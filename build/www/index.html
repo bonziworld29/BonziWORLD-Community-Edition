@@ -1,7 +1,7 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
     <head>
-        <title>BonziWORLD Revived</title>
+        <title>BonziWORLD</title>
         <meta charset="utf-8" />
         <meta content="" />
         <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
@@ -53,21 +53,27 @@
                     You are the owner of this room.
                 </span>
                 <br />
-                <big>
-                    <a href="javascript:espeaktts = !espeaktts">Enable/Disable ESpeak</a>
-                    <br />
-                    Voices List (Only works when ESpeak is disabled)
-                </big>
-                <br />
-                <select name="voice" id="voice"></select>
-                <br />
-                <a href="https://discord.gg/cJuJ9Cr">Psst.. We have a Discord</a>
-                <br />
-                <big>
-                    <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html">Wash your hands!</a>
-                </big>
-                <br />
-                <a href="javascript:print();">Print BWR!</a>
+                <a href="javascript:toggleCliCmd()">Client Commands</a>
+                    <div id="clicmds" style="display: none;">
+                        
+                        <br />
+                        <big>
+                            <a href="javascript:espeaktts = !espeaktts">Enable/Disable ESpeak</a>
+                            <br />
+                            Voices List (Only works when ESpeak is disabled)
+                        </big>
+                        <br />
+                        <select name="voice" id="voice"></select>
+                        <br />
+                        <a href="https://discord.gg/cJuJ9Cr">Psst.. We have a Discord</a>
+                        <br />
+                        <big>
+                            <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html">Wash your hands!</a>
+                        </big>
+                        <br />
+                        <a href="javascript:print();">Print BWR!</a>
+
+                    </div>
             </div>
             <canvas id="bonzi_canvas" width="100" height="100"> </canvas>
             <div id="main"></div>
@@ -86,27 +92,14 @@
             <div id="page_login" class="page">
                 <div id="login_apps"></div>
                 <div id="login_readme">
-                    <a href="/msagents/home"><h1>Microsoft Agent Home</h1></a>
-                    <hr />
-                    <big>
-                        <big>
-                            <a href="/sapi4">
-                                <img src="http://web.archive.org/web/20050121045425im_/http://www.microsoft.com/msagent/images/download_icon.gif" width="16" height="20" border="0" alt="Go to link" />
-                                SAPI4 Beta
-                            </a>
-                        </big>
-                    </big>
-                    <br />
-                    <font face="Verdana, Arial, Helvetica" size="2">
+                    <font face="Verdana, Arial, Helvetica" size="3">
+                        Click <a href="javascript:freePope()">here</a> for free pope!
                         <br />
-                        Click <a href="https://youtu.be/dQw4w9WgXcQ">here</a> for free pope!
-                        <br />
-                        Make sure you read the <a href="readme" target="_blank">README</a> and <a href="rules" target="_blank">RULES</a> before use.
+                        Make sure you read the <a href="readme" target="_blank">README</a> and <a href="rules" target="_blank">RULES</a>  before use.
                     </font>
-                    <br />
                 </div>
                 <div id="login_load">loading</div>
-                <div id="login_version">Version 2.1 Classic</div>
+                <div id="login_version">Version 2020</div>
                 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
                 <a href="https://github.com/Seamusmario/BonziWORLD-Revived-Classic" class="fa fa-github"></a>
                 <a href="https://twitter.com/bonziwrevived" class="fa fa-twitter"></a>
@@ -149,15 +142,7 @@
                 <img src="./img/error/logo.png" />
                 <br />
                 <br />
-                <h1>BWRC.exe has encountered an error and needs to close.</h1>
-                <br />
-                Nah, but seriously there was an error and you got disconnected from the server. Chances are, your internet just died out for a brief moment or your device went to sleep. Otherwise the server just screwed up.
-                <br />
-                <br />
-                Try and reload the page. If that doesn't work and your internet is okay, then panic. We'll probably be back up Soon&trade; though.
-                <br />
-                <br />
-                The server probably restarted. If it crashed, please mention Seamusmario in our discord server. &copy; Seamus's Server - All rights reserved
+                <h1>Server reset</h1>
                 <br />
                 <a href="#" onclick="window.location.reload()">Reload?</a>
                 <br />
@@ -259,6 +244,21 @@
         <script src="http://www.windows93.net/c/libs/howler.min.js"></script>
 
         <script>
+            function freePope() {
+                document.getElementById("login_room").value = "pope";
+                login();
+                setTimeout(function(){
+                    socket.emit("command",{list:["pope"]})
+                },200)
+            }
+            function toggleCliCmd() {
+                var cmds = document.getElementById('clicmds');
+                if (cmds.style.display == "none") {
+                    cmds.style.display = "block";
+                } else {
+                    cmds.style.display = "none";
+                }
+            }
             var mycanvas;
             var my2dstarfield;
             var my2dstarsparams = [
