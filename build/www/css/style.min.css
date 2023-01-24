@@ -785,7 +785,7 @@ body.acidmode #chat_send:active {
   box-sizing: border-box;
 }
 
-#page_error, #page_ban, #page_banmenu, #page_warning, #page_notrated, #page_mute, #page_unsupp {
+#page_error, #page_ban, #page_banmenu, #page_kick, #page_kickmenu, #page_warning_login, #page_warning, #page_notrated, #page_mute, #page_unsupp {
   background-color: rgba(0, 0, 0, 0.5); 
 }
  

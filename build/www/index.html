@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>BonziWORLD</title>
+        <title>BonziWORLD Revived</title>
         <meta charset="utf-8" />
         <meta content="" />
         <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
@@ -65,7 +65,7 @@
                         <br />
                         <select name="voice" id="voice"></select>
                         <br />
-                        <a href="https://discord.gg/cJuJ9Cr">Psst.. We have a Discord</a>
+                        <a href="https://discord.gg/T4FtbuKuqq">Psst.. We have a Discord</a>
                         <br />
                         <big>
                             <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html">Wash your hands!</a>
@@ -96,17 +96,23 @@
                         Click <a href="javascript:freePope()">here</a> for free pope!
                         <br />
                         Make sure you read the <a href="readme" target="_blank">README</a> and <a href="rules" target="_blank">RULES</a>  before use.
+                        <br>
                     </font>
+                        <font face="Verdana, Arial, Helvetica" size="5" color="black">
+                          <a href="https://github.com/Daisreich/BonziWORLD-Revived-Classic" class="fab fa-github" style="color:black; text-decoration: none;"></a>
+                          <a href="https://www.youtube.com/@itzcrazyscoutakasm55/featured" class="fab fa-youtube" style="color:red; text-decoration: none;"></a>
+                          <a href="https://discord.gg/T4FtbuKuqq" class="fab fa-discord"  style="color:blue; text-decoration: none;"></a>
+                          <a href="javascript:alert('nope')" class="fab fa-twitter"  style="color:cyan; text-decoration: none;"></a>
+                        </font>
                 </div>
                 <div id="login_load">loading</div>
                 <div id="login_version">Version 2020</div>
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-                <a href="https://github.com/Daisreich/BonziWORLD-Revived-Classic" class="fa fa-github"></a>
-                <a href="javascript:alert(\"nope\")" class="fa fa-twitter"></a>
+              <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
                 <div id="login_card" style="display: none;">
                     <input id="login_name" type="text" placeholder="Nickname" />
                     <input id="login_room" type="text" placeholder="Room ID (Optional)" />
-                    <button onclick="login()" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
+                    <button onclick="warningScreen()" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
                         <div id="login_go"></div>
                     </button>
                     <br />
@@ -145,6 +151,27 @@
                 <h1>Server reset</h1>
                 <br />
                 <a href="#" onclick="window.location.reload()">Reload?</a>
+                <br />
+                <br />
+                Room ID:
+                <span id="room_id">???</span>
+                <br />
+            </div>
+        </div>
+        <div id="page_warning_login" class="page" style="display: none;">
+            <div id="error_cont" class="message_cont">
+                <img src="./img/error/logo2.png" />
+                <br />
+                <br />
+                <h1>Warning</h1>
+                <br>
+                <br>
+                Public rooms are not be safe. It is highly recommended you use a Room ID and share your Room ID to people you trust. By logging in, You agree that you are vulnerable to attackers, doxxers and cyberbullies.
+                <br>
+                An README about The Dangers of BonziWORLD is coming soon.
+                <br>
+                <br>
+                <a href="javascript:closeWarningScreen1()" onclick="$('#page_warning_login')">I know what i'm doing!</a> <a href="javascript:closeWarningScreen2()" onclick="$('#page_warning_login')">Return to Home</a>
                 <br />
                 <br />
                 Room ID:
@@ -250,6 +277,18 @@
                 setTimeout(function(){
                     socket.emit("command",{list:["pope"]})
                 },200)
+            }
+            function warningScreen() {
+              if ($("#login_room").val() == "") {
+                $("#page_warning_login").show();
+              }
+            }
+            function closeWarningScreen1() {
+              $("#page_warning_login").hide();
+              login();
+            }
+            function closeWarningScreen2() {
+              $("#page_warning_login").hide();
             }
             function toggleCliCmd() {
                 var cmds = document.getElementById('clicmds');
