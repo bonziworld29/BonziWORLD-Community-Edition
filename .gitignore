@@ -7,12 +7,12 @@ src/cordova/www/**
 src/cordova/config.xml
 
 src/www/tmp/**
-server/node_modules/**
-server/settings.json
-server/bans.json
-server/mutes.json
-server/logins.json
-server/logs/**
+node_modules/**
+settings.json
+bans.json
+mutes.json
+logins.json
+logs/**
 
 # IntelliJ IDEA files
 *.iml
