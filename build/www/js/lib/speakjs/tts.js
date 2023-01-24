@@ -65972,7 +65972,8 @@ var shouldRunNow = true;
     this['text']
   ];
   run();
-  console.log(FS.root.contents['wav.wav']);
+  // memory leak fix (thanks sam)
+  //console.log(FS.root.contents['wav.wav']);
   this['ret'] = unsignedStream(FS.root.contents['wav.wav'].contents);
   }).call(self);
   return self.ret;
