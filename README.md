@@ -1,6 +1,12 @@
 ## BonziWORLD Revived Classic
 
-BonziWORLD Revived Classic is a re-release of an older version of a fork of BonziWORLD Revived by mrnotesonic, originally released in 2019. However, due to obvious reasons, This software has since then discontinued and is not supported.
+BonziWORLD Revived Classic is a re-release of an older version of a fork of BonziWORLD Revived by mrnotesonic, originally released in 2019.
+
+## Where can I visit it?
+
+We have 1 demo.
+
+https://bozoworld-raveed-variant-3.daisreich.repl.co
 
 ## Dependencies
 - Node.js and npm
