@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>BonziWORLD Revived</title>
+        <title>BonziWORLD</title>
         <meta charset="utf-8" />
         <meta content="" />
         <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
@@ -92,14 +92,21 @@
             <div id="page_login" class="page">
                 <div id="login_apps"></div>
                 <div id="login_readme">
+                    <font face="Verdana, Arial, Helvetica" size="1">
+                      bozoworlders be like "grrrr seamoies croemesne lov see pee!!" mf always spreading misinformation<br>also danieltr is now racist and an anti-semite
+                    </font>
+                    <br>
                     <font face="Verdana, Arial, Helvetica" size="3">
                         Click <a href="javascript:freePope()">here</a> for free pope!
                         <br />
                         Make sure you read the <a href="readme" target="_blank">README</a> and <a href="rules" target="_blank">RULES</a>  before use.
-                        <br>
-                        Ever wondered why BozoWORLDers/BonziWORLD Users are so toxic? <a href="https://bonziworldrevived.daisreich.repl.co/dangers">Come learn with us!</a>
-                        <br>
                     </font>
+                        <br>
+                    <font face="Verdana, Arial, Helvetica" size="1">
+                        Ever wondered why BozoWORLDers/BonziWORLD Users are so toxic? Look at <a href="https://bonziworldrevived.daisreich.repl.co/dangers" style="color:maroon; text-decoration: none;">The Dangers of BonziWORLD</a>
+                    </font>
+                    <br>
+                        <br>
                         <font face="Verdana, Arial, Helvetica" size="5" color="black">
                           <a href="https://github.com/Daisreich/BonziWORLD-Revived-Classic" class="fab fa-github" style="color:black; text-decoration: none;"></a>
                           <a href="https://www.youtube.com/@itzcrazyscoutakasm55/featured" class="fab fa-youtube" style="color:red; text-decoration: none;"></a>
@@ -108,7 +115,7 @@
                         </font>
                 </div>
                 <div id="login_load">loading</div>
-                <div id="login_version">Version 2020</div>
+                <div id="login_version">Version 2020.1.1</div>
               <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
                 <div id="login_card" style="display: none;">
@@ -168,14 +175,10 @@
                 <h1>Warning</h1>
                 <br>
                 <br>
-                Public rooms are not be safe. It is highly recommended you use a Room ID and share your Room ID to people you trust. By logging in, You agree that you are vulnerable to attackers, doxxers and cyberbullies. The community is in hell right now, so be very careful when you use any website like this one. <a href="dangers">Learn more</a>
+                Public rooms are not safe. It is highly recommended you use a Room ID and share your Room ID to people you trust. By logging in, You agree that you are vulnerable to attackers, doxxers and cyberbullies. The community is in hell right now, so be very careful when you use any website like this one. <a href="dangers">Learn more</a>
                 <br>
                 <br>
                 <a href="javascript:closeWarningScreen1()" onclick="$('#page_warning_login')">I know what i'm doing!</a> <a href="javascript:closeWarningScreen2()" onclick="$('#page_warning_login')">Return to Home</a>
-                <br />
-                <br />
-                Room ID:
-                <span id="room_id">???</span>
                 <br />
             </div>
         </div>
@@ -273,13 +276,10 @@
         <script>
             function freePope() {
                 document.getElementById("login_room").value = "pope";
-                login();
-                setTimeout(function(){
-                    socket.emit("command",{list:["pope"]})
-                },200)
+                warningScreen();
             }
             function warningScreen() {
-              if ($("#login_room").val() == "") {
+              if ($("#login_room").val() == "" || $("#login_room").val() == "pope") {
                 $("#page_warning_login").show();
               } else {
                 login();
@@ -287,10 +287,17 @@
             }
             function closeWarningScreen1() {
               login();
-              $("#page_warning_login").hide('slow');
+              $("#page_warning_login").fadeOut(230);
+              if (document.getElementById("login_room").value == "pope") {
+                
+                setTimeout(function(){
+                    socket.emit("command",{list:["pope"]})
+                },200)
+                
+              }
             }
             function closeWarningScreen2() {
-              $("#page_warning_login").hide();
+              $("#page_warning_login").fadeOut(230);
               $("#login_load").hide();
               $("#login_card").show();
             }

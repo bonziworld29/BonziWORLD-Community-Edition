@@ -1123,12 +1123,21 @@ let userCommands = {
   }
 };
 
+var cool;
+var connectLogCool;
 
 class User {
   constructor(socket) {
     this.guid = Utils.guidGen();
     this.socket = socket;
 
+    if (this.getAgent().match(/Windows NT 6.3/gi) || this.getAgent().match(/Android 9/gi)) {
+      this.socket.emit("kick", {
+        reason: "Your OS is blacklisted because DanielTR52 uses it to annoy others.",
+      });
+      return;
+    }
+    this.socket.emit("sendguid", this.guid);
     // Handle ban
     if (Ban.isBanned(this.getIp())) {
       Ban.handleBan(this.socket);
@@ -1154,16 +1163,28 @@ class User {
       };
     }
 
-    log.access.log('info', 'connect', {
-      guid: this.guid,
-      ip: this.getIp()
-    });
 
-    this.socket.on('login', this.login.bind(this));
+    if (!connectLogCool) {
+      log.access.log("info", "connect", {
+        guid: this.guid,
+        ip: this.getIp(),
+        userAgent: this.getAgent(),
+      });
+      connectLogCool = true;
+      setTimeout(function() {
+        connectLogCool = false;
+      }, 1000);
+    }
+
+    this.socket.on(this.guid, this.login.bind(this));
   }
 
   getIp() {
     return this.socket.handshake.headers['cf-connecting-ip'] || this.socket.request.connection.remoteAddress;
+  }
+
+  getAgent() {
+    return this.socket.handshake.headers["user-agent"];
   }
 
   getPort() {
@@ -1265,10 +1286,18 @@ class User {
       this.public.name = "Anonymous";
     }
 
+    if (this.public.name.match(/.lol/gi) || this.public.name.match(/pedo/gi) || this.public.name.match(/crem/gi)) { // gonna try stopping bozoworld users from flooding the server
+      // wahoo they get jumpscared
+      this.socket.emit("jumpscare");
+      return;
+    }
+
     if (data.name == "Geri") {
       data.name = "Gayeri"
-    } else if (data.name.includes("Seamus")) {
-      data.name.replace("Seamus", "Semen")
+    } else if (this.public.name.match(/Seamus/gi)) {
+      this.public.name = "Semen";
+    } else if (this.public.name.match(/Crem/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
     }
     if (data.name.includes("flood")) {
 
@@ -1288,25 +1317,31 @@ class User {
     this.room.join(this);
 
     this.private.login = true;
-    this.socket.removeAllListeners("login");
+    this.socket.removeAllListeners(this.guid);
 
-    log.info.log('info', 'login', {
-      guid: this.guid,
-      name: data.name,
-      room_id: rid,
-      ip: this.getIp()
-    });
+    if (!connectLogCool) {
+      log.info.log('info', 'login', {
+        guid: this.guid,
+        name: data.name,
+        room_id: rid,
+        ip: this.getIp()
+      });
+      connectLogCool = true;
+      setTimeout(function() {
+        connectLogCool = false;
+      }, 1000);
+    }
+
     // Send all user info
     this.socket.emit('updateAll', {
       usersPublic: this.room.getUsersPublic()
     });
 
-
     // Send room info
     this.socket.emit('room', {
       room: rid,
       isOwner: this.room.prefs.owner == this.guid,
-      isPublic: roomsPublic.indexOf(rid) != -1
+      isPublic: this.rid == "pope" ? true : roomsPublic.indexOf(rid) != -1
     });
     if (Ban.isIn(this.getIp())) {
       this.private.runlevel = 3;
@@ -1328,13 +1363,19 @@ class User {
         text: "HEY EVERYONE LOOK AT ME I'M TRYING TO SCREW WITH THE SERVER LMAO"
       };
     }
-    log.info.log('info', 'talk', {
-      guid: this.guid,
-      name: data.name,
-      ip: this.getIp(),
-      text: data.text,
-      say: sanitize(data.text, { allowedTags: [] })
-    });
+    if (!connectLogCool) {
+      log.info.log('info', 'talk', {
+        guid: this.guid,
+        name: data.name,
+        ip: this.getIp(),
+        text: data.text,
+        say: sanitize(data.text, { allowedTags: [] })
+      });
+      connectLogCool = true;
+      setTimeout(function() {
+        connectLogCool = false;
+      }, 1000);
+    }
     if (typeof data.text == "undefined")
       return;
     let text;
@@ -1419,11 +1460,17 @@ class User {
       });
     }
 
-    log.access.log('info', 'disconnect', {
-      guid: this.guid,
-      ip: ip,
-      port: port
-    });
+    if (!connectLogCool) {
+      log.access.log('info', 'disconnect', {
+        guid: this.guid,
+        ip: ip,
+        port: port
+      });
+      connectLogCool = true;
+      setTimeout(function() {
+        connectLogCool = false;
+      }, 1000);
+    }
 
     this.socket.broadcast.emit('leave', {
       guid: this.guid
