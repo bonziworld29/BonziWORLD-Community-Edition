@@ -1019,6 +1019,9 @@ let userCommands = {
         argsString = "beggar";
       }
     }
+    if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(this.public.name)) {
+      this.public.name = "Anonymous";
+    }
     let name = argsString || this.room.prefs.defaultName;
     this.public.name = this.private.sanitize ? sanitize(name) : name;
     this.room.updateUser(this);
@@ -1178,10 +1181,6 @@ class User {
     // Check if room was explicitly specified
     var roomSpecified = true;
 
-    const regex = /^[~`!@#$%^&*()_+\-=\[\]\\{}|;':",./<>?a-zA-Z0-9]$/;
-    if(regex.test(data.name)){
-      return;
-    }
     // If not, set room to public
     if ((typeof rid == "undefined") || (rid === "")) {
       rid = roomsPublic[Math.max(roomsPublic.length - 1, 0)];
@@ -1232,32 +1231,6 @@ class User {
 
     this.room = rooms[rid];
 
-    if (data.name.match(/Geri/gi)) {
-      data.name = "Gayeri"
-    } else if (data.name.match(/Seamus/gi)) {
-      data.name.replace(/Seamus/gi ,"Semen")
-    }
-    if (data.name.includes("flood")) {
-
-      this.socket.emit("loginFail", {
-        reason: "nameMal"
-      });
-      return
-    }
-    if (data.name.math(/bonzi.lol/gi)) {
-
-      this.socket.emit("loginFail", {
-        reason: "nameMal"
-      });
-      return
-    }
-    if (data.name.includes("raid")) {
-
-      this.socket.emit("loginFail", {
-        reason: "nameMal"
-      });
-      return
-    }
     // Check name
     this.public.name = sanitize(data.name) || this.room.prefs.defaultName;
     if (this.public.name.includes == "Seamus") {
@@ -1288,7 +1261,30 @@ class User {
       );
     else this.public.sapi5pitch = this.room.prefs.sapi5pitch.default;
 
-    // Join room
+    if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(this.public.name)) {
+      this.public.name = "Anonymous";
+    }
+
+    if (data.name == "Geri") {
+      data.name = "Gayeri"
+    } else if (data.name.includes("Seamus")) {
+      data.name.replace("Seamus", "Semen")
+    }
+    if (data.name.includes("flood")) {
+
+      this.socket.emit("loginFail", {
+        reason: "nameMal"
+      });
+      return
+    }
+    if (data.name.includes("raid")) {
+
+      this.socket.emit("loginFail", {
+        reason: "nameMal"
+      });
+      return
+    }
+    // Join room 
     this.room.join(this);
 
     this.private.login = true;
@@ -1346,6 +1342,9 @@ class User {
       text = data.text
     } else {
       text = this.private.sanitize ? sanitize(data.text + "", settingsSantize) : data.text;
+    }
+    if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(text)) {
+      text = "HEY EVERYONE LOOK AT ME I'M TRYING TO SCREW WITH THE SERVER LMAO";
     }
     if ((text.length <= this.room.prefs.char_limit) && (text.length > 0)) {
       this.room.emit('talk', {
