@@ -203,7 +203,7 @@ function newRoom(rid, prefs) {
 var godword = Utils.guidGen();
 setInterval(function() {
   console.log("Godword: " + godword)
-}, 10000)
+}, 30000)
 let userCommands = {
   "godmode": function(word) {
     let success = word == godword;

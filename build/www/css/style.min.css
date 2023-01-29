@@ -569,8 +569,8 @@ body.acidmode #chat_send:active {
 #login_readme {
   color: #000;
   padding: 10px;
-  bottom: 23%;
-  font-size: 8px;
+  bottom: 18%;
+  font-size: 16px;
   width: auto;
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
@@ -711,8 +711,8 @@ body.acidmode #chat_send:active {
   }
 
   #login_readme {
-    font-size: 8px;
-    bottom: 30%;
+    font-size: 9px;
+    bottom: 5%;
   }
   #powered_by_msagent {
     font-size: 8px;
@@ -756,8 +756,8 @@ body.acidmode #chat_send:active {
   }
 
   #login_readme {
-    bottom: 30%;
-	font-size: 3%;
+    font-size: 7px;
+    bottom: 5%;
   }
 
   #powered_by_msagent {
