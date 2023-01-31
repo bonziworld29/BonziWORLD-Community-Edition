@@ -479,24 +479,7 @@ let userCommands = {
     });
   },
   "vlare": function(vidRaw) {
-    if (vidRaw.includes("\"")) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        vid: "bonziacid.html"
-      });
-      return;
-    }
-    if (vidRaw.includes("'")) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        vid: "bonziacid.html"
-      });
-    }
-    var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
-    this.room.emit("vlare", {
-      guid: this.guid,
-      vid: vid
-    });
+    this.socket.emit('alert', { title: 'oh fuck', msg: 'Vlare shut down a long time ago so this command is non-functional.', button: 'OK' })
   },
   "backflip": function(swag) {
     this.room.emit("backflip", {
