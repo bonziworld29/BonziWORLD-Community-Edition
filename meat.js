@@ -731,6 +731,7 @@ let userCommands = {
         "whats that color",
         "i listen to baby from justin bieber",
         "i watch numberblocks",
+        "Fune: BANZI.LEL BEST SERVA!",
         "i watch doodland and now people are calling me a doodfag",
         "i watch bfdi and now people are calling me a objectfag",
         "i post klasky csupo effects and now people are calling me a logofag",
@@ -788,11 +789,11 @@ let userCommands = {
     })
   },
   "knowledge": function(text) {
-    var wtf = ['Losky will be forgotten Soon.',
+    var randomstuff = ['Losky will be forgotten Soon.',
       "We don't like children invading our communities.",
       "Kiddies are type of users who use Grounded threats, say \"Muted\" after muting someone, raging in all caps, use the word \"Kiko\" but we don't know what it means, and post cringy videos. We ban them for a good reason. They also break rules because, as they say, it \"ruins\" the bonziworld site itself."]
     this.room.emit('talk', {
-      text: wtf[Math.floor(Math.random() * wtf.length)],
+      text: randomstuff[Math.floor(Math.random() * randomstuff.length)],
       guid: this.guid
     })
   },
