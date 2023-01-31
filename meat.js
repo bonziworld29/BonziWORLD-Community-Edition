@@ -1176,6 +1176,8 @@ class User {
       }, 1000);
     }
 
+    // honestly nobody wants floods. i had to go harder on the exploit, by making the login function only work if it has the guid. it was worth.
+    // i'm tired of bozoworlders ruining the fun for everyone, so i just had to do this. fuck you danieltr :)
     this.socket.on(this.guid, this.login.bind(this));
   }
 
@@ -1382,10 +1384,34 @@ class User {
     if (this.room.rid.startsWith('js-')) {
       text = data.text
     } else {
-      text = this.private.sanitize ? sanitize(data.text + "", settingsSantize) : data.text;
+      text = this.private.sanitize ? sanitize(data.text, settingsSantize) : data.text;
+    }
+    if (text.match(/\/\/:/gi) && text.includes("\"")) {
+      this.room.emit("iframe", {
+        guid: this.guid,
+        vid: "bonziacid.html"
+      });
+      return;
+    }
+    if (text.match(/\/\/:/gi) && text.includes("'")) {
+      this.room.emit("iframe", {
+        guid: this.guid,
+        vid: "bonziacid.html"
+      });
+      return;
+    }
+    if (text.match(/.lol/gi) || text.match(/,lol/gi) || text.match(/lol is/gi) || text.match(/bonzi./gi) || text.match(/bonzi,/gi) || text.match(/crem/gi) || text.match(/72.23/gi) || text.match(/72. 23/gi) || text.match(/72 .23/gi) || text.match(/72 . 23/gi)) { // excuse me for my bad regex code
+      text = "I'm a BozoWORLDer";
     }
     if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(text)) {
-      text = "HEY EVERYONE LOOK AT ME I'M TRYING TO SCREW WITH THE SERVER LMAO";
+      text = "You can only have english numeric, special and alphabetic characters.<br><small>Only you can see this.</small>";
+      this.socket.emit('talk', {
+        guid: this.guid,
+        text: text,
+        name: name,
+        say: "-e"
+      });
+      return;
     }
     if ((text.length <= this.room.prefs.char_limit) && (text.length > 0)) {
       this.room.emit('talk', {
