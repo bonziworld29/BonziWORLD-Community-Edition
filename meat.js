@@ -881,6 +881,9 @@ let userCommands = {
       target: sanitize(Utils.argsString(arguments))
     });
   },
+  "update": function() {
+    this.socket.emit('alert', { title: 'See Updates', msg: 'BonziWORLD 2020.1.2 has been released.\nSoon, there will be a hue and saturation manager so you can make your own colors without using an PNG file!', button: 'OK' })
+  },
   "beggar": function() {
     this.room.emit("beggar", {
       guid: this.guid,
