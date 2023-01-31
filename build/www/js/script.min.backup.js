@@ -1409,9 +1409,9 @@ var _createClass = (function() {
           value: function(a) {
             var b = BonziHandler.stage;
             //this.cancel(),
-            b.removeChild(this.sprite),
+              b.removeChild(this.sprite),
               this.colorPrev != this.color && (delete this.sprite, (this.sprite = new createjs.Sprite(BonziHandler.spriteSheets[this.color], a ? "gone" : "idle")));
-            b.addChild(this.sprite),
+              b.addChild(this.sprite),
               this.move();
           },
         },
