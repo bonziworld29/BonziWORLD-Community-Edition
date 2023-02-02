@@ -3,7 +3,7 @@
 		"public": {
 			"char_limit": 12000,
 			"name_limit": 100,
-			"godword": "",
+			"godword": "youwillnevergetit",
 			"runlevel": {
 				"godmode": 0,
 				"youtube": 0,

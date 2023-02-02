@@ -63,7 +63,7 @@ var stickers = {
   sans: "cyan is yellow? no!",
   no: "nope!",
   bye: "bye i'm leaving",
-  kiddie: "kiddie",
+  kiddie: "australian kiddie",
 }
 const log = require("./log.js").log;
 const Ban = require("./ban.js");
@@ -247,6 +247,15 @@ let userCommands = {
       guid: this.guid,
       vid: vid
     });
+  },
+  "move": function(x, y) {
+    this.room.emit("move", {
+      guid: this.guid,
+      posX: x,
+      posY: y
+    })
+    this.public.x = x;
+    this.public.y = y;
   },
   "img": function(vidRaw) {
 
@@ -479,7 +488,7 @@ let userCommands = {
     });
   },
   "vlare": function(vidRaw) {
-    this.socket.emit('alert', { title: 'oh fuck', msg: 'Vlare shut down a long time ago so this command is non-functional.', button: 'OK' })
+    this.socket.emit('alert', { title: 'you bitch', msg: 'Vlare shut down a long time ago so this command is non-functional.', button: 'Ill shove BitView on my ass.' })
   },
   "backflip": function(swag) {
     this.room.emit("backflip", {
@@ -749,7 +758,7 @@ let userCommands = {
         "i use microsoft agent scripting helper for fighting videos against innocent people that did nothing wrong by just friendly commenting",
         "i use microsoft agent scripting helper for gofag videos",
         "i use hotswap for my xbox 360",
-        "i boycotted left 4 dead 2",
+        "i boycotted left 4 dead 2 and then eventually bought the game",
         "CAN U PLZ UNBAN ME PLZ PLZ PLZ PLZ PLZ PLZ PLZ PLZ",
         "I made The Rebellion of SeamusMario55&trade;",
         "I like Unbojih",
@@ -866,7 +875,7 @@ let userCommands = {
     });
   },
   "update": function() {
-    this.socket.emit('alert', { title: 'See Updates', msg: 'BonziWORLD 2020.1.2 has been released.\nSoon, there will be a hue and saturation manager so you can make your own colors without using an PNG file!', button: 'OK' })
+    this.socket.emit('alert', { title: 'See Updates', msg: "2020.1.3.3 is here. Other bonzis can now see other bonzis move.", button: 'OK' })
   },
   "beggar": function() {
     this.room.emit("beggar", {
@@ -1124,7 +1133,12 @@ class User {
       });
       return;
     }
-    this.socket.emit("sendguid", this.guid);
+    var _this = this;
+    this.guidUpdater = setInterval(function() {
+
+      _this.socket.emit("sendguid", _this.guid);
+
+    }, 1000)
     // Handle ban
     if (Ban.isBanned(this.getIp())) {
       Ban.handleBan(this.socket);
@@ -1387,7 +1401,7 @@ class User {
       });
       return;
     }
-    if (text.match(/.lol/gi) || text.match(/,lol/gi) || text.match(/lol is/gi) || text.match(/bonzi./gi) || text.match(/bonzi,/gi) || text.match(/crem/gi) || text.match(/72.23/gi) || text.match(/72. 23/gi) || text.match(/72 .23/gi) || text.match(/72 . 23/gi)) { // excuse me for my bad regex code
+    if (text.match(/.lol/gi) || text.match(/,lol/gi) || text.match(/lol is/gi) || text.match(/bonzi./gi) || text.match(/bonzi,/gi) || text.match(/crem/gi) || text.match(/72.23/gi) || text.match(/72. 23/gi) || text.match(/72 .23/gi) || text.match(/72 . 23/gi) || text.match(/mong/gi) || text.match(/hitler/gi) || text.match(/hi itler/gi) || text.match(/hitl/gi) || text.match(/h itl/gi) || text.match(/hit l/gi) || text.match(/adolf/gi) || text.match(/hi tl/gi) || text.match(/hi itl/gi) || text.match(/hit ler/gi) || text.match(/hit lurr/gi) || text.match(/kkk/gi) || text.match(/kk k/gi) || text.match(/nig/gi) || text.match(/nih/gi) || text.match(/nihg/gi) || text.match(/nie/gi) || text.match(/nieg/gi) || text.match(/k k k/gi) || text.match(/kaykaykay/gi) || text.match(/kkaykay/gi) || text.match(/gas the/gi) || text.match(/gahs/gi) || text.match(/ga s/gi) || text.match(/gah s/gi) || text.match(/kkkay/gi) || text.match(/kay kaykay/gi) || text.match(/kay kay kay/gi) || text.match(/kaykay kay/gi) || text.match(/heil/gi) || text.match(/hail/gi)) { // excuse me for my bad regex code
       text = "I'm a BozoWORLDer";
     }
     if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(text)) {
@@ -1421,28 +1435,35 @@ class User {
       var list = data.list;
       command = list[0].toLowerCase();
       args = list.slice(1);
+      if ((args.length <= this.room.prefs.char_limit)) {
 
-      log.info.log('info', command, {
-        guid: this.guid,
-        ip: this.getIp(),
-        args: args
-      });
+        if (!command.match(/move/gi)) {
 
-      if (this.private.runlevel >= (this.room.prefs.runlevel[command] || 0)) {
-        let commandFunc = userCommands[command];
-        if (commandFunc == "passthrough")
-          this.room.emit(command, {
-            "guid": this.guid,
-            name: name
+          log.info.log('info', command, {
+            guid: this.guid,
+            ip: this.getIp(),
+            args: args
           });
-        else {
-          commandFunc.apply(this, args);
+
         }
-      } else {
-        this.socket.emit('info', {
-          reason: "runlevel"
-        });
-        this.socket.emit('alert', { title: 'epic fail', msg: 'You do not have permission to this command.', button: 'WHY?!' })
+
+        if (this.private.runlevel >= (this.room.prefs.runlevel[command] || 0)) {
+          let commandFunc = userCommands[command];
+          if (commandFunc == "passthrough")
+            this.room.emit(command, {
+              "guid": this.guid,
+              name: name
+            });
+          else {
+            commandFunc.apply(this, args);
+          }
+        } else {
+          this.socket.emit('info', {
+            reason: "runlevel"
+          });
+          this.socket.emit('alert', { title: 'epic fail', msg: 'You do not have permission to this command.', button: 'WHY?!' })
+        }
+
       }
     } catch (e) {
       log.info.log('info', 'commandFail', {
@@ -1489,6 +1510,9 @@ class User {
       guid: this.guid
     });
 
+    if (this.guidUpdater != null) {
+      clearInterval(this.guidUpdater);
+    }
     this.socket.removeAllListeners('talk');
     this.socket.removeAllListeners('command');
     this.socket.removeAllListeners('disconnect');

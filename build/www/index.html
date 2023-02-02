@@ -1,437 +1,104 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
-    <head>
-        <title>BonziWORLD</title>
-        <meta charset="utf-8" />
-        <meta content="" />
-        <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
-        <script src="https://www.google.com/recaptcha/api.js"></script>
-        <script src="./js/lib/clippy.min.js"></script>
-        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
-        <meta name="mobile-web-app-capable" content="yes" />
-        <link rel="stylesheet" type="text/css" href="./css/style.min.css" />
-        <link rel="stylesheet" type="text/css" href="./css/clippy.css" media="all" />
-        <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
-        <link rel="icon" type="image/png" href="./favicons/favicon-32x32.png" sizes="32x32" />
-        <link rel="icon" type="image/png" href="./favicons/favicon-16x16.png" sizes="16x16" />
-        <link rel="manifest" href="./favicons/manifest.json" />
-        <link rel="mask-icon" href="./favicons/safari-pinned-tab.svg" color="#5bbad5" />
-        <link rel="shortcut icon" href="./favicons/favicon.ico" />
-        <meta name="msapplication-config" content="./favicons/browserconfig.xml" />
-        <meta name="theme-color" content="#8b5adc" />
-        <script src="./js/lib/easeljs.min.js"></script>
-        <script src="./js/lib/preloadjs-0.6.2.min.js"></script>
-        <script src="./js/lib/jquery.min.js"></script>
-        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
-        <script src="./js/lib/seedrandom.min.js"></script>
-        <script src="./js/lib/socket.io-1.4.5.js"></script>
-        <script src="./js/lib/speakjs/speakClient.js"></script>
-        <script src="./mespeak/mespeak.js"></script>
-        <script src="./js/lib/autostartjs"></script>
-        <script src="./js/lib/jquery.contextMenu.min.js"></script>
-        <script src="./cordova.js"></script>
-        <script src="./js/platform.js"></script>
-        <link rel="stylesheet" type="text/css" href="./css/platform.css" />
-        <script src="./js/script.min.js"></script>
-        <script src="./js/warning.js"></script>
-        <script src="./js/css.js"></script>
-        <script src="./js/ban.js"></script>
-    </head>
-    <body>
-        <style id="theme"></style>
-        <audio id="error" src="error.ogg"></audio>
-        <audio id="jumpscare" src="hypnobehh.mp3" loop></audio>
-        <div id="content">
-            <div id="news"></div>
-            <div id="room_info">
-                Room ID: <span id="room_id">???</span>
-                <br />
-                <span id="room_public">This room is public.</span>
-                <span id="room_private">This room is private.</span>
-                <span id="room_owner">
-                    <br />
-                    You are the owner of this room.
-                </span>
-                <br />
-                        <big>
-                            <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html">Wash your hands!</a>
-                        </big>
-                <a href="javascript:toggleCliCmd()">Client Commands</a>
-                    <div id="clicmds" style="display: none;">
-                        
-                        <br />
-                        <big>
-                            <a href="javascript:espeaktts = !espeaktts">Enable/Disable ESpeak</a>
-                            <br />
-                            Voices List (Only works when ESpeak is disabled)
-                        </big>
-                        <br />
-                        <select name="voice" id="voice"></select>
-                        <br />
-                        <!-- <a href="https://discord.gg/T4FtbuKuqq">Psst.. We have a Discord</a> -->
-                        <br />
-                        <br />
-                        <a href="javascript:print();">Print BWR!</a>
+<head>
+	<title>BonziWORLD NOTICE</title>
 
-                    </div>
-            </div>
-            <canvas id="bonzi_canvas" width="100" height="100"> </canvas>
-            <div id="main"></div>
-            <table id="chat_bar">
-                <tr>
-                    <td id="chat_send">send</td>
-                    <td id="chat_message_cont">
-                        <input id="chat_message" type="text" placeholder="Enter a message" />
-                    </td>
-                    <td id="chat_tray">
-                        <div id="btn_tile" class="tray_btn"></div>
-                    </td>
-                </tr>
-            </table>
+	<meta content="">
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="mobile-web-app-capable" content="yes" />
 
-            <div id="page_login" class="page">
-                <div id="login_apps"></div>
-                <div id="login_readme">
-                    <small>
-                      The BozoWORLD Server: Duh Mowst Powerfool BozoWorld Servor! BW Communtiy is Gret! (not)
-                      <br>
-                      Us: keep on lying you dumb cave men
-                      <br>
-                      <small><font color="red">Warning</font>: BozoWORLDers, or bonzi.lol's admins keep attacking this website while also spreading misinformation about me. I'm not a child predator and never will be. I would like to have peace and not get involved with any more drama, people or activities in any other bonziworld site.</small>
-                    </small>
-                    <br>
-                        Click <a href="javascript:freePope()">here</a> for free pope!
-                        <br />
-                        Make sure you read the <a href="readme" target="_blank">README</a> and <a href="rules" target="_blank">RULES</a>  before use.
-                    </font>
-                        <br>
-                    <small>
-                        Bonzi.lol is a shock website. Learn more at <a href="https://bonziworldrevived.daisreich.repl.co/dangers" style="color:maroon; text-decoration: none;">The Dangers of BonziWORLD</a> (you must click the red text)</small>
-                    <br>
-                        <br>
-                        <font size=5>
-                          <a href="https://github.com/Daisreich/BonziWORLD-Revived-Classic" class="fab fa-github" style="color:black; text-decoration: none;"></a>
-                          <a href="https://www.youtube.com/@itzcrazyscoutakasm55/featured" class="fab fa-youtube" style="color:red; text-decoration: none;"></a>
-                          <!-- <a href="#" class="fab fa-discord"  style="color:blue; text-decoration: none;"></a>
-                          <a href="#" class="fab fa-twitter"  style="color:cyan; text-decoration: none;"></a> -->
-                       </font>
-                </div>
-                <div id="login_load">loading</div>
-                <div id="login_version">Version 2020.1.3</div>
-              <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
-                <div id="login_card" style="display: none;">
-                    <input id="login_name" type="text" placeholder="Nickname" />
-                    <input id="login_room" type="text" placeholder="Room ID (Optional)" />
-                    <button onclick="warningScreen()" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
-                        <div id="login_go"></div>
-                    </button>
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <br />
-                    <div id="login_error" style="display: none;"></div>
-                    <br />
-                </div>
-            </div>
-        </div>
-        <template id="b_alert" class="page no_selection">
-            <div class="message_cont no_selection">
-                <h1>text here afgjagoafgja</h1>
-                <br />
-                <p>type text here for free</p>
-                <br />
-                <button class="btn">OK</button>
-            </div>
-        </template>
-        <template id="b_broadcast" class="page no_selection">
-            <div class="message_cont no_selection">
-                <h1>text here afgjagoafgja</h1>
-                <br />
-                <p>type text here for free</p>
-                <br />
-                <button class="btn">OK</button>
-            </div>
-        </template>
-        <div id="page_error" class="page" style="display: none;">
-            <div id="error_cont" class="message_cont">
-                <img src="./img/error/logo.png" />
-                <br />
-                <br />
-                <h1>Disconnected</h1>
-                <p>The server may have been reset or you have been disconnected from the server.</p>
-                <br />
-                <a href="#" onclick="window.location.reload()">Reload?</a>
-            </div>
-        </div>
-        <div id="page_warning_login" class="page" style="display: none;">
-            <div id="error_cont" class="message_cont">
-                <img src="./img/error/logo2.png" />
-                <br />
-                <br />
-                <h1>Warning</h1>
-                <br>
-                <br>
-                Public rooms are not safe. It is highly recommended you use a Room ID and share your Room ID to people you trust. By logging in, You agree that you are vulnerable to attackers, doxxers and cyberbullies. The community is in hell right now, so be very careful when you use any website like this one. <a href="dangers">Learn more</a>
-                <br>
-                <br>
-                <a href="javascript:closeWarningScreen1()" onclick="$('#page_warning_login')">I know what i'm doing!</a> <a href="javascript:closeWarningScreen2()" onclick="$('#page_warning_login')">Return to Home</a>
-                <br />
-            </div>
-        </div>
-        <div id="page_warning" class="page" style="display: none;">
-            <div id="warning_cont" class="message_cont">
-                <img src="./img/ban/logo.png" />
-                <br />
-                <br />
-                <h1>Warning</h1>
-                <br />
-                <br />
-                <b>Why did i get warned? </b>
-                <span id="warning_reason"></span>
-                <br />
-                <br />
-                <button onclick="hidewarning()">Hide</button>
-            </div>
-        </div>
-        <div id="page_achieve" class="page" style="display: none;">
-            <div id="achieve_cont" class="message_cont">
-                <img src="./img/ban/logo.png" />
-                <br />
-                <br />
-                <h1>You've Received Admin!</h1>
-                <br />
-                <br />
-                <b>Why did i get admin? </b>
-                <span id="achieve_reason"></span>
-                <br />
-                <br />
-                If you did not get admin, reload the page.
-                <br />
-                <br />
-                <button onclick="hideadmin()">Hide</button>
-            </div>
-        </div>
-        <div id="page_ban" class="page" style="display: none;">
-            <div id="ban_cont" class="message_cont">
-                <img src="./img/ban/logo.png" />
-                <br />
-                <br />
-                <h1>You got banned!</h1>
-                <br />
-                <br />
-                <b>Why? </b>
-                <span id="ban_reason"></span>
-                <br />
-                <b>When is it over? </b>
-                <span id="ban_end"></span>
-                <br />
-            </div>
-        </div>
-        <div id="page_kick" class="page" style="display: none;">
-            <div id="kick_cont" class="message_cont">
-                <img src="./img/ban/logo.png" />
-                <br />
-                <br />
-                <h1>You got kicked!</h1>
-                <br />
-                <br />
-                <b>Why? </b>
-                <span id="kick_reason"></span>
-                <br />
-            </div>
-        </div>
-        <div id="page_unsupp" class="page" style="display: none;">
-            <div id="unsupp_cont" class="message_cont">
-                <img src="./img/error/logo.png" />
-                <br />
-                <br />
-                <h1>BonziWORLD cannot run on this platform.</h1>
-                <br />
-                Unfortunately, BonziWORLD cannot run in this browser for the following reasons:
-                <br />
-                <ul id="unsupp_reasons"></ul>
-                You can try to download a BonziWORLD app that works on your device, or update your browser.
-                <div id="login_apps"></div>
-            </div>
-        </div>
-        <div id="titlebar">
-            <div id="minimize"></div>
-            <div id="maximize"></div>
-            <div id="close"></div>
-        </div>
-        <script src="/js/midi.js"></script>
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicons/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="/favicons/favicon-32x32.png" sizes="32x32">
+	<link rel="icon" type="image/png" href="/favicons/favicon-16x16.png" sizes="16x16">
+	<link rel="manifest" href="/favicons/manifest.json">
+	<link rel="mask-icon" href="/favicons/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/favicons/favicon.ico">
+	<meta name="msapplication-config" content="/favicons/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
 
-        <script src="//www.windows93.net/c/libs/codef/codef_core.js"></script>
-        <script src="//www.windows93.net/c/libs/codef/codef_starfield.js"></script>
-        <script src="//www.windows93.net/c/libs/codef/codef_gradient.js"></script>
-        <script src="//www.windows93.net/c/libs/codef/codef_scrolltext.js"></script>
-        <script src="//www.windows93.net/c/libs/codef/codef_fx.js"></script>
-        <script src="//www.windows93.net/c/libs/codef/codef_3d.js"></script>
-        <script src="//www.windows93.net/c/libs/howler.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="./css/readme.min.css">
 
-        <script>
-            function freePope() {
-                document.getElementById("login_room").value = "pope";
-                warningScreen();
-            }
-            function warningScreen() {
-              if ($("#login_room").val() == "" || $("#login_room").val() == "pope") {
-                $("#page_warning_login").show();
-              } else {
-                login();
-              }
-            }
-            function closeWarningScreen1() {
-              login();
-              $("#page_warning_login").fadeOut(230);
-              if (document.getElementById("login_room").value == "pope") {
-                
-                setTimeout(function(){
-                    socket.emit("command",{list:["pope"]})
-                },200)
-                
-              }
-            }
-            function closeWarningScreen2() {
-              $("#page_warning_login").fadeOut(230);
-              $("#login_load").hide();
-              $("#login_card").show();
-            }
-            function toggleCliCmd() {
-                var cmds = document.getElementById('clicmds');
-                if (cmds.style.display == "none") {
-                    cmds.style.display = "block";
-                } else {
-                    cmds.style.display = "none";
-                }
-            }
-            var mycanvas;
-            var my2dstarfield;
-            var my2dstarsparams = [
-                { nb: 30, speedy: 2, speedx: -1, params: 0 },
-                { nb: 30, speedy: 0.8, speedx: 0.8, params: 1 },
-                { nb: 30, speedy: 0.6, speedx: 0.6, params: 2 },
-            ];
+	<script src="./js/lib/jquery.min.js"></script>
 
-            var bubble = new Array();
-            //bubble[0]=new image('data/zip.gif');
-            bubble[0] = new image("/img/ban/logo.png");
-            bubble[1] = new image("/img/stickers/flip.png");
-            bubble[2] = new image("/img/error/logo.png");
-            // not dangerous
-            //bubble[3]=new image('/dangerous/slimey.png');
+	<script src="./js/platform.js"></script>
+	<link rel="stylesheet" type="text/css" href="./css/platform.css">
+	<link rel="stylesheet" type="text/css" href="./css/clippy.css">
+	<script src="./js/lib/clippy.min.js"></script>
+	
+	<script type="text/javascript">
+		clippy.load('Genie', function(agent) {
+			// Do anything with the loaded agent
+      // this might not work with some browsers but whatever
+			agent.show();
+			agent.play('Greet');
+			agent.gestureAt(-200,0);
+			agent.speak('This is the darkest side of BonziWORLD\'s Community.');
+			agent.speak('You should never be one of those people.');
+      agent.speak('Don\'t talk to strangers!');
+		});
+	</script>
+</head>
+<body>
+  	<div id="content">
+    <h2>The BonziWORLD Community's Darkest Side / The Dangers of BonziWORLD</h2>
+    <br>
+    <a href="enemies">Click here for the simplified version</a><br>
+    <h3>Please do not ignore this page, it is really important that you read this. <br><big><font color="maroon">ATTENTION</font>: There are misinformation being spread by Fune. It is about me being a 'pedo' which is there to ruin my reputation. There is no proof of me being a disgusting criminal. Even my parents deny it. Don't believe in their lies. I am not a child predator and never will be. Bonzi.lol is lying to you. I'm a literal minor, and I never groomed people. They're also using my arch nemesis's name 'losky' in there. They are becoming my new arch nemesis and a huge threat to my life and privacy. </big><br><center><img src="./img/fake_allegations.png" width=400></center></img><br>NOTE: The ERP shit with losky was when i was literally 12 years old. I'm 17 years old, and i'm old enough to not do trash anymore. He started it and did it with his other friends (now enemies) anyways. And about the DanielTR52 NSFW shit, i was literally protraying those disgusting users in this community, the funny zone was designed to make fun of bonziworld users, but i may have gone a bit overboard about it because eventually i started using bot commands that post weird and NSFW content. (DTR52, i owe you an apology about all of this. Check your github issue page.) </h3>
+    <p>The newest variation of BonziWORLD Revived was meant to be for private use, but due to the discord server members really wanting it back it has been decided that it had to be put back online again. It is now public once again, however the members decided that it had to come back, not Seamus.</p>
+    <p>Since 2021, BonziWORLD has become slightly unplayable due to people being rude to others. This README page will show you the darkest side of bonziworld's community.</p>
+    <p>Currently, the popular server everyone is using is bonzi.lol. However, the site has potentially offensive content. The server's discord server has been violating numerous TOS and Guidelines, yet nobody is reporting them.</p>
+    <p>
+      heyjoeway, the creator of BonziWORLD permanently abandoned this community because of people like bonzi.lol's users and bonzi.lol's admins in 2020. I would blame an old admin of BWR for this because he got mad at me for coding a minecraft mod poorly (i didn't know java much at the time) and befriending ardakirac2009 and his gang.
+    </p>
+    <p>Bonzi.lol encourages illegal activites such as doxxing, and will tell their cybermob to harass innocent users.</p>
+    <p>Because of an former admin of our server being a dick to nearly everybody, he decided to conquer it and make it the most toxic community in the world, making the website extremely aggressive, unfriendly, and will harass anybody.</p>
+    <p>The owner of bonzi.lol's name is Fune, also known as Bluefong. It is known that everyone named after a children's youtube channel 'Pinkfong' are shitty people. Well who would've guessed, because Fune is a shitty person already.</p>
+    <p>A former 'friend' of Seamus recently went against him in Janurary 2022, constantly accusing him of things he didn't do, and started making cringe videos out of him and would harass him non stop. He has created a Google Docs document named 'Enough is enough', which 'exposes' seamus and his 'actions', most of them being minor and falsified rumors of him being a paedophile. To this day, he hasn't changed a single bit, still having mental issues and has now joined bonzi.lol's cybermob, but now i'm trying to solve this conflict with me and danieltr52. Yes, that is his name. </p>
+    <p>
+        Bonzi.lol contains a server that has doxxed information of innocent inviduals, like Seamus. and nobody seems to care about their lives being in potential danger. The people of bonzi.lol are no-lifers and don't give a shit about your feelings. One really simple thing and you will get doxxed by them instantly. Your IP address is taken from the logs of bonzi.lol and will be used for malicious purposes, like doxxing. It's also a literal shock website, by the way.
+    </p>
+    <p>
+      It is crazy how nobody knows the dangers of the community right now. Nobody seems to care about people having their lives in danger. They might get swatted by the BozoWORLD users. One of them might even commit suicide. Only a few amount of people know about the situation we're dealing with.
+    </p>
+    <br>
+    <h3>Learning how to use BonziWORLD and it's forks in 2022 and later</h3>
+    Okay, now we got some of the info shown to you, we will show you how to use any bonziworld website, and how to avoid these mean people from harassing you.
 
-            var mygrad;
-            var mygradcolor = [
-                { color: "rgb(128,0,128)", offset: 0 },
-                { color: "rgb(255,20,147)", offset: 0.25 },
-                { color: "rgb(128,0,128)", offset: 0.5 },
-                { color: "rgb(255,20,147)", offset: 0.75 },
-                { color: "rgb(128,0,128)", offset: 1 },
-            ];
+    <h4>Using BonziWORLD</h4>
+    Try to avoid all public rooms and only share your room id to people you trust. If you are planning to stream and/or record, censor the room id by using inspect element so the attackers can't join your room and harass you.
+    If you are under attack by these inviduals, you can create an new identity.
+    <br>
+    <h5>Creating your new identity</h5>
+    Delete all of your accounts except valuable ones like your steam account, and try to make up a new nickname. It must not be related to your interests, your name and anything that is related to you and your family.
+    Keep your brand new discord account private. Only share the tag of your new account to your friends and stay off of public discord servers.
 
-            var myfont = new image("img/font.png");
-            var mycanvas;
-            var myscrolltext;
-
-            var myscrollparam = [{ myvalue: 0, amp: 125, inc: 0.2, offset: -0.04 }];
-
-            var myimage = new image("/img/desktop/bg_acid.png");
-            var mycanvas;
-            var myoffscreencanvas;
-            var myfx;
-            var myfxparam = [
-                { value: 0, amp: 30, inc: 0.03, offset: -0.05 },
-                { value: 0, amp: 30, inc: 0.01, offset: 0.08 },
-            ];
-
-            var my3d;
-
-            var myobj = new Array();
-            var myobjvert = new Array();
-            myobjvert = [
-                { x: -300, y: 0, z: 300 },
-                { x: 300, y: 0, z: 300 },
-                { x: 300, y: 0, z: -300 },
-                { x: -300, y: 0, z: -300 },
-                { x: 0, y: 400, z: 0 },
-                { x: 0, y: -400, z: 0 },
-            ];
-
-            myobj = [
-                { p1: 1, p2: 4, p3: 0, params: new MeshBasicMaterial({ color: 0x00ffff, opacity: 0.7 }) },
-                { p1: 2, p2: 4, p3: 1, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
-                { p1: 3, p2: 4, p3: 2, params: new MeshBasicMaterial({ color: 0xff00ff, opacity: 0.7 }) },
-                { p1: 0, p2: 4, p3: 3, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
-                { p1: 0, p2: 5, p3: 1, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
-                { p1: 1, p2: 5, p3: 2, params: new MeshBasicMaterial({ color: 0x00ffff, opacity: 0.7 }) },
-                { p1: 2, p2: 5, p3: 3, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
-                { p1: 3, p2: 5, p3: 0, params: new MeshBasicMaterial({ color: 0xff00ff, opacity: 0.7 }) },
-            ];
-
-            function init() {
-                window.addEventListener("resize", onWindowResize, false);
-
-                mycanvas = new canvas(window.innerWidth, window.innerHeight, "main");
-                my2dstarfield = new starfield2D_img(mycanvas, bubble, my2dstarsparams);
-                mygrad = new grad(mycanvas, mygradcolor);
-
-                myfont.initTile(32, 32, 32);
-                myscrolltext = new scrolltext_horizontal();
-                myscrolltext.scrtxt = "HELLO AND WELCOME TO        BONZIWORLD ACID MODE                   HAVE FUN       :)  ";
-                myscrolltext.init(mycanvas, myfont, 1, myscrollparam);
-
-                myoffscreencanvas = new canvas(208, 170);
-                myimage.draw(myoffscreencanvas, 0, 0);
-                myfx = new FX(myoffscreencanvas, mycanvas, myfxparam);
-
-                my3d = new codef3D(mycanvas, 900, 40, 1, 1600);
-                my3d.faces(myobjvert, myobj, true, false);
-
-                //sound
-
-                //
-
-                var invisiblepink = new Audio("//www.windows93.net/c/programs/acidBox93/data/DJ_Invisible_Pink_-_Live_Acid_at_Databit.ogg");
-                invisiblepink.playbackRate = 1.0;
-                invisiblepink.play();
-                invisiblepink.volume = 1;
-                invisiblepink.loop = true;
-                go();
-            }
-
-            function go() {
-                //mycanvas.fill('#000000');
-                mygrad.drawV();
-
-                my3d.group.rotation.x += 0.01;
-                my3d.group.rotation.y += 0.02;
-                my3d.group.rotation.z += 0.04;
-                my3d.draw();
-
-                my2dstarfield.draw();
-
-                myfx.siny(window.innerWidth / 2 - 104, window.innerHeight / 2 - 85);
-
-                myscrolltext.draw(240 - 16);
-
-                requestAnimFrame(go);
-            }
-
-            function onWindowResize() {
-                console.log(mycanvas);
-                //console.log('??');
-                mycanvas.canvas.width = window.innerWidth;
-                mycanvas.canvas.height = window.innerHeight;
-                mycanvas.canvas.style.width = window.innerWidth + "px";
-                mycanvas.canvas.style.height = window.innerHeight + "px";
-
-                //console.log('resize');
-
-                //document.location.reload(true);
-            }
-        </script>
-    </body>
+    <h3>About the BonziWORLD Encylopedia Dramatica Page</h3>
+    <p>
+      All pages on the drama wiki are satire and being so fake. Don't worry too much about it.
+    </p>
+    <h2>Final Words</h2>
+    <p>
+      I think BonziWORLD's Community has devolved into degeneracy and pure toxicity at this point. They will harass any children and will give no mercy. I still kind of hate the community because of those people. They will never be poltie ever, which is really unfortunate. Stay off of bonzi.lol and move to this version of BonziWORLD for a much better experience. And also if they ever say that they're the most powerful server, better than erik's or any other server, or the bonziworld community is great, they're lying. They turned it into shit. I must also say though, they're also making fake screenshots out of me saying "grrr eem so mad im going to docks fune" but in reality it's just an edited image of my conversation with Cosmic. They're also invading my personal stuff and using them to leak personal information about me. They are no lifers who are destroying this community. I want YOU to spread the word. If you have discord, send this page to your friends. Fune is the bad person here, not me. Please tell others about this on other bonziworld servers and make them stay away from bonzi.lol. He's doxxing innocent server hosts (like me) and making misinformation about them.
+      <br>
+      <br>
+      ~ Seamusmario
+    </p>
+    <p>
+      <h3>Links</h3>
+      <p>
+        
+        <strong><a href="readme">README</a></strong>
+        <strong><a href="rules">RULES</a></strong>
+        <strong><a href="chat">Home</a></strong>
+        
+      </p>
+    </p>
+	<div id="titlebar">
+		<div id="minimize"></div>
+		<div id="maximize"></div>
+		<div id="close"></div>
+	</div>
+</body>
 </html>

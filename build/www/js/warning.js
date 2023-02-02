@@ -6,12 +6,14 @@ function hidewarning() {
     x.style.display = "none";
   }
 }
+// is this even used? possibly like 2022 or something?
+// it's one of the remains of the censored version of bwr that was made for my siblings
 function showunder12warning() { // wtf?
   $('#page_contentwarning').show('slow');
   msg = new SpeechSynthesisUtterance();
   synth = window.speechSynthesis;
   voices = window.speechSynthesis.getVoices();
-  msg.text = "Content Warning! User made content in this website may not be suitible for users under the age of 12, or people who have parents who can't handle swearing. Continue Anyway?"
+  msg.text = "CONTENT WARNING! User made content in this website may not be suitible for users under the age of 12, or people who have parents who can't handle swearing. Continue Anyway?"
   synth.speak(this.msg);
 }
 function hideunder12warning() {
