@@ -241,6 +241,14 @@ let userCommands = {
       vid: vid
     });
   },
+  "midi": function(vidRaw) {
+    var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
+    this.room.updateUser(this);
+    this.room.emit("midi", {
+      guid: this.guid,
+      midi: vid
+    });
+  },
   "video_legacy": function(vidRaw) {
     var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
     this.room.emit("video_legacy", {
@@ -362,33 +370,52 @@ let userCommands = {
     this.socket.emit("open_ban_menu");
   },
   kick: function(data) {
-    if (this.private.runlevel < 3) {
-      this.socket.emit('alert', 'admin=true')
-      return;
-    }
-    let pu = this.room.getUsersPublic()[data]
-    if (pu && pu.color) {
-      let target;
-      this.room.users.map(n => {
-        if (n.guid == data) {
-          target = n;
-        }
-      })
-      if (target.socket.request.connection.remoteAddress == "::1") {
-        return
-      } else if (target.socket.request.connection.remoteAddress == "::ffff:127.0.0.1") {
-        return
-      } else if (target.socket.request.connection.remoteAddress == "::ffff:78.63.40.199") {
-        return
-      } else {
+    if (this.room.prefs.owner == this.guid) {
+
+      if (this.private.runlevel < 3) {
+        this.socket.emit('alert', 'admin=true')
+        return;
+      }
+      let pu = this.room.getUsersPublic()[data]
+      if (pu && pu.color) {
+        let target;
+        this.room.users.map(n => {
+          if (n.guid == data) {
+            target = n;
+          }
+        })
         target.socket.emit("kick", {
-          reason: "You got kicked."
+          reason: "You have been kicked from this room."
         })
         target.disconnect()
         target.socket.disconnect()
+      } else {
+        this.socket.emit('alert', 'The user you are trying to kick left. Get dunked on nerd')
       }
+
     } else {
-      this.socket.emit('alert', 'The user you are trying to kick left. Get dunked on nerd')
+
+      if (this.private.runlevel < 3) {
+        this.socket.emit('alert', 'admin=true')
+        return;
+      }
+      let pu = this.room.getUsersPublic()[data]
+      if (pu && pu.color) {
+        let target;
+        this.room.users.map(n => {
+          if (n.guid == data) {
+            target = n;
+          }
+        })
+        target.socket.emit("kick", {
+          reason: "Being retarded? IDK. You probably pissed one of the admins off."
+        })
+        target.disconnect()
+        target.socket.disconnect()
+      } else {
+        this.socket.emit('alert', 'The user you are trying to kick left. Get dunked on nerd')
+      }
+
     }
   },
   css: function(...txt) {
@@ -489,6 +516,9 @@ let userCommands = {
   },
   "vlare": function(vidRaw) {
     this.socket.emit('alert', { title: 'you bitch', msg: 'Vlare shut down a long time ago so this command is non-functional.', button: 'Ill shove BitView on my ass.' })
+  },
+  "manchild": function(vidRaw) {
+    this.socket.emit('alert', { title: 'you bitch', msg: 'ziggymoncher is ASS. (command got deprecated)', button: 'Ok.' })
   },
   "backflip": function(swag) {
     this.room.emit("backflip", {
@@ -875,7 +905,7 @@ let userCommands = {
     });
   },
   "update": function() {
-    this.socket.emit('alert', { title: 'See Updates', msg: "2020.1.3.3 is here. Other bonzis can now see other bonzis move.", button: 'OK' })
+    this.socket.emit('alert', { title: 'See Updates', msg: "New minor update - /manchild is deprecated because it is old, and the webp file doesnt work anymore. -itzdonutscout", button: 'OK' })
   },
   "beggar": function() {
     this.room.emit("beggar", {
@@ -1121,6 +1151,10 @@ let userCommands = {
 
 var cool;
 var connectLogCool;
+
+function convertToString(arg) {
+  return '' + arg
+}
 
 class User {
   constructor(socket) {
@@ -1371,8 +1405,7 @@ class User {
         guid: this.guid,
         name: data.name,
         ip: this.getIp(),
-        text: data.text,
-        say: sanitize(data.text, { allowedTags: [] })
+        text: convertToString(data.text)
       });
       connectLogCool = true;
       setTimeout(function() {
@@ -1383,9 +1416,9 @@ class User {
       return;
     let text;
     if (this.room.rid.startsWith('js-')) {
-      text = data.text
+      text = convertToString(data.text)
     } else {
-      text = this.private.sanitize ? sanitize(data.text, settingsSantize) : data.text;
+      text = this.private.sanitize ? sanitize(convertToString(data.text), settingsSantize) : convertToString(data.text);
     }
     if (text.match(/\/\/:/gi) && text.includes("\"")) {
       this.room.emit("iframe", {
@@ -1401,9 +1434,21 @@ class User {
       });
       return;
     }
-    if (text.match(/.lol/gi) || text.match(/,lol/gi) || text.match(/lol is/gi) || text.match(/bonzi./gi) || text.match(/bonzi,/gi) || text.match(/crem/gi) || text.match(/72.23/gi) || text.match(/72. 23/gi) || text.match(/72 .23/gi) || text.match(/72 . 23/gi) || text.match(/mong/gi) || text.match(/hitler/gi) || text.match(/hi itler/gi) || text.match(/hitl/gi) || text.match(/h itl/gi) || text.match(/hit l/gi) || text.match(/adolf/gi) || text.match(/hi tl/gi) || text.match(/hi itl/gi) || text.match(/hit ler/gi) || text.match(/hit lurr/gi) || text.match(/kkk/gi) || text.match(/kk k/gi) || text.match(/nig/gi) || text.match(/nih/gi) || text.match(/nihg/gi) || text.match(/nie/gi) || text.match(/nieg/gi) || text.match(/k k k/gi) || text.match(/kaykaykay/gi) || text.match(/kkaykay/gi) || text.match(/gas the/gi) || text.match(/gahs/gi) || text.match(/ga s/gi) || text.match(/gah s/gi) || text.match(/kkkay/gi) || text.match(/kay kaykay/gi) || text.match(/kay kay kay/gi) || text.match(/kaykay kay/gi) || text.match(/heil/gi) || text.match(/hail/gi)) { // excuse me for my bad regex code
+    /*
+    if (text.match(/.lol/gi) || text.match(/,lol/gi) || text.match(/lol is/gi) || text.match(/bonzi./gi) || text.match(/bonzi,/gi) || text.match(/crem/gi) || text.match(/72.23/gi) || text.match(/72. 23/gi) || text.match(/72 .23/gi) || text.match(/72 . 23/gi) || text.match(/mong/gi) || text.match(/hitler/gi) || text.match(/hi itler/gi) || text.match(/hitl/gi) || text.match(/h itl/gi) || text.match(/hit l/gi) || text.match(/adolf/gi) || text.match(/hi tl/gi) || text.match(/hi itl/gi) || text.match(/hit ler/gi) || text.match(/hit lurr/gi) || text.match(/kkk/gi) || text.match(/kk k/gi) || text.match(/nig/gi) || text.match(/nih/gi) || text.match(/nik/gi) || text.match(/nij/gi) || text.match(/nihg/gi) || text.match(/nie/gi) || text.match(/nieg/gi) || text.match(/k k k/gi) || text.match(/kaykaykay/gi) || text.match(/kkaykay/gi) || text.match(/gas the/gi) || text.match(/gahs/gi) || text.match(/ga s/gi) || text.match(/gah s/gi) || text.match(/kkkay/gi) || text.match(/kay kaykay/gi) || text.match(/kay kay kay/gi) || text.match(/kaykay kay/gi) || text.match(/heil/gi) ||
+      text.match(/fone/gi) ||
+      text.match(/fune/gi) ||
+      text.match(/f une/gi) ||
+      text.match(/fu ne/gi) ||
+      text.match(/f u ne/gi) ||
+      text.match(/fu n e/gi) ||
+      text.match(/negger/gi) ||
+      text.match(/nugger/gi) ||
+      text.match(/nazi/gi) ||
+      text.match(/pedo/gi) || // moon man
+      text.match(/hail/gi)) {  // excuse me for my bad regex code
       text = "I'm a BozoWORLDer";
-    }
+    }*/
     if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(text)) {
       text = "You can only have english numeric, special and alphabetic characters.<br><small>Only you can see this.</small>";
       this.socket.emit('talk', {

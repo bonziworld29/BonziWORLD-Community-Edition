@@ -45,6 +45,19 @@ body, html {
   color: #fff;
 }
 
+#login_tips {
+  background-color: #6d33a0;
+  position: absolute;
+  padding: 4px 3px;
+  border: none;
+  border-radius: 3px;
+  box-shadow: 2px 2px 2px #13316f;
+  outline: none;
+  background: #;
+  text-rendering: optimizeLegibility;
+  color: #fff;
+}
+
 #content {
   width: 100%;
   height: 100%;
@@ -578,6 +591,19 @@ body.acidmode #chat_send:active {
   left: 50%;
 }
 
+#login_tips {
+  color: #fff;
+  background-color: 
+  padding: 10px;
+  bottom: 18%;
+  font-size: 16px;
+  width: auto;
+  transform: translateX(-50%);
+  -webkit-transform: translateX(-50%);
+  text-align: center;
+  left: 50%;
+}
+
 #powered_by_msagent {
   color: #000;
   padding: 10px;
@@ -714,6 +740,10 @@ body.acidmode #chat_send:active {
     font-size: 9px;
     bottom: 5%;
   }
+  #login_tips {
+    font-size: 9px;
+    bottom: 5%;
+  }
   #powered_by_msagent {
     font-size: 8px;
     bottom: 30%;
@@ -730,12 +760,12 @@ body.acidmode #chat_send:active {
   }
 }
 @media screen and (max-height: 300px) {
-  #login_readme, #login_version {
+  #login_readme, #login_tips, #login_version {
     display: none;
   }
 }
 @media screen and (max-height: 400px) and (max-width: 560px) {
-  #login_readme {
+  #login_readme, #login_tips {
     display: none;
   }
 }
@@ -756,6 +786,11 @@ body.acidmode #chat_send:active {
   }
 
   #login_readme {
+    font-size: 7px;
+    bottom: 5%;
+  }
+  
+  #login_tips {
     font-size: 7px;
     bottom: 5%;
   }

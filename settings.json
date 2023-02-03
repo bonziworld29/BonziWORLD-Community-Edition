@@ -28,11 +28,11 @@
 				"sticker": 0,
 				"name": 0,
 				"owo": 0, 
-				"peedy": 4, 
+				"peedy": 0, 
 				"sanitize": 3,
 				"losky": 0,
 				"video": 3,
-				"clippy": 3,
+				"clippy": 0,
 				"img": 3,
 				"loskyize": 3,
 				"unbojih": 3,
@@ -48,13 +48,19 @@
 				"pope2": 3,
 				"pope3": 3,
 				"pope4": 3,
-				"ww3": 3
+				"ww3": 0,
+        "midi": 3
 			},
 			"room_max": 1000000,
 			"owner": null,
 			"pitch": {
-				"max": 400,
-				"min": 50,
+				"max": 125,
+				"min": 1,
+				"default": "random"
+			},
+			"speed": {
+				"max": 275,
+				"min": 125,
 				"default": "random"
 			},
 			"sapi5pitch": {
@@ -65,11 +71,6 @@
 			"amplitude": {
 				"max": 205,
 				"min": 80,
-				"default": "random"
-			},
-			"speed": {
-				"max": 200,
-				"min": 50,
 				"default": "random"
 			},
 			"defaultName": "Anonymous"
@@ -83,6 +84,7 @@
 				"youtube": 0,
 				"joke": 0,
 				"fact": 0,
+        "midi": 0,
 				"backflip": 0,
 				"color": 0,
 				"join": 0,
@@ -92,7 +94,7 @@
 				"pitch": 0,
 				"speed": 0,
 				"evaljs": 3,
-				"peedy": 4,
+				"peedy": 0,
 				"pawn": 0,
 				"bees": 0,
 				"vaporwave": 0,
@@ -105,9 +107,9 @@
 				"owo": 0, 
 				"sanitize": 3,
 				"losky": 0,
-				"video": 3,
-				"clippy": 3,
-				"img": 3,
+				"video": 0,
+				"clippy": 0,
+				"img": 0,
 				"loskyize": 3,
 				"unbojih": 3,
 				"seamus": 3,
@@ -117,18 +119,23 @@
 				"warn_menu": 3,
 				"iframe": 3,
 				"unban": 3,
-				"kick": 3,
+				"kick": 0,
 				"pope": 0,
 				"pope2": 0,
 				"pope3": 0,
 				"pope4": 0,
-				"ww3": 3
+				"ww3": 0
 			},
 			"room_max": 1000000,
 			"owner": null,
 			"pitch": {
-				"max": 400,
-				"min": 50,
+				"max": 125,
+				"min": 1,
+				"default": "random"
+			},
+			"speed": {
+				"max": 275,
+				"min": 125,
 				"default": "random"
 			},
 			"sapi5pitch": {
@@ -139,11 +146,6 @@
 			"amplitude": {
 				"max": 205,
 				"min": 80,
-				"default": "random"
-			},
-			"speed": {
-				"max": 200,
-				"min": 50,
 				"default": "random"
 			},
 			"defaultName": "Anonymous"

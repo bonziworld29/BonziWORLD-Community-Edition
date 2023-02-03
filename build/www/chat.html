@@ -91,13 +91,22 @@
 
             <div id="page_login" class="page">
                 <div id="login_apps"></div>
+                <div id="login_tips">
+                    <img src="./img/tips/swag.png">
+                    Tip: Everyone can see you move. Drag (or hold) your bonzi to move around the website!
+                    <br>
+                    You will be in the room in 3 seconds.
+                </div>
                 <div id="login_readme">
-                  its fucking down, piss on bozoworlders xdddd
+                  <!-- too much stuff bonzi.lol fucking died, piss on bozoworlders xdddd
                   <br>
                     <small>
-                      Your IP is filtered by replit, So you are safe from malicious activites.<br>
-                      <small><font color="red">Warning</font>: BonerWORLDers, or bonzi.lol's admins keep attacking this website while also spreading misinformation about me.<br> I'm not a child predator and never will be. <br> I would like to have peace and not get involved with any more drama, people or activities in any other bonziworld site.</small>
+                      We don't grab IPs. Bonzi.lol is lying to you by making fake news and misinformation about Seamus and everyone else. Like we said, Your IP is filtered by replit, So you are safe from malicious activites.<br>
+                      All IPs seen in the console is actually the Replit server IP address proxied into Cloudflare. We only ban everyone from using this site in emergencies.<br>
+                      
+                      <small><font color="red">Warning</font>: BonerWORLDers, or bonzi.lol's admins keep attacking this website while also spreading misinformation about me.<br> I'm not a child predator and never will be. <br> I would like to have peace and not get involved with any more drama, people or activities in any other bonziworld site.</small> -->
                     </small>
+                    <small><strong>It's official: We have removed the rules from existence.</strong></small><br>
                     <br>
                         Click <a href="javascript:freePope()">here</a> for free pope! (actually not clickbait) (not a scam either)
                         <br />
@@ -116,8 +125,8 @@
                        </font>
                 </div>
                 <div id="login_load">loading</div>
-                <div id="login_version">Version 2020.1.3.3</div>
-              <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="aBonzi.lol is dead">
+                <div id="login_version">Version 2020.1.3.5<br><a href="#" onclick="promptForServerURL()">Connect to a third party server</a></div>
+              <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
                 <div id="login_card" style="display: none;">
                     <input id="login_name" type="text" placeholder="Nickname" />
@@ -279,12 +288,33 @@
             function warningScreen() {
               if ($("#login_room").val() == "" || $("#login_room").val() == "pope") {
                 $("#page_warning_login").show();
+                $("#login_readme").hide();
+                $("#login_tips").show();
               } else {
-                login();
+                $("#login_readme").hide();
+                $("#login_tips").show();
+                setTimeout(function(){
+                  
+                  login();
+                  
+                },3000)
               }
             }
+
+            function promptForServerURL() {
+              var url = prompt("Please enter an valid BonziWORLD Server URL\n(may require a anti-CORS extension)\n\nIn order to use a HTTP server, enable insecure content in site permissions.","http://server.erik.red:3000/")
+              if (url) {
+                safeMode = true;
+                socket = io(url);
+              }
+              
+            }
             function closeWarningScreen1() {
-              login();
+              setTimeout(function(){
+                  
+                login();
+                  
+              },3000)
               $("#page_warning_login").fadeOut(230);
               if (document.getElementById("login_room").value == "pope") {
                 
