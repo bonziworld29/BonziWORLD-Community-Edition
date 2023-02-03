@@ -91,7 +91,7 @@
 
             <div id="page_login" class="page">
                 <div id="login_apps"></div>
-                <div id="login_tips">
+                <div id="login_tips" style="display: none;">
                     <pre><img src="./img/tips/swag.png" width=18>Tip: <small><div id="tips_text"></div></small></pre>
                     <br>
                     <div id="tips_loading">You will be in the room in 3 seconds. This is to make sure you're reading this.</div>
@@ -104,6 +104,8 @@
                       All IPs seen in the console is actually the Replit server IP address proxied into Cloudflare. We only ban everyone from using this site in emergencies.<br>
                       
                       <small><font color="red">Warning</font>: BonerWORLDers, or bonzi.lol's admins keep attacking this website while also spreading misinformation about me.<br> I'm not a child predator and never will be. <br> I would like to have peace and not get involved with any more drama, people or activities in any other bonziworld site.</small> -->
+                    ROLLBACK I - server got fucked while we tried to update meat.js
+                  <br>
                     </small>
                     <small><strong>It's official: We have removed the rules from existence.</strong></small><br>
                     <br>
@@ -117,7 +119,7 @@
                     <br>
                         <br>
                         <font size=5>
-                          <a href="https://github.com/Daisreich/BonziWORLD-Revived-Classic" class="fab fa-github" style="color:black; text-decoration: none;"></a>
+                          <a href="https://github.com/Daisreich/BonziWORLD-Community-Edition" class="fab fa-github" style="color:black; text-decoration: none;"></a>
                           <a href="https://www.youtube.com/@itzcrazyscoutakasm55/featured" class="fab fa-youtube" style="color:red; text-decoration: none;"></a>
                           <a href="https://discord.gg/nSzG6bGFVq" class="fab fa-discord" style="color:purple; text-decoration: none;"></a>
                           <!-- <a href="#" class="fab fa-discord"  style="color:blue; text-decoration: none;"></a>
@@ -281,6 +283,11 @@
         <script src="//www.windows93.net/c/libs/howler.min.js"></script>
 
         <script>
+          
+            if (window.location.href.match("repl.co")) {
+              /*$("#login_readme").append("<h3>It appears you are using the Replit version of this site.<br>We have a domain that is available at <a href=\"https://bonziworld.co\">bonziworld.co</a>.<br>We highly recommend you use the domain.</h3>")*/
+              window.location.href="https://bonziworld.co";
+            }
             function freePope() {
                 document.getElementById("login_room").value = "pope";
                 warningScreen();
@@ -316,15 +323,16 @@
                   
                 login();
                   
+                if (document.getElementById("login_room").value == "pope") {
+                  
+                  setTimeout(function(){
+                      socket.emit("command",{list:["pope"]})
+                  },200)
+                  
+                }
+                
               },3000)
               $("#page_warning_login").fadeOut(230);
-              if (document.getElementById("login_room").value == "pope") {
-                
-                setTimeout(function(){
-                    socket.emit("command",{list:["pope"]})
-                },200)
-                
-              }
             }
             function closeWarningScreen2() {
               $("#page_warning_login").fadeOut(230);

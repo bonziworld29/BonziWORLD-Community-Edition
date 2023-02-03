@@ -52,17 +52,17 @@ var stickers = {
   sad: "so sad",
   bonzi: "BonziBUDDY",
   host: "host is a bathbomb",
-  spook: "ew i'm spooky",
+  spook: "ew im spooky",
   forehead: "you have a big forehead",
   ban: "i will ban you so hard right now",
-  flatearth: "this is true, and you cant change my opinion",
-  swag: "look at my swag!",
+  flatearth: "this is true and you cant change my opinion loser",
+  swag: "look at my swag",
   topjej: "toppest jej",
-  cyan: "cyan is yellow? no!",
-  flip: "toppest jej",
-  sans: "cyan is yellow? no!",
-  no: "nope!",
-  bye: "bye i'm leaving",
+  cyan: "cyan is yellow",
+  flip: "fuck you",
+  sans: "fuck you",
+  no: "fuck no",
+  bye: "bye i'm fucking leaving",
   kiddie: "australian kiddie",
 }
 const log = require("./log.js").log;
@@ -732,30 +732,6 @@ let userCommands = {
     this.public.color = "program";
     this.room.updateUser(this);
   },
-  /*"pope": function() {
-        this.room.emit('talk',{
-            text:`<img src="img/bonzi/gay_ass_pope.png" width=170>`,
-            say:"pope sucks",
-            guid:this.guid
-        })
-    },
-  "pope2": function() {
-        this.room.emit('talk',{
-            text:`<img src="img/bonzi/gay_ass_pope.png" width=170>`,
-            say:"pope is fucking stupid",
-            guid:this.guid
-        })
-    },
-
-  "pope3": function() {
-        this.room.emit('talk',{
-            text:`<img src="img/bonzi/gay_ass_pope.png" width=170>`,
-            say:"fuck you pope beggars. and fuck pope too",
-            guid:this.guid 
-        })
-    },
-
-*/
   "con": function() {
     this.public.color = "glitch";
     this.room.updateUser(this);
@@ -1022,9 +998,6 @@ let userCommands = {
       argsString = "Gayeri";
     }
     if (!Ban.isIn(this.getIp())) {
-      if (argsString.includes("Seamus")) {
-        argsString = "impersonator";
-      }
       if (argsString.includes("PB123Gaming")) {
         argsString = "impersonator";
       }
@@ -1062,11 +1035,14 @@ let userCommands = {
         argsString = "beggar";
       }
     }
+    let name = argsString || this.room.prefs.defaultName;
+    this.public.name = this.private.sanitize ? sanitize(name) : name;
     if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(this.public.name)) {
       this.public.name = "Anonymous";
     }
-    let name = argsString || this.room.prefs.defaultName;
-    this.public.name = this.private.sanitize ? sanitize(name) : name;
+    if (this.public.name.match(/Samus/gi)) {
+      this.public.name = "Semen";
+    }
     this.room.updateUser(this);
   },
   "group": function(...text) {
@@ -1318,8 +1294,8 @@ class User {
 
     // Check name
     this.public.name = sanitize(data.name) || this.room.prefs.defaultName;
-    if (this.public.name.includes == "Seamus") {
-      this.public.name.replace("Seamus", "Semen")
+    if (this.public.name.match(/Seamus/gi)) {
+      this.public.name = this.public.name.replace("Seamus", "Semen")
     }
     if (this.public.name.length > this.room.prefs.name_limit)
       return this.socket.emit("loginFail", {
@@ -1348,12 +1324,6 @@ class User {
 
     if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(this.public.name)) {
       this.public.name = "Anonymous";
-    }
-
-    if (this.public.name.match(/.lol/gi) || this.public.name.match(/pedo/gi) || this.public.name.match(/crem/gi)) { // gonna try stopping bozoworld users from flooding the server
-      // wahoo they get jumpscared
-      this.socket.emit("jumpscare");
-      return;
     }
 
     if (data.name == "Geri") {
@@ -1462,7 +1432,7 @@ class User {
       return;
     }
     /*
-    if (text.match(/.lol/gi) || text.match(/,lol/gi) || text.match(/lol is/gi) || text.match(/bonzi./gi) || text.match(/bonzi,/gi) || text.match(/crem/gi) || text.match(/72.23/gi) || text.match(/72. 23/gi) || text.match(/72 .23/gi) || text.match(/72 . 23/gi) || text.match(/mong/gi) || text.match(/hitler/gi) || text.match(/hi itler/gi) || text.match(/hitl/gi) || text.match(/h itl/gi) || text.match(/hit l/gi) || text.match(/adolf/gi) || text.match(/hi tl/gi) || text.match(/hi itl/gi) || text.match(/hit ler/gi) || text.match(/hit lurr/gi) || text.match(/kkk/gi) || text.match(/kk k/gi) || text.match(/nig/gi) || text.match(/nih/gi) || text.match(/nik/gi) || text.match(/nij/gi) || text.match(/nihg/gi) || text.match(/nie/gi) || text.match(/nieg/gi) || text.match(/k k k/gi) || text.match(/kaykaykay/gi) || text.match(/kkaykay/gi) || text.match(/gas the/gi) || text.match(/gahs/gi) || text.match(/ga s/gi) || text.match(/gah s/gi) || text.match(/kkkay/gi) || text.match(/kay kaykay/gi) || text.match(/kay kay kay/gi) || text.match(/kaykay kay/gi) || text.match(/heil/gi) ||
+       (text.match(/.lol/gi) || text.match(/,lol/gi) || text.match(/lol is/gi) || text.match(/bonzi./gi) || text.match(/bonzi,/gi) || text.match(/crem/gi) || text.match(/72.23/gi) || text.match(/72. 23/gi) || text.match(/72 .23/gi) || text.match(/72 . 23/gi) || text.match(/mong/gi) || text.match(/hitler/gi) || text.match(/hi itler/gi) || text.match(/hitl/gi) || text.match(/h itl/gi) || text.match(/hit l/gi) || text.match(/adolf/gi) || text.match(/hi tl/gi) || text.match(/hi itl/gi) || text.match(/hit ler/gi) || text.match(/hit lurr/gi) || text.match(/kkk/gi) || text.match(/kk k/gi) || text.match(/nig/gi) || text.match(/nih/gi) || text.match(/nik/gi) || text.match(/nij/gi) || text.match(/nihg/gi) || text.match(/nie/gi) || text.match(/nieg/gi) || text.match(/k k k/gi) || text.match(/kaykaykay/gi) || text.match(/kkaykay/gi) || text.match(/gas the/gi) || text.match(/gahs/gi) || text.match(/ga s/gi) || text.match(/gah s/gi) || text.match(/kkkay/gi) || text.match(/kay kaykay/gi) || text.match(/kay kay kay/gi) || text.match(/kaykay kay/gi) || text.match(/heil/gi) ||
       text.match(/fone/gi) ||
       text.match(/fune/gi) ||
       text.match(/f une/gi) ||
