@@ -677,16 +677,34 @@ let userCommands = {
   "linux": "passthrough",
   "pawn": "passthrough",
   "color": function(color) {
-    if (typeof color != "undefined") {
-      if (settings.bonziColors.indexOf(color) == -1)
-        return;
+    if (this.room.rid == "pope") {
 
-      this.public.color = color;
+      if (typeof color != "undefined") {
+        if (settings.bonziColors2.indexOf(color) == -1)
+          return;
+
+        this.public.color = color;
+      } else {
+        let bc = settings.bonziColors2;
+        this.public.color = bc[
+          Math.floor(Math.random() * bc.length)
+        ];
+      }
+
     } else {
-      let bc = settings.bonziColors;
-      this.public.color = bc[
-        Math.floor(Math.random() * bc.length)
-      ];
+
+      if (typeof color != "undefined") {
+        if (settings.bonziColors.indexOf(color) == -1)
+          return;
+
+        this.public.color = color;
+      } else {
+        let bc = settings.bonziColors;
+        this.public.color = bc[
+          Math.floor(Math.random() * bc.length)
+        ];
+      }
+
     }
 
     this.room.updateUser(this);
@@ -877,8 +895,7 @@ let userCommands = {
   },
 
   "god": function() {
-    if (this.private.runlevel === 3) // removing this will cause chaos
-    {
+    if (this.private.runlevel === 3 || !this.room.isPublic) { // removing this will cause chaos, shut up 2020 me
       this.public.color = "god";
       this.room.updateUser(this);
     }
@@ -1185,7 +1202,9 @@ class User {
     };
     if (Ban.isIn(this.getIp())) {
       this.public = {
-        color: 'pope',
+        color: settings.bonziColors[Math.floor(
+          Math.random() * settings.bonziColors.length
+        )],
         hue: 0
       }
       this.socket.emit('admin')
@@ -1243,6 +1262,14 @@ class User {
     if ((typeof rid == "undefined") || (rid === "")) {
       rid = roomsPublic[Math.max(roomsPublic.length - 1, 0)];
       roomSpecified = false;
+    }
+    if (rid == "pope") {
+      this.public = {
+        color: settings.bonziColors2[Math.floor(
+          Math.random() * settings.bonziColors2.length
+        )],
+        hue: 0
+      }
     }
     log.info.log('debug', 'roomSpecified', {
       guid: this.guid,
