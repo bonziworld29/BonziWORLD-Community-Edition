@@ -3,6 +3,7 @@
 		"public": {
 			"char_limit": 12000,
 			"name_limit": 100,
+      "command_limit": 500,
 			"godword": "youwillnevergetit",
 			"runlevel": {
 				"godmode": 0,
@@ -78,6 +79,7 @@
 		"private": {
 			"char_limit": 12000,
 			"name_limit": 100,
+      "command_limit": 500,
 			"godword": "",
 			"runlevel": {
 				"godmode": 0,

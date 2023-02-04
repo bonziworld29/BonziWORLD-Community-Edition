@@ -4,9 +4,9 @@ BonziWORLD Revived Classic (or just BonziWORLD) is a re-release of an older vers
 
 ## Where can I visit it?
 
-We have 1 demo you can try.
+We have a demo.
 
-https://bonziworldrevived.daisreich.repl.co
+https://bonziworld.co
 
 ## Dependencies
 - Node.js and npm

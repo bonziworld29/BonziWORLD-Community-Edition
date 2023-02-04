@@ -600,7 +600,7 @@ body.acidmode #chat_send:active {
   width: auto;
   transform: translateX(-50%);
   -webkit-transform: translateX(-50%);
-  text-align: center;
+  text-align: left;
   left: 50%;
 }
 

@@ -79,7 +79,7 @@
             <div id="main"></div>
             <table id="chat_bar">
                 <tr>
-                    <td id="chat_send">send</td>
+                    <td id="chat_send">Send</td>
                     <td id="chat_message_cont">
                         <input id="chat_message" type="text" placeholder="Enter a message" />
                     </td>
@@ -92,22 +92,12 @@
             <div id="page_login" class="page">
                 <div id="login_apps"></div>
                 <div id="login_tips" style="display: none;">
-                    <pre><img src="./img/tips/swag.png" width=18>Tip: <small><div id="tips_text"></div></small></pre>
+                    <img src="./img/tips/swag.png" width=18>Tip: <small><div id="tips_text"></div></small>
                     <br>
                     <div id="tips_loading">You will be in the room in 3 seconds. This is to make sure you're reading this.</div>
                 </div>
                 <div id="login_readme" style="display: none;">
-                  <!-- too much stuff bonzi.lol fucking died, piss on bozoworlders xdddd
-                  <br>
-                    <small>
-                      We don't grab IPs. Bonzi.lol is lying to you by making fake news and misinformation about Seamus and everyone else. Like we said, Your IP is filtered by replit, So you are safe from malicious activites.<br>
-                      All IPs seen in the console is actually the Replit server IP address proxied into Cloudflare. We only ban everyone from using this site in emergencies.<br>
-                      
-                      <small><font color="red">Warning</font>: BonerWORLDers, or bonzi.lol's admins keep attacking this website while also spreading misinformation about me.<br> I'm not a child predator and never will be. <br> I would like to have peace and not get involved with any more drama, people or activities in any other bonziworld site.</small> -->
-                    ROLLBACK I - server got fucked while we tried to update meat.js
-                  <br>
-                    </small>
-                    <small><strong>It's official: We have removed the rules from existence.</strong></small><br>
+                  <strong>Last minute shit, This is not BonziWORLD Revived anymore. Get your facts right.</strong>
                     <br>
                         Click <a href="javascript:freePope()">here</a> for free pope! (actually not clickbait) (not a scam either)
                         <br />
@@ -115,7 +105,7 @@
                     </font>
                         <br>
                     <small>
-                        <a href="enemies"><font color="maroon">The Enemies of BonziWORLD</font></small></a>
+                        <a href="enemies"><font color="maroon">The Enemies of BonziWORLD</font></small></a> (click on the red link to learn about the possible dangers of the community)
                     <br>
                         <br>
                         <font size=5>
@@ -126,8 +116,8 @@
                           <a href="#" class="fab fa-twitter"  style="color:cyan; text-decoration: none;"></a> -->
                        </font>
                 </div>
-                <div id="login_load">loading</div>
-                <div id="login_version">Version 2020.1.3.5<br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
+                <div id="login_load">loading... <img id="loading_cursor" src="./img/cursors/hourglas.gif"></div>
+                <div id="login_version">Version 1.7.0 BETA<br>BonziWORLD Version 1.6.0 (modified)<br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
               <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
                 <div id="login_card" style="display: none;">
@@ -169,8 +159,8 @@
                 <img src="./img/error/logo.png" />
                 <br />
                 <br />
-                <h1>Disconnected</h1>
-                <p>The server may have been reset or you have been disconnected from the server.<br>Copyright 2020-2023 BonziWORLD Revived, All rights reserved</p>
+                <h1>BonziWORLD.exe has stopped working</h1>
+                <p>The server may have been reset or you have been disconnected from the server.</p>
                 <br />
                 <a href="#" onclick="window.location.reload()">Reload?</a>
             </div>
@@ -263,7 +253,7 @@
                 Unfortunately, BonziWORLD cannot run in this browser for the following reasons:
                 <br />
                 <ul id="unsupp_reasons"></ul>
-                You can try to download a BonziWORLD app that works on your device, or update your browser.
+                You can try to download a BonziWORLD app that works on your device, upgrade your operating system, or update your browser.
                 <div id="login_apps"></div>
             </div>
         </div>
@@ -285,11 +275,11 @@
         <script>
           
             if (window.location.href.match("repl.co")) {
-              /*$("#login_readme").append("<h3>It appears you are using the Replit version of this site.<br>We have a domain that is available at <a href=\"https://bonziworld.co\">bonziworld.co</a>.<br>We highly recommend you use the domain.</h3>")*/
-              window.location.href="https://bonziworld.co";
+              $("#login_readme").append("<h3>It appears you are using the Replit version of this site.<br>We have a domain that is available at <a href=\"https://bonziworld.co\">bonziworld.co</a>.<br>We highly recommend you use the domain.</h3>")
             }
             function freePope() {
                 document.getElementById("login_room").value = "pope";
+                loadTest();
                 warningScreen();
             }
             function warningScreen() {

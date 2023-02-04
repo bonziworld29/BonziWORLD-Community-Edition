@@ -371,11 +371,6 @@ let userCommands = {
   },
   kick: function(data) {
     if (this.room.prefs.owner == this.guid) {
-
-      if (this.private.runlevel < 3) {
-        this.socket.emit('alert', 'admin=true')
-        return;
-      }
       let pu = this.room.getUsersPublic()[data]
       if (pu && pu.color) {
         let target;
@@ -1040,8 +1035,34 @@ let userCommands = {
     if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(this.public.name)) {
       this.public.name = "Anonymous";
     }
-    if (this.public.name.match(/Samus/gi)) {
+    if (this.public.name.match(/Seamus/gi)) {
       this.public.name = "Semen";
+    } else if (this.public.name.match(/Jakey/gi)) { // no more impersonators???
+      this.public.name = "Retard";
+    } else if (this.public.name.match(/touch/gi)) { // you sick fucks
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/to uch/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/t ouch/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/t ou ch/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/t ouc h/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/touc h/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/tou c h/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/to u c h/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/t ouc h/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/to uc h/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/Crem/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/Creem/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
     }
     this.room.updateUser(this);
   },
@@ -1330,7 +1351,31 @@ class User {
       data.name = "Gayeri"
     } else if (this.public.name.match(/Seamus/gi)) {
       this.public.name = "Semen";
+    } else if (this.public.name.match(/Jakey/gi)) { // no more impersonators???
+      this.public.name = "Retard";
+    } else if (this.public.name.match(/touch/gi)) { // you sick fucks
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/to uch/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/t ouch/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/t ou ch/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/t ouc h/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/touc h/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/tou c h/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/to u c h/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/t ouc h/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/to uc h/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
     } else if (this.public.name.match(/Crem/gi)) {
+      this.public.name = "I'm a BozoWORLDer";
+    } else if (this.public.name.match(/Creem/gi)) {
       this.public.name = "I'm a BozoWORLDer";
     }
     if (data.name.includes("flood")) {
@@ -1477,7 +1522,8 @@ class User {
       var list = data.list;
       command = list[0].toLowerCase();
       args = list.slice(1);
-      if ((args.length <= this.room.prefs.char_limit)) {
+
+      if ((args.length <= this.room.prefs.command_limit) && (command.length <= this.room.prefs.command_limit)) {
 
         if (!command.match(/move/gi)) {
 
