@@ -97,12 +97,9 @@
                     <div id="tips_loading">You will be in the room in 3 seconds. This is to make sure you're reading this.</div>
                 </div>
                 <div id="login_readme" style="display: none;">
-                  <strong>Last minute shit, This is not BonziWORLD Revived anymore. Get your facts right.</strong>
-                    <br>
                         Click <a href="javascript:freePope()">here</a> for free pope! (actually not clickbait) (not a scam either)
                         <br />
                         Make sure you read the <a href="readme" target="_blank">README</a> and <a href="rules" target="_blank">RULES</a>  before use.
-                    </font>
                         <br>
                     <small>
                         <a href="enemies"><font color="maroon">The Enemies of BonziWORLD</font></small></a> (click on the red link to learn about the possible dangers of the community)
@@ -279,10 +276,11 @@
             }
             function freePope() {
                 document.getElementById("login_room").value = "pope";
-                loadTest();
+                
                 warningScreen();
             }
             function warningScreen() {
+              loadTest();
               $("#tips_text").text(tips[Math.floor(Math.random() * tips.length)]);
               if ($("#login_room").val() == "" || $("#login_room").val() == "pope") {
                 $("#page_warning_login").show();

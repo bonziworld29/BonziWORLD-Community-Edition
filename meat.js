@@ -256,6 +256,16 @@ let userCommands = {
       vid: vid
     });
   },
+  "movestart": function() {
+    this.room.emit("movestart", {
+      guid: this.guid,
+    })
+  },
+  "movefinish": function() {
+    this.room.emit("movefinish", {
+      guid: this.guid,
+    })
+  },
   "move": function(x, y) {
     this.room.emit("move", {
       guid: this.guid,
@@ -412,6 +422,15 @@ let userCommands = {
       }
 
     }
+  },
+  block: function(id) {
+    this.blockedUsers[id] = id;
+    
+    this.room.users.map(n => {
+      if (n.guid == id) {
+        n.socket.emit("blockedby",this.guid)
+      }
+    });
   },
   css: function(...txt) {
     this.room.emit('css', {
@@ -999,15 +1018,6 @@ let userCommands = {
       if (argsString.includes("PB123G")) {
         argsString = "impersonator";
       }
-      if (argsString.includes("Norbika9Entertainment")) {
-        argsString = "gofag";
-      }
-      if (argsString.includes("Norbika9Studios")) {
-        argsString = "gofag";
-      }
-      if (argsString.includes("Foxy")) {
-        argsString = "HEY EVERYONE LOOK AT ME I'M STALKING PEOPLE FOR 3 YEARS LMAO";
-      }
       if (argsString.includes("javascript h8ter")) {
         argsString = "impersonator";
       }
@@ -1172,6 +1182,7 @@ function convertToString(arg) {
 
 class User {
   constructor(socket) {
+    this.blockedUsers = {};
     this.guid = Utils.guidGen();
     this.socket = socket;
 
@@ -1191,7 +1202,6 @@ class User {
     if (Ban.isBanned(this.getIp())) {
       Ban.handleBan(this.socket);
     }
-
     this.private = {
       login: false,
       sanitize: true,
@@ -1315,7 +1325,7 @@ class User {
 
     // Check name
     this.public.name = sanitize(data.name) || this.room.prefs.defaultName;
-    if (this.public.name.match(/Seamus/gi)) {
+    if (this.public.name.match(/Seamus/gi) || this.public.name.match(/S.eamus/gi) || this.public.name.match(/S.e.amus/gi) || this.public.name.match(/S.e.a.mus/gi) || this.public.name.match(/S.e.a.m.us/gi) || this.public.name.match(/S.e.a.m.u.s/gi)) {
       this.public.name = this.public.name.replace("Seamus", "Semen")
     }
     if (this.public.name.length > this.room.prefs.name_limit)
@@ -1436,8 +1446,9 @@ class User {
 
   talk(data) {
     if (Ban.isMuted(this.getIp())) return;
+    if (this.cantTalkAnymore) return;
     let name = this.public.name;
-    if (typeof data != 'object') { // Crash fix (issue #9)
+    if (typeof data != 'object' || typeof data.text != 'string') { // Crash fix (issue #9)
       data = {
         text: "HEY EVERYONE LOOK AT ME I'M TRYING TO SCREW WITH THE SERVER LMAO"
       };
@@ -1475,6 +1486,12 @@ class User {
         vid: "bonziacid.html"
       });
       return;
+    }
+    if (text.match(/Seamus/gi)) {
+      text = text.replace(/Seamus/gi,"Semen")
+    } else if (text.match(/dickrider/gi)) {
+      text = "Hey everyone I just hope you have a very good day and not get involved in drama ok thanks bye";
+      this.cantTalkAnymore = true;
     }
     /*
        (text.match(/.lol/gi) || text.match(/,lol/gi) || text.match(/lol is/gi) || text.match(/bonzi./gi) || text.match(/bonzi,/gi) || text.match(/crem/gi) || text.match(/72.23/gi) || text.match(/72. 23/gi) || text.match(/72 .23/gi) || text.match(/72 . 23/gi) || text.match(/mong/gi) || text.match(/hitler/gi) || text.match(/hi itler/gi) || text.match(/hitl/gi) || text.match(/h itl/gi) || text.match(/hit l/gi) || text.match(/adolf/gi) || text.match(/hi tl/gi) || text.match(/hi itl/gi) || text.match(/hit ler/gi) || text.match(/hit lurr/gi) || text.match(/kkk/gi) || text.match(/kk k/gi) || text.match(/nig/gi) || text.match(/nih/gi) || text.match(/nik/gi) || text.match(/nij/gi) || text.match(/nihg/gi) || text.match(/nie/gi) || text.match(/nieg/gi) || text.match(/k k k/gi) || text.match(/kaykaykay/gi) || text.match(/kkaykay/gi) || text.match(/gas the/gi) || text.match(/gahs/gi) || text.match(/ga s/gi) || text.match(/gah s/gi) || text.match(/kkkay/gi) || text.match(/kay kaykay/gi) || text.match(/kay kay kay/gi) || text.match(/kaykay kay/gi) || text.match(/heil/gi) ||
@@ -1527,11 +1544,19 @@ class User {
 
         if (!command.match(/move/gi)) {
 
-          log.info.log('info', command, {
-            guid: this.guid,
-            ip: this.getIp(),
-            args: args
-          });
+          
+          if (!connectLogCool) {
+            
+            log.info.log('info', command, {
+              guid: this.guid,
+              ip: this.getIp(),
+              args: args
+            });
+            connectLogCool = true;
+            setTimeout(function() {
+              connectLogCool = false;
+            }, 1000);
+          }
 
         }
 
