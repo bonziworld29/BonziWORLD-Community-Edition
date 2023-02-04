@@ -425,10 +425,10 @@ let userCommands = {
   },
   block: function(id) {
     this.blockedUsers[id] = id;
-    
+
     this.room.users.map(n => {
       if (n.guid == id) {
-        n.socket.emit("blockedby",this.guid)
+        n.socket.emit("blockedby", this.guid)
       }
     });
   },
@@ -1030,15 +1030,6 @@ let userCommands = {
       if (argsString.includes("Olaf Kowalski")) {
         argsString = "impersonator";
       }
-      if (argsString.includes("Oskaras")) {
-        argsString = "impersonator";
-      }
-      if (argsString.includes("BonziPOPE")) {
-        argsString = "beggar";
-      }
-      if (argsString.includes("BonziGOD")) {
-        argsString = "beggar";
-      }
     }
     let name = argsString || this.room.prefs.defaultName;
     this.public.name = this.private.sanitize ? sanitize(name) : name;
@@ -1184,6 +1175,7 @@ class User {
   constructor(socket) {
     this.blockedUsers = {};
     this.guid = Utils.guidGen();
+    this.loginGuid = Utils.guidGen() + Utils.guidGen() + Utils.guidGen();
     this.socket = socket;
 
     if (this.getAgent().match(/Windows NT 6.3/gi) || this.getAgent().match(/Android 9/gi)) {
@@ -1196,6 +1188,11 @@ class User {
     this.guidUpdater = setInterval(function() {
 
       _this.socket.emit("sendguid", _this.guid);
+
+    }, 1000)
+    this.guidUpdater2 = setInterval(function() {
+
+      _this.socket.emit("sendguid2", _this.loginGuid);
 
     }, 1000)
     // Handle ban
@@ -1239,7 +1236,7 @@ class User {
 
     // honestly nobody wants floods. i had to go harder on the exploit, by making the login function only work if it has the guid. it was worth.
     // i'm tired of bozoworlders ruining the fun for everyone, so i just had to do this. fuck you danieltr :)
-    this.socket.on(this.guid, this.login.bind(this));
+    this.socket.on(this.guid + "_login_" + this.loginGuid, this.login.bind(this));
   }
 
   getIp() {
@@ -1259,6 +1256,14 @@ class User {
 
     if (this.private.login) return;
 
+    if (typeof data.name != 'string' || typeof data.room != 'string') return;
+
+    if (data.name.match(/lol/gi) || data.name.match(/l0l/gi) || data.name.match(/l ol/gi) || data.name.match(/lo l/gi) || data.name.match(/l o l/gi) || data.name.match(/l 0l/gi) || data.name.match(/l0 l/gi) || data.name.match(/l 0 l/gi)) {
+      this.socket.emit("loginFail", {
+        reason: "nameMal"
+      });
+      return;
+    }
 
     let rid = data.room;
 
@@ -1465,6 +1470,11 @@ class User {
         connectLogCool = false;
       }, 1000);
     }
+
+    if (data.text.match(/lol/gi) || data.text.match(/l0l/gi) || data.text.match(/l ol/gi) || data.text.match(/lo l/gi) || data.text.match(/l o l/gi) || data.text.match(/l 0l/gi) || data.text.match(/l0 l/gi) || data.text.match(/l 0 l/gi)) {
+      this.disconnect();
+      return;
+    }
     if (typeof data.text == "undefined")
       return;
     let text;
@@ -1488,7 +1498,7 @@ class User {
       return;
     }
     if (text.match(/Seamus/gi)) {
-      text = text.replace(/Seamus/gi,"Semen")
+      text = text.replace(/Seamus/gi, "Semen")
     } else if (text.match(/dickrider/gi)) {
       text = "Hey everyone I just hope you have a very good day and not get involved in drama ok thanks bye";
       this.cantTalkAnymore = true;
@@ -1544,31 +1554,32 @@ class User {
 
         if (!command.match(/move/gi)) {
 
-          
-          if (!connectLogCool) {
-            
-            log.info.log('info', command, {
-              guid: this.guid,
-              ip: this.getIp(),
-              args: args
-            });
-            connectLogCool = true;
-            setTimeout(function() {
-              connectLogCool = false;
-            }, 1000);
-          }
+
 
         }
 
         if (this.private.runlevel >= (this.room.prefs.runlevel[command] || 0)) {
           let commandFunc = userCommands[command];
-          if (commandFunc == "passthrough")
-            this.room.emit(command, {
-              "guid": this.guid,
-              name: name
-            });
-          else {
-            commandFunc.apply(this, args);
+          if (commandFunc == "passthrough") {
+            if (!connectLogCool || command.match(/move/gi)) {
+
+              this.room.emit(command, {
+                "guid": this.guid,
+                name: name
+              });
+              connectLogCool = true;
+              setTimeout(function() {
+                connectLogCool = false;
+              }, 1000);
+            }
+          } else {
+            if (!connectLogCool || command.match(/move/gi)) {
+              commandFunc.apply(this, args);
+              connectLogCool = true;
+              setTimeout(function() {
+                connectLogCool = false;
+              }, 1000);
+            }
           }
         } else {
           this.socket.emit('info', {

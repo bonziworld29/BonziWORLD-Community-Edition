@@ -115,7 +115,7 @@
                        </font>
                 </div>
                 <div id="login_load">loading... <img id="loading_cursor" src="./img/cursors/hourglas.gif"></div>
-                <div id="login_version">Version 1.7.1 BETA<br>BonziWORLD Version 1.6.0 (modified)<br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
+                <div id="login_version">Version 1.7.0 BETA<br>BonziWORLD Version 1.6.0 (modified)<br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
               <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
                 <div id="login_card" style="display: none;">
@@ -282,36 +282,6 @@
         <script src="//www.windows93.net/c/libs/howler.min.js"></script>
 
         <script>
-
-            // when i don't know how to do things, i search it up on google to learn how to do it 
-            document.onkeydown = function(e) {
-              if(event.keyCode == 123) {
-                 return false;
-              }
-              if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-                 return false;
-              }
-              if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-                 return false;
-              }
-              if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-                 return false;
-              }
-              if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-                 return false;
-              }
-            }
-
-            setInterval(function(){
-
-              debugger;
-              console.profile();
-              console.profileEnd();
-              if (console.clear) {
-                console.clear();
-              }
-              
-            },100)
             if (window.location.href.match("repl.co")) {
               $("#login_readme").append("<h3>It appears you are using the Replit version of this site.<br>We have a domain that is available at <a href=\"https://bonziworld.co\">bonziworld.co</a>.<br>We highly recommend you use the domain.</h3>")
             }

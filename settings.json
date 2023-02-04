@@ -52,7 +52,7 @@
 				"ww3": 0,
         "midi": 3
 			},
-			"room_max": 1000000,
+			"room_max": 15,
 			"owner": null,
 			"pitch": {
 				"max": 125,
@@ -128,7 +128,7 @@
 				"pope4": 0,
 				"ww3": 0
 			},
-			"room_max": 1000000,
+			"room_max": 30,
 			"owner": null,
 			"pitch": {
 				"max": 125,
@@ -203,7 +203,12 @@
 		"genie",
 		"red_clippy",
     "program",
-    "dunce"
+    "dunce",
+    "qmark",
+    "f1",
+    "pm",
+    "genius",
+    "kairu"
 	],
 	"bonziColors2": [ 
 		"purple",
@@ -233,7 +238,11 @@
     "peedy_pope",
     "dogpope",
     "dunce",
-    "god"
+    "god",
+    "qmark",
+    "f1",
+    "pm",
+    "genius"
 	],
 	"banLength": 1440,
 	"port": 3000,

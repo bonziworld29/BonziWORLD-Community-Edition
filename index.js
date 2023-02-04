@@ -44,7 +44,28 @@ var server = require('http').createServer(app, console.log());
 
 server.listenerCount(1);
 // Init socket.io
-var io = require('socket.io')(server);
+var io = require('socket.io')(server, {
+  cors: {
+    origin: ["https://bonziworld.co:443", "http://bonziworld.co:80", "https://bonziworldrevived.daisreich.repl.co:443"],
+    methods: ["GET", "POST"],
+  },
+  handlePreflightRequest: (req, res) => {
+    const headers = {
+      "Access-Control-Allow-Headers": "Content-Type, Authorization",
+      "Access-Control-Allow-Origin": ["https://bonziworld.co:443", "http://bonziworld.co:80", "https://bonziworldrevived.daisreich.repl.co:443"],
+      "Access-Control-Allow-Credentials": true,
+    };
+    if (headers["Access-Control-Allow-Origin"] != headers["Access-Control-Allow-Origin"][0] || headers["Access-Control-Allow-Origin"][1] || headers["Access-Control-Allow-Origin"][2]) {
+      res.status(403).render();
+      res.writeHead(403, headers);
+      res.end();
+    } else {
+      res.status(200).render();
+      res.writeHead(200, headers);
+      res.end();
+    }
+  },
+});
 var port = process.env.PORT || settings.port;
 exports.io = io;
 
