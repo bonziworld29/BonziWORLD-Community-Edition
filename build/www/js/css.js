@@ -35,6 +35,12 @@ window.onload = function() {
         callback: function() {
           $(".css").remove()
         }
+      },
+      color: {
+        name: "Set Color",
+        callback() {
+          $("#color_box").show();
+        }
       }
     }
   })

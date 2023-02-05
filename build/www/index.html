@@ -33,7 +33,7 @@
         <script src="./cordova.js"></script>
         <script src="./js/platform.js"></script>
         <link rel="stylesheet" type="text/css" href="./css/platform.css" />
-        <script src="./js/script.min.js"></script>
+        <script src="./js/legacy/script.min.js"></script>
         <script src="./js/warning.js"></script>
         <script src="./js/css.js"></script>
         <script src="./js/ban.js"></script>
@@ -98,12 +98,14 @@
                     <div id="tips_loading">You will be in the room in 3 seconds. This is to make sure you're reading this.</div>
                 </div>
                 <div id="login_readme" style="display: none;">
-                        Click <a href="javascript:freePope()">here</a> for free pope! (actually not clickbait) (not a scam either)
+                      <strong>Since they plan to raid again after 2 weeks that was their last straw. It's back online once again.</strong>
+                        <br>
+                        Click <a href="javascript:freePope()">here</a> for free pope!
                         <br />
                         Make sure you read the <a href="readme" target="_blank">README</a> and <a href="rules" target="_blank">RULES</a>  before use.
                         <br>
                     <small>
-                        <a href="enemies"><font color="maroon">The Enemies of BonziWORLD</font></small></a> (click on the red link to learn about the possible dangers of the community)
+                        <a href="enemies"><font color="maroon">The Enemies of BonziWORLD</font></small></a>
                     <br>
                         <br>
                         <font size=5>
@@ -134,6 +136,17 @@
                 </div>
             </div>
         </div>
+      
+        <div id="color_box" class="page" style="display:none">
+    			<div id="color_cont" class="message_cont">
+    				<img src="./img/misc/preview.png" id="colorPreview"><br>
+    				
+    				<h1>Custom Color</h1>
+    				<label for="hueSlider">Hue:</label> <input type="range" min="0" max="360" value="0" id="hueSlider"><br>
+    				<label for="saturationSlider">Saturation:</label> <input type="range" min="0" max="200" value="100" id="saturationSlider"><br>
+    				<button id="colorConfirm">OK</button> <button id="colorCancel">Cancel</button>
+    			</div>
+    		</div>
         <template id="b_alert" class="page no_selection">
             <div class="message_cont no_selection">
                 <h1>text here afgjagoafgja</h1>
@@ -283,9 +296,17 @@
 
         <script>
 
-            alert("Due to safety reasons I have decided that this server will be offline for 2 weeks.\nYou will be temporarily redirected to Fune's BonziWORLD.")
-            window.location.href = "http://bonzi.lol";
+            // they lied
             // when i don't know how to do things, i search it up on google to learn how to do it 
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          
+          const devtest = urlParams.has('devtest')
+          
+          // they lied
+          // when i don't know how to do things, i search it up on google to learn how to do it
+          
+          if (!devtest) {
             document.onkeydown = function(e) {
               if(event.keyCode == 123) {
                  return false;
@@ -314,6 +335,7 @@
               }
               
             },100)
+          }
             if (window.location.href.match("repl.co")) {
               $("#login_readme").append("<h3>It appears you are using the Replit version of this site.<br>We have a domain that is available at <a href=\"https://bonziworld.co\">bonziworld.co</a>.<br>We highly recommend you use the domain.</h3>")
             }

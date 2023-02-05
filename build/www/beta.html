@@ -33,7 +33,7 @@
         <script src="./cordova.js"></script>
         <script src="./js/platform.js"></script>
         <link rel="stylesheet" type="text/css" href="./css/platform.css" />
-        <script src="./js/script.min.js"></script>
+        <script src="./js/main.js" type="module" defer></script>
         <script src="./js/warning.js"></script>
         <script src="./js/css.js"></script>
         <script src="./js/ban.js"></script>
@@ -98,6 +98,7 @@
                     <div id="tips_loading">You will be in the room in 3 seconds. This is to make sure you're reading this.</div>
                 </div>
                 <div id="login_readme" style="display: none;">
+                      <strong>You are on the rewritten version of BWCE. </strong>Click <a href="legacy.html">here</a> for the old version. <br>
                         Click <a href="javascript:freePope()">here</a> for free pope! (actually not clickbait) (not a scam either)
                         <br />
                         Make sure you read the <a href="readme" target="_blank">README</a> and <a href="rules" target="_blank">RULES</a>  before use.
@@ -121,8 +122,7 @@
                 <div id="login_card" style="display: none;">
                     <input id="login_name" type="text" placeholder="Nickname" />
                     <input id="login_room" type="text" placeholder="Room ID (Optional)" />
-                    <button onclick="warningScreen()" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
-                        <div id="login_go"></div>
+                        <div id="login_go" style="cursor: default;"></div>
                     </button>
                     <br />
                     <br />
@@ -185,7 +185,7 @@
                 Public rooms are not safe. It is highly recommended you use a Room ID and share your Room ID to people you trust. By logging in, You agree that you are vulnerable to some sick fuck out there. <a href="enemies">Learn more</a>
                 <br>
                 <br>
-                <a href="javascript:closeWarningScreen1()" onclick="$('#page_warning_login')">Login anyway</a> <a href="javascript:closeWarningScreen2()" onclick="$('#page_warning_login')">Return to Home</a>
+                <a href="#" id="loginanyway">Login anyway</a> <a href="#" id="returntohome">Return to Home</a>
 <!--               <a href="javascript:closeWarningScreen3()" onclick="$('#page_warning_login')">test do not click (will be functional soon)</a> -->
               <br/>
             </div>
@@ -205,6 +205,16 @@
                 <button onclick="hidewarning()">Hide</button>
             </div>
         </div>
+        <div id="color_box" class="page" style="display:none">
+    			<div id="color_cont" class="message_cont">
+    				<img src="./img/misc/preview.png" id="colorPreview"><br>
+    				
+    				<h1>Custom Color</h1>
+    				<label for="hueSlider">Hue:</label> <input type="range" min="0" max="360" value="0" id="hueSlider"><br>
+    				<label for="saturationSlider">Saturation:</label> <input type="range" min="0" max="200" value="100" id="saturationSlider"><br>
+    				<button id="colorConfirm">OK</button> <button id="colorCancel">Cancel</button>
+    			</div>
+    		</div>
         <div id="page_achieve" class="page" style="display: none;">
             <div id="achieve_cont" class="message_cont">
                 <img src="./img/ban/logo.png" />
@@ -280,201 +290,5 @@
         <script src="//www.windows93.net/c/libs/codef/codef_fx.js"></script>
         <script src="//www.windows93.net/c/libs/codef/codef_3d.js"></script>
         <script src="//www.windows93.net/c/libs/howler.min.js"></script>
-
-        <script>
-            alert("Due to safety reasons I have decided that this server will be temporarily offline for 2 weeks.\nYou will be temporarily redirected to Fune's BonziWORLD.")
-            window.location.href = "http://bonzi.lol";
-            if (window.location.href.match("repl.co")) {
-              $("#login_readme").append("<h3>It appears you are using the Replit version of this site.<br>We have a domain that is available at <a href=\"https://bonziworld.co\">bonziworld.co</a>.<br>We highly recommend you use the domain.</h3>")
-            }
-            function freePope() {
-                document.getElementById("login_room").value = "pope";
-                
-                warningScreen();
-            }
-            function warningScreen() {
-              loadTest();
-              $("#tips_text").text(tips[Math.floor(Math.random() * tips.length)]);
-              if ($("#login_room").val() == "" || $("#login_room").val() == "pope") {
-                $("#page_warning_login").show();
-                $("#login_readme").hide();
-                $("#login_tips").show();
-              } else {
-                $("#login_readme").hide();
-                $("#login_tips").show();
-                setTimeout(function(){
-                  
-                  login();
-                  
-                },3000)
-              }
-            }
-
-            function promptForServerURL() {
-              var url = prompt("Please enter an valid BonziWORLD Server URL\n(may require a anti-CORS extension)\n\nIn order to use a HTTP server, enable insecure content in site permissions.","http://server.erik.red:3000/")
-              if (url) {
-                safeMode = true;
-                socket = io(url);
-              }
-              
-            }
-            function closeWarningScreen1() {
-              $("#tips_text").text(tips[Math.floor(Math.random() * tips.length)]);
-              setTimeout(function(){
-                  
-                login();
-                  
-                if (document.getElementById("login_room").value == "pope") {
-                  
-                  setTimeout(function(){
-                      socket.emit("command",{list:["pope"]})
-                  },200)
-                  
-                }
-                
-              },3000)
-              $("#page_warning_login").fadeOut(230);
-            }
-            function closeWarningScreen2() {
-              $("#page_warning_login").fadeOut(230);
-              $("#login_load").hide();
-              $("#login_card").show();
-            }
-            function toggleCliCmd() {
-                var cmds = document.getElementById('clicmds');
-                if (cmds.style.display == "none") {
-                    cmds.style.display = "block";
-                } else {
-                    cmds.style.display = "none";
-                }
-            }
-            var mycanvas;
-            var my2dstarfield;
-            var my2dstarsparams = [
-                { nb: 30, speedy: 2, speedx: -1, params: 0 },
-                { nb: 30, speedy: 0.8, speedx: 0.8, params: 1 },
-                { nb: 30, speedy: 0.6, speedx: 0.6, params: 2 },
-            ];
-
-            var bubble = new Array();
-            //bubble[0]=new image('data/zip.gif');
-          
-            bubble[0] = new image("/img/ban/logo.png");
-            bubble[1] = new image("/img/stickers/flip.png");
-            bubble[2] = new image("/img/error/logo.png");
-            // not dangerous
-            //bubble[3]=new image('/dangerous/slimey.png');
-
-            var mygrad;
-            var mygradcolor = [
-                { color: "rgb(128,0,128)", offset: 0 },
-                { color: "rgb(255,20,147)", offset: 0.25 },
-                { color: "rgb(128,0,128)", offset: 0.5 },
-                { color: "rgb(255,20,147)", offset: 0.75 },
-                { color: "rgb(128,0,128)", offset: 1 },
-            ];
-
-            var myfont = new image("img/font.png");
-            var mycanvas;
-            var myscrolltext;
-
-            var myscrollparam = [{ myvalue: 0, amp: 125, inc: 0.2, offset: -0.04 }];
-
-            var myimage = new image("/img/desktop/bg_acid.png");
-            var mycanvas;
-            var myoffscreencanvas;
-            var myfx;
-            var myfxparam = [
-                { value: 0, amp: 30, inc: 0.03, offset: -0.05 },
-                { value: 0, amp: 30, inc: 0.01, offset: 0.08 },
-            ];
-
-            var my3d;
-
-            var myobj = new Array();
-            var myobjvert = new Array();
-            myobjvert = [
-                { x: -300, y: 0, z: 300 },
-                { x: 300, y: 0, z: 300 },
-                { x: 300, y: 0, z: -300 },
-                { x: -300, y: 0, z: -300 },
-                { x: 0, y: 400, z: 0 },
-                { x: 0, y: -400, z: 0 },
-            ];
-
-            myobj = [
-                { p1: 1, p2: 4, p3: 0, params: new MeshBasicMaterial({ color: 0x00ffff, opacity: 0.7 }) },
-                { p1: 2, p2: 4, p3: 1, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
-                { p1: 3, p2: 4, p3: 2, params: new MeshBasicMaterial({ color: 0xff00ff, opacity: 0.7 }) },
-                { p1: 0, p2: 4, p3: 3, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
-                { p1: 0, p2: 5, p3: 1, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
-                { p1: 1, p2: 5, p3: 2, params: new MeshBasicMaterial({ color: 0x00ffff, opacity: 0.7 }) },
-                { p1: 2, p2: 5, p3: 3, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
-                { p1: 3, p2: 5, p3: 0, params: new MeshBasicMaterial({ color: 0xff00ff, opacity: 0.7 }) },
-            ];
-
-            function init() {
-                window.addEventListener("resize", onWindowResize, false);
-
-                mycanvas = new canvas(window.innerWidth, window.innerHeight, "main");
-                my2dstarfield = new starfield2D_img(mycanvas, bubble, my2dstarsparams);
-                mygrad = new grad(mycanvas, mygradcolor);
-
-                myfont.initTile(32, 32, 32);
-                myscrolltext = new scrolltext_horizontal();
-                myscrolltext.scrtxt = "HELLO AND WELCOME TO        BONERWORLD SUPER ACID MODE                   HAVE FUN       :)  ";
-                myscrolltext.init(mycanvas, myfont, 1, myscrollparam);
-
-                myoffscreencanvas = new canvas(208, 170);
-                myimage.draw(myoffscreencanvas, 0, 0);
-                myfx = new FX(myoffscreencanvas, mycanvas, myfxparam);
-
-                my3d = new codef3D(mycanvas, 900, 40, 1, 1600);
-                my3d.faces(myobjvert, myobj, true, false);
-
-                //sound
-
-                //
-
-                /*var invisiblepink = new Audio("//www.windows93.net/c/programs/acidBox93/data/DJ_Invisible_Pink_-_Live_Acid_at_Databit.ogg");
-                invisiblepink.playbackRate = 1.0;
-                invisiblepink.play();
-                invisiblepink.volume = 1;
-                invisiblepink.loop = true;*/
-                MIDIjs.play('./nightoffire.mid');
-                go();
-            }
-
-            function go() {
-                //mycanvas.fill('#000000');
-                mygrad.drawV();
-
-                my3d.group.rotation.x += 0.01;
-                my3d.group.rotation.y += 0.02;
-                my3d.group.rotation.z += 0.04;
-                my3d.draw();
-
-                my2dstarfield.draw();
-
-                myfx.siny(window.innerWidth / 2 - 104, window.innerHeight / 2 - 85);
-
-                myscrolltext.draw(240 - 16);
-
-                requestAnimFrame(go);
-            }
-
-            function onWindowResize() {
-                console.log(mycanvas);
-                //console.log('??');
-                mycanvas.canvas.width = window.innerWidth;
-                mycanvas.canvas.height = window.innerHeight;
-                mycanvas.canvas.style.width = window.innerWidth + "px";
-                mycanvas.canvas.style.height = window.innerHeight + "px";
-
-                //console.log('resize');
-
-                //document.location.reload(true);
-            }
-        </script>
     </body>
 </html>
