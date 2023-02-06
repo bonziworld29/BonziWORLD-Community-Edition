@@ -4,10 +4,18 @@
         <title>BonziWORLD</title>
         <meta charset="utf-8" />
         <meta content="" />
-        <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>
-        <script src="https://www.google.com/recaptcha/api.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>              <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script>
+          function onSubmit() {
+            grecaptcha.render(document.getElementById('recaptcha_verify'), {
+              'sitekey' : '6LdJg1UkAAAAADPB7eAzWRGEi8GArEkiCQbSX1PM',
+              'theme' : 'light',
+              callback: onSuccess
+            });
+          }
+        </script>
         <script src="./js/lib/clippy.min.js"></script>
-        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" /> 
         <meta name="mobile-web-app-capable" content="yes" />
         <link rel="stylesheet" type="text/css" href="./css/style.min.css" />
         <link rel="stylesheet" type="text/css" href="./css/clippy.css" media="all" />
@@ -19,6 +27,18 @@
         <link rel="shortcut icon" href="./favicons/favicon.ico" />
         <meta name="msapplication-config" content="./favicons/browserconfig.xml" />
         <meta name="theme-color" content="#8b5adc" />
+      	<meta property="og:type" content="website">
+      <meta property="og:site_name" content="BonziWORLD">
+      <meta property="og:keywords" content="BonziWORLD, bonziworld, bwr, BWR, BonziWorld Revived, Bonziworld">
+      <meta property="twitter:card" content="summary_large_image"> 
+      <meta property="twitter:site" content="@BonziWRevived">
+      <meta property="twitter:site:id" content="@BonziWRevived"> <meta property="twitter:creator" content="@BonziWRevived">
+      <meta property="twitter:creator:id" content="@BonziWRevived"
+        ><!-- section:ogImages -->
+      <meta property="twitter:image" content="https://cdn.discordapp.com/attachments/694985591762452611/703655741482860554/unknown.png">
+      <meta property="og:image" content="http://web.archive.org/web/20200618161105im_/https://cdn.discordapp.com/attachments/694985591762452611/703655741482860554/unknown.png"><!-- endsection --><meta property="og:locale" content="en-US"> 
+      <meta data-react-helmet="true" property="og:title" content="BonziWORLD"><meta data-react-helmet="true" property="og:description" content="BonziWORLD is a memey BonziBUDDY chat site with no viruses at all. It is fun to use and it also has rules. Chat, watch videos, record, and many others!">
+      <meta data-react-helmet="true" name="description" content="BonziWORLD is a memey BonziBUDDY chat site with no viruses at all. It is fun to use and it also has rules. Chat, watch videos, record, and many others!">
         <script src="./js/lib/easeljs.min.js"></script>
         <script src="./js/lib/preloadjs-0.6.2.min.js"></script>
         <script src="./js/lib/jquery.min.js"></script>
@@ -98,32 +118,33 @@
                     <div id="tips_loading">You will be in the room in 3 seconds. This is to make sure you're reading this.</div>
                 </div>
                 <div id="login_readme" style="display: none;">
-                      <strong>Since they plan to raid again after 2 weeks that was their last straw. It's back online once again.</strong>
+                      <strong>We have an official subreddit!</strong>
                         <br>
                         Click <a href="javascript:freePope()">here</a> for free pope!
                         <br />
                         Make sure you read the <a href="readme" target="_blank">README</a> and <a href="rules" target="_blank">RULES</a>  before use.
                         <br>
-                    <small>
-                        <a href="enemies"><font color="maroon">The Enemies of BonziWORLD</font></small></a>
+                        <a href="enemies"><font color="maroon">The Enemies of BonziWORLD</font</a>
                     <br>
                         <br>
                         <font size=5>
                           <a href="https://github.com/Daisreich/BonziWORLD-Community-Edition" class="fab fa-github" style="color:black; text-decoration: none;"></a>
                           <a href="https://www.youtube.com/@itzcrazyscoutakasm55/featured" class="fab fa-youtube" style="color:red; text-decoration: none;"></a>
                           <a href="https://discord.gg/nSzG6bGFVq" class="fab fa-discord" style="color:purple; text-decoration: none;"></a>
+                          <a href="https://www.reddit.com/r/BonziWORLD_CE/" class="fab fa-reddit" style="color:orange; text-decoration: none;"></a>
                           <!-- <a href="#" class="fab fa-discord"  style="color:blue; text-decoration: none;"></a>
                           <a href="#" class="fab fa-twitter"  style="color:cyan; text-decoration: none;"></a> -->
                        </font>
                 </div>
                 <div id="login_load">loading... <img id="loading_cursor" src="./img/cursors/hourglas.gif"></div>
+                <div id="recaptcha_verify" class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSubmit" data-size="invisible"></div>
                 <div id="login_version">Version 1.7.1 BETA<br>BonziWORLD Version 1.6.0 (modified)<br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
               <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
                 <div id="login_card" style="display: none;">
                     <input id="login_name" type="text" placeholder="Nickname" />
                     <input id="login_room" type="text" placeholder="Room ID (Optional)" />
-                    <button onclick="warningScreen()" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
+                    <button id="login_go_button"  class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSuccess" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
                         <div id="login_go"></div>
                     </button>
                     <br />
@@ -338,11 +359,18 @@
           }
             if (window.location.href.match("repl.co")) {
               $("#login_readme").append("<h3>It appears you are using the Replit version of this site.<br>We have a domain that is available at <a href=\"https://bonziworld.co\">bonziworld.co</a>.<br>We highly recommend you use the domain.</h3>")
+              window.location.href = "https://bonziworld.co";
             }
             function freePope() {
                 document.getElementById("login_room").value = "pope";
                 
                 warningScreen();
+            }
+            function onSuccess(token) {
+              socket.emit("sendTokenToServer",{
+                token: token
+              });
+              warningScreen();
             }
             function warningScreen() {
               loadTest();

@@ -20,6 +20,7 @@ window.onload = function() {
         name: "Themes",
         items: {
           default: { name: "Default", callback: function() { theme('') } },
+          classic: { name: "Classic", callback: function() { theme('#content {background-color: #6d33a0; }') } },
           dark: { name: "Dark Mode", callback: function() { theme('#chat_bar{background-image:url("../img/desktop/taskbar_dark.png")}#chat_send{background-image:url("../img/desktop/start_dark.png")}#chat_tray{background-image:url("../img/desktop/notif_left_dark.png"), url("../img/desktop/notif_dark.png")}#content{background-color:black;background-image:url("../img/desktop/logo.png"), url("../img/desktop/bg_dark.png")}') } },
           acid: { name: "Acid", callback: function() { theme('@keyframes sex{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(360deg)}}canvas{animation:sex 5s linear infinite}') } },
           sacid: { name: "Super Acid", callback: function() { theme('@keyframes sex{from{filter:hue-rotate(0deg)}to{filter:hue-rotate(360deg)}}body{animation:sex 1s linear infinite}') } },
