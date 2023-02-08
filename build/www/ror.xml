@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:ror="http://rorweb.com/0.1/" >
+<channel>
+  <title>ROR Sitemap for https://bonziworld.co/</title>
+  <link>https://bonziworld.co/</link>
+
+<item>
+     <link>https://bonziworld.co/</link>
+     <title>BonziWORLD</title>
+     <description>BonziWORLD is a memey BonziBUDDY chat site with no viruses at all. It is fun to use and it also has rules. Chat, watch videos, record, and many others!</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>0</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://bonziworld.co/readme</link>
+     <title>BonziWORLD README</title>
+     <description>BonziWORLD README</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://bonziworld.co/rules</link>
+     <title>BonziWORLD README</title>
+     <description>BonziWORLD README</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://bonziworld.co/enemies</link>
+     <title>BonziWORLD Enemies (A.K.A The BonziWORLD Blacklist)</title>
+     <description>BonziWORLD Enemies (A.K.A The BonziWORLD Blacklist)</description>
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>1</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+<item>
+     <link>https://bonziworld.co/chat</link>
+     <title></title>
+     
+     <ror:updatePeriod></ror:updatePeriod>
+     <ror:sortOrder>2</ror:sortOrder>
+     <ror:resourceOf>sitemap</ror:resourceOf>
+</item>
+</channel>
+</rss>
+  

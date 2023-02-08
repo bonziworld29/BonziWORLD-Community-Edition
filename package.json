@@ -17,6 +17,7 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-recaptcha": "^5.1.0",
+    "express-sitemap-xml": "^3.0.1",
     "fs": "0.0.1-security",
     "fs-extra": "^7.0.1",
     "http": "0.0.0",

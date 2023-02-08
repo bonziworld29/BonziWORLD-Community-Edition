@@ -43,6 +43,14 @@ if (settings.express.serveStatic)
 var server = require('http').createServer(app, console.log());
 
 server.listenerCount(1);
+
+app.get('/sitemap.xml', function(req, res) {
+  res.sendFile('./build/www/sitemap.xml');
+});
+app.use('/robots.txt', function(req, res, next) {
+  res.type('text/plain')
+  res.send("User-agent: *\nDisallow: /chat\nSitemap: https://bonziworld.co/sitemap.xml");
+});
 // Init socket.io
 var io = require('socket.io')(server, {
   cors: {

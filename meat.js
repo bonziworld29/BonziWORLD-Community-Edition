@@ -790,24 +790,34 @@ let userCommands = {
     this.public.color_cross = clrurl;
     this.room.updateUser(this);
   },
-  crosscolorguid: function(guid,color) {
-      let pu = this.room.getUsersPublic()[guid];
-      if (pu && pu.color) {
-        let target;
-        this.room.users.map((n) => {
-          if (n.guid == data) {
-            target = n;
-          }
-        });
-        var clrurl = target.private.sanitize ? sanitize(color) : color;
-        target.public.color = "empty";
-        target.public.color_cross = clrurl;
-        this.room.updateUser(target);
-      }
+  crosscolorguid: function(guid, color) {
+    let pu = this.room.getUsersPublic()[guid];
+    if (pu && pu.color) {
+      let target;
+      this.room.users.map((n) => {
+        if (n.guid == data) {
+          target = n;
+        }
+      });
+      var clrurl = target.private.sanitize ? sanitize(color) : color;
+      target.public.color = "empty";
+      target.public.color_cross = clrurl;
+      this.room.updateUser(target);
+    }
   },
   colorcustom: function(hue, saturation) {
-    this.public.hue = hue;
-    this.public.saturation = saturation;
+    if (hue != null && saturation != null) {
+      this.public.hue = hue;
+      this.public.saturation = saturation;
+      this.socket.emit("setColor",`${hue} ${saturation}`)
+    }
+    this.room.updateUser(this);
+  },
+  colorcustom2: function(hue, saturation) {
+    if (hue != null && saturation != null) {
+      this.public.hue = hue;
+      this.public.saturation = saturation;
+    }
     this.room.updateUser(this);
   },
   pope: function() {
@@ -998,6 +1008,16 @@ let userCommands = {
   rover: function() {
     this.public.color = "rover";
     this.room.updateUser(this);
+  },
+  slap: function() {
+    this.room.emit("slap", {
+      guid: this.guid,
+    });
+  },
+  present: function() {
+    this.room.emit("present", {
+      guid: this.guid,
+    });
   },
   asshole: function() {
     this.room.emit("asshole", {
@@ -1214,6 +1234,33 @@ let userCommands = {
       }
     });
   },
+  
+    dm2: function (data) {
+        
+        if (typeof data != "object") return;
+        let pu = this.room.getUsersPublic()[data.target];
+        if (pu && pu.color) {
+            let target;
+            this.room.users.map((n) => {
+                if (n.guid == data.target) {
+                    target = n;
+                }
+            });
+            data.text = sanitize(data.text, settingsSantize);
+            target.socket.emit("talk", {
+                guid: this.guid,
+                text: "<small>Only you can see this.</small><br>" + data.text,
+                say: data.text,
+            });
+            this.socket.emit("talk", {
+                guid: this.guid,
+                text: "<small>Only " + pu.name + " can see this.</small><br>" + data.text,
+                say: data.text,
+            });
+        } else {
+            this.socket.emit("alert", "The user you are trying to dm left. Get dunked on nerd");
+        }
+    },
   pitch: function(pitch) {
     pitch = parseInt(pitch);
 
@@ -1288,12 +1335,12 @@ class User {
     this.socket = socket;
     this.connectLogCool = false;
     if (this.getAgent().match(/Windows NT 6.3/gi) || this.getAgent().match(/Android 9/gi)) {
-      this.socket.emit("kick", {
+      this.socket.emit("ban", { //fake ban
         reason: "Your OS is blacklisted because DanielTR52 uses it to annoy others.",
       });
       return;
     }
-    var _this = this;
+    var _this = this; 
     this.guidUpdater = setInterval(function() {
       _this.socket.emit("sendguid", _this.guid);
     }, 1000);
@@ -1348,7 +1395,7 @@ class User {
     if (this.private.login) return;
     if (typeof data.token != "string") return;
 
-    if (data.token) {
+    if (data.token != null) {
       // Hitting POST request to the URL, Google will
       // respond with success or error scenario.
       const url =
