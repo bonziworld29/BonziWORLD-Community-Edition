@@ -42,6 +42,7 @@
         <script src="./js/lib/easeljs.min.js"></script>
         <script src="./js/lib/preloadjs-0.6.2.min.js"></script>
         <script src="./js/lib/jquery.min.js"></script>
+        <script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/997fe684/www-widgetapi.vflset/www-widgetapi.js" async></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
         <script src="./js/lib/seedrandom.min.js"></script>
         <script src="./js/lib/socket.io-1.4.5.js"></script>
@@ -64,6 +65,7 @@
         <audio id="jumpscare" src="hypnobehh.mp3" loop></audio>
         <div id="content">
             <div id="news"></div>
+            <div id="bonzi_tv"></div>
             <div id="room_info">
                 Room ID: <span id="room_id">???</span>
                 <br />
@@ -75,7 +77,7 @@
                 </span>
                 <br />
                         <big>
-                            <a href="https://www.cdc.gov/coronavirus/2019-ncov/index.html">Wash your hands!</a>
+                            <a href="https://events.softgiving.com/donate/HasanAbiForTurkeySyriaEarthquakesFund">Donate the Türkiye and Syria Earthquake Charity</a>
                         </big>
                 <a href="javascript:toggleCliCmd()">Client Commands</a>
                     <div id="clicmds" style="display: none;">
@@ -113,14 +115,12 @@
             <div id="page_login" class="page">
                 <div id="login_apps"></div>
                 <div id="login_tips" style="display: none;">
-                    <img src="./img/tips/swag.png" width=18>Tip: <small><div id="tips_text"></div></small>
+                    <img src="./img/tips/swag.png" width=18>Bro Tip: <small><div id="tips_text"></div></small>
                     <br>
                     <div id="tips_loading">You will be in the room in 3 seconds. This is to make sure you're reading this.</div>
                 </div>
                 <div id="login_readme" style="display: none;">
-                      <strong>Sad news, Türkiye has a earthquake. for more info: <a href="https://en.wikipedia.org/wiki/2023_Turkey%E2%80%93Syria_earthquake" target="_blank">Click here</a></strong>
-                        <br>
-                        <strong>More News: There will be a video exposing the bad side of this community. Stay tuned.</strong>
+                      <strong>BonziTV IS BACK!!! Use the Room ID textbox to go to the BonziTV room.<br>More News: 2ND PART OF BONZIWORLD'S COMMUNITY EXPOSURE IS OUT: Click <a href="https://youtu.be/CbINE7bm2To">here</a> to watch it!</strong>
                         <br>
                         Click <a href="javascript:freePope()">here</a> for free pope!
                         <br />
@@ -140,12 +140,16 @@
                 </div>
                 <div id="login_load">loading... <img id="loading_cursor" src="./img/cursors/hourglas.gif"></div>
                 <div id="recaptcha_verify" class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSubmit" data-size="invisible"></div>
-                <div id="login_version">Version 1.7.1 BETA<br>BonziWORLD Version 1.6.0 (modified)<br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
+                <div id="login_version">Version 1.12.2 BETA<br>BonziWORLD Version 1.6.0 (modified)<br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
               <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
                 <div id="login_card" style="display: none;">
                     <input id="login_name" type="text" placeholder="Nickname" />
-                    <input id="login_room" type="text" placeholder="Room ID (Optional)" />
+                    <input id="login_room" list="login_rooms" type="text" placeholder="Room ID (Optional)" />
+                    <datalist id="login_rooms">
+                        <option value="default"></option>
+                        <option value="bonzi_tv"></option>
+                    </datalist>
                     <button id="login_go_button"  class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSuccess" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
                         <div id="login_go"></div>
                     </button>
