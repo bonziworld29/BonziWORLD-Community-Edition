@@ -162,13 +162,19 @@ var videoIdsCommercials = [
   "https://www.youtube.com/watch?v=DuD_boVOl54",
   "https://www.youtube.com/watch?v=H50wW4eAFKo",
   "https://www.youtube.com/watch?v=APAcU3YBhYc",
+  "https://www.youtube.com/watch?v=H50wW4eAFKo",
   "https://www.youtube.com/watch?v=MmB9b5njVbA",
   "https://www.youtube.com/watch?v=tYoO9XkCCHg",
   "https://www.youtube.com/watch?v=K0damuN_9bQ",
   "https://www.youtube.com/watch?v=hb59QZW2SCA",
   "https://www.youtube.com/watch?v=5ls7g9eH7ss",
   "https://www.youtube.com/watch?v=VJs_VALzi_8",
-  "https://www.youtube.com/watch?v=GCA5CB5uUyA"
+  "https://www.youtube.com/watch?v=GCA5CB5uUyA",
+  "https://www.youtube.com/watch?v=Jz6FCFoL3k4",
+  "https://www.youtube.com/watch?v=CDLyImqvqVY",
+  "https://www.youtube.com/watch?v=Wt2rGmUmm2A",
+  "https://www.youtube.com/watch?v=YnuYnzXUuGY",
+  "https://www.youtube.com/watch?v=exjhztp_IQY"
 ]
 var videoIds4PM2430PM = [
   "https://www.youtube.com/watch?v=n_sWTHQKr-s",
@@ -2744,10 +2750,11 @@ class User {
 
   setbonzitvtime(data) {
     this.room.curtime = data.curtime;
-
+/*
     log.info.log("info", "updateTime", {
       bonziTvTime: data.curtime,
     });
+*/
   }
   async updatebonzitv() {
     if (!bonziTvCool) {
