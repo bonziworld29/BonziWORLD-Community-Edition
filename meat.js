@@ -147,6 +147,10 @@ var stickers = {
   kiddie: "australian kiddie",
 };
 
+const axios = require('axios').default;
+const fs = require('fs');
+
+
 
 function getRandomInt(min, max) {
   min = Math.ceil(min);
@@ -155,899 +159,13 @@ function getRandomInt(min, max) {
 }
 var bonziTvCommercialMode = false;
 var bonziTvCool = false;
-var videoIdsCommercials = [
-  "https://www.youtube.com/watch?v=97dyt7MXWpo",
-  "https://www.youtube.com/watch?v=t0JyCdk5ymo",
-  "https://www.youtube.com/watch?v=bzXzGMbdQfY",
-  "https://www.youtube.com/watch?v=DuD_boVOl54",
-  "https://www.youtube.com/watch?v=H50wW4eAFKo",
-  "https://www.youtube.com/watch?v=APAcU3YBhYc",
-  "https://www.youtube.com/watch?v=H50wW4eAFKo",
-  "https://www.youtube.com/watch?v=MmB9b5njVbA",
-  "https://www.youtube.com/watch?v=tYoO9XkCCHg",
-  "https://www.youtube.com/watch?v=K0damuN_9bQ",
-  "https://www.youtube.com/watch?v=hb59QZW2SCA",
-  "https://www.youtube.com/watch?v=5ls7g9eH7ss",
-  "https://www.youtube.com/watch?v=VJs_VALzi_8",
-  "https://www.youtube.com/watch?v=GCA5CB5uUyA",
-  "https://www.youtube.com/watch?v=Jz6FCFoL3k4",
-  "https://www.youtube.com/watch?v=CDLyImqvqVY",
-  "https://www.youtube.com/watch?v=Wt2rGmUmm2A",
-  "https://www.youtube.com/watch?v=YnuYnzXUuGY",
-  "https://www.youtube.com/watch?v=exjhztp_IQY"
-]
-var videoIds4PM2430PM = [
-  "https://www.youtube.com/watch?v=n_sWTHQKr-s",
-  "https://www.youtube.com/watch?v=FdjXC4aDNrc",
-  "https://www.youtube.com/watch?v=oqwjsqLvaGA",
-  "https://www.youtube.com/watch?v=ewQeG4bfh7o",
-  "https://www.youtube.com/watch?v=J1xFJDSeHxI",
-  "https://www.youtube.com/watch?v=AJNF04k6hDU",
-  "https://www.youtube.com/watch?v=EXFJ1gUqSOI",
-  "https://www.youtube.com/watch?v=zvB3h2IKdYU",
-  "https://www.youtube.com/watch?v=ihDMzzMxsFY",
-  "https://www.youtube.com/watch?v=JdPibO28X6g",
-  "https://www.youtube.com/watch?v=BpJZAKy3-EI",
-  "https://www.youtube.com/watch?v=y281xhixx9I",
-  "https://www.youtube.com/watch?v=f-1tlzLYUE0",
-  "https://www.youtube.com/watch?v=LBapITUr878",
-  "https://www.youtube.com/watch?v=R7M2RiTgEO4",
-  "https://www.youtube.com/watch?v=hYC5FcjhowU",
-  "https://www.youtube.com/watch?v=PM2cT0GYs0k",
-  "https://www.youtube.com/watch?v=kX-TUNMguqQ",
-  "https://www.youtube.com/watch?v=CJjGRbm7AP0",
-  "https://www.youtube.com/watch?v=nUXNQk-GpXE",
-  "https://www.youtube.com/watch?v=pRIdTBDo5s0",
-  "https://www.youtube.com/watch?v=lnUnMD8avFo",
-  "https://www.youtube.com/watch?v=OHtNgbbZUHc",
-  "https://www.youtube.com/watch?v=IWeeGlqWjTo",
-  "https://www.youtube.com/watch?v=B-43bJpN9p0",
-  "https://www.youtube.com/watch?v=ZlJUN6ld7Uw",
-  "https://www.youtube.com/watch?v=cepnx5OtwMg",
-  "https://www.youtube.com/watch?v=CyYUtJWu67g",
-  "https://www.youtube.com/watch?v=kVPAH1SoJOs",
-  "https://www.youtube.com/watch?v=CSSucrEZru0",
-  "https://www.youtube.com/watch?v=voX77aqxMVM",
-  "https://www.youtube.com/watch?v=VMenL3FtjwY",
-  "https://www.youtube.com/watch?v=gMWMaYqMuvU",
-  "https://www.youtube.com/watch?v=9CivuYkHkdw",
-  "https://www.youtube.com/watch?v=nWjshODENSE",
-  "https://www.youtube.com/watch?v=wC85p4WwT7o",
-  "https://www.youtube.com/watch?v=-STfCX3_Dt8",
-  "https://www.youtube.com/watch?v=2npJbktaXas",
-  "https://www.youtube.com/watch?v=mW8HT3wTjtw",
-  "https://www.youtube.com/watch?v=aqJxAEc8I98",
-  "https://www.youtube.com/watch?v=7RTuOTLqNJg",
-  "https://www.youtube.com/watch?v=D-mxD6R0PZk",
-  "https://www.youtube.com/watch?v=gkpfOwxvP5Y",
-  "https://www.youtube.com/watch?v=MaOJiU7ICSs",
-  "https://www.youtube.com/watch?v=ldoCeoPnsr4",
-  "https://www.youtube.com/watch?v=kRtuL6PVM3M",
-  "https://www.youtube.com/watch?v=BxEn1br2hhA",
-  "https://www.youtube.com/watch?v=E7e2NbRTv34",
-  "https://www.youtube.com/watch?v=0Pw-W11hzaY",
-  "https://www.youtube.com/watch?v=fjOraqJJfdo",
-  "https://www.youtube.com/watch?v=-k2lYZmcyUs",
-  "https://www.youtube.com/watch?v=IpDx4Fw137U",
-  "https://www.youtube.com/watch?v=bIy7bGgPmu8",
-  "https://www.youtube.com/watch?v=wGFfIulM2aw",
-  "https://www.youtube.com/watch?v=xv3LBB6GAh4",
-  "https://www.youtube.com/watch?v=SLfbsnOG3lA",
-  "https://www.youtube.com/watch?v=YaRNqZT1QH4",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=pOiiAdshU5Q",
-  "https://www.youtube.com/watch?v=pOiiAdshU5Q",
-  "https://www.youtube.com/watch?v=pOiiAdshU5Q",
-  "https://www.youtube.com/watch?v=pOiiAdshU5Q",
-  "https://www.youtube.com/watch?v=pOiiAdshU5Q",
-  "https://www.youtube.com/watch?v=pOiiAdshU5Q",
-  "https://www.youtube.com/watch?v=pOiiAdshU5Q",
-  "https://www.youtube.com/watch?v=pOiiAdshU5Q",
-  "https://www.youtube.com/watch?v=pOiiAdshU5Q",
-  "https://www.youtube.com/watch?v=pOiiAdshU5Q",
-  "https://www.youtube.com/watch?v=WwnSgVJcGm8",
-  "https://www.youtube.com/watch?v=XEwg5dwLjng",
-  "https://www.youtube.com/watch?v=eYo8jusJkfA",
-  "https://www.youtube.com/watch?v=iIBI3vVcce0",
-  "https://www.youtube.com/watch?v=7K7gaKhkiVg",
-  "https://www.youtube.com/watch?v=vX5baryGnnk",
-  "https://www.youtube.com/watch?v=kEkmTUobm9A",
-  "https://www.youtube.com/watch?v=ynWOhlnFJWQ",
-  "https://www.youtube.com/watch?v=ofPNauMOvFU",
-  "https://www.youtube.com/watch?v=LP4M4TBXg58",
-  "https://www.youtube.com/watch?v=LP4M4TBXg58",
-  "https://www.youtube.com/watch?v=LP4M4TBXg58",
-  "https://www.youtube.com/watch?v=lGT7GRoUsaw",
-  "https://www.youtube.com/watch?v=lGT7GRoUsaw",
-  "https://www.youtube.com/watch?v=lGT7GRoUsaw",
-  "https://www.youtube.com/watch?v=lGT7GRoUsaw",
-];
-var videoIds5PM = [
-  "https://www.youtube.com/watch?v=iK4BKnkW9rc",
-  "https://www.youtube.com/watch?v=qjqBUYQb21g",
-  "https://www.youtube.com/watch?v=XbI29tI5MXs",
-  "https://www.youtube.com/watch?v=0dnRWrsgKrU",
-  "https://www.youtube.com/watch?v=ohCm6YeovpQ",
-  "https://www.youtube.com/watch?v=HVK-KiANd_Q",
-  "https://www.youtube.com/watch?v=6-USBEqLicg",
-  "https://www.youtube.com/watch?v=QoHbvZfu1-c",
-  "https://www.youtube.com/watch?v=X2Q2X-7hVQw",
-  "https://www.youtube.com/watch?v=mR-lbatS6ts",
-  "https://www.youtube.com/watch?v=1wMsbj0VvVE",
-  "https://www.youtube.com/watch?v=Mzf_jtM8jgw",
-  "https://www.youtube.com/watch?v=qsATpni7B9s",
-  "https://www.youtube.com/watch?v=a0tSVDjQbz0",
-  "https://www.youtube.com/watch?v=4ES2y7bxENE",
-  "https://www.youtube.com/watch?v=j32-UnN6m5E",
-  "https://www.youtube.com/watch?v=86EkHcJsXhU",
-  "https://www.youtube.com/watch?v=P3Ca0X-TO1U",
-  "https://www.youtube.com/watch?v=UjnyCsweHOE",
-  "https://www.youtube.com/watch?v=G2ApsOSMX2s",
-  "https://www.youtube.com/watch?v=3Hssx5jy-f4",
-  "https://www.youtube.com/watch?v=sRih4d0Um9U",
-  "https://www.youtube.com/watch?v=lI-u0pJ-XEM",
-  "https://www.youtube.com/watch?v=tv9UIy0RCus",
-  "https://www.youtube.com/watch?v=wGKi7YITv84",
-  "https://www.youtube.com/watch?v=FQ0ZvlLi3Aw",
-  "https://www.youtube.com/watch?v=hlm9JW6hzu4",
-  "https://www.youtube.com/watch?v=W61OP5HPSU4",
-  "https://www.youtube.com/watch?v=PqS4Ckf01XI",
-  "https://www.youtube.com/watch?v=BjiWP6GdaZs",
-  "https://www.youtube.com/watch?v=VR6G2-BXk50",
-  "https://www.youtube.com/watch?v=7D6W6Dzsinw",
-  "https://www.youtube.com/watch?v=LWW9kyDhSGY",
-  "https://www.youtube.com/watch?v=s60XUkdNoNc",
-  "https://www.youtube.com/watch?v=PjfvbA3yaB4",
-  "https://www.youtube.com/watch?v=8M1fDbBTeuc",
-  "https://www.youtube.com/watch?v=OMtsPjcvOyA",
-  "https://www.youtube.com/watch?v=1n1_ocOUx4M",
-  "https://www.youtube.com/watch?v=8Yy_xnQTS9k",
-  "https://www.youtube.com/watch?v=aTYAwNeP7hw",
-  "https://www.youtube.com/watch?v=Cc4_lDIhhK4",
-  "https://www.youtube.com/watch?v=dTUrgFaXR2o",
-  "https://www.youtube.com/watch?v=IPQmfvcvOWI",
-  "https://www.youtube.com/watch?v=tHjjbHkFqVw",
-  "https://www.youtube.com/watch?v=UfDFvG0Px5A",
-  "https://www.youtube.com/watch?v=mtxjk_kIi6I",
-  "https://www.youtube.com/watch?v=M_U4NYPHuE8",
-  "https://www.youtube.com/watch?v=XmheFB3vSmM",
-  "https://www.youtube.com/watch?v=b9RSREv2NAE",
-  "https://www.youtube.com/watch?v=YcZ4vXgsGh4",
-  "https://www.youtube.com/watch?v=MnjMwoJpDag",
-  "https://www.youtube.com/watch?v=8zVTrQ54oKA",
-  "https://www.youtube.com/watch?v=HV7SQkbOKQQ",
-  "https://www.youtube.com/watch?v=urX6QcVFkHY",
-  "https://www.youtube.com/watch?v=Q7vthL5hIqo",
-  "https://www.youtube.com/watch?v=N0j6NXznknU",
-  "https://www.youtube.com/watch?v=u0qTJz2DUos",
-  "https://www.youtube.com/watch?v=UioiM5KopzU",
-  "https://www.youtube.com/watch?v=sDlGy1SxYGg",
-  "https://www.youtube.com/watch?v=dnua8QvCfB0",
-  "https://www.youtube.com/watch?v=FG0ydp-1mHE",
-  "https://www.youtube.com/watch?v=bCm-EAd_oEI",
-  "https://www.youtube.com/watch?v=aZ5lyqb4gUc",
-  "https://www.youtube.com/watch?v=2HUy60DWYek",
-  "https://www.youtube.com/watch?v=FEXeAlaL9cc",
-  "https://www.youtube.com/watch?v=ORouZmGacHk",
-  "https://www.youtube.com/watch?v=2v-8DArgo-Y",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-];
-var videoIds7PM = [
-  "https://www.youtube.com/watch?v=PT5HrjP-lPE",
-  "https://www.youtube.com/watch?v=1yfUfH1jF3g",
-  "https://www.youtube.com/watch?v=vN2BCZjZYWs",
-  "https://www.youtube.com/watch?v=oZF2RUJHV8c",
-  "https://www.youtube.com/watch?v=rNY5lwrmZ1w",
-  "https://www.youtube.com/watch?v=E7sn6tjcZgI",
-  "https://www.youtube.com/watch?v=kvsw74KWAIw",
-  "https://www.youtube.com/watch?v=OX3rC3ENFw0",
-  "https://www.youtube.com/watch?v=o3i64oR6Dv8",
-  "https://www.youtube.com/watch?v=Frm0LTTtgFo",
-  "https://www.youtube.com/watch?v=PFbYJ2-KpR8",
-  "https://www.youtube.com/watch?v=rVAxjlFU28o",
-  "https://www.youtube.com/watch?v=fIonJON2p9A",
-  "https://www.youtube.com/watch?v=Gc_DMKiz9LU",
-  "https://www.youtube.com/watch?v=bfk_pzQSfX8",
-  "https://www.youtube.com/watch?v=SKLlmJKfcI0",
-  "https://www.youtube.com/watch?v=r0W-607Atz0",
-  "https://www.youtube.com/watch?v=nGQ-nCwHYcs",
-  "https://www.youtube.com/watch?v=7hTge-5W3Cc",
-  "https://www.youtube.com/watch?v=fBHJFPqKIG0",
-  "https://www.youtube.com/watch?v=LvV7MOoSwy0",
-  "https://www.youtube.com/watch?v=MTyBtwmvEjE",
-  "https://www.youtube.com/watch?v=djMpH9D3NUQ",
-  "https://www.youtube.com/watch?v=3_uRhxkjdB4",
-  "https://www.youtube.com/watch?v=3VS4Nkzh-70",
-  "https://www.youtube.com/watch?v=jX28oxrdUVI",
-  "https://www.youtube.com/watch?v=dnBqjTmlLg8",
-  "https://www.youtube.com/watch?v=r_mwNcxuxwY",
-  "https://www.youtube.com/watch?v=xlyyu1Go4yU",
-  "https://www.youtube.com/watch?v=l8g0z8yZ6FU",
-  "https://www.youtube.com/watch?v=gMDgHPQ0YfI",
-  "https://www.youtube.com/watch?v=HjWbtUBKuUc",
-  "https://www.youtube.com/watch?v=WO2SCGfEYiE",
-  "https://www.youtube.com/watch?v=ur8ys2aglI4",
-  "https://www.youtube.com/watch?v=jmr5kAmIQGs",
-  "https://www.youtube.com/watch?v=3va3bdtT9LQ",
-  "https://www.youtube.com/watch?v=7vzfeyh-ow8",
-  "https://www.youtube.com/watch?v=v2t6iP4mWvA",
-  "https://www.youtube.com/watch?v=iwxbY-p_w0w",
-  "https://www.youtube.com/watch?v=pdO9uKpzaYU",
-  "https://www.youtube.com/watch?v=8iEXhbqami8",
-  "https://www.youtube.com/watch?v=T-BoDW1_9P4",
-  "https://www.youtube.com/watch?v=NgHygsNwTNk",
-  "https://www.youtube.com/watch?v=jPKuyeDb0mM",
-  "https://www.youtube.com/watch?v=EDsDnR2dzlw",
-  "https://www.youtube.com/watch?v=ljl1jBEY3_A",
-  "https://www.youtube.com/watch?v=jIwqlKDPq4s",
-  "https://www.youtube.com/watch?v=TGulB0MfxPs",
-  "https://www.youtube.com/watch?v=ehlrUPrvFuk",
-  "https://www.youtube.com/watch?v=vkUIyOm9hZk",
-  "https://www.youtube.com/watch?v=t2Jpe0I5pa4",
-  "https://www.youtube.com/watch?v=kHKJ9Mf8UxU",
-  "https://www.youtube.com/watch?v=zwz5yJR_aFA",
-  "https://www.youtube.com/watch?v=RdTJHVG_IdU",
-  "https://www.youtube.com/watch?v=WaXvbkjn-RA",
-  "https://www.youtube.com/watch?v=xe0P0rnsS1Q",
-  "https://www.youtube.com/watch?v=bBjk55hNjWw",
-  "https://www.youtube.com/watch?v=bBjk55hNjWw",
-  "https://www.youtube.com/watch?v=bBjk55hNjWw",
-  "https://www.youtube.com/watch?v=bBjk55hNjWw",
-  "https://www.youtube.com/watch?v=bBjk55hNjWw",
-  "https://www.youtube.com/watch?v=bBjk55hNjWw",
-  "https://www.youtube.com/watch?v=bBjk55hNjWw",
-  "https://www.youtube.com/watch?v=bBjk55hNjWw",
-  "https://www.youtube.com/watch?v=IyirV9lir8Q",
-  "https://www.youtube.com/watch?v=IyirV9lir8Q",
-  "https://www.youtube.com/watch?v=IyirV9lir8Q",
-];
-var videoIds25MinutesofMSAgent = [
-  "https://www.youtube.com/watch?v=iK4BKnkW9rc",
-  "https://www.youtube.com/watch?v=qjqBUYQb21g",
-  "https://www.youtube.com/watch?v=XbI29tI5MXs",
-  "https://www.youtube.com/watch?v=0dnRWrsgKrU",
-  "https://www.youtube.com/watch?v=ohCm6YeovpQ",
-  "https://www.youtube.com/watch?v=HVK-KiANd_Q",
-  "https://www.youtube.com/watch?v=6-USBEqLicg",
-  "https://www.youtube.com/watch?v=QoHbvZfu1-c",
-  "https://www.youtube.com/watch?v=X2Q2X-7hVQw",
-  "https://www.youtube.com/watch?v=mR-lbatS6ts",
-  "https://www.youtube.com/watch?v=1wMsbj0VvVE",
-  "https://www.youtube.com/watch?v=Mzf_jtM8jgw",
 
-  "https://www.youtube.com/watch?v=iK4BKnkW9rc",
-  "https://www.youtube.com/watch?v=qjqBUYQb21g",
-  "https://www.youtube.com/watch?v=XbI29tI5MXs",
-  "https://www.youtube.com/watch?v=0dnRWrsgKrU",
-  "https://www.youtube.com/watch?v=ohCm6YeovpQ",
-  "https://www.youtube.com/watch?v=HVK-KiANd_Q",
-  "https://www.youtube.com/watch?v=6-USBEqLicg",
-  "https://www.youtube.com/watch?v=QoHbvZfu1-c",
-  "https://www.youtube.com/watch?v=X2Q2X-7hVQw",
-  "https://www.youtube.com/watch?v=mR-lbatS6ts",
-  "https://www.youtube.com/watch?v=1wMsbj0VvVE",
-  "https://www.youtube.com/watch?v=Mzf_jtM8jgw",
-  "https://www.youtube.com/watch?v=qsATpni7B9s",
-  "https://www.youtube.com/watch?v=a0tSVDjQbz0",
-  "https://www.youtube.com/watch?v=4ES2y7bxENE",
-  "https://www.youtube.com/watch?v=j32-UnN6m5E",
-  "https://www.youtube.com/watch?v=86EkHcJsXhU",
-  "https://www.youtube.com/watch?v=P3Ca0X-TO1U",
-  "https://www.youtube.com/watch?v=UjnyCsweHOE",
-  "https://www.youtube.com/watch?v=G2ApsOSMX2s",
-  "https://www.youtube.com/watch?v=3Hssx5jy-f4",
-  "https://www.youtube.com/watch?v=sRih4d0Um9U",
-  "https://www.youtube.com/watch?v=lI-u0pJ-XEM",
-  "https://www.youtube.com/watch?v=tv9UIy0RCus",
-  "https://www.youtube.com/watch?v=wGKi7YITv84",
-  "https://www.youtube.com/watch?v=FQ0ZvlLi3Aw",
-  "https://www.youtube.com/watch?v=hlm9JW6hzu4",
-  "https://www.youtube.com/watch?v=W61OP5HPSU4",
-  "https://www.youtube.com/watch?v=PqS4Ckf01XI",
-  "https://www.youtube.com/watch?v=BjiWP6GdaZs",
-  "https://www.youtube.com/watch?v=VR6G2-BXk50",
-  "https://www.youtube.com/watch?v=7D6W6Dzsinw",
-  "https://www.youtube.com/watch?v=LWW9kyDhSGY",
-  "https://www.youtube.com/watch?v=s60XUkdNoNc",
-  "https://www.youtube.com/watch?v=PjfvbA3yaB4",
-  "https://www.youtube.com/watch?v=8M1fDbBTeuc",
-  "https://www.youtube.com/watch?v=OMtsPjcvOyA",
-  "https://www.youtube.com/watch?v=1n1_ocOUx4M",
-  "https://www.youtube.com/watch?v=8Yy_xnQTS9k",
-  "https://www.youtube.com/watch?v=aTYAwNeP7hw",
-  "https://www.youtube.com/watch?v=Cc4_lDIhhK4",
-  "https://www.youtube.com/watch?v=dTUrgFaXR2o",
-  "https://www.youtube.com/watch?v=IPQmfvcvOWI",
-  "https://www.youtube.com/watch?v=tHjjbHkFqVw",
-  "https://www.youtube.com/watch?v=UfDFvG0Px5A",
-  "https://www.youtube.com/watch?v=mtxjk_kIi6I",
-  "https://www.youtube.com/watch?v=M_U4NYPHuE8",
-  "https://www.youtube.com/watch?v=XmheFB3vSmM",
-  "https://www.youtube.com/watch?v=b9RSREv2NAE",
-  "https://www.youtube.com/watch?v=YcZ4vXgsGh4",
-  "https://www.youtube.com/watch?v=MnjMwoJpDag",
-  "https://www.youtube.com/watch?v=8zVTrQ54oKA",
-  "https://www.youtube.com/watch?v=HV7SQkbOKQQ",
-  "https://www.youtube.com/watch?v=urX6QcVFkHY",
-  "https://www.youtube.com/watch?v=Q7vthL5hIqo",
-  "https://www.youtube.com/watch?v=N0j6NXznknU",
-  "https://www.youtube.com/watch?v=u0qTJz2DUos",
-  "https://www.youtube.com/watch?v=UioiM5KopzU",
-  "https://www.youtube.com/watch?v=sDlGy1SxYGg",
-  "https://www.youtube.com/watch?v=dnua8QvCfB0",
-  "https://www.youtube.com/watch?v=FG0ydp-1mHE",
-  "https://www.youtube.com/watch?v=bCm-EAd_oEI",
-  "https://www.youtube.com/watch?v=aZ5lyqb4gUc",
-  "https://www.youtube.com/watch?v=2HUy60DWYek",
-  "https://www.youtube.com/watch?v=FEXeAlaL9cc",
-  "https://www.youtube.com/watch?v=ORouZmGacHk",
-  "https://www.youtube.com/watch?v=2v-8DArgo-Y",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=qsATpni7B9s",
-  "https://www.youtube.com/watch?v=a0tSVDjQbz0",
-  "https://www.youtube.com/watch?v=4ES2y7bxENE",
-  "https://www.youtube.com/watch?v=j32-UnN6m5E",
-  "https://www.youtube.com/watch?v=86EkHcJsXhU",
-  "https://www.youtube.com/watch?v=P3Ca0X-TO1U",
-  "https://www.youtube.com/watch?v=UjnyCsweHOE",
-  "https://www.youtube.com/watch?v=G2ApsOSMX2s",
-  "https://www.youtube.com/watch?v=3Hssx5jy-f4",
-  "https://www.youtube.com/watch?v=sRih4d0Um9U",
-  "https://www.youtube.com/watch?v=lI-u0pJ-XEM",
-  "https://www.youtube.com/watch?v=tv9UIy0RCus",
-  "https://www.youtube.com/watch?v=wGKi7YITv84",
-  "https://www.youtube.com/watch?v=FQ0ZvlLi3Aw",
-  "https://www.youtube.com/watch?v=hlm9JW6hzu4",
-  "https://www.youtube.com/watch?v=W61OP5HPSU4",
-  "https://www.youtube.com/watch?v=PqS4Ckf01XI",
-  "https://www.youtube.com/watch?v=BjiWP6GdaZs",
-  "https://www.youtube.com/watch?v=7D6W6Dzsinw",
-  "https://www.youtube.com/watch?v=LWW9kyDhSGY",
-  "https://www.youtube.com/watch?v=I5XjMXFuAEg",
-  "https://www.youtube.com/watch?v=bLu9ZT7xc-s",
-  "https://www.youtube.com/watch?v=oDmcLsCd1wM",
-  "https://www.youtube.com/watch?v=_0EaFBajEJc",
-  "https://www.youtube.com/watch?v=PESJ7GXFSTY",
-  "https://www.youtube.com/watch?v=tjWpSalUJ7M",
-  "https://www.youtube.com/watch?v=CUwkddtoq_Q",
-  "https://www.youtube.com/watch?v=kUS79V-GED4",
-  "https://www.youtube.com/watch?v=XuZYiN_fLLo",
-  "https://www.youtube.com/watch?v=N7UVouZF3rs",
-  "https://www.youtube.com/watch?v=nIe6hhSNYMo",
-  "https://www.youtube.com/watch?v=WR-ItEt7Wsc",
-  "https://www.youtube.com/watch?v=xRMtup3tSiY",
-  "https://www.youtube.com/watch?v=8PdVfC588rk",
-  "https://www.youtube.com/watch?v=y_NNbA1YHXI",
-  "https://www.youtube.com/watch?v=uUKakTJTq8Q",
-  "https://www.youtube.com/watch?v=Q9xzX3uYFrg",
-  "https://www.youtube.com/watch?v=AeHLChNvmuo",
-  "https://www.youtube.com/watch?v=oAnQODG7WIM",
-  "https://www.youtube.com/watch?v=32lLfeLcqpc",
-  "https://www.youtube.com/watch?v=T6OqOb9GHm8",
-  "https://www.youtube.com/watch?v=7_dFef7LmN0",
-  "https://www.youtube.com/watch?v=35aKtzd6ITU",
-  "https://www.youtube.com/watch?v=PYX5WGWCy80",
-  "https://www.youtube.com/watch?v=JnkxS1kyZgc",
-  "https://www.youtube.com/watch?v=pg4zVD6nVTM",
-  "https://www.youtube.com/watch?v=i8zCkUtvbyI",
-  "https://www.youtube.com/watch?v=5lWKWEBG7sU",
-  "https://www.youtube.com/watch?v=JC__xVzW4q4",
-  "https://www.youtube.com/watch?v=g_bKg27Zskg",
-  "https://www.youtube.com/watch?v=vsPt1P6ouEw",
-  "https://www.youtube.com/watch?v=sWKXS0Jy6y0",
-  "https://www.youtube.com/watch?v=H3aSBjRV1m4",
-  "https://www.youtube.com/watch?v=mDofooY1oxI",
-  "https://www.youtube.com/watch?v=9NQVRayFJ4Q",
-  "https://www.youtube.com/watch?v=-_0qqaiFwKU",
-  "https://www.youtube.com/watch?v=CpW0lFG8nxE",
-  "https://www.youtube.com/watch?v=i7KzCagtyvg",
-  "https://www.youtube.com/watch?v=Tc9IJ9yE_ds",
-  "https://www.youtube.com/watch?v=LgZ9XoRakuE",
-  "https://www.youtube.com/watch?v=HJ_QylejL0o",
-  "https://www.youtube.com/watch?v=T7PRlNIbEOw",
-  "https://www.youtube.com/watch?v=hht_m1cjqLo",
-  "https://www.youtube.com/watch?v=AltpSUZqRzo",
-  "https://www.youtube.com/watch?v=ryI0Hc6TNs4",
-  "https://www.youtube.com/watch?v=RIrYEbJmYVU",
-  "https://www.youtube.com/watch?v=NbzjAQd_A4E",
-  "https://www.youtube.com/watch?v=DeugO5Tl0-k",
-  "https://www.youtube.com/watch?v=b9RSREv2NAE",
-  "https://www.youtube.com/watch?v=YcZ4vXgsGh4",
-  "https://www.youtube.com/watch?v=MnjMwoJpDag",
-  "https://www.youtube.com/watch?v=8zVTrQ54oKA",
-  "https://www.youtube.com/watch?v=HV7SQkbOKQQ",
-  "https://www.youtube.com/watch?v=urX6QcVFkHY",
-  "https://www.youtube.com/watch?v=Q7vthL5hIqo",
-  "https://www.youtube.com/watch?v=N0j6NXznknU",
-  "https://www.youtube.com/watch?v=u0qTJz2DUos",
-  "https://www.youtube.com/watch?v=UioiM5KopzU",
-  "https://www.youtube.com/watch?v=dnua8QvCfB0",
-  "https://www.youtube.com/watch?v=FG0ydp-1mHE",
-  "https://www.youtube.com/watch?v=bCm-EAd_oEI",
-  "https://www.youtube.com/watch?v=wlqM_kMRPJI",
-  "https://www.youtube.com/watch?v=W9DST-6jIBU",
-  "https://www.youtube.com/watch?v=TDpxx5UqrVU",
-  "https://www.youtube.com/watch?v=d-vB8qdNSYc",
-  "https://www.youtube.com/watch?v=Gh0bczrw4NU",
-  "https://www.youtube.com/watch?v=doZ-Wmgrkfs",
-  "https://www.youtube.com/watch?v=CiVtoO65BRY",
-  "https://www.youtube.com/watch?v=9Lu99J5UsXs",
-  "https://www.youtube.com/watch?v=SNK74ecgFKg",
-  "https://www.youtube.com/watch?v=hRSYYKEfwoE",
-  "https://www.youtube.com/watch?v=GODj_vgnmuY",
-  "https://www.youtube.com/watch?v=z4nWu0kmYzE",
-  "https://www.youtube.com/watch?v=SkKPMlCQWiI",
-  "https://www.youtube.com/watch?v=5SAkFdHwrdU",
-  "https://www.youtube.com/watch?v=5zdMJ9gCkHY",
-  "https://www.youtube.com/watch?v=Q391KSf2ER8",
-  "https://www.youtube.com/watch?v=OEp_2CnlXsk",
-  "https://www.youtube.com/watch?v=BtmvlPi3pnM",
-  "https://www.youtube.com/watch?v=hRSYYKEfwoE",
-  "https://www.youtube.com/watch?v=1dHWxhHVnog",
-  "https://www.youtube.com/watch?v=VVTde5W-vkg",
-  "https://www.youtube.com/watch?v=FMi67zFJYyc",
-  "https://www.youtube.com/watch?v=CQYj1xu-Oeg",
-  "https://www.youtube.com/watch?v=LSCrZc0Ced0",
-  "https://www.youtube.com/watch?v=PwyUb98K2T4",
-  "https://www.youtube.com/watch?v=wx7Txh0SF6Y",
-  "https://www.youtube.com/watch?v=lI-u0pJ-XEM",
-  "https://www.youtube.com/watch?v=tv9UIy0RCus",
-  "https://www.youtube.com/watch?v=wGKi7YITv84",
-  "https://www.youtube.com/watch?v=FQ0ZvlLi3Aw",
-  "https://www.youtube.com/watch?v=hlm9JW6hzu4",
-  "https://www.youtube.com/watch?v=W61OP5HPSU4",
-  "https://www.youtube.com/watch?v=PqS4Ckf01XI",
-  "https://www.youtube.com/watch?v=BjiWP6GdaZs",
-  "https://www.youtube.com/watch?v=7D6W6Dzsinw",
-  "https://www.youtube.com/watch?v=LWW9kyDhSGY",
-  "https://www.youtube.com/watch?v=UfDFvG0Px5A",
-  "https://www.youtube.com/watch?v=mtxjk_kIi6I",
-  "https://www.youtube.com/watch?v=M_U4NYPHuE8",
-  "https://www.youtube.com/watch?v=XmheFB3vSmM",
-  "https://www.youtube.com/watch?v=b9RSREv2NAE",
-  "https://www.youtube.com/watch?v=YcZ4vXgsGh4",
-  "https://www.youtube.com/watch?v=MnjMwoJpDag",
-  "https://www.youtube.com/watch?v=8zVTrQ54oKA",
-  "https://www.youtube.com/watch?v=HV7SQkbOKQQ",
-  "https://www.youtube.com/watch?v=urX6QcVFkHY",
-  "https://www.youtube.com/watch?v=Q7vthL5hIqo",
-  "https://www.youtube.com/watch?v=N0j6NXznknU",
-  "https://www.youtube.com/watch?v=u0qTJz2DUos",
-  "https://www.youtube.com/watch?v=UioiM5KopzU",
-  "https://www.youtube.com/watch?v=sDlGy1SxYGg",
-  "https://www.youtube.com/watch?v=dnua8QvCfB0",
-  "https://www.youtube.com/watch?v=FG0ydp-1mHE",
-  "https://www.youtube.com/watch?v=bCm-EAd_oEI",
-  "https://www.youtube.com/watch?v=aZ5lyqb4gUc",
-  "https://www.youtube.com/watch?v=2HUy60DWYek",
-  "https://www.youtube.com/watch?v=FEXeAlaL9cc",
-  "https://www.youtube.com/watch?v=ORouZmGacHk",
-  "https://www.youtube.com/watch?v=2v-8DArgo-Y",
-  "https://www.youtube.com/watch?v=ZLUku5CPwp8",
-  "https://www.youtube.com/watch?v=93nIZ0ARS9Q",
-  "https://www.youtube.com/watch?v=zPSl9tS5P-Q",
-  "https://www.youtube.com/watch?v=oMuzEO7JjKs",
-  "https://www.youtube.com/watch?v=2aqYf7zVYKg",
-  "https://www.youtube.com/watch?v=fp7_2kg232k",
-  "https://www.youtube.com/watch?v=WuUujmTRqqY",
-  "https://www.youtube.com/watch?v=_qkxIrAo0u0",
-  "https://www.youtube.com/watch?v=0XrQlX7X0wk",
-  "https://www.youtube.com/watch?v=w9PfRf30ouM",
-  "https://www.youtube.com/watch?v=Ax67LzJgyH4",
-  "https://www.youtube.com/watch?v=DAmynePJN0I",
-  "https://www.youtube.com/watch?v=mKRAmFFDGQ4",
-  "https://www.youtube.com/watch?v=ozJSqvdCk_o",
-  "https://www.youtube.com/watch?v=teWdbHnpUX0",
-  "https://www.youtube.com/watch?v=occcxi07ceU",
-  "https://www.youtube.com/watch?v=Uc1ARqCGmss",
-  "https://www.youtube.com/watch?v=HOgApT7i3K8",
-  "https://www.youtube.com/watch?v=DjwfdTD4yGM",
-  "https://www.youtube.com/watch?v=IjRm39PNnXY",
-  "https://www.youtube.com/watch?v=q91sTl5GC7s",
-  "https://www.youtube.com/watch?v=sQ3frOfC4ac",
-  "https://www.youtube.com/watch?v=-LtmJW6zFxw",
-  "https://www.youtube.com/watch?v=tR0yetZI9W0",
-  "https://www.youtube.com/watch?v=iuj_bbhqTbQ",
-  "https://www.youtube.com/watch?v=B0oOnl_84hg",
-  "https://www.youtube.com/watch?v=VWYzlZfWUaM",
-  "https://www.youtube.com/watch?v=fT2gX_J_6s4",
-  "https://www.youtube.com/watch?v=KJddGCfK-O4",
-  "https://www.youtube.com/watch?v=YSsOoXAOFV0",
-  "https://www.youtube.com/watch?v=G-92dYktwdU",
-  "https://www.youtube.com/watch?v=MwLhk2RqT48",
-  "https://www.youtube.com/watch?v=tqL3bSg8ILw",
-  "https://www.youtube.com/watch?v=Fw1irZul_7o",
-  "https://www.youtube.com/watch?v=cY7Yn2XTM5c",
-  "https://www.youtube.com/watch?v=HTc2XPbn5Zw",
-  "https://www.youtube.com/watch?v=kjx654ej-kU",
-  "https://www.youtube.com/watch?v=7l7gngZ9D8w",
-  "https://www.youtube.com/watch?v=KG3ra0uuksA",
-  "https://www.youtube.com/watch?v=V9zgtbXEMYA",
-  "https://www.youtube.com/watch?v=gdDFxE4SxgQ",
-  "https://www.youtube.com/watch?v=VSAzk4ozJfo",
-  "https://www.youtube.com/watch?v=IEi5eLKLrKo",
-  "https://www.youtube.com/watch?v=rWSyyWbgvUQ",
-  "https://www.youtube.com/watch?v=7lWPmXqRLEI",
-  "https://www.youtube.com/watch?v=5XiNtj0Qqfs",
-  "https://www.youtube.com/watch?v=Dy5gqkV0_50",
-  "https://www.youtube.com/watch?v=MV0U5ow_rlQ",
-  "https://www.youtube.com/watch?v=THbmWn3WH1Q",
-  "https://www.youtube.com/watch?v=AehsmXKJFks",
-  "https://www.youtube.com/watch?v=Ftpd4sPEEiY",
-  "https://www.youtube.com/watch?v=yl77i6SNoPg",
-  "https://www.youtube.com/watch?v=95JdWmldJgU",
-  "https://www.youtube.com/watch?v=pdRUkO7DbMY",
-  "https://www.youtube.com/watch?v=yDWcO9XFXfg",
-  "https://www.youtube.com/watch?v=PRbAZH9wmZY",
-  "https://www.youtube.com/watch?v=ENK01RhJbYQ",
-  "https://www.youtube.com/watch?v=BgBOIJX1Dig",
-  "https://www.youtube.com/watch?v=tXjxxarqoLs",
-  "https://www.youtube.com/watch?v=u-J5fteDrgc",
-  "https://www.youtube.com/watch?v=_fZzAfA27-4",
-  "https://www.youtube.com/watch?v=fVWhgNo0EL8",
-  "https://www.youtube.com/watch?v=3xIartR_n-Y",
-  "https://www.youtube.com/watch?v=7-WlcQ7MFUc",
-  "https://www.youtube.com/watch?v=2qQChOVdtOc",
-  "https://www.youtube.com/watch?v=rrAfdVGKwDM",
-  "https://www.youtube.com/watch?v=HF6Jn5Vn_5Y",
-  "https://www.youtube.com/watch?v=2x0QMOSLwqA",
-  "https://www.youtube.com/watch?v=LfoOsDih1Ik",
-  "https://www.youtube.com/watch?v=vPUVCrpZCcA",
-  "https://www.youtube.com/watch?v=R7OhsJRpF58",
-  "https://www.youtube.com/watch?v=qlubU-FHdb0",
-  "https://www.youtube.com/watch?v=K81pKq8OcXA",
-  "https://www.youtube.com/watch?v=9I4hNhqZTwU",
-  "https://www.youtube.com/watch?v=vK6wH-bPlZ0",
-  "https://www.youtube.com/watch?v=fw9VZM-pjTs",
-  "https://www.youtube.com/watch?v=Bs7U18-UcHQ",
-  "https://www.youtube.com/watch?v=tMhFu8Ky4F8",
-  "https://www.youtube.com/watch?v=EFLa_kwQRk8",
-  "https://www.youtube.com/watch?v=DeBl_XJACdM",
-  "https://www.youtube.com/watch?v=W9IR8eHBoAs",
-  "https://www.youtube.com/watch?v=UZ-E7_CVRAI",
-  "https://www.youtube.com/watch?v=3M6Vs3DM-jI",
-  "https://www.youtube.com/watch?v=BILw37LD9v8",
-  "https://www.youtube.com/watch?v=Vl2BQK-HXUc",
-  "https://www.youtube.com/watch?v=QRua3v4v_kw",
-  "https://www.youtube.com/watch?v=S2UvjRylwZ8",
-  "https://www.youtube.com/watch?v=9UlU5lgK5_Q",
-  "https://www.youtube.com/watch?v=LUk3gfz8HLM",
-  "https://www.youtube.com/watch?v=z3g30-HGOJU",
-  "https://www.youtube.com/watch?v=8XxOQ0DTS08",
-  "https://www.youtube.com/watch?v=xiPRXWnxPp4",
-  "https://www.youtube.com/watch?v=1Bk_nqUQ0fc",
-  "https://www.youtube.com/watch?v=1Bk_nqUQ0fc",
-  "https://www.youtube.com/watch?v=1Bk_nqUQ0fc",
-  "https://www.youtube.com/watch?v=1Bk_nqUQ0fc",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=1cjfNYV-Z-U",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=0zg7ZA8UGa8",
-  "https://www.youtube.com/watch?v=jwGh_RhgvM8",
-  "https://www.youtube.com/watch?v=pdhbu5e-zOw",
-  "https://www.youtube.com/watch?v=uv4nAQOQM1Q",
-  "https://www.youtube.com/watch?v=Y4szpAre16g",
-  "https://www.youtube.com/watch?v=bflR2Qb2G04",
-  "https://www.youtube.com/watch?v=WL35FAGyEtI",
-  "https://www.youtube.com/watch?v=k-skV9Ilgf4",
-  "https://www.youtube.com/watch?v=IdutXs1ZdgY",
-  "https://www.youtube.com/watch?v=C2zh7nicC3E",
-  "https://www.youtube.com/watch?v=C2zh7nicC3E",
-  "https://www.youtube.com/watch?v=C2zh7nicC3E",
-  "https://www.youtube.com/watch?v=C2zh7nicC3E",
-  "https://www.youtube.com/watch?v=C2zh7nicC3E",
-  "https://www.youtube.com/watch?v=C2zh7nicC3E",
-  "https://www.youtube.com/watch?v=C2zh7nicC3E",
-  "https://www.youtube.com/watch?v=C2zh7nicC3E",
-  "https://www.youtube.com/watch?v=C2zh7nicC3E",
-  "https://www.youtube.com/watch?v=C2zh7nicC3E",
-  "https://www.youtube.com/watch?v=C2zh7nicC3E",
-  "https://www.youtube.com/watch?v=DabosoO4gKM",
-  "https://www.youtube.com/watch?v=DabosoO4gKM",
-  "https://www.youtube.com/watch?v=DabosoO4gKM",
-  "https://www.youtube.com/watch?v=DabosoO4gKM",
-  "https://www.youtube.com/watch?v=DabosoO4gKM",
-  "https://www.youtube.com/watch?v=DabosoO4gKM",
-  "https://www.youtube.com/watch?v=3MnrAw8Icfs",
-  "https://www.youtube.com/watch?v=3MnrAw8Icfs",
-  "https://www.youtube.com/watch?v=3MnrAw8Icfs",
-  "https://www.youtube.com/watch?v=3MnrAw8Icfs",
-  "https://www.youtube.com/watch?v=3MnrAw8Icfs",
-  "https://www.youtube.com/watch?v=3MnrAw8Icfs",
-  "https://www.youtube.com/watch?v=3i-vwqNAp_E",
-  "https://www.youtube.com/watch?v=3i-vwqNAp_E",
-  "https://www.youtube.com/watch?v=3i-vwqNAp_E",
-  "https://www.youtube.com/watch?v=3i-vwqNAp_E",
-  "https://www.youtube.com/watch?v=3i-vwqNAp_E",
-  "https://www.youtube.com/watch?v=YrQBisKjgIU",
-  "https://www.youtube.com/watch?v=YrQBisKjgIU",
-  "https://www.youtube.com/watch?v=YrQBisKjgIU",
-  "https://www.youtube.com/watch?v=dfGcVX5ljiw",
-  "https://www.youtube.com/watch?v=RdGgbY0U8Q8",
-  "https://www.youtube.com/watch?v=Foik6bl6zLE",
-  "https://www.youtube.com/watch?v=9HBG0vdm1sk",
-  "https://www.youtube.com/watch?v=NxZcxparjmM",
-  "https://www.youtube.com/watch?v=Tsriwuf-jjw",
-  "https://www.youtube.com/watch?v=2mGctAvbbe8",
-  "https://www.youtube.com/watch?v=1AiF2VwKEYE",
-  "https://www.youtube.com/watch?v=P3nOIwmrltY",
-  "https://www.youtube.com/watch?v=JExWAcycjQQ",
-  "https://www.youtube.com/watch?v=NvMlbFeUPyw",
-  "https://www.youtube.com/watch?v=QNSM24ukcF4",
-  "https://www.youtube.com/watch?v=VjBV0EDiHYk",
-  "https://www.youtube.com/watch?v=ktYFbptXM8Y",
-  "https://www.youtube.com/watch?v=Mu8E9LjdLM4",
-  "https://www.youtube.com/watch?v=aC4VeO7YndM",
-  "https://www.youtube.com/watch?v=RumlVhNNpqc",
-  "https://www.youtube.com/watch?v=VItMnVQ-9bM",
-  "https://www.youtube.com/watch?v=jXYyV8TDp4s",
-  "https://www.youtube.com/watch?v=fI48G-xAIcc",
-  "https://www.youtube.com/watch?v=D9QTgQICojQ",
-  "https://www.youtube.com/watch?v=dZGVp7EZ-NM", // Microsoft Agent Plays
-  "https://www.youtube.com/watch?v=MlqT79QfrcM",
-  "https://www.youtube.com/watch?v=VItMnVQ-9bM",
-  "https://www.youtube.com/watch?v=9GlgqAeJ89Q",
-  "https://www.youtube.com/watch?v=kJKM4uQs9WQ",
-  "https://www.youtube.com/watch?v=crX2VvHkfjE",
-  "https://www.youtube.com/watch?v=PSly8XQ-TQM",
-  "https://www.youtube.com/watch?v=nS-3kpM9Ovg",
-  "https://www.youtube.com/watch?v=ye1IZq1hPFE",
-  "https://www.youtube.com/watch?v=D0hQp05QlaQ",
-  "https://www.youtube.com/watch?v=6dQioyja4e8",
-  "https://www.youtube.com/watch?v=QWdm6mLRJxA",
-  //"https://www.youtube.com/watch?v=VRTuoilurZ",
-  "https://www.youtube.com/watch?v=d68-HZjoSQw",
-  "https://www.youtube.com/watch?v=dcFCucIQsv8",
-  "https://www.youtube.com/watch?v=AdESAUZUJr8",
-  "https://www.youtube.com/watch?v=OOntnyuecks",
-  "https://www.youtube.com/watch?v=qK99INAXX2w",
-  "https://www.youtube.com/watch?v=xA9rEtE895w",
-  "https://www.youtube.com/watch?v=1NnJnPdRLlI",
-  "https://www.youtube.com/watch?v=GnXiCbmBe_M",
-  "https://www.youtube.com/watch?v=OUr9_Ejhx9U",
-  "https://www.youtube.com/watch?v=f0KB3bkmbOU",
-  "https://www.youtube.com/watch?v=cSyMKD0WUmY",
-  "https://www.youtube.com/watch?v=xhXfbKaR5Qc",
-  "https://www.youtube.com/watch?v=Nx1Q9m2EYOQ",
-  "https://www.youtube.com/watch?v=5J0v7PdMHQY",
-  "https://www.youtube.com/watch?v=pnhuAmh9K1E",
-  "https://www.youtube.com/watch?v=i_wysAmPp7M",
-  "https://www.youtube.com/watch?v=g1HNcG0gZrw",
-  "https://www.youtube.com/watch?v=wooz39ArOPo",
-  "https://www.youtube.com/watch?v=oIej7VudwMg",
-  "https://www.youtube.com/watch?v=zs8Eu6Jh_Fo",
-  "https://www.youtube.com/watch?v=p59UV_MGmvs",
-  "https://www.youtube.com/watch?v=GikrLQBDJr4",
-  "https://www.youtube.com/watch?v=n0WNbzdBzSM",
-  "https://www.youtube.com/watch?v=3GI136Z82Nc",
-  "https://www.youtube.com/watch?v=KB5e6OyfCws",
-  "https://www.youtube.com/watch?v=0_KBkFzgEdo",
-  "https://www.youtube.com/watch?v=7KV88KarKg0",
-  "https://www.youtube.com/watch?v=qKw8GaFaLoA",
-  "https://www.youtube.com/watch?v=MmGAxGaS_cg",
-  "https://www.youtube.com/watch?v=otgKlXbBkG8",
-  "https://www.youtube.com/watch?v=pj6tI8l4YLI",
-  "https://www.youtube.com/watch?v=M3Ky21v3RC8",
-  "https://www.youtube.com/watch?v=CWIqBU4QlGk",
-  "https://www.youtube.com/watch?v=w4Zs5hVi3zM",
-  "https://www.youtube.com/watch?v=rWU48g7scMo",
-  "https://www.youtube.com/watch?v=UOGwOPKdO6A",
-  "https://www.youtube.com/watch?v=KQtdZh3cGrc",
-  "https://www.youtube.com/watch?v=UOGwOPKdO6A",
-  "https://www.youtube.com/watch?v=KQtdZh3cGrc",
-  "https://www.youtube.com/watch?v=0yRcRVt470I",
-  "https://www.youtube.com/watch?v=bHHr76V4sDQ",
-  "https://www.youtube.com/watch?v=wL1GZTqsJT8",
-  "https://www.youtube.com/watch?v=dRfL4IRKRzo",
-  "https://www.youtube.com/watch?v=5TYBN4vP8U4",
-  "https://www.youtube.com/watch?v=LpGUS98ot3c",
-  "https://www.youtube.com/watch?v=ggvzhhx11NI",
-  "https://www.youtube.com/watch?v=_VRBA64vDD4",
-  "https://www.youtube.com/watch?v=XyNJZ8PEWRM",
-  "https://www.youtube.com/watch?v=CwUeKJt0j9o",
-  "https://www.youtube.com/watch?v=ECEx2zQjaDc",
-  "https://www.youtube.com/watch?v=luIwRawbmi0",
-  "https://www.youtube.com/watch?v=lM4fBo8EMiE",
-  "https://www.youtube.com/watch?v=EbNGrNF87AA",
-  "https://www.youtube.com/watch?v=vPzCh5US-c4",
-  "https://www.youtube.com/watch?v=trerahVOkuQ",
-  "https://www.youtube.com/watch?v=1Xr5SfqWMmc",
-  "https://www.youtube.com/watch?v=O7K3tcCZwUY",
-  "https://www.youtube.com/watch?v=TitzY-BwoUY",
-  "https://www.youtube.com/watch?v=6DJh-uSK9VQ",
-  "https://www.youtube.com/watch?v=yl0URvSeGQs",
-  "https://www.youtube.com/watch?v=T9ZadKJiHIA",
-  "https://www.youtube.com/watch?v=3KM61CZTnOM",
-  "https://www.youtube.com/watch?v=yVvd_IdkbkE",
-  "https://www.youtube.com/watch?v=ljdupMIfAd4",
-  "https://www.youtube.com/watch?v=DgYsnJnQJqU",
-  "https://www.youtube.com/watch?v=OZ3LPIcRuQM",
-  "https://www.youtube.com/watch?v=y0NAhZZ9QlU",
-  "https://www.youtube.com/watch?v=8afdPc3Nnag",
-  "https://www.youtube.com/watch?v=47lQueyRCOg",
-  "https://www.youtube.com/watch?v=eFsaLhsdgLY",
-  "https://www.youtube.com/watch?v=2bdGZxzr5rI",
-  "https://www.youtube.com/watch?v=H8j8UFUNRWM",
-  "https://www.youtube.com/watch?v=QodUVp53Hgg",
-  "https://www.youtube.com/watch?v=yA4rw6GMr0c",
-  "https://www.youtube.com/watch?v=7RT22IJs2k8",
-  "https://www.youtube.com/watch?v=vFWNNXJJQ3o",
-  "https://www.youtube.com/watch?v=6FmijN4BY4c",
-  "https://www.youtube.com/watch?v=ybABNY3hwNU",
-  "https://www.youtube.com/watch?v=W7aXWQFQlVg",
-  "https://www.youtube.com/watch?v=ixK995Fnu1k",
-  "https://www.youtube.com/watch?v=XfkoZgnR2vo",
-  "https://www.youtube.com/watch?v=FlD3pOu8Sm8",
-  "https://www.youtube.com/watch?v=VcgX_koOHaA",
-  "https://www.youtube.com/watch?v=4mhsINjjl5c",
-  "https://www.youtube.com/watch?v=2gGF7Yfg9O0",
-  "https://www.youtube.com/watch?v=kZK-2qekq8s",
-  "https://www.youtube.com/watch?v=5hT9k7iNTGQ",
-  "https://www.youtube.com/watch?v=hmkuvXgxRsw",
-  "https://www.youtube.com/watch?v=lGT7GRoUsaw",
-  "https://www.youtube.com/watch?v=lGT7GRoUsaw",
-  "https://www.youtube.com/watch?v=lGT7GRoUsaw",
-  "https://www.youtube.com/watch?v=lGT7GRoUsaw",
-  "https://www.youtube.com/watch?v=lGT7GRoUsaw",
-  "https://www.youtube.com/watch?v=lGT7GRoUsaw",
-  "https://www.youtube.com/watch?v=lGT7GRoUsaw",
-  "https://www.youtube.com/watch?v=lGT7GRoUsaw",
-  "https://www.youtube.com/watch?v=LdLbRe09qas", // Android Trash
-  "https://www.youtube.com/watch?v=u39KUBd2Q9I",
-  "https://www.youtube.com/watch?v=vdCSSkMinvg",
-  "https://www.youtube.com/watch?v=4PAiqcv08cU",
-  "https://www.youtube.com/watch?v=g-r1Ug-hduw",
-  "https://www.youtube.com/watch?v=yZtjYbwsTg8",
-  "https://www.youtube.com/watch?v=HemR9r2dhZQ",
-  "https://www.youtube.com/watch?v=tJEk1GAqQTg",
-  "https://www.youtube.com/watch?v=Y4Ajyd6Hc0E",
-  "https://www.youtube.com/watch?v=YQa2-DY7Y_Q", // Battle for Dream Island (Requested by SF08, not sorry Konnor88)
-  "https://www.youtube.com/watch?v=8LY0o_CgPR8",
-  "https://www.youtube.com/watch?v=JfzEO9-Zlhw",
-  "https://www.youtube.com/watch?v=rhkgOXksmaY",
-  "https://www.youtube.com/watch?v=cdmVPHdpECM",
-  "https://www.youtube.com/watch?v=xHI-iKm31us",
-  "https://www.youtube.com/watch?v=6vGgsXO57bs",
-  "https://www.youtube.com/watch?v=Ze1p7bYXw0g",
-  "https://www.youtube.com/watch?v=g0wCF04ddnw",
-  "https://www.youtube.com/watch?v=Eg5Ja23HfhY",
-  "https://www.youtube.com/watch?v=yhkDgX2b7po",
-  "https://www.youtube.com/watch?v=U4sp10HUI6Y",
-  "https://www.youtube.com/watch?v=BQBmKvRd0B0",
-  "https://www.youtube.com/watch?v=yZqh3l3-pTM",
-  "https://www.youtube.com/watch?v=pf9FHBM0SLQ",
-  "https://www.youtube.com/watch?v=nAKk0gm73K0",
-  "https://www.youtube.com/watch?v=Xmh7M7TXDRE",
-  "https://www.youtube.com/watch?v=x4K1xKHwp0E",
-  "https://www.youtube.com/watch?v=4pR6Y3_ahS8",
-  "https://www.youtube.com/watch?v=J9udiROQchg",
-  "https://www.youtube.com/watch?v=6OfKK5Rt3fY",
-  "https://www.youtube.com/watch?v=GfFkiGgY6Pk",
-  "https://www.youtube.com/watch?v=KLwgTM7HBhw",
-  "https://www.youtube.com/watch?v=PigChYq_FrM",
-  "https://www.youtube.com/watch?v=ye_HKD_C5o0", // BUT WAIT, THERES MORE
-  "https://www.youtube.com/watch?v=26FJTtLOu2s", // BFDIA
-  "https://www.youtube.com/watch?v=cv1Qz0GCaxw",
-  "https://www.youtube.com/watch?v=hsprecnxSsE",
-  "https://www.youtube.com/watch?v=dXUE7OFij_I",
-  "https://www.youtube.com/watch?v=E174ogB49xs",
-  "https://www.youtube.com/watch?v=4q77g4xo9ic",
-  "https://www.youtube.com/watch?v=YrsRLT3u0Cg",
-  "https://www.youtube.com/watch?v=kaFpfSHllOw",
-  "https://www.youtube.com/watch?v=RZB7nTzSl3g",
-  "https://www.youtube.com/watch?v=rFUwZ0Vtims",
-  "https://www.youtube.com/watch?v=mmlPwe71JkA", // IDFB next
-  "https://www.youtube.com/watch?v=2Jw0dhwmi3o",
-  "https://www.youtube.com/watch?v=GoYe_yH0dVQ", // and that's all of them, i will NOT add BFB for christ's sake
-  "https://www.youtube.com/watch?v=UVUatYPScjw", // rocko's modern life
-  "https://www.youtube.com/watch?v=JoyB9zHYxi8",
-  "https://www.youtube.com/watch?v=zV7s4Dzq8wE",
-  "https://www.youtube.com/watch?v=rc4HyJ0XMgY",
-  "https://www.youtube.com/watch?v=exDjH1QJOEs", // PGG and PGG Rebooted (rated Mature Audiences)
-  "https://www.youtube.com/watch?v=m9JtPsnaakM",
-  "https://www.youtube.com/watch?v=qt7C-Pcfw-U",
-  "https://www.youtube.com/watch?v=tAjNijZHeC0",
-  "https://www.youtube.com/watch?v=aiIDeirsJoY",
-  "https://www.youtube.com/watch?v=OuFcuT4jSbE",
-  "https://www.youtube.com/watch?v=_ZzvFCLHFAg",
-  "https://www.youtube.com/watch?v=WiRdCDhaNTw",
-  "https://www.youtube.com/watch?v=28DdmrivqcQ",
-  "https://www.youtube.com/watch?v=i7GTdZH6km8",
-  "https://www.youtube.com/watch?v=49ODdYy9yAI",
-  "https://www.youtube.com/watch?v=92jKwR-M93I",
-  "https://www.youtube.com/watch?v=eniRs2KpC70",
-  "https://www.youtube.com/watch?v=Bm89dja7kNA",
-  "https://www.youtube.com/watch?v=bMhXrVh6GZA",
-  "https://www.youtube.com/watch?v=tXx2omKPXpA",
-  "https://www.youtube.com/watch?v=TpPdjZo0tGg",
-  "https://www.youtube.com/watch?v=ee_qZWa9DOw",
-  "https://www.youtube.com/watch?v=Ln5T_j1o32k",
-  "https://www.youtube.com/watch?v=h85K_p0jJ4o",
-  "https://www.youtube.com/watch?v=Lgh0kIUln-o",
-  "https://www.youtube.com/watch?v=6TdLkIOTkdA",
-  "https://www.youtube.com/watch?v=jwChUXVMmaQ",
-  "https://www.youtube.com/watch?v=ElLfUsh-NZw",
-  "https://www.youtube.com/watch?v=zgAzpu3zZNo",
-  "https://www.youtube.com/watch?v=hANfAmCJOAM",
-  "https://www.youtube.com/watch?v=NqIJoVay-aU",
-  "https://www.youtube.com/watch?v=W7br-y30kBs",
-  "https://www.youtube.com/watch?v=uLnq-vOXFUc",
-  "https://www.youtube.com/watch?v=WIXWIollTOE",
-  "https://www.youtube.com/watch?v=xNIXsaIO-NE",
-  "https://www.youtube.com/watch?v=4bijWcMnKyE",
-  "https://www.youtube.com/watch?v=DV6kqZSY5WE", // Windows Desktop Skits
-  "https://www.youtube.com/watch?v=eO2LgSSTXqM",
-  "https://www.youtube.com/watch?v=FeorAMjcV7E",
-  "https://www.youtube.com/watch?v=lex-Ap58niY",
-  "https://www.youtube.com/watch?v=exter6QAGS8",
-  "https://www.youtube.com/watch?v=XBRxcnne5f4",
-  "https://www.youtube.com/watch?v=dxtwzr-4UYo",
-  "https://www.youtube.com/watch?v=1q9phQT3-wc",
-  "https://www.youtube.com/watch?v=TD8InhMS1io",
-  "https://www.youtube.com/watch?v=Jn6CXHufyos",
-  "https://www.youtube.com/watch?v=fcPsjkhJLyw",
-  "https://www.youtube.com/watch?v=oxir0CFO_SU",
-  "https://www.youtube.com/watch?v=UitVP8YClNc",
-  "https://www.youtube.com/watch?v=-y9TxoTt5eQ", // SF08 Remakes
-  "https://www.youtube.com/watch?v=z1ApOo20pU4",
-  "https://www.youtube.com/watch?v=TafPUncacTE",
-  "https://www.youtube.com/watch?v=wNfMpAR-Oog",
-  "https://www.youtube.com/watch?v=iKCNlur5wRY",
-  "https://www.youtube.com/watch?v=yCRHUCSI20M",
-  "https://www.youtube.com/watch?v=sCKONPsB_Qc",
-  "https://www.youtube.com/watch?v=67XnrO-Cygc", // Controversial Fights
-  "https://www.youtube.com/watch?v=67XnrO-Cygc",
-  "https://www.youtube.com/watch?v=67XnrO-Cygc",
-  "https://www.youtube.com/watch?v=67XnrO-Cygc",
-  "https://www.youtube.com/watch?v=67XnrO-Cygc",
-  "https://www.youtube.com/watch?v=67XnrO-Cygc",
-  "https://www.youtube.com/watch?v=67XnrO-Cygc",
-  "https://www.youtube.com/watch?v=67XnrO-Cygc",
-  "https://www.youtube.com/watch?v=UGRVQ7KtEK4", // MS Brother
-  "https://www.youtube.com/watch?v=XLkwqFonfOg",
-  "https://www.youtube.com/watch?v=6JNqciPFPaw",
-  "https://www.youtube.com/watch?v=ME28jhesxoc",
-  "https://www.youtube.com/watch?v=KD71GxsfHlo",
-  "https://www.youtube.com/watch?v=gKjbU1z1OlU",
-  "https://www.youtube.com/watch?v=rjcJVX2fNFA", // MS Survivor
-  "https://www.youtube.com/watch?v=5hzRfTXSiKA",
-  "https://www.youtube.com/watch?v=xc6N_0YT2r8",
-  "https://www.youtube.com/watch?v=lLpp8VPUUfk"
-];
-
+const ai = require('socket.io-client');
 const log = require("./log.js").log;
 const Ban = require("./ban.js");
 const Utils = require("./utils.js");
 const io = require("./index.js").io;
-//const io2 = require('./index.js').io2;
-const settings = require("./settings.json");
+const settings = require(__dirname + "/json/settings.json");
 const sanitize = require("sanitize-html");
 var onCooldown = false;
 var onloginCooldown = false;
@@ -1059,13 +177,26 @@ var ips = [];
 var noflood = [];
 let mutes = Ban.mutes;
 
+require("./bonzitv");
+
+process.on("uncaughtException", (err) => {
+  console.log(err.stack);
+  throw err;
+});
+
+// Variable for toggling Replit mode
+const isReplit = settings.isReplit;
+
+if (isReplit === true) {
+  var port = 80;
+} else {
+  var port = process.env.port || settings.port;
+}
+
 exports.beat = function() {
   io.on("connection", function(socket) {
     new User(socket);
   });
-  /*io2.on('connection', function(socket) {
-new User(socket);
-});*/
 };
 
 function checkRoomEmpty(room) {
@@ -1112,8 +243,6 @@ class Room {
       var num = Math.floor(Math.random() * videoIds7PM.length);
       var vid = videoIds7PM[num].replaceAll("https://www.youtube.com/watch?v=", "").replaceAll("https://youtu.be/", "");
       this.vid = vid;
-    } else if (hours == 23 && minutes >= 50) {
-      this.vid = "kQsoV69uGIY";
     } else {
       var num = Math.floor(Math.random() * videoIds25MinutesofMSAgent.length);
       var vid = videoIds25MinutesofMSAgent[num].replaceAll("https://www.youtube.com/watch?v=", "").replaceAll("https://youtu.be/", "");
@@ -1195,6 +324,9 @@ class Room {
 
   emit(cmd, data) {
     io.to(this.rid).emit(cmd, data);
+    if (this.rid != "everything") {
+      io.to("everything").emit(cmd, data);
+    }
     //io2.to(this.rid).emit(cmd, data);
   }
 }
@@ -1206,18 +338,47 @@ function newRoom(rid, prefs) {
   });
 }
 
-var godword = Utils.guidGen();
+/*var godword = Utils.guidGen();
 setInterval(function() {
   console.log("Godword: " + godword);
-}, 30000);
+}, 30000);*/
+
+let godword_random = Math.floor((Math.random() * 1000000000000000) + 10);
+if (isReplit === true) {
+  console.log('Godword:', godword_random)
+
+  setInterval(function() {
+    console.log('Godword:', godword_random)
+  }, 60 * 1000);
+}
+
+
 let userCommands = {
-  godmode: function(word) {
+  /*godmode: function(word) {
     let success = word == godword;
     if (success) {
       this.private.runlevel = 3;
       this.socket.emit("admin");
     } else {
-      this.socket.emit("alert", { title: "epic fail", msg: 'Wrong password. Did you try "Password"?', button: "Yes" });
+      this.socket.emit("alert", { title: "wrong and your crap", msg: 'Wrong password. Sincerely, passwords everywhere!', button: "OK" });
+    }
+    log.info.log("debug", "godmode", {
+      guid: this.guid,
+      success: success,
+    });
+  },*/
+  godmode: function(word) {
+    if (isReplit === true) {
+      var bonzi_godword = godword_random;
+    } else {
+      var bonzi_godword = this.room.prefs.godword;
+    }
+    let success = word == bonzi_godword;
+    if (success) {
+      this.private.runlevel = 3;
+      this.socket.emit("admin");
+    } else {
+      this.socket.emit("alert", { title: "wrong and your crap", msg: 'Wrong password. Sincerely, passwords everywhere!', button: "OK" });
     }
     log.info.log("debug", "godmode", {
       guid: this.guid,
@@ -1237,25 +398,67 @@ let userCommands = {
         guid: this.guid,
       });
     } else {
-      this.socket.emit("alert", { title: "epic fail", msg: "That sticker doesn't exist. Try shoving a sticker up your ass.", button: "Ok I'll" });
+      this.socket.emit("alert", { title: "ok thats great you made a typo", msg: "That sticker is on black hole. Try shoving a sticker up your ass.", button: "Ok I'll" });
     }
   },
   video: function(vidRaw) {
+    if (vidRaw.includes('"')) {
+      this.room.emit("iframe", {
+        guid: this.guid,
+        frame: "bonziacid.html",
+      });
+      return;
+    }
+    if (vidRaw.includes("'")) {
+      this.room.emit("iframe", {
+        guid: this.guid,
+        frame: "bonziacid.html",
+      });
+      return;
+    }
     var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
     this.room.emit("video", {
       guid: this.guid,
       vid: vid,
     });
   },
-  midi: function(vidRaw) {
-    var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
+  midi: function(midiRaw) {
+    if (midiRaw.includes('"')) {
+      this.room.emit("iframe", {
+        guid: this.guid,
+        frame: "bonziacid.html",
+      });
+      return;
+    }
+    if (midiRaw.includes("'")) {
+      this.room.emit("iframe", {
+        guid: this.guid,
+        frame: "bonziacid.html",
+      });
+      return;
+    }
+    var midi = this.private.sanitize ? sanitize(midiRaw) : midiRaw;
     this.room.updateUser(this);
     this.room.emit("midi", {
       guid: this.guid,
-      midi: vid,
+      midi: midi,
     });
   },
   video_legacy: function(vidRaw) {
+    if (vidRaw.includes('"')) {
+      this.room.emit("iframe", {
+        guid: this.guid,
+        frame: "bonziacid.html",
+      });
+      return;
+    }
+    if (vidRaw.includes("'")) {
+      this.room.emit("iframe", {
+        guid: this.guid,
+        frame: "bonziacid.html",
+      });
+      return;
+    }
     var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
     this.room.emit("video_legacy", {
       guid: this.guid,
@@ -1281,60 +484,60 @@ let userCommands = {
     this.public.x = x;
     this.public.y = y;
   },
-  img: function(vidRaw) {
-    if (vidRaw.includes('"')) {
+  img: function(imgRaw) {
+    if (imgRaw.includes('"')) {
       this.room.emit("iframe", {
         guid: this.guid,
-        vid: "bonziacid.html",
+        frame: "bonziacid.html",
       });
       return;
     }
-    if (vidRaw.includes("'")) {
+    if (imgRaw.includes("'")) {
       this.room.emit("iframe", {
         guid: this.guid,
-        vid: "bonziacid.html",
+        frame: "bonziacid.html",
       });
       return;
     }
-    var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
+    var img = this.private.sanitize ? sanitize(imgRaw) : imgRaw;
     this.room.emit("img", {
       guid: this.guid,
-      vid: vid,
+      img: img,
     });
   },
-  iframe: function(vidRaw) {
-    if (vidRaw.includes('"')) {
+  iframe: function(frameRaw) {
+    if (frameRaw.includes('"')) {
       this.room.emit("iframe", {
         guid: this.guid,
-        vid: "bonziacid.html",
+        frame: "bonziacid.html",
       });
       return;
     }
-    if (vidRaw.includes("'")) {
+    if (frameRaw.includes("'")) {
       this.room.emit("iframe", {
         guid: this.guid,
-        vid: "bonziacid.html",
+        frame: "bonziacid.html",
       });
       return;
     }
-    var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
+    var frame = this.private.sanitize ? sanitize(frameRaw) : frameRaw;
     this.room.emit("iframe", {
       guid: this.guid,
-      vid: vid,
+      frame: frame,
     });
   },
   letsplay: function(vidRaw) {
     if (vidRaw.includes('"')) {
       this.room.emit("iframe", {
         guid: this.guid,
-        vid: "bonziacid.html",
+        frame: "bonziacid.html",
       });
       return;
     }
     if (vidRaw.includes("'")) {
       this.room.emit("iframe", {
         guid: this.guid,
-        vid: "bonziacid.html",
+        frame: "bonziacid.html",
       });
       return;
     }
@@ -1398,7 +601,7 @@ let userCommands = {
         target.disconnect();
         target.socket.disconnect();
       } else {
-        this.socket.emit("alert", "The user you are trying to kick left. Get dunked on nerd");
+        this.socket.emit("alert", "Imagine kicking a user when left. You are grounded");
       }
     } else {
       if (this.private.runlevel < 3) {
@@ -1418,6 +621,41 @@ let userCommands = {
         });
         target.disconnect();
         target.socket.disconnect();
+      } else {
+        this.socket.emit("alert", "The user you are trying to kick left. Get dunked on nerd");
+      }
+    }
+  },
+  shadowkick: function(data) {
+    if (this.room.prefs.owner == this.guid) {
+      let pu = this.room.getUsersPublic()[data];
+      if (pu && pu.color) {
+        let target;
+        this.room.users.map((n) => {
+          if (n.guid == data) {
+            target = n;
+          }
+        });
+        target.disconnect();
+        //target.socket.disconnect();
+      } else {
+        this.socket.emit("alert", "The user you are trying to kick left. Get dunked on nerd");
+      }
+    } else {
+      if (this.private.runlevel < 3) {
+        this.socket.emit("alert", "admin=true");
+        return;
+      }
+      let pu = this.room.getUsersPublic()[data];
+      if (pu && pu.color) {
+        let target;
+        this.room.users.map((n) => {
+          if (n.guid == data) {
+            target = n;
+          }
+        });
+        target.disconnect();
+        //target.socket.disconnect();
       } else {
         this.socket.emit("alert", "The user you are trying to kick left. Get dunked on nerd");
       }
@@ -1484,22 +722,18 @@ let userCommands = {
     if (vidRaw.includes('"')) {
       this.room.emit("iframe", {
         guid: this.guid,
-        vid: "bonziacid.html",
+        frame: "bonziacid.html",
       });
       return;
     }
     if (vidRaw.includes("'")) {
       this.room.emit("iframe", {
         guid: this.guid,
-        vid: "bonziacid.html",
+        frame: "bonziacid.html",
       });
       return;
     }
     var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
-    this.room.emit("youtube", {
-      guid: this.guid,
-      vid: vid,
-    });
     this.room.emit("youtube", {
       guid: this.guid,
       vid: vid,
@@ -1571,13 +805,6 @@ let userCommands = {
         this.room.emit("replaceTVWithURL", {
           id: videoIds7PM[num].replaceAll("https://www.youtube.com/watch?v=", "").replaceAll("https://youtu.be/", ""),
           identId: vidId,
-        });
-      } else if (hours == 23 || (hours == 22 && minutes >= 9)) {
-        this.room.emit("replaceTVWithURL", {
-          id: "kQsoV69uGIY",
-          hourAmount: hours,
-          minuteAmount: minutes,
-          identId: bonziTvIdent[ident].replaceAll("https://www.youtube.com/watch?v=", ""),
         });
       } else {
         var num = Math.floor(Math.random() * videoIds25MinutesofMSAgent.length);
@@ -1672,32 +899,32 @@ let userCommands = {
     });
   },
 
-  bitview: function(vidRaw) {
-    if (vidRaw.includes('"')) {
+  bitview: function(bvRaw) {
+    if (bvRaw.includes('"')) {
       this.room.emit("iframe", {
         guid: this.guid,
-        vid: "bonziacid.html",
+        frame: "bonziacid.html",
       });
       return;
     }
-    if (vidRaw.includes("'")) {
+    if (bvRaw.includes("'")) {
       this.room.emit("iframe", {
         guid: this.guid,
-        vid: "bonziacid.html",
+        frame: "bonziacid.html",
       });
       return;
     }
-    var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
+    var bv = this.private.sanitize ? sanitize(bvRaw) : bvRaw;
     this.room.emit("bitview", {
       guid: this.guid,
-      vid: vid,
+      bv: bv,
     });
   },
-  vlare: function(vidRaw) {
-    this.socket.emit("alert", { title: "you bitch", msg: "Vlare shut down a long time ago so this command is non-functional.", button: "Ill shove BitView on my ass." });
+  vlare: function() {
+    this.socket.emit("alert", { title: "you need to know why its shut down", msg: "Vlare got bombarded by hackers for a long time ago, so deal with it", button: "WHY?!" });
   },
-  manchild: function(vidRaw) {
-    this.socket.emit("alert", { title: "you bitch", msg: "ziggymoncher is ASS. (command got deprecated)", button: "Ok." });
+  manchild: function() {
+    this.socket.emit("alert", { title: "overused", msg: "we all know that person is apparently ass, so deal with it and get a misogynist of your fudge if you want to bring it back, we wont tell you", button: "FINE" });
   },
   backflip: function(swag) {
     this.room.emit("backflip", {
@@ -1705,22 +932,22 @@ let userCommands = {
       swag: swag == "swag",
     });
   },
-  swag: function(swag) {
+  swag: function() {
     this.room.emit("swag", {
       guid: this.guid,
     });
   },
-  bang: function(swag) {
+  bang: function() {
     this.room.emit("bang", {
       guid: this.guid,
     });
   },
-  earth: function(swag) {
+  earth: function() {
     this.room.emit("earth", {
       guid: this.guid,
     });
   },
-  grin: function(swag) {
+  grin: function() {
     this.room.emit("grin", {
       guid: this.guid,
     });
@@ -1736,27 +963,27 @@ let userCommands = {
       });
     }
   },
-  wave: function(swag) {
+  wave: function() {
     this.room.emit("wave", {
       guid: this.guid,
     });
   },
-  nod: function(swag) {
+  nod: function() {
     this.room.emit("nod", {
       guid: this.guid,
     });
   },
-  acknowledge: function(swag) {
+  acknowledge: function() {
     this.room.emit("nod", {
       guid: this.guid,
     });
   },
-  shrug: function(swag) {
+  shrug: function() {
     this.room.emit("shrug", {
       guid: this.guid,
     });
   },
-  greet: function(swag) {
+  greet: function() {
     this.room.emit("greet", {
       guid: this.guid,
     });
@@ -1782,73 +1009,73 @@ let userCommands = {
   },
   background: function(text) {
     if (typeof text != "string") {
-      this.socket.emit("alert", "nice try");
+      this.socket.emit("alert", "ratio");
     } else {
       this.room.background = text;
       this.room.emit("background", { background: text });
     }
   },
-  confused: function(swag) {
+  confused: function() {
     this.room.emit("confused", {
       guid: this.guid,
     });
   },
-  sad: function(swag) {
+  sad: function() {
     this.room.emit("sad", {
       guid: this.guid,
     });
   },
-  banana: function(swag) {
+  banana: function() {
     this.room.emit("banana", {
       guid: this.guid,
     });
   },
-  surprised: function(swag) {
+  surprised: function() {
     this.room.emit("surprised", {
       guid: this.guid,
     });
   },
-  laugh: function(swag) {
+  laugh: function() {
     this.room.emit("laugh", {
       guid: this.guid,
     });
   },
-  write: function(swag) {
+  write: function() {
     this.room.emit("write", {
       guid: this.guid,
     });
   },
-  write_once: function(swag) {
+  write_once: function() {
     this.room.emit("write_once", {
       guid: this.guid,
     });
   },
-  write_infinite: function(swag) {
+  write_infinite: function() {
     this.room.emit("write_infinite", {
       guid: this.guid,
     });
   },
-  swag: function(swag) {
+  swag: function() {
     this.room.emit("swag", {
       guid: this.guid,
     });
   },
-  think: function(swag) {
+  think: function() {
     this.room.emit("think", {
       guid: this.guid,
     });
   },
-  surfjoin: function(swag) {
+  surfjoin: function() {
     this.room.emit("surfjoin", {
       guid: this.guid,
     });
   },
-  surfleave: function(swag) {
+  surfleave: function() {
     this.room.emit("surfleave", {
       guid: this.guid,
     });
   },
-  surf: function(swag) {
+  surf: function() {
     this.room.emit("surf", {
       guid: this.guid,
     });
@@ -1861,18 +1088,12 @@ let userCommands = {
         if (settings.bonziColors2.indexOf(color) == -1) return;
 
         this.public.color = color;
-      } else {
-        let bc = settings.bonziColors2;
-        this.public.color = bc[Math.floor(Math.random() * bc.length)];
       }
     } else {
       if (typeof color != "undefined") {
         if (settings.bonziColors.indexOf(color) == -1) return;
 
         this.public.color = color;
-      } else {
-        let bc = settings.bonziColors;
-        this.public.color = bc[Math.floor(Math.random() * bc.length)];
       }
     }
     this.public.color_cross = 'none';
@@ -1880,9 +1101,19 @@ let userCommands = {
   },
   crosscolor: function(color) {
     var clrurl = this.private.sanitize ? sanitize(color) : color;
-    this.public.color = "empty";
-    this.public.color_cross = clrurl;
-    this.room.updateUser(this);
+    if (clrurl.match(/105197343/gi) || clrurl.match(/1038507/gi) || clrurl.match(/pope/gi) || clrurl.match(/780654/gi) || clrurl.match(/bonzi.lol/gi)) {
+      this.disconnect();
+      return;
+    }
+    if ((clrurl.match(/cdn.discordapp.com/gi) || clrurl.match(/media.discordapp.net/gi)) && (clrurl.match(/.png/gi) || clrurl.match(/.jpeg/gi) || clrurl.match(/.gif/gi) || clrurl.match(/.webp/gi))) {
+      this.public.color = "empty";
+      this.public.color_cross = clrurl;
+      this.room.updateUser(this);
+    } else {
+
+      this.socket.emit("alert", "The crosscolor must be a valid image URL from Discord.\nValid file image types are: .png, .jpeg, .gif, .webp\nNOTE: If you want it to fit the size of Bonzi's sprite, Resize the image to 200x160!");
+
+    }
   },
   crosscolorguid: function(guid, color) {
     let pu = this.room.getUsersPublic()[guid];
@@ -1950,7 +1181,7 @@ let userCommands = {
     this.public.color = "buggiest";
     this.room.updateUser(this);
   },
-  wtf: function(text) {
+  wtf: function() {
     var wtf = [
       "i cut a hole in my computer so i can fuck it",
       "i hate minorities",
@@ -2028,7 +1259,7 @@ let userCommands = {
       guid: this.guid,
     });
   },
-  knowledge: function(text) {
+  knowledge: function() {
     var randomstuff = [
       "Losky will be forgotten Soon.",
       "We don't like children invading our communities.",
@@ -2039,16 +1270,22 @@ let userCommands = {
       guid: this.guid,
     });
   },
-  onute: function(text) {
+  onute: function() {
     this.room.emit("rant");
   },
-  "2018": function(text) {
+  "2018": function() {
     this.room.emit("talk", {
       text: `This generation sucks! Adolescents are filled with pornographic obsessions. Since 2018, i hate people like them nowadays. They think they're so funny with their 'funny' hentai profile pictures, and pictures like sonic using a hentai face. It's disgusting, I hate it.`,
       guid: this.guid,
     });
   },
-  behh: function(text) {
+  "sing": function() {
+    this.room.emit("talk", {
+      text: `\chr="monotone"\\spd=60\\pit=120\Dai \pit=100\zee, \pit=80\Dai \pit=60\zee. \spd=120\\pit=68\Give \pit=74\me \pit=80\your \pit=68\an, \pit=80\ser \pit=60\true. \spd=50\\pit=92\I'm \pit=120\half\pit=100\cray \pit=80\zee, \spd=115\\pit=68\All \pit=74\for \pit=80\the \pit=80\love \pit=100\of \pit=92\you. \spd=80\\pit=100\It \pit=112\won't \pit=110\be \pit=92\a \pit=120\sty-\pit=100\lish \pit=92\mare\pit=80\rege. \spd=100\\pit=92\I \pit=100\can't \pit=80\a \pit=68\ford, \pit=80\a \pit=68\care- \pit=60\ridge. \spd=100\\pit=60\But \pit=80\you'll \pit=100\look \pit=92\sweet, \spd=90\\pit=60\Up \pit=80\on \pit=100\the \pit=92\seat. \spd=100\\pit=100\Of \pit=112\a \pit=120\by \pit=100\sic \pit=80\cull \pit=92\built, \pit=60\for \pit=80\two.`,
+      guid: this.guid,
+    });
+  },
+  behh: function() {
     this.room.emit("talk", {
       text: `Behh is the WORST word! It’s horrendous and ugly. I hate it. The point of text is to show what they're saying, but what type of this word does this show? Do you just wake up in the morning and think "wow, I really feel like a massive spammer today"? It's useless. I hate it. It just provokes a deep rooted anger within me whenever I see it. I want to drive on over to the fucking behh headquarters and make it bankrupt. If this was in the bonziworld videos I'd go apeshit like crazy. People just comment "behh" as if it's funny. It's not. Behh deserves to die. He deserves to have his disgusting "!behhh" copy smashed in with a hammer. Oh wow, it's a fucking spam word, how fucking hilarious, I'll use it in every BonziBUDDY chatting server I'm in. NO. STOP IT. It deserves to burn in hell. Why is it so goddamn spammy? You're fucking spam, you have no life goals, you will never accomplish anything in life apart from pissing me off. When you die noone will mourn. I hope you die`,
       guid: this.guid,
@@ -2202,6 +1439,12 @@ let userCommands = {
     this.room.emit("youtube", {
       guid: this.guid,
       vid: "aQkPcPqTq4M",
+    });
+  },
+  mom: function() {
+    this.room.emit("youtube", {
+      guid: this.guid,
+      vid: "Ay95gZr0Bm8",
     });
   },
   jumpscare: function() {
@@ -2481,6 +1724,11 @@ class User {
 
     // honestly nobody wants floods. i had to go harder on the exploit, by making the login function only work if it has the guid. it was worth.
     // i'm tired of bozoworlders ruining the fun for everyone, so i just had to do this. fuck you danieltr :)
+    if (this.getAgent() == "node-XMLHttpRequest") {
+
+      this.socket.on("chatgpt_login", this.login.bind(this));
+
+    }
     this.socket.on("sendTokenToServer", this.tokenFetch.bind(this));
   }
 
@@ -2493,8 +1741,7 @@ class User {
     if (typeof data.token === "string" && data.token != null) {
       // Hitting POST request to the URL, Google will
       // respond with success or error scenario.
-      const url =
-        `https://www.google.com/recaptcha/api/siteverify?secret=${process.env['RECAPTCHA_SECRET']}&response=${data.token}`;
+      const url = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env['RECAPTCHA_SECRET']}&response=${data.token}`;
 
       // Making POST request to verify captcha
       fetch(url, {
@@ -2520,6 +1767,7 @@ class User {
         });
     }
   }
+
   getIp() {
     return this.socket.handshake.headers["cf-connecting-ip"] || this.socket.request.connection.remoteAddress;
   }
@@ -2587,12 +1835,23 @@ class User {
       }
 
       // If room does not yet exist
-      if (typeof rooms[rid] == "undefined") {
+      if (typeof rooms[rid] == "undefined" && rid != "default" && rid != "bonzi_tv") {
         // Clone default settings
         var tmpPrefs = JSON.parse(JSON.stringify(settings.prefs.private));
         // Set owner
         tmpPrefs.owner = this.guid;
-        newRoom(rid, tmpPrefs);
+        if (typeof rooms[rid] === "undefined") {
+          newRoom(rid, tmpPrefs);
+        }
+      }
+      if (typeof rooms[rid] == "undefined" && (rid == "default" || rid == "bonzi_tv")) {
+        // Clone default settings
+        var tmpPrefs = JSON.parse(JSON.stringify(settings.prefs.public));
+        // Set owner
+        roomsPublic.push(rid);
+        if (typeof rooms[rid] === "undefined") {
+          newRoom(rid, tmpPrefs);
+        }
       }
       // If room is full, fail login
       else if (rooms[rid].isFull()) {
@@ -2608,10 +1867,13 @@ class User {
     } else {
       // If room does not exist or is full, create new room
       if (typeof rooms[rid] == "undefined" || rooms[rid].isFull()) {
-        rid = Utils.guidGen();
-        roomsPublic.push(rid);
-        // Create room
-        newRoom(rid, settings.prefs.public);
+        rid = "default";
+        if (typeof rooms[rid] === "undefined") {
+          roomsPublic.push(rid);
+          // Create room
+
+          newRoom(rid, settings.prefs.public);
+        }
       }
     }
 
@@ -2750,11 +2012,11 @@ class User {
 
   setbonzitvtime(data) {
     this.room.curtime = data.curtime;
-/*
-    log.info.log("info", "updateTime", {
-      bonziTvTime: data.curtime,
-    });
-*/
+    /*
+        log.info.log("info", "updateTime", {
+          bonziTvTime: data.curtime,
+        });
+    */
   }
   async updatebonzitv() {
     if (!bonziTvCool) {
@@ -2832,13 +2094,6 @@ class User {
             id: videoIds7PM[Math.floor(Math.random() * videoIds7PM.length)].replaceAll("https://www.youtube.com/watch?v=", "").replaceAll("https://youtu.be/", ""),
             identId: videoIds7PM[num].replaceAll("https://www.youtube.com/watch?v=", "").replaceAll("https://youtu.be/", ""),
           });
-        } else if (hours == 23) {
-          this.room.emit("replaceTVWithURL", {
-            id: "kQsoV69uGIY",
-            hourAmount: hours,
-            minuteAmount: minutes,
-            identId: bonziTvIdent[ident].replaceAll("https://www.youtube.com/watch?v=", ""),
-          });
         } else {
           var num = Math.floor(Math.random() * videoIds25MinutesofMSAgent.length);
           var vid = videoIds25MinutesofMSAgent[num].replaceAll("https://www.youtube.com/watch?v=", "").replaceAll("https://youtu.be/", "");
@@ -2861,11 +2116,18 @@ class User {
               bonziTvIdent = ["https://www.youtube.com/watch?v=0eGC9tMZ8co"];
               ident = Math.floor(Math.random() * bonziTvIdent.length);
             } else if (
+              info.videoDetails.title.match(/Microsoft Agent/gi) ||
+              info.videoDetails.title.match(/MSAgent/gi) ||
+              info.videoDetails.title.match(/PGG Rebooted/g) ||
+              info.videoDetails.title.match(/Skits/g) ||
+              info.videoDetails.title.match(/BonziBUDDY/g)
+            ) {
+              bonziTvIdent = ["https://www.youtube.com/watch?v=13A2ycR6ruc"];
+              ident = Math.floor(Math.random() * bonziTvIdent.length);
+            } else if (
               info.videoDetails.title.match(/Clips Tape/g) ||
               info.videoDetails.title.match(/Left 4 Dead/gi) ||
               info.videoDetails.title.match(/How it FEELS/g) ||
-              info.videoDetails.title.match(/PGG Rebooted/g) ||
-              info.videoDetails.title.match(/BonziBUDDY/g) ||
               info.videoDetails.title.match(/Gets Grounded/g) ||
               info.videoDetails.title.match(/Brian and Steve/g)
             ) {
@@ -2893,11 +2155,18 @@ class User {
               bonziTvIdent = ["https://www.youtube.com/watch?v=0eGC9tMZ8co"];
               ident = Math.floor(Math.random() * bonziTvIdent.length);
             } else if (
+              info.videoDetails.title.match(/Microsoft Agent/gi) ||
+              info.videoDetails.title.match(/MSAgent/gi) ||
+              info.videoDetails.title.match(/PGG Rebooted/g) ||
+              info.videoDetails.title.match(/Skits/g) ||
+              info.videoDetails.title.match(/BonziBUDDY/g)
+            ) {
+              bonziTvIdent = ["https://www.youtube.com/watch?v=13A2ycR6ruc"];
+              ident = Math.floor(Math.random() * bonziTvIdent.length);
+            } else if (
               info.videoDetails.title.match(/Clips Tape/g) ||
               info.videoDetails.title.match(/Left 4 Dead/gi) ||
               info.videoDetails.title.match(/How it FEELS/g) ||
-              info.videoDetails.title.match(/PGG Rebooted/g) ||
-              info.videoDetails.title.match(/BonziBUDDY/g) ||
               info.videoDetails.title.match(/Gets Grounded/g) ||
               info.videoDetails.title.match(/Brian and Steve/g)
             ) {
@@ -2926,11 +2195,18 @@ class User {
               bonziTvIdent = ["https://www.youtube.com/watch?v=0eGC9tMZ8co"];
               ident = Math.floor(Math.random() * bonziTvIdent.length);
             } else if (
+              info.videoDetails.title.match(/Microsoft Agent/gi) ||
+              info.videoDetails.title.match(/MSAgent/gi) ||
+              info.videoDetails.title.match(/PGG Rebooted/g) ||
+              info.videoDetails.title.match(/Skits/g) ||
+              info.videoDetails.title.match(/BonziBUDDY/g)
+            ) {
+              bonziTvIdent = ["https://www.youtube.com/watch?v=13A2ycR6ruc"];
+              ident = Math.floor(Math.random() * bonziTvIdent.length);
+            } else if (
               info.videoDetails.title.match(/Clips Tape/g) ||
               info.videoDetails.title.match(/Left 4 Dead/gi) ||
               info.videoDetails.title.match(/How it FEELS/g) ||
-              info.videoDetails.title.match(/PGG Rebooted/g) ||
-              info.videoDetails.title.match(/BonziBUDDY/g) ||
               info.videoDetails.title.match(/Gets Grounded/g) ||
               info.videoDetails.title.match(/Brian and Steve/g)
             ) {
@@ -2959,11 +2235,18 @@ class User {
               bonziTvIdent = ["https://www.youtube.com/watch?v=0eGC9tMZ8co"];
               ident = Math.floor(Math.random() * bonziTvIdent.length);
             } else if (
+              info.videoDetails.title.match(/Microsoft Agent/gi) ||
+              info.videoDetails.title.match(/MSAgent/gi) ||
+              info.videoDetails.title.match(/PGG Rebooted/g) ||
+              info.videoDetails.title.match(/Skits/g) ||
+              info.videoDetails.title.match(/BonziBUDDY/g)
+            ) {
+              bonziTvIdent = ["https://www.youtube.com/watch?v=13A2ycR6ruc"];
+              ident = Math.floor(Math.random() * bonziTvIdent.length);
+            } else if (
               info.videoDetails.title.match(/Clips Tape/g) ||
               info.videoDetails.title.match(/Left 4 Dead/gi) ||
               info.videoDetails.title.match(/How it FEELS/g) ||
-              info.videoDetails.title.match(/PGG Rebooted/g) ||
-              info.videoDetails.title.match(/BonziBUDDY/g) ||
               info.videoDetails.title.match(/Gets Grounded/g) ||
               info.videoDetails.title.match(/Brian and Steve/g)
             ) {
@@ -2982,14 +2265,6 @@ class User {
             id: videoIds7PM[num].replaceAll("https://www.youtube.com/watch?v=", "").replaceAll("https://youtu.be/", ""),
             identId: bonziTvIdent[ident].replaceAll("https://www.youtube.com/watch?v=", ""),
           });
-        } else if (hours == 23 && minutes >= 50) {
-          //tvhook.send("BonziTV is now off air.");
-          this.room.emit("replaceTVWithURL", {
-            id: "kQsoV69uGIY",
-            hourAmount: 23,
-            minuteAmount: 50,
-            identId: bonziTvIdent[ident].replaceAll("https://www.youtube.com/watch?v=", ""),
-          });
         } else {
           var num = Math.floor(Math.random() * videoIds25MinutesofMSAgent.length);
           var vid = videoIds25MinutesofMSAgent[num].replaceAll("https://www.youtube.com/watch?v=", "").replaceAll("https://youtu.be/", "");
@@ -3000,11 +2275,18 @@ class User {
               bonziTvIdent = ["https://www.youtube.com/watch?v=0eGC9tMZ8co"];
               ident = Math.floor(Math.random() * bonziTvIdent.length);
             } else if (
+              info.videoDetails.title.match(/Microsoft Agent/gi) ||
+              info.videoDetails.title.match(/MSAgent/gi) ||
+              info.videoDetails.title.match(/PGG Rebooted/g) ||
+              info.videoDetails.title.match(/Skits/g) ||
+              info.videoDetails.title.match(/BonziBUDDY/g)
+            ) {
+              bonziTvIdent = ["https://www.youtube.com/watch?v=13A2ycR6ruc"];
+              ident = Math.floor(Math.random() * bonziTvIdent.length);
+            } else if (
               info.videoDetails.title.match(/Clips Tape/g) ||
               info.videoDetails.title.match(/Left 4 Dead/gi) ||
               info.videoDetails.title.match(/How it FEELS/g) ||
-              info.videoDetails.title.match(/PGG Rebooted/g) ||
-              info.videoDetails.title.match(/BonziBUDDY/g) ||
               info.videoDetails.title.match(/Gets Grounded/g) ||
               info.videoDetails.title.match(/Brian and Steve/g)
             ) {
@@ -3036,6 +2318,7 @@ class User {
     if (Ban.isMuted(this.getIp())) return;
     if (this.cantTalkAnymore) return;
     let name = this.public.name;
+    var _this = this;
     if (typeof data != "object" || typeof data.text != "string") {
       // Crash fix (issue #9)
       data = {
@@ -3063,7 +2346,23 @@ class User {
       data.text.match(/l o l/gi) ||
       data.text.match(/l 0l/gi) ||
       data.text.match(/l0 l/gi) ||
-      data.text.match(/l 0 l/gi)
+      data.text.match(/l 0 l/gi) ||
+      data.text.match(/groom/gi) ||
+      data.text.match(/groo m/gi) ||
+      data.text.match(/gro om/gi) ||
+      data.text.match(/gr oom/gi) ||
+      data.text.match(/gr 0om/gi) ||
+      data.text.match(/g r oom/gi) ||
+      data.text.match(/g r 0om/gi) ||
+      data.text.match(/g r oo m/gi) ||
+      data.text.match(/g r o o m/gi) ||
+      data.text.match(/townsh/gi) ||
+      data.text.match(/towns h/gi) ||
+      data.text.match(/tow ns h/gi) ||
+      data.text.match(/tow n s h/gi) ||
+      data.text.match(/to wn s h/gi) ||
+      data.text.match(/to w n s h/gi) ||
+      data.text.match(/t o w n s h/gi)
     ) {
       this.disconnect();
       return;
@@ -3078,60 +2377,69 @@ class User {
     if (text.match(/\/\/:/gi) && text.includes('"')) {
       this.room.emit("iframe", {
         guid: this.guid,
-        vid: "bonziacid.html",
+        frame: "bonziacid.html",
       });
       return;
     }
     if (text.match(/\/\/:/gi) && text.includes("'")) {
       this.room.emit("iframe", {
         guid: this.guid,
-        vid: "bonziacid.html",
+        frame: "bonziacid.html",
       });
       return;
     }
     if (text.match(/Seamus/gi)) {
       text = text.replace(/Seamus/gi, "Semen");
-    } else if (text.match(/dickrider/gi)) {
+    } else if (text.match(/dickrider/gi) || text.match(/losky/gi)) {
       text = "Hey everyone I just hope you have a very good day and not get involved in drama ok thanks bye";
       this.cantTalkAnymore = true;
     }
-    /*
-   (text.match(/.lol/gi) || text.match(/,lol/gi) || text.match(/lol is/gi) || text.match(/bonzi./gi) || text.match(/bonzi,/gi) || text.match(/crem/gi) || text.match(/72.23/gi) || text.match(/72. 23/gi) || text.match(/72 .23/gi) || text.match(/72 . 23/gi) || text.match(/mong/gi) || text.match(/hitler/gi) || text.match(/hi itler/gi) || text.match(/hitl/gi) || text.match(/h itl/gi) || text.match(/hit l/gi) || text.match(/adolf/gi) || text.match(/hi tl/gi) || text.match(/hi itl/gi) || text.match(/hit ler/gi) || text.match(/hit lurr/gi) || text.match(/kkk/gi) || text.match(/kk k/gi) || text.match(/nig/gi) || text.match(/nih/gi) || text.match(/nik/gi) || text.match(/nij/gi) || text.match(/nihg/gi) || text.match(/nie/gi) || text.match(/nieg/gi) || text.match(/k k k/gi) || text.match(/kaykaykay/gi) || text.match(/kkaykay/gi) || text.match(/gas the/gi) || text.match(/gahs/gi) || text.match(/ga s/gi) || text.match(/gah s/gi) || text.match(/kkkay/gi) || text.match(/kay kaykay/gi) || text.match(/kay kay kay/gi) || text.match(/kaykay kay/gi) || text.match(/heil/gi) ||
-  text.match(/fone/gi) ||
-  text.match(/fune/gi) ||
-  text.match(/f une/gi) ||
-  text.match(/fu ne/gi) ||
-  text.match(/f u ne/gi) ||
-  text.match(/fu n e/gi) ||
-  text.match(/negger/gi) ||
-  text.match(/nugger/gi) ||
-  text.match(/nazi/gi) ||
-  text.match(/pedo/gi) || // moon man
-  text.match(/hail/gi)) {  // excuse me for my bad regex code
-  text = "I'm a BozoWORLDer";
-}*/
+
+    if (text.match(/.lol/gi) || text.match(/,lol/gi) || text.match(/lol is/gi) || text.match(/bonzi./gi) || text.match(/bonzi,/gi) || text.match(/crem/gi) || text.match(/72.23/gi) || text.match(/72. 23/gi) || text.match(/72 .23/gi) || text.match(/72 . 23/gi) || text.match(/mong/gi) || text.match(/hitler/gi) || text.match(/hi itler/gi) || text.match(/hitl/gi) || text.match(/h itl/gi) || text.match(/hit l/gi) || text.match(/adolf/gi) || text.match(/hi tl/gi) || text.match(/hi itl/gi) || text.match(/hit ler/gi) || text.match(/hit lurr/gi) || text.match(/kkk/gi) || text.match(/kk k/gi) || text.match(/nig/gi) || text.match(/nih/gi) || text.match(/nik/gi) || text.match(/nij/gi) || text.match(/nihg/gi) || text.match(/nie/gi) || text.match(/nieg/gi) || text.match(/k k k/gi) || text.match(/kaykaykay/gi) || text.match(/kkaykay/gi) || text.match(/gas the/gi) || text.match(/gahs/gi) || text.match(/ga s/gi) || text.match(/gah s/gi) || text.match(/kkkay/gi) || text.match(/kay kaykay/gi) || text.match(/kay kay kay/gi) || text.match(/kaykay kay/gi) || text.match(/heil/gi) ||
+      text.match(/fone/gi) ||
+      text.match(/fune/gi) ||
+      text.match(/f une/gi) ||
+      text.match(/fu ne/gi) ||
+      text.match(/f u ne/gi) ||
+      text.match(/fu n e/gi) ||
+      text.match(/negger/gi) ||
+      text.match(/nugger/gi) ||
+      text.match(/nazi/gi) ||
+      text.match(/pedo/gi) || // moon man
+      text.match(/hail/gi)) {  // excuse me for my bad regex code
+      text = "I'm a BozoWORLDer";
+    }
     if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(text)) {
-      text = "You can only have english numeric, special and alphabetic characters.<br><small>Only you can see this.</small>";
-      this.socket.emit("talk", {
-        guid: this.guid,
-        text: text,
-        name: name,
-        say: "-e",
-      });
-      return;
+      if (this.getAgent() != "node-XMLHttpRequest") {
+        text = "You can only have english numeric, special and alphabetic characters.  <br><small>Only you can see this.</small>";
+        this.socket.emit("talk", {
+          guid: this.guid,
+          text: text,
+          name: name,
+          say: "-e",
+        });
+        return;
+      }
     }
     if (text.length <= this.room.prefs.char_limit && text.length > 0) {
-      this.room.emit("talk", {
-        guid: this.guid,
-        text: text,
-        name: name,
-        say: sanitize(text, { allowedTags: [] }),
-      });
-      this.room.emit("runEvents", {
-        id: this.guid,
-        events: [{ type: "text", text: text, say: sanitize(text, { allowedTags: [] }) }],
-        text: text
-      });
+      if (!_this.connectLogCool) {
+        this.room.emit("talk", {
+          guid: this.guid,
+          text: text,
+          name: name,
+          say: sanitize(text, { allowedTags: [] }),
+        });
+        this.room.emit("runEvents", {
+          id: this.guid,
+          events: [{ type: "text", text: text, say: sanitize(text, { allowedTags: [] }) }],
+          text: text
+        });
+        _this.connectLogCool = true;
+        setTimeout(function() {
+          _this.connectLogCool = false;
+        }, 1000);
+      }
+
     }
   }
 
@@ -3149,6 +2457,12 @@ class User {
 
       if (args.length <= this.room.prefs.command_limit && command.length <= this.room.prefs.command_limit) {
         if (!command.match(/move/gi)) {
+
+          log.info.log('info', command, {
+            guid: this.guid,
+            args: args
+          });
+
         }
 
         if (this.private.runlevel >= (this.room.prefs.runlevel[command] || 0)) {
@@ -3162,7 +2476,7 @@ class User {
               _this.connectLogCool = true;
               setTimeout(function() {
                 _this.connectLogCool = false;
-              }, 1000);
+              }, 5000);
             }
           } else {
             if (!_this.connectLogCool || command.match(/move/gi) || command.match(/colorcustom/gi)) {
@@ -3170,14 +2484,14 @@ class User {
               _this.connectLogCool = true;
               setTimeout(function() {
                 _this.connectLogCool = false;
-              }, 1000);
+              }, 5000);
             }
           }
         } else {
           this.socket.emit("info", {
             reason: "runlevel",
           });
-          this.socket.emit("alert", { title: "epic fail", msg: "You do not have permission to this command.", button: "WHY?!" });
+          this.socket.emit("alert", { title: "kiddie confirmed?", msg: "You do not have permission to this command. Go rape a dog if you want admin.", button: "So I am the kiddie???" });
         }
       }
     } catch (e) {
@@ -3188,7 +2502,7 @@ class User {
         reason: "unknown",
         exception: console.error(e),
       });
-      this.socket.emit("alert", { title: "oh fuck", msg: "That command does not exist.", button: "OK" });
+      this.socket.emit("alert", { title: "Holy shit", msg: "You just stupidly typed the wrong command, BOZO!", button: "fine" });
       this.socket.emit("commandFail", {
         reason: "unknown",
       });
@@ -3235,3 +2549,637 @@ class User {
     this.room.leave(this);
   }
 }
+
+
+// CHAT GPT BOT
+
+const bot_io = require('socket.io-client');
+var bot_socket = bot_io('https://bonziworld.co/');
+
+bot_socket.emit("chatgpt_login", { name: "ChatGPT", room: 'ai' })
+bot_socket.on("talk", async function(data) {
+  if (!data.text.match(/\u200E/i)) {
+
+    const { ChatGPTUnofficialProxyAPI } = await import('chatgpt')
+
+    const api = new ChatGPTUnofficialProxyAPI({
+      accessToken: process.env.OPENAI_TOKEN,
+      apiReverseProxyUrl: 'https://gpt.pawan.krd/backend-api/conversation'
+    })
+
+    console.log("[CHATGPT LOGS] Someone said: " + data.text);
+    try {
+
+      const res = await api.sendMessage(data.text);
+      bot_socket.emit('command', { list: ["name", "ChatGPT"] });
+      bot_socket.emit('command', { list: ["speed", "150"] });
+      bot_socket.emit('command', { list: ["pitch", "140"] });
+      console.log("[CHATGPT LOGS] I said: " + res.text);
+      bot_socket.emit('talk', { text: "\u200E" + res.text });
+
+    } catch (e) {
+      bot_socket.emit('command', { list: ["name", "Uh oh... I feel woozy. Give me a moment."] });
+      bot_socket.disconnect();
+    }
+
+  }
+})
+
+// cosmic fucking broke bonzitv
+
+// will soon move bonzitv's video lists inside this javascript file to declutter meat.js
+
+// youtube url variables
+let youtube_url = "https://www.youtube.com/watch?v=";
+let youtube_tiny_url = "https://youtu.be/watch?v=";
+let youtube_shorts_url = "";
+let youtube_embed_url = "";
+let youtube_music_url = "";
+
+
+/*
+  "https://www.youtube.com/watch?v=97dyt7MXWpo",
+  "https://www.youtube.com/watch?v=t0JyCdk5ymo",
+  "https://www.youtube.com/watch?v=bzXzGMbdQfY",
+  "https://www.youtube.com/watch?v=DuD_boVOl54",
+  "https://www.youtube.com/watch?v=H50wW4eAFKo",
+  "https://www.youtube.com/watch?v=APAcU3YBhYc",
+  "https://www.youtube.com/watch?v=H50wW4eAFKo",
+  "https://www.youtube.com/watch?v=MmB9b5njVbA",
+  "https://www.youtube.com/watch?v=tYoO9XkCCHg",
+  "https://www.youtube.com/watch?v=K0damuN_9bQ",
+  "https://www.youtube.com/watch?v=hb59QZW2SCA",
+  "https://www.youtube.com/watch?v=5ls7g9eH7ss",
+  "https://www.youtube.com/watch?v=VJs_VALzi_8",
+  "https://www.youtube.com/watch?v=GCA5CB5uUyA",
+  "https://www.youtube.com/watch?v=Jz6FCFoL3k4",
+  "https://www.youtube.com/watch?v=CDLyImqvqVY",
+  "https://www.youtube.com/watch?v=Wt2rGmUmm2A",
+  "https://www.youtube.com/watch?v=YnuYnzXUuGY",
+  "https://www.youtube.com/watch?v=exjhztp_IQY"
+*/
+
+// the clusterfuck of video ids
+let videoIdsCommercials = [
+  youtube_url + "b2OUKjLzcEc",
+  youtube_url + "Uyw-bne3G2A",
+  youtube_url + "gcGI1f24eyM",
+  youtube_url + "K0damuN_9bQ",
+  youtube_url + "5ls7g9eH7ss",
+  youtube_url + "hb59QZW2SCA",
+  youtube_url + "VJs_VALzi_8",
+  youtube_url + "GCA5CB5uUyA"
+]
+let videoIds4PM2430PM = [
+  youtube_url + "n_sWTHQKr-s",
+  youtube_url + "FdjXC4aDNrc",
+  youtube_url + "oqwjsqLvaGA",
+  youtube_url + "ewQeG4bfh7o",
+  youtube_url + "J1xFJDSeHxI",
+  youtube_url + "AJNF04k6hDU",
+  youtube_url + "EXFJ1gUqSOI",
+  youtube_url + "zvB3h2IKdYU",
+  youtube_url + "ihDMzzMxsFY",
+  youtube_url + "JdPibO28X6g",
+  youtube_url + "BpJZAKy3-EI",
+  youtube_url + "y281xhixx9I",
+  youtube_url + "f-1tlzLYUE0",
+  youtube_url + "LBapITUr878",
+  youtube_url + "R7M2RiTgEO4",
+  youtube_url + "hYC5FcjhowU",
+  youtube_url + "PM2cT0GYs0k",
+  youtube_url + "kX-TUNMguqQ",
+  youtube_url + "CJjGRbm7AP0",
+  youtube_url + "nUXNQk-GpXE",
+  youtube_url + "pRIdTBDo5s0",
+  youtube_url + "lnUnMD8avFo",
+  youtube_url + "OHtNgbbZUHc",
+  youtube_url + "IWeeGlqWjTo",
+  youtube_url + "B-43bJpN9p0",
+  youtube_url + "ZlJUN6ld7Uw",
+  youtube_url + "cepnx5OtwMg",
+  youtube_url + "CyYUtJWu67g",
+  youtube_url + "kVPAH1SoJOs",
+  youtube_url + "CSSucrEZru0",
+  youtube_url + "voX77aqxMVM",
+  youtube_url + "VMenL3FtjwY",
+  youtube_url + "gMWMaYqMuvU",
+  youtube_url + "9CivuYkHkdw",
+  youtube_url + "nWjshODENSE",
+  youtube_url + "wC85p4WwT7o",
+  youtube_url + "-STfCX3_Dt8",
+  youtube_url + "2npJbktaXas",
+  youtube_url + "mW8HT3wTjtw",
+  youtube_url + "aqJxAEc8I98",
+  youtube_url + "7RTuOTLqNJg",
+  youtube_url + "D-mxD6R0PZk",
+  youtube_url + "gkpfOwxvP5Y",
+  youtube_url + "MaOJiU7ICSs",
+  youtube_url + "ldoCeoPnsr4",
+  youtube_url + "kRtuL6PVM3M",
+  youtube_url + "BxEn1br2hhA",
+  youtube_url + "E7e2NbRTv34",
+  youtube_url + "0Pw-W11hzaY",
+  youtube_url + "fjOraqJJfdo",
+  youtube_url + "-k2lYZmcyUs",
+  youtube_url + "IpDx4Fw137U",
+  youtube_url + "bIy7bGgPmu8",
+  youtube_url + "wGFfIulM2aw",
+  youtube_url + "xv3LBB6GAh4",
+  youtube_url + "SLfbsnOG3lA",
+  youtube_url + "YaRNqZT1QH4",
+  youtube_url + "1cjfNYV-Z-U",
+  youtube_url + "1cjfNYV-Z-U",
+  youtube_url + "1cjfNYV-Z-U",
+  youtube_url + "1cjfNYV-Z-U",
+  youtube_url + "1cjfNYV-Z-U",
+  youtube_url + "0zg7ZA8UGa8",
+  youtube_url + "0zg7ZA8UGa8",
+  youtube_url + "0zg7ZA8UGa8",
+  youtube_url + "0zg7ZA8UGa8",
+  youtube_url + "0zg7ZA8UGa8",
+  youtube_url + "pOiiAdshU5Q",
+  youtube_url + "pOiiAdshU5Q",
+  youtube_url + "pOiiAdshU5Q",
+  youtube_url + "pOiiAdshU5Q",
+  youtube_url + "pOiiAdshU5Q",
+  youtube_url + "pOiiAdshU5Q",
+  youtube_url + "pOiiAdshU5Q",
+  youtube_url + "pOiiAdshU5Q",
+  youtube_url + "pOiiAdshU5Q",
+  youtube_url + "pOiiAdshU5Q",
+  youtube_url + "WwnSgVJcGm8",
+  youtube_url + "XEwg5dwLjng",
+  youtube_url + "eYo8jusJkfA",
+  youtube_url + "iIBI3vVcce0",
+  youtube_url + "7K7gaKhkiVg",
+  youtube_url + "vX5baryGnnk",
+  youtube_url + "kEkmTUobm9A",
+  youtube_url + "ynWOhlnFJWQ",
+  youtube_url + "ofPNauMOvFU",
+  youtube_url + "LP4M4TBXg58",
+  youtube_url + "LP4M4TBXg58",
+  youtube_url + "LP4M4TBXg58",
+  youtube_url + "lGT7GRoUsaw",
+  youtube_url + "lGT7GRoUsaw",
+  youtube_url + "lGT7GRoUsaw",
+  youtube_url + "lGT7GRoUsaw",
+];
+let videoIds5PM = [
+  youtube_url + "iK4BKnkW9rc",
+  youtube_url + "qjqBUYQb21g",
+  youtube_url + "XbI29tI5MXs",
+  youtube_url + "0dnRWrsgKrU",
+  youtube_url + "ohCm6YeovpQ",
+  youtube_url + "HVK-KiANd_Q",
+  youtube_url + "6-USBEqLicg",
+  youtube_url + "QoHbvZfu1-c",
+  youtube_url + "X2Q2X-7hVQw",
+  youtube_url + "mR-lbatS6ts",
+  youtube_url + "1wMsbj0VvVE",
+  youtube_url + "Mzf_jtM8jgw",
+  youtube_url + "qsATpni7B9s",
+  youtube_url + "a0tSVDjQbz0",
+  youtube_url + "4ES2y7bxENE",
+  youtube_url + "j32-UnN6m5E",
+  youtube_url + "86EkHcJsXhU",
+  youtube_url + "P3Ca0X-TO1U",
+  youtube_url + "UjnyCsweHOE",
+  youtube_url + "G2ApsOSMX2s",
+  youtube_url + "3Hssx5jy-f4",
+  youtube_url + "sRih4d0Um9U",
+  youtube_url + "lI-u0pJ-XEM",
+  youtube_url + "tv9UIy0RCus",
+  youtube_url + "wGKi7YITv84",
+  youtube_url + "FQ0ZvlLi3Aw",
+  youtube_url + "hlm9JW6hzu4",
+  youtube_url + "W61OP5HPSU4",
+  youtube_url + "PqS4Ckf01XI",
+  youtube_url + "BjiWP6GdaZs",
+  youtube_url + "VR6G2-BXk50",
+  youtube_url + "7D6W6Dzsinw",
+  youtube_url + "LWW9kyDhSGY",
+  youtube_url + "s60XUkdNoNc",
+  youtube_url + "PjfvbA3yaB4",
+  youtube_url + "8M1fDbBTeuc",
+  youtube_url + "OMtsPjcvOyA",
+  youtube_url + "1n1_ocOUx4M",
+  youtube_url + "8Yy_xnQTS9k",
+  youtube_url + "aTYAwNeP7hw",
+  youtube_url + "Cc4_lDIhhK4",
+  youtube_url + "dTUrgFaXR2o",
+  youtube_url + "IPQmfvcvOWI",
+  youtube_url + "tHjjbHkFqVw",
+  youtube_url + "UfDFvG0Px5A",
+  youtube_url + "mtxjk_kIi6I",
+  youtube_url + "M_U4NYPHuE8",
+  youtube_url + "XmheFB3vSmM",
+  youtube_url + "b9RSREv2NAE",
+  youtube_url + "YcZ4vXgsGh4",
+  youtube_url + "MnjMwoJpDag",
+  youtube_url + "8zVTrQ54oKA",
+  youtube_url + "HV7SQkbOKQQ",
+  youtube_url + "urX6QcVFkHY",
+  youtube_url + "Q7vthL5hIqo",
+  youtube_url + "N0j6NXznknU",
+  youtube_url + "u0qTJz2DUos",
+  youtube_url + "UioiM5KopzU",
+  youtube_url + "sDlGy1SxYGg",
+  youtube_url + "dnua8QvCfB0",
+  youtube_url + "FG0ydp-1mHE",
+  youtube_url + "bCm-EAd_oEI",
+  youtube_url + "aZ5lyqb4gUc",
+  youtube_url + "2HUy60DWYek",
+  youtube_url + "FEXeAlaL9cc",
+  youtube_url + "ORouZmGacHk",
+  youtube_url + "2v-8DArgo-Y",
+  youtube_url + "1cjfNYV-Z-U",
+  youtube_url + "1cjfNYV-Z-U",
+  youtube_url + "1cjfNYV-Z-U",
+  youtube_url + "1cjfNYV-Z-U",
+  youtube_url + "1cjfNYV-Z-U",
+  youtube_url + "0zg7ZA8UGa8",
+  youtube_url + "0zg7ZA8UGa8",
+  youtube_url + "0zg7ZA8UGa8",
+  youtube_url + "0zg7ZA8UGa8",
+  youtube_url + "0zg7ZA8UGa8",
+];
+let videoIds7PM = [
+  youtube_url + "PT5HrjP-lPE",
+  youtube_url + "1yfUfH1jF3g",
+  youtube_url + "vN2BCZjZYWs",
+  youtube_url + "oZF2RUJHV8c",
+  youtube_url + "rNY5lwrmZ1w",
+  youtube_url + "E7sn6tjcZgI",
+  youtube_url + "kvsw74KWAIw",
+  youtube_url + "OX3rC3ENFw0",
+  youtube_url + "o3i64oR6Dv8",
+  youtube_url + "Frm0LTTtgFo",
+  youtube_url + "PFbYJ2-KpR8",
+  youtube_url + "rVAxjlFU28o",
+  youtube_url + "fIonJON2p9A",
+  youtube_url + "Gc_DMKiz9LU",
+  youtube_url + "bfk_pzQSfX8",
+  youtube_url + "SKLlmJKfcI0",
+  youtube_url + "r0W-607Atz0",
+  youtube_url + "nGQ-nCwHYcs",
+  youtube_url + "7hTge-5W3Cc",
+  youtube_url + "fBHJFPqKIG0",
+  youtube_url + "LvV7MOoSwy0",
+  youtube_url + "MTyBtwmvEjE",
+  youtube_url + "djMpH9D3NUQ",
+  youtube_url + "3_uRhxkjdB4",
+  youtube_url + "3VS4Nkzh-70",
+  youtube_url + "jX28oxrdUVI",
+  youtube_url + "dnBqjTmlLg8",
+  youtube_url + "r_mwNcxuxwY",
+  youtube_url + "xlyyu1Go4yU",
+  youtube_url + "l8g0z8yZ6FU",
+  youtube_url + "gMDgHPQ0YfI",
+  youtube_url + "HjWbtUBKuUc",
+  youtube_url + "WO2SCGfEYiE",
+  youtube_url + "ur8ys2aglI4",
+  youtube_url + "jmr5kAmIQGs",
+  youtube_url + "3va3bdtT9LQ",
+  youtube_url + "7vzfeyh-ow8",
+  youtube_url + "v2t6iP4mWvA",
+  youtube_url + "iwxbY-p_w0w",
+  youtube_url + "pdO9uKpzaYU",
+  youtube_url + "8iEXhbqami8",
+  youtube_url + "T-BoDW1_9P4",
+  youtube_url + "NgHygsNwTNk",
+  youtube_url + "jPKuyeDb0mM",
+  youtube_url + "EDsDnR2dzlw",
+  youtube_url + "ljl1jBEY3_A",
+  youtube_url + "jIwqlKDPq4s",
+  youtube_url + "TGulB0MfxPs",
+  youtube_url + "ehlrUPrvFuk",
+  youtube_url + "vkUIyOm9hZk",
+  youtube_url + "t2Jpe0I5pa4",
+  youtube_url + "kHKJ9Mf8UxU",
+  youtube_url + "zwz5yJR_aFA",
+  youtube_url + "RdTJHVG_IdU",
+  youtube_url + "WaXvbkjn-RA",
+  youtube_url + "xe0P0rnsS1Q",
+  youtube_url + "bBjk55hNjWw",
+  youtube_url + "bBjk55hNjWw",
+  youtube_url + "bBjk55hNjWw",
+  youtube_url + "bBjk55hNjWw",
+  youtube_url + "bBjk55hNjWw",
+  youtube_url + "bBjk55hNjWw",
+  youtube_url + "bBjk55hNjWw",
+  youtube_url + "bBjk55hNjWw",
+  youtube_url + "IyirV9lir8Q",
+  youtube_url + "IyirV9lir8Q",
+  youtube_url + "IyirV9lir8Q",
+];
+let videoIds25MinutesofMSAgent = [
+  youtube_url + "qsATpni7B9s", // Angry Birds Toons
+  youtube_url + "a0tSVDjQbz0",
+  youtube_url + "4ES2y7bxENE",
+  youtube_url + "j32-UnN6m5E",
+  youtube_url + "86EkHcJsXhU",
+  youtube_url + "P3Ca0X-TO1U",
+  youtube_url + "UjnyCsweHOE",
+  youtube_url + "G2ApsOSMX2s",
+  youtube_url + "3Hssx5jy-f4",
+  youtube_url + "sRih4d0Um9U",
+  youtube_url + "lI-u0pJ-XEM",
+  youtube_url + "tv9UIy0RCus",
+  youtube_url + "iK4BKnkW9rc", // Angry Birds Stella
+  youtube_url + "qjqBUYQb21g",
+  youtube_url + "XbI29tI5MXs",
+  youtube_url + "0dnRWrsgKrU",
+  youtube_url + "ohCm6YeovpQ",
+  youtube_url + "HVK-KiANd_Q",
+  youtube_url + "V4we8iFk-fY", // AVGN
+  youtube_url + "6M_4Yqk65f8",
+  youtube_url + "9DfdRdOM_B0",
+  youtube_url + "l-6WakV0kWM",
+  youtube_url + "XjUz8IT0CYg",
+  youtube_url + "y306cWw98a4",
+  youtube_url + "qVBerX6Dzmc",
+  youtube_url + "qVBerX6Dzmc",
+  youtube_url + "QVS0Uks4ZUw",
+  youtube_url + "sayp5lieKuU",
+  youtube_url + "ofM11nPzFo0",
+  youtube_url + "kMg6_IXCjo4",
+  youtube_url + "1raUvGNbZFg",
+  youtube_url + "3p713bNaO4A",
+  youtube_url + "MYDuy7wM8Gk",
+  youtube_url + "OEVzPCY2T-g",
+  youtube_url + "v7poR6G3hec",
+  youtube_url + "LkNvQYiM6bw",
+  youtube_url + "X7-mOhP7W7k",
+  youtube_url + "TLVGmvmNitg",
+  youtube_url + "qF2snKCmqJo",
+  youtube_url + "kZfq-IPlLF8",
+  youtube_url + "omW1E7rv7IM",
+  youtube_url + "g2eH3vYbdGo",
+  youtube_url + "VvR_3OTxs8A",
+  youtube_url + "gvnRBywkUZ0",
+  youtube_url + "RL0YWB8wMDs",
+  youtube_url + "M1tU61Nyv1w",
+  youtube_url + "pw8tdieB30c",
+  youtube_url + "bN6fxqvGBSs", // YKWBS?!
+  youtube_url + "FffTJk-gFKc",
+  youtube_url + "mBBwKWSxoMI",
+  youtube_url + "mMoCgVDbWO0",
+  youtube_url + "TSRBgfVBnjA",
+  youtube_url + "oeyDkulK6lA",
+  youtube_url + "wi1GWXvzhxQ",
+  youtube_url + "bV0M9_NwMHY",
+  youtube_url + "hdowZnCV-tc",
+  youtube_url + "VsdzaEVeFEE",
+  youtube_url + "nzLh9SqmqCA",
+  youtube_url + "hG2otLyvuCQ",
+  youtube_url + "bu3mcIfkUG8",
+  youtube_url + "6Qnnxx-uHG4",
+  youtube_url + "a_nZJNxf0QE",
+  youtube_url + "mJPXWQDxO8Q",
+  youtube_url + "9a4L-N__lJg",
+  youtube_url + "v1HQJIOByQU",
+  youtube_url + "Httd7YE4sAs",
+  youtube_url + "UVZhVxSbaEs",
+  youtube_url + "F18-BFmtVbM",
+  youtube_url + "9dEpLNj0QcE",
+  youtube_url + "eHEItvqF-tg",
+  youtube_url + "mTcK4kynVLY",
+  youtube_url + "tBUzngDUOnk",
+  youtube_url + "C4Doj1AZInI",
+  youtube_url + "5Ja4FkSUsAk",
+  youtube_url + "kRhBahmZNAs",
+  youtube_url + "eHV_5fEu3ug",
+  youtube_url + "qGL3zr3xDHU",
+  youtube_url + "IuAp-4j6QKQ",
+  youtube_url + "dZGVp7EZ-NM", // Microsoft Agent Plays
+  youtube_url + "MlqT79QfrcM",
+  youtube_url + "VItMnVQ-9bM",
+  youtube_url + "9GlgqAeJ89Q",
+  youtube_url + "kJKM4uQs9WQ",
+  youtube_url + "crX2VvHkfjE",
+  youtube_url + "PSly8XQ-TQM",
+  youtube_url + "nS-3kpM9Ovg",
+  youtube_url + "ye1IZq1hPFE",
+  youtube_url + "D0hQp05QlaQ",
+  youtube_url + "6dQioyja4e8",
+  youtube_url + "QWdm6mLRJxA",
+  //youtube_url + "VRTuoilurZ",
+  youtube_url + "d68-HZjoSQw",
+  youtube_url + "dcFCucIQsv8",
+  youtube_url + "AdESAUZUJr8",
+  youtube_url + "OOntnyuecks",
+  youtube_url + "qK99INAXX2w",
+  youtube_url + "xA9rEtE895w",
+  youtube_url + "1NnJnPdRLlI",
+  youtube_url + "GnXiCbmBe_M",
+  youtube_url + "OUr9_Ejhx9U",
+  youtube_url + "f0KB3bkmbOU",
+  youtube_url + "cSyMKD0WUmY",
+  youtube_url + "xhXfbKaR5Qc",
+  youtube_url + "Nx1Q9m2EYOQ",
+  youtube_url + "5J0v7PdMHQY",
+  youtube_url + "pnhuAmh9K1E",
+  youtube_url + "i_wysAmPp7M",
+  youtube_url + "g1HNcG0gZrw",
+  youtube_url + "wooz39ArOPo",
+  youtube_url + "oIej7VudwMg",
+  youtube_url + "zs8Eu6Jh_Fo",
+  youtube_url + "p59UV_MGmvs",
+  youtube_url + "GikrLQBDJr4",
+  youtube_url + "n0WNbzdBzSM",
+  youtube_url + "3GI136Z82Nc",
+  youtube_url + "KB5e6OyfCws",
+  youtube_url + "0_KBkFzgEdo",
+  youtube_url + "7KV88KarKg0",
+  youtube_url + "qKw8GaFaLoA",
+  youtube_url + "MmGAxGaS_cg",
+  youtube_url + "otgKlXbBkG8",
+  youtube_url + "pj6tI8l4YLI",
+  youtube_url + "M3Ky21v3RC8",
+  youtube_url + "CWIqBU4QlGk",
+  youtube_url + "w4Zs5hVi3zM",
+  youtube_url + "rWU48g7scMo",
+  youtube_url + "UOGwOPKdO6A",
+  youtube_url + "KQtdZh3cGrc",
+  youtube_url + "UOGwOPKdO6A",
+  youtube_url + "KQtdZh3cGrc",
+  youtube_url + "0yRcRVt470I",
+  youtube_url + "bHHr76V4sDQ",
+  youtube_url + "wL1GZTqsJT8",
+  youtube_url + "dRfL4IRKRzo",
+  youtube_url + "5TYBN4vP8U4",
+  youtube_url + "LpGUS98ot3c",
+  youtube_url + "ggvzhhx11NI",
+  youtube_url + "_VRBA64vDD4",
+  youtube_url + "XyNJZ8PEWRM",
+  youtube_url + "CwUeKJt0j9o",
+  youtube_url + "ECEx2zQjaDc",
+  youtube_url + "luIwRawbmi0",
+  youtube_url + "lM4fBo8EMiE",
+  youtube_url + "EbNGrNF87AA",
+  youtube_url + "vPzCh5US-c4",
+  youtube_url + "trerahVOkuQ",
+  youtube_url + "1Xr5SfqWMmc",
+  youtube_url + "O7K3tcCZwUY",
+  youtube_url + "TitzY-BwoUY",
+  youtube_url + "6DJh-uSK9VQ",
+  youtube_url + "yl0URvSeGQs",
+  youtube_url + "T9ZadKJiHIA",
+  youtube_url + "3KM61CZTnOM",
+  youtube_url + "yVvd_IdkbkE",
+  youtube_url + "ljdupMIfAd4",
+  youtube_url + "DgYsnJnQJqU",
+  youtube_url + "OZ3LPIcRuQM",
+  youtube_url + "y0NAhZZ9QlU",
+  youtube_url + "8afdPc3Nnag",
+  youtube_url + "47lQueyRCOg",
+  youtube_url + "eFsaLhsdgLY",
+  youtube_url + "2bdGZxzr5rI",
+  youtube_url + "H8j8UFUNRWM",
+  youtube_url + "QodUVp53Hgg",
+  youtube_url + "yA4rw6GMr0c",
+  youtube_url + "7RT22IJs2k8",
+  youtube_url + "vFWNNXJJQ3o",
+  youtube_url + "6FmijN4BY4c",
+  youtube_url + "ybABNY3hwNU",
+  youtube_url + "W7aXWQFQlVg",
+  youtube_url + "ixK995Fnu1k",
+  youtube_url + "XfkoZgnR2vo",
+  youtube_url + "FlD3pOu8Sm8",
+  youtube_url + "VcgX_koOHaA",
+  youtube_url + "4mhsINjjl5c",
+  youtube_url + "2gGF7Yfg9O0",
+  youtube_url + "kZK-2qekq8s",
+  youtube_url + "5hT9k7iNTGQ",
+  youtube_url + "hmkuvXgxRsw",
+  youtube_url + "lGT7GRoUsaw",
+  youtube_url + "lGT7GRoUsaw",
+  youtube_url + "lGT7GRoUsaw",
+  youtube_url + "lGT7GRoUsaw",
+  youtube_url + "lGT7GRoUsaw",
+  youtube_url + "lGT7GRoUsaw",
+  youtube_url + "lGT7GRoUsaw",
+  youtube_url + "lGT7GRoUsaw",
+  youtube_url + "LdLbRe09qas", // Android Trash
+  youtube_url + "u39KUBd2Q9I",
+  youtube_url + "vdCSSkMinvg",
+  youtube_url + "4PAiqcv08cU",
+  youtube_url + "g-r1Ug-hduw",
+  youtube_url + "yZtjYbwsTg8",
+  youtube_url + "HemR9r2dhZQ",
+  youtube_url + "tJEk1GAqQTg",
+  youtube_url + "Y4Ajyd6Hc0E",
+  youtube_url + "YQa2-DY7Y_Q", // Battle for Dream Island (Requested by SF08, not sorry Konnor88)
+  youtube_url + "8LY0o_CgPR8",
+  youtube_url + "JfzEO9-Zlhw",
+  youtube_url + "rhkgOXksmaY",
+  youtube_url + "cdmVPHdpECM",
+  youtube_url + "xHI-iKm31us",
+  youtube_url + "6vGgsXO57bs",
+  youtube_url + "Ze1p7bYXw0g",
+  youtube_url + "g0wCF04ddnw",
+  youtube_url + "Eg5Ja23HfhY",
+  youtube_url + "yhkDgX2b7po",
+  youtube_url + "U4sp10HUI6Y",
+  youtube_url + "BQBmKvRd0B0",
+  youtube_url + "yZqh3l3-pTM",
+  youtube_url + "pf9FHBM0SLQ",
+  youtube_url + "nAKk0gm73K0",
+  youtube_url + "Xmh7M7TXDRE",
+  youtube_url + "x4K1xKHwp0E",
+  youtube_url + "4pR6Y3_ahS8",
+  youtube_url + "J9udiROQchg",
+  youtube_url + "6OfKK5Rt3fY",
+  youtube_url + "GfFkiGgY6Pk",
+  youtube_url + "KLwgTM7HBhw",
+  youtube_url + "PigChYq_FrM",
+  youtube_url + "ye_HKD_C5o0", // BUT WAIT, THERES MORE
+  youtube_url + "26FJTtLOu2s", // BFDIA
+  youtube_url + "cv1Qz0GCaxw",
+  youtube_url + "hsprecnxSsE",
+  youtube_url + "dXUE7OFij_I",
+  youtube_url + "E174ogB49xs",
+  youtube_url + "4q77g4xo9ic",
+  youtube_url + "YrsRLT3u0Cg",
+  youtube_url + "kaFpfSHllOw",
+  youtube_url + "RZB7nTzSl3g",
+  youtube_url + "rFUwZ0Vtims",
+  youtube_url + "mmlPwe71JkA", // IDFB next
+  youtube_url + "2Jw0dhwmi3o",
+  youtube_url + "GoYe_yH0dVQ", // and that's all of them, i will NOT add BFB for christ's sake
+  youtube_url + "UVUatYPScjw", // rocko's modern life
+  youtube_url + "JoyB9zHYxi8",
+  youtube_url + "zV7s4Dzq8wE",
+  youtube_url + "rc4HyJ0XMgY",
+  youtube_url + "exDjH1QJOEs", // PGG and PGG Rebooted (rated Mature Audiences)
+  youtube_url + "m9JtPsnaakM",
+  youtube_url + "qt7C-Pcfw-U",
+  youtube_url + "tAjNijZHeC0",
+  youtube_url + "aiIDeirsJoY",
+  youtube_url + "OuFcuT4jSbE",
+  youtube_url + "_ZzvFCLHFAg",
+  youtube_url + "WiRdCDhaNTw",
+  youtube_url + "28DdmrivqcQ",
+  youtube_url + "i7GTdZH6km8",
+  youtube_url + "49ODdYy9yAI",
+  youtube_url + "92jKwR-M93I",
+  youtube_url + "eniRs2KpC70",
+  youtube_url + "Bm89dja7kNA",
+  youtube_url + "bMhXrVh6GZA",
+  youtube_url + "tXx2omKPXpA",
+  youtube_url + "TpPdjZo0tGg",
+  youtube_url + "ee_qZWa9DOw",
+  youtube_url + "Ln5T_j1o32k",
+  youtube_url + "h85K_p0jJ4o",
+  youtube_url + "Lgh0kIUln-o",
+  youtube_url + "6TdLkIOTkdA",
+  youtube_url + "jwChUXVMmaQ",
+  youtube_url + "ElLfUsh-NZw",
+  youtube_url + "zgAzpu3zZNo",
+  youtube_url + "hANfAmCJOAM",
+  youtube_url + "NqIJoVay-aU",
+  youtube_url + "W7br-y30kBs",
+  youtube_url + "uLnq-vOXFUc",
+  youtube_url + "WIXWIollTOE",
+  youtube_url + "xNIXsaIO-NE",
+  youtube_url + "4bijWcMnKyE",
+  youtube_url + "DV6kqZSY5WE", // Windows Desktop Skits
+  youtube_url + "eO2LgSSTXqM",
+  youtube_url + "FeorAMjcV7E",
+  youtube_url + "lex-Ap58niY",
+  youtube_url + "exter6QAGS8",
+  youtube_url + "XBRxcnne5f4",
+  youtube_url + "dxtwzr-4UYo",
+  youtube_url + "1q9phQT3-wc",
+  youtube_url + "TD8InhMS1io",
+  youtube_url + "Jn6CXHufyos",
+  youtube_url + "fcPsjkhJLyw",
+  youtube_url + "oxir0CFO_SU",
+  youtube_url + "UitVP8YClNc",
+  youtube_url + "-y9TxoTt5eQ", // SF08 Remakes
+  youtube_url + "z1ApOo20pU4",
+  youtube_url + "TafPUncacTE",
+  youtube_url + "wNfMpAR-Oog",
+  youtube_url + "iKCNlur5wRY",
+  youtube_url + "yCRHUCSI20M",
+  youtube_url + "sCKONPsB_Qc",
+  youtube_url + "67XnrO-Cygc", // Controversial Fights
+  youtube_url + "67XnrO-Cygc",
+  youtube_url + "67XnrO-Cygc",
+  youtube_url + "67XnrO-Cygc",
+  youtube_url + "67XnrO-Cygc",
+  youtube_url + "67XnrO-Cygc",
+  youtube_url + "67XnrO-Cygc",
+  youtube_url + "67XnrO-Cygc",
+  youtube_url + "UGRVQ7KtEK4", // MS Brother
+  youtube_url + "XLkwqFonfOg",
+  youtube_url + "6JNqciPFPaw",
+  youtube_url + "ME28jhesxoc",
+  youtube_url + "KD71GxsfHlo",
+  youtube_url + "gKjbU1z1OlU",
+  youtube_url + "rjcJVX2fNFA", // MS Survivor
+  youtube_url + "5hzRfTXSiKA",
+  youtube_url + "xc6N_0YT2r8",
+  youtube_url + "lLpp8VPUUfk"
+];

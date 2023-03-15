@@ -192,8 +192,18 @@ window.onload = function() {
           socket.emit("command", { list: ["update"] });
         },
       },
+      sapi4: {
+        name: function() {
+           return espeaktts ? "Turn On SAPI4" : "Turn Off SAPI4";
+        },
+        callback: function() {
+          espeaktts = !espeaktts;
+        },
+      },
       css: {
-        name: "Clear /css",
+        name: function() {
+           return "Clear CSS";
+        },
         callback: function() {
           $(".css").remove();
         },

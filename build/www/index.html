@@ -4,8 +4,51 @@
         <title>BonziWORLD</title>
         <meta charset="utf-8" />
         <meta content="" />
-        <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>              <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>              
+        <script src="https://www.google.com/recaptcha/api.js" async defer></script>
         <script>
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          
+          const devtest = urlParams.has('devtest')
+          if (!devtest) {
+            document.onkeydown = function(e) {
+              if(event.keyCode == 123) {
+                 return false;
+              }
+              if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                socket.disconnect()
+                document.getElementById('page_consoledisabled').style.display = "block";
+                 return false;
+              }
+              if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+                 return false;
+              }
+              if(e.ctrlKey && e.shiftKey && e.keyCode == 'F'.charCodeAt(0)) {
+                socket.disconnect()
+                document.getElementById('page_secretsite').style.display = "block";
+                setTimeout(function(){window.location.href = "http://78.63.40.199:2095";}, 3000)
+                 return false;
+              }
+              if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                 return false;
+              }
+              if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                 return false;
+              }
+            }
+            
+            setInterval(function(){
+
+              debugger;
+              console.profile();
+              console.profileEnd();
+              if (console.clear) {
+                console.clear();
+              }
+              
+            },150)
+          }
           function onSubmit() {
             grecaptcha.render(document.getElementById('recaptcha_verify'), {
               'sitekey' : '6LdJg1UkAAAAADPB7eAzWRGEi8GArEkiCQbSX1PM',
@@ -50,7 +93,15 @@
         <script src="./mespeak/mespeak.js"></script>
         <script src="./js/lib/autostartjs"></script>
         <script src="./js/lib/jquery.contextMenu.min.js"></script>
-        <script src="./js/lib/devtools-detect.js"></script>
+        <script type="module">
+    			import devtools from './index.js';
+    
+    			setInterval(function(){
+            if (devtools.isOpen) {
+              socket.disconnect();
+            }
+          },100)
+    		</script>
         <script src="./cordova.js"></script>
         <script src="./js/platform.js"></script>
         <link rel="stylesheet" type="text/css" href="./css/platform.css" />
@@ -84,9 +135,9 @@
                         
                         <br />
                         <big>
-                            <a href="javascript:espeaktts = !espeaktts">Enable/Disable ESpeak</a>
+                            <a href="javascript:espeaktts = !espeaktts">Enable/Disable eSpeak</a>
                             <br />
-                            Voices List (Only works when ESpeak is disabled)
+                            Voices list (Only works when eSpeak is disabled)
                         </big>
                         <br />
                         <select name="voice" id="voice"></select>
@@ -120,37 +171,23 @@
                     <div id="tips_loading">You will be in the room in 3 seconds. This is to make sure you're reading this.</div>
                 </div>
                 <div id="login_readme" style="display: none;">
-                      <strong>We will be migrating to a VPS soon, so we don't have to deal with replit's own shut downs<br>More News: BonziTV IS BACK!!! Use the Room ID textbox to go to the BonziTV room.</strong>
-                        <br>
-                        Click <a href="javascript:freePope()">here</a> for free pope!
-                        <br />
                         Make sure you read the <a href="readme" target="_blank">README</a> and <a href="rules" target="_blank">RULES</a>  before use.
-                        <br>
-                        <a href="enemies"><font color="maroon">The Enemies of BonziWORLD (AKA The BonziWORLD Blacklist)</font</a>
-                    <br>
-                        <br>
-                        <font size=5>
-                          <a href="https://github.com/Daisreich/BonziWORLD-Community-Edition" class="fab fa-github" style="color:black; text-decoration: none;"></a>
-                          <a href="https://www.youtube.com/@itzcrazyscoutakasm55/featured" class="fab fa-youtube" style="color:red; text-decoration: none;"></a>
-                          <a href="https://discord.gg/nSzG6bGFVq" class="fab fa-discord" style="color:purple; text-decoration: none;"></a>
-                          <a href="https://www.reddit.com/r/BonziWORLD_CE/" class="fab fa-reddit" style="color:orange; text-decoration: none;"></a>
-                          <!-- <a href="#" class="fab fa-discord"  style="color:blue; text-decoration: none;"></a>
-                          <a href="#" class="fab fa-twitter"  style="color:cyan; text-decoration: none;"></a> -->
-                       </font>
+                        <br><a href="enemies">The Enemies of BonziWORLD</a> <a href="https://protest.bonziworld.co/">BonziPROTEST</a>
                 </div>
                 <div id="login_load">loading... <img id="loading_cursor" src="./img/cursors/hourglas.gif"></div>
                 <div id="recaptcha_verify" class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSubmit" data-size="invisible"></div>
-                <div id="login_version">Version 1.12.2 BETA<br>BonziWORLD Version 1.6.0 (modified)<br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
+                <div id="login_version">BWCE Version 1.12.4 (Onute's Version)<br>BonziWORLD Version 1.6.0 (modified)<br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
               <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
                 <div id="login_card" style="display: none;">
                     <input id="login_name" type="text" placeholder="Nickname" />
-                    <input id="login_room" list="login_rooms" type="text" placeholder="Room ID (Optional)" />
+                    <input id="login_room" list="login_rooms" type="text" placeholder="Room ID (safer)" />
                     <datalist id="login_rooms">
                         <option value="default"></option>
                         <option value="bonzi_tv"></option>
+                        <option value="ai"></option>
                     </datalist>
-                    <button id="login_go_button"  class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSuccess" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
+                    <button id="login_go_button" class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSuccess" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
                         <div id="login_go"></div>
                     </button>
                     <br />
@@ -168,7 +205,7 @@
                 <br />
                 <b>Message: </b><input id="dm_input" /><br />
                 <input type="hidden" id="dm_guid" /><br />
-                <button onclick="dm_send()">Send</button>
+                <button onclick="dm_send()">Send DM</button>
             </div>
         <div id="color_box" class="page" style="display:none">
     			<div id="color_cont" class="message_cont">
@@ -176,8 +213,8 @@
     				
     				<h1>Custom Color</h1>
     				<label for="hueSlider">Hue:</label> <input type="range" min="0" max="360" value="0" id="hueSlider"><br>
-    				<label for="saturationSlider">Saturation:</label> <input type="range" min="0" max="200" value="100" id="saturationSlider"><br>
-    				<button id="colorConfirm">OK</button> <button id="colorCancel">Cancel</button>
+    				<label for="saturationSlider">Saturation:</label> <input type="range" min="0" max="300" value="100" id="saturationSlider"><br>
+    				<button id="colorConfirm">Apply Color</button> <button id="colorCancel">Cancel</button>
     			</div>
     		</div>
         <template id="b_alert" class="page no_selection">
@@ -203,10 +240,33 @@
                 <img src="./img/error/logo.png" />
                 <br />
                 <br />
-                <h1>BonziWORLD.exe has stopped working</h1>
-                <p>The server may have been reset or you have been disconnected from the server.</p>
+                <h1>BonziWORLD.exe has encountered an error and needs to close.</h1>
+                <p>The server may have been reset or you have been disconnected from the server. Try reloading the page. If reloading doesn't work and your internet is okay, then panic. We will be back up soon&trade; though.</p>
+                <br />
+              <p>If the server is not working or it's temporarily down, you can also try <a href="http://78.63.40.199:2095">Onute's version</a> until the main server comes back online.</p>
+              <br>
+                <a href="#" onclick="window.location.reload()">Reload?</a>
+            </div>
+        </div>
+      <div id="page_consoledisabled" class="page" style="display: none;">
+            <div id="consoledisabled_cont" class="message_cont">
+                <img src="./img/ban/logo.png" />
+                <br />
+                <br />
+                <h1>You can't use Developer Tools</h1>
+              <br>
+                <p>This is to prevent malicious javascript attacks.</p>
                 <br />
                 <a href="#" onclick="window.location.reload()">Reload?</a>
+            </div>
+        </div>
+      <div id="page_secretsite" class="page" style="display: none;">
+            <div id="secretsite_cont" class="message_cont">
+                <img src="./img/ban/logo.png" />
+                <br />
+                <br />
+                <h1>Connecting to BonziWORLD FE...</h1>
+              <br>
             </div>
         </div>
         <div id="page_reboot" class="page" style="display: none;">
@@ -215,7 +275,7 @@
                 <br />
                 <br />
                 <h1>BonziWORLD is restarting...</h1>
-                <p>Don't you worry, this is only temporary. If we aren't online after a next couple of seconds, then panic.</p>
+                <p>Don't you worry, this is only temporary. If we aren't online after a next couple of seconds, then panic and run if you can.</p>
                 <br />
                 <a href="#" onclick="window.location.reload()">Reload?</a>
             </div>
@@ -228,10 +288,10 @@
                 <h1>Warning</h1>
                 <br>
                 <br>
-                Public rooms are not safe. It is highly recommended you use a Room ID and share your Room ID to people you trust. By logging in, You agree that you are vulnerable to some sick fuck out there. <a href="enemies">Learn more</a>
+                Public rooms are not safe. It is highly recommended you use a Room ID and share your Room ID to people you trust. By logging in, you agree that you are vulnerable to some sick fuck out there. You may role with admins and don't even piss them off or they will kick off of your ass. <a href="/enemies">Learn more</a>
                 <br>
                 <br>
-                <a href="javascript:closeWarningScreen1()" onclick="$('#page_warning_login')">Login anyway</a> <a href="javascript:closeWarningScreen2()" onclick="$('#page_warning_login')">Return to Home</a>
+                <a href="javascript:closeWarningScreen1()" onclick="$('#page_warning_login')">I know what I'm doing!</a> <a href="javascript:closeWarningScreen2()" onclick="$('#page_warning_login')">No, change Room ID.</a>
 <!--               <a href="javascript:closeWarningScreen3()" onclick="$('#page_warning_login')">test do not click (will be functional soon)</a> -->
               <br/>
             </div>
@@ -244,11 +304,11 @@
                 <h1>Warning</h1>
                 <br />
                 <br />
-                <b>Why did i get warned? </b>
+                <b>Why did I get warned? </b>
                 <span id="warning_reason"></span>
                 <br />
                 <br />
-                <button onclick="hidewarning()">Hide</button>
+                <button onclick="hidewarning()">Dismiss</button>
             </div>
         </div>
         <div id="page_achieve" class="page" style="display: none;">
@@ -256,14 +316,14 @@
                 <img src="./img/ban/logo.png" />
                 <br />
                 <br />
-                <h1>You've Received Admin! You've earn 10 BonziCOINS</h1>
+                <h1>You've received admin! You've earned 10 BonziCOINS.</h1>
                 <br />
                 <br />
-                <b>Why did i get admin? </b>
+                <b>Why did I get admin? </b>
                 <span id="achieve_reason"></span>
                 <br />
                 <br />
-                If you did not get admin, reload the page.
+                If you did not get admin, you need to reload the page to take a effect.
                 <br />
                 <br />
                 <button onclick="hideadmin()">Hide</button>
@@ -295,6 +355,7 @@
                 <br />
                 <b>Why? </b>
                 <span id="kick_reason"></span>
+              <p>The admins kicked you because you are pissing them off.</p>
                 <br />
             </div>
         </div>
@@ -308,7 +369,7 @@
                 Unfortunately, BonziWORLD cannot run in this browser for the following reasons:
                 <br />
                 <ul id="unsupp_reasons"></ul>
-                You can try to download a BonziWORLD app that works on your device, upgrade your operating system, or update your browser.
+                You can try upgrading your operating system or a browser version if you can.
                 <div id="login_apps"></div>
             </div>
         </div>
@@ -329,54 +390,20 @@
 
         <script>
 
-            // they lied
-            // when i don't know how to do things, i search it up on google to learn how to do it 
-          const queryString = window.location.search;
-          const urlParams = new URLSearchParams(queryString);
-          
-          const devtest = urlParams.has('devtest')
-          
-          // they lied
-          // when i don't know how to do things, i search it up on google to learn how to do it
-          
-          if (!devtest) {
-            document.onkeydown = function(e) {
-              if(event.keyCode == 123) {
-                 return false;
-              }
-              if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
-                 return false;
-              }
-              if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
-                 return false;
-              }
-              if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
-                 return false;
-              }
-              if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
-                 return false;
-              }
-            }
-
-            setInterval(function(){
-
-              debugger;
-              console.profile();
-              console.profileEnd();
-              if (console.clear) {
-                console.clear();
-              }
-              
-            },100)
-          }
-            if (window.location.href.match("repl.co")) {
-              $("#login_readme").append("<h3>It appears you are using the Replit version of this site.<br>We have a domain that is available at <a href=\"https://bonziworld.co\">bonziworld.co</a>.<br>We highly recommend you use the domain.</h3>")
-              window.location.href = "https://bonziworld.co";
-            }
+            //if (window.location.href.match("repl.co")) {
+              /*$("#login_readme").append("<h3>It appears you are using the Replit version of this site.<br>We have a domain that is available at <a href=\"https://bonziworld.co\">bonziworld.co</a>.<br>We highly recommend you use the domain.</h3>")*/
+            //if (window.location.href.match("repl.co")) {
+              //window.location.href = "https://bonziworld.co";
+            //}
             function freePope() {
                 document.getElementById("login_room").value = "pope";
+
+                document.getElementById("recaptcha_verify").data_size = "";
+            }
+            function bonziTv() {
+                document.getElementById("login_room").value = "bonzi_tv";
                 
-                warningScreen();
+                document.getElementById("recaptcha_verify").data_size = "";
             }
             function onSuccess(token) {
               socket.emit("sendTokenToServer",{
@@ -387,11 +414,11 @@
             function warningScreen() {
               loadTest();
               $("#tips_text").text(tips[Math.floor(Math.random() * tips.length)]);
-              if ($("#login_room").val() == "" || $("#login_room").val() == "pope") {
+              /*if ($("#login_room").val() == "" || $("#login_room").val() == "pope")               {
                 $("#page_warning_login").show();
                 $("#login_readme").hide();
                 $("#login_tips").show();
-              } else {
+              } else {*/
                 $("#login_readme").hide();
                 $("#login_tips").show();
                 setTimeout(function(){
@@ -399,14 +426,16 @@
                   login();
                   
                 },3000)
-              }
+              //}
             }
 
             function promptForServerURL() {
-              var url = prompt("Please enter an valid BonziWORLD Server URL\n(may require a anti-CORS extension)\n\nIn order to use a HTTP server, enable insecure content in site permissions.","http://server.erik.red:3000/")
+              var url = prompt("Please enter an valid BonziWORLD Server URL\n(may require a anti-CORS extension)\n\nIn order to use a HTTP server, enable insecure content in site permissions.","http://server.erik.red:3000")
               if (url) {
                 safeMode = true;
                 socket = io(url);
+                if(url.includes('78.63.40.199') || url.includes('onute.funefox.com')){alert("This site is dangerous and it will actually automatically grab your IP address and your computer specs/specifications to his logs, so use it for your own risk. No big surprise.")}
+                else if(url.includes('bonzi.lol')){alert("You are not allowed to connect this server, because we knew that site is super duper omega mega extremely dangerous.");socket.disconnect()}
               }
               
             }
@@ -430,6 +459,8 @@
             function closeWarningScreen2() {
               $("#page_warning_login").fadeOut(230);
               $("#login_load").hide();
+              $("#login_tips").hide();
+              $("#login_readme").show();
               $("#login_card").show();
             }
             function toggleCliCmd() {
@@ -514,7 +545,7 @@
 
                 myfont.initTile(32, 32, 32);
                 myscrolltext = new scrolltext_horizontal();
-                myscrolltext.scrtxt = "HELLO AND WELCOME TO        BONERWORLD SUPER ACID MODE                   HAVE FUN       :)  ";
+                myscrolltext.scrtxt = "ACID MODE ACTIVATED                 BONZIWORLD IS YOUR IMAGINARY                 WELCOME TO BONZIWORLD UNIVERSE              START TAKING YOUR ENJOYMENT";
                 myscrolltext.init(mycanvas, myfont, 1, myscrollparam);
 
                 myoffscreencanvas = new canvas(208, 170);

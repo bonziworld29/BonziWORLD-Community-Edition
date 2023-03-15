@@ -1,6 +1,6 @@
 const log = require('./log.js').log;
 const fs = require('fs-extra');
-const settings = require("./settings.json");
+const settings = require(__dirname + "/json/settings.json");
 const io = require('./index.js').io;
 
 
@@ -10,35 +10,35 @@ let logins;
 let reports;
 
 exports.init = function() {
-  fs.writeFile("./bans.json", "{}", { flag: 'wx' }, function(err) {
+  fs.writeFile(__dirname + "/json/bans.json", "{}", { flag: 'wx' }, function(err) {
     if (!err) console.log("Created empty bans list.");
     try {
-      bans = require("./bans.json");
+      bans = require(__dirname + "/json/bans.json");
     } catch (e) {
       throw "Could not load bans.json. Check syntax and permissions.";
     }
   });
-  fs.writeFile("./mutes.json", "{}", { flag: 'wx' }, function(err) {
+  fs.writeFile(__dirname + "/json/mutes.json", "{}", { flag: 'wx' }, function(err) {
     if (!err) console.log("Created empty mutes list.");
     try {
-      mutes = require("./mutes.json");
+      mutes = require(__dirname + "/json/mutes.json");
     } catch (e) {
       throw "Could not load mutes.json. Check syntax and permissions.";
     }
   });
-  fs.writeFile("./logins.json", "{}", { flag: 'wx' }, function(err) {
+  fs.writeFile(__dirname + "/json/logins.json", "{}", { flag: 'wx' }, function(err) {
     if (!err) console.log("Created empty logins list.");
-    logins = require("./logins.json");
+    logins = require(__dirname + "/json/logins.json");
   });
-  fs.writeFile("./reports.json", "{}", { flag: 'wx' }, function(err) {
+  fs.writeFile(__dirname + "/json/reports.json", "{}", { flag: 'wx' }, function(err) {
     if (!err) console.log("Created empty reports list.");
-    reports = require("./reports.json");
+    reports = require(__dirname + "/json/reports.json");
   });
 };
 
 exports.saveBans = function() {
   fs.writeFile(
-    "./bans.json",
+    __dirname + "/json/bans.json",
     JSON.stringify(bans),
     { flag: 'w' },
     function(error) {
@@ -49,22 +49,23 @@ exports.saveBans = function() {
   );
 };
 
+
 exports.saveLogins = function() {
   fs.writeFile(
-    "./logins.json",
+    __dirname + "/json/logins.json",
     JSON.stringify(logins)
   );
 };
 exports.saveReport = function() {
   fs.writeFile(
-    "./reports.json",
+    __dirname + "/json/reports.json",
     JSON.stringify(reports)
   );
 };
 
 exports.saveMutes = function() {
   fs.writeFile(
-    "./mutes.json",
+    __dirname + "/json/mutes.json",
     JSON.stringify(mutes),
     { flag: 'w' },
     function(error) {
@@ -74,6 +75,7 @@ exports.saveMutes = function() {
     }
   );
 };
+
 
 // Ban length is in minutes
 exports.addBan = function(ip, length, reason) {

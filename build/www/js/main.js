@@ -384,6 +384,7 @@ if (!devtest) {
 if (window.location.href.match("repl.co")) {
   $("#login_readme").append("<h3>It appears you are using the Replit version of this site.<br>We have a domain that is available at <a href=\"https://bonziworld.co\">bonziworld.co</a>.<br>We highly recommend you use the domain.</h3>")
 }
+
 function freePope() {
   document.getElementById("login_room").value = "pope";
 

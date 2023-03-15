@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>YouTube Thumbnail Downloader</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="black">
+	<meta data-react-helmet="true" charset="utf-8">
+	<meta data-react-helmet="true" property="og:title" content="YouTube Thumbnail Downloader">
+	<meta data-react-helmet="true" property="og:description" content="Download any thumbnail if you want!">
+</head>
+<style>
+body { text-align: center; color: black; background: white; font-family: Eurostile, Arial, sans-serif;font-smooth: never; -webkit-font-smoothing: none; }
+.thumbnailEnter { background: white; color: black; text-align: center; display: inline; font-family: Eurostile, Arial, sans-serif: }
+.imgPreview { border: 2px solid black; transition: 0.3s; display: inline; filter: brightness(100%);}
+.imgPreview:hover { border: 2px solid black; display: inline; filter: brightness(120%);}
+</style>
+<body>
+<h1>YouTube Thumbnail Downloader</h1>
+<p>Convert your video thumbnail into various thumbnails that are now available. You can use both links containing www.youtube.com and youtu.be. Remember, you must have an official YouTube URL with HTTPS in it. <b>Otherwise it will not work!</b></p>
+<p>You will need Internet connection to do this.</p>
+  <p>Some of thumbnails will show grayscale default thumbnail, because of this thumbnail is not available.</p>
+<br>
+<input type="text" size="40" class="thumbnailEnter" onkeydown="if (event.keyCode == 13){getThumbnails()}" onpaste="setTimeout(function(){getThumbnails()}, 100)" placeholder="E.g., https://www.youtube.com/watch?v=tRlQhldXz60" required id="thumbnailId">
+<button onclick="getThumbnails();">Get Thumbnails</button>
+<hr noshade>
+<h1>Your thumbnails</h1>
+<p>Right click to download them.</p>
+<img src="" class="imgPreview" id="maxresdefault" width="300px">
+<img src="" class="imgPreview" id="sddefault" width="300px">
+<img src="" class="imgPreview" id="hqdefault" width="300px">
+<img src="" class="imgPreview" id="mqdefault" width="300px">
+<img src="" class="imgPreview" id="default" width="300px"><br>
+<img src="" class="imgPreview" id="0vid" width="300px">
+<img src="" class="imgPreview" id="1vid" width="300px">
+<img src="" class="imgPreview" id="2vid" width="300px">
+<img src="" class="imgPreview" id="3vid" width="300px">
+<img src="" class="imgPreview" id="mq1" width="300px"><br>
+<img src="" class="imgPreview" id="mq2" width="300px">
+<img src="" class="imgPreview" id="mq3" width="300px">
+<img src="" class="imgPreview" id="hq1" width="300px">
+<img src="" class="imgPreview" id="hq2" width="300px">
+<img src="" class="imgPreview" id="hq3" width="300px"><br>
+<img src="" class="imgPreview" id="sd1" width="300px">
+<img src="" class="imgPreview" id="sd2" width="300px">
+<img src="" class="imgPreview" id="sd3" width="300px">
+<img src="" class="imgPreview" id="maxres1" width="300px">
+<img src="" class="imgPreview" id="maxres2" width="300px"><br>
+<img src="" class="imgPreview" id="maxres3" width="300px">
+<img src="" class="imgPreview" id="hq720" width="300px">
+<img src="" class="imgPreview" id="hq720" width="300px">
+<hr noshade>
+<p>Tool made by ItzUltraScout/Onute Saulute, started 2022/02/25, if you like this tool, I appreciate your decision. No ads required.</p>
+</body>
+<script>
+var linkIMG = "https://i.ytimg.com/vi/";
+function getThumbnails(){
+if(document.getElementById('thumbnailId').value === ""){alert("Please enter an YouTube URL!")}
+else {
+if(document.getElementById('thumbnailId').value.includes("youtube.com")){
+var youtubeLink = document.getElementById('thumbnailId').value.replace("https://www.youtube.com/watch?v=","")
+document.getElementById('maxresdefault').src = linkIMG + youtubeLink + "/maxresdefault.jpg";
+document.getElementById('sddefault').src = linkIMG + youtubeLink + "/sddefault.jpg";
+document.getElementById('hqdefault').src = linkIMG + youtubeLink + "/hqdefault.jpg";
+document.getElementById('mqdefault').src = linkIMG + youtubeLink + "/mqdefault.jpg";
+document.getElementById('default').src = linkIMG + youtubeLink + "/default.jpg";
+document.getElementById('0vid').src = linkIMG + youtubeLink + "/0.jpg";
+document.getElementById('1vid').src = linkIMG + youtubeLink + "/1.jpg";
+document.getElementById('2vid').src = linkIMG + youtubeLink + "/2.jpg";
+document.getElementById('3vid').src = linkIMG + youtubeLink + "/3.jpg";
+document.getElementById('mq1').src = linkIMG + youtubeLink + "/mq1.jpg";
+document.getElementById('mq2').src = linkIMG + youtubeLink + "/mq2.jpg";
+document.getElementById('mq3').src = linkIMG + youtubeLink + "/mq3.jpg";
+document.getElementById('hq1').src = linkIMG + youtubeLink + "/hq1.jpg";
+document.getElementById('hq2').src = linkIMG + youtubeLink + "/hq2.jpg";
+document.getElementById('hq3').src = linkIMG + youtubeLink + "/hq3.jpg";
+document.getElementById('sd1').src = linkIMG + youtubeLink + "/sd1.jpg";
+document.getElementById('sd2').src = linkIMG + youtubeLink + "/sd2.jpg";
+document.getElementById('sd3').src = linkIMG + youtubeLink + "/sd3.jpg";
+document.getElementById('maxres1').src = linkIMG + youtubeLink + "/maxres1.jpg";
+document.getElementById('maxres2').src = linkIMG + youtubeLink + "/maxres2.jpg";
+document.getElementById('maxres3').src = linkIMG + youtubeLink + "/maxres3.jpg";
+document.getElementById('hq720').src = linkIMG + youtubeLink + "/hq720.jpg";
+document.getElementById('hq720').src = "https://i.ytimg.com/vi_webp/" + youtubeLink + "/maxresdefault.webp";
+
+} else {
+var youtubeLink = document.getElementById('thumbnailId').value.replace("https://youtu.be/","")
+document.getElementById('maxresdefault').src = linkIMG + youtubeLink + "/maxresdefault.jpg";
+document.getElementById('sddefault').src = linkIMG + youtubeLink + "/sddefault.jpg";
+document.getElementById('hqdefault').src = linkIMG + youtubeLink + "/hqdefault.jpg";
+document.getElementById('mqdefault').src = linkIMG + youtubeLink + "/mqdefault.jpg";
+document.getElementById('default').src = linkIMG + youtubeLink + "/default.jpg";
+document.getElementById('0vid').src = linkIMG + youtubeLink + "/0.jpg";
+document.getElementById('1vid').src = linkIMG + youtubeLink + "/1.jpg";
+document.getElementById('2vid').src = linkIMG + youtubeLink + "/2.jpg";
+document.getElementById('3vid').src = linkIMG + youtubeLink + "/3.jpg";
+document.getElementById('mq1').src = linkIMG + youtubeLink + "/mq1.jpg";
+document.getElementById('mq2').src = linkIMG + youtubeLink + "/mq2.jpg";
+document.getElementById('mq3').src = linkIMG + youtubeLink + "/mq3.jpg";
+document.getElementById('hq1').src = linkIMG + youtubeLink + "/hq1.jpg";
+document.getElementById('hq2').src = linkIMG + youtubeLink + "/hq2.jpg";
+document.getElementById('hq3').src = linkIMG + youtubeLink + "/hq3.jpg";
+document.getElementById('sd1').src = linkIMG + youtubeLink + "/sd1.jpg";
+document.getElementById('sd2').src = linkIMG + youtubeLink + "/sd2.jpg";
+document.getElementById('sd3').src = linkIMG + youtubeLink + "/sd3.jpg";
+document.getElementById('maxres1').src = linkIMG + youtubeLink + "/maxres1.jpg";
+document.getElementById('maxres2').src = linkIMG + youtubeLink + "/maxres2.jpg";
+document.getElementById('maxres3').src = linkIMG + youtubeLink + "/maxres3.jpg";
+document.getElementById('hq720').src = linkIMG + youtubeLink + "/hq720.jpg";
+document.getElementById('hq720').src = "https://i.ytimg.com/vi_webp/" + youtubeLink + "/maxresdefault.webp";
+}
+}
+}
+</script>
+</html>

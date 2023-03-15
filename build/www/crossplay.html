@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>BonziWORLD</title>
+        <meta charset="utf-8" />
+        <meta content="" />
+        <script src="https://cdn.jsdelivr.net/npm/interactjs/dist/interact.min.js"></script>              <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+        <script>
+          function onSubmit() {
+            grecaptcha.render(document.getElementById('recaptcha_verify'), {
+              'sitekey' : '6LdJg1UkAAAAADPB7eAzWRGEi8GArEkiCQbSX1PM',
+              'theme' : 'light',
+              callback: onSuccess
+            });
+          }
+        </script>
+        <script src="./js/lib/clippy.min.js"></script>
+        <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" /> 
+        <meta name="mobile-web-app-capable" content="yes" />
+        <link rel="stylesheet" type="text/css" href="./css/style.min.css" />
+        <link rel="stylesheet" type="text/css" href="./css/clippy.css" media="all" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./favicons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" href="./favicons/favicon-32x32.png" sizes="32x32" />
+        <link rel="icon" type="image/png" href="./favicons/favicon-16x16.png" sizes="16x16" />
+        <link rel="manifest" href="./favicons/manifest.json" />
+        <link rel="mask-icon" href="./favicons/safari-pinned-tab.svg" color="#5bbad5" />
+        <link rel="shortcut icon" href="./favicons/favicon.ico" />
+        <meta name="msapplication-config" content="./favicons/browserconfig.xml" />
+        <meta name="theme-color" content="#8b5adc" />
+      	<meta property="og:type" content="website">
+      <meta property="og:site_name" content="BonziWORLD">
+      <meta property="og:keywords" content="BonziWORLD, bonziworld, bwr, BWR, BonziWorld Revived, Bonziworld">
+      <meta property="twitter:card" content="summary_large_image"> 
+      <meta property="twitter:site" content="@BonziWRevived">
+      <meta property="twitter:site:id" content="@BonziWRevived"> <meta property="twitter:creator" content="@BonziWRevived">
+      <meta property="twitter:creator:id" content="@BonziWRevived"
+        ><!-- section:ogImages -->
+      <meta property="twitter:image" content="./favicons/android-chrome-192x192.png">
+      <meta property="og:image" content="./favicons/android-chrome-192x192.png"><!-- endsection --><meta property="og:locale" content="en-US"> 
+      <meta data-react-helmet="true" property="og:title" content="BonziWORLD"><meta data-react-helmet="true" property="og:description" content="BonziWORLD is a memey BonziBUDDY chat site with no viruses at all. It is fun to use and it also has rules. Chat, watch videos, record, and many others!">
+      <meta data-react-helmet="true" name="description" content="BonziWORLD is a memey BonziBUDDY chat site with no viruses at all. It is fun to use and it also has rules. Chat, watch videos, record, and many others!">
+        <script src="./js/lib/easeljs.min.js"></script>
+        <script src="./js/lib/preloadjs-0.6.2.min.js"></script>
+        <script src="./js/lib/jquery.min.js"></script>
+        <script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/997fe684/www-widgetapi.vflset/www-widgetapi.js" async></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+        <script src="./js/lib/seedrandom.min.js"></script>
+        <script src="./js/lib/socket.io-1.4.5.js"></script>
+        <script src="./js/lib/speakjs/speakClient.js"></script>
+        <script src="./mespeak/mespeak.js"></script>
+        <script src="./js/lib/autostartjs"></script>
+        <script src="./js/lib/jquery.contextMenu.min.js"></script>
+        <script src="./js/lib/devtools-detect.js"></script>
+        <script src="./cordova.js"></script>
+        <script src="./js/platform.js"></script>
+        <link rel="stylesheet" type="text/css" href="./css/platform.css" />
+        <script src="./js/legacy/crossplay.min.js"></script>
+        <script src="./js/warning.js"></script>
+        <script src="./js/css.js"></script>
+        <script src="./js/ban.js"></script>
+    </head>
+    <body oncontextmenu="return false">
+        <style id="theme"></style>
+        <audio id="error" src="error.ogg"></audio>
+        <audio id="jumpscare" src="hypnobehh.mp3" loop></audio>
+        <div id="content">
+            <div id="news"></div>
+            <div id="bonzi_tv"></div>
+            <div id="room_info">
+                Room ID: <span id="room_id">???</span>
+                <br />
+                <span id="room_public">This room is public.</span>
+                <span id="room_private">This room is private.</span>
+                <span id="room_owner">
+                    <br />
+                    You are the owner of this room.
+                </span>
+                <br />
+                        <big>
+                            <a href="https://events.softgiving.com/donate/HasanAbiForTurkeySyriaEarthquakesFund">Donate the Türkiye and Syria Earthquake Charity</a>
+                        </big>
+                <a href="javascript:toggleCliCmd()">Client Commands</a>
+                    <div id="clicmds" style="display: none;">
+                        
+                        <br />
+                        <big>
+                            <a href="javascript:espeaktts = !espeaktts">Enable/Disable ESpeak</a>
+                            <br />
+                            Voices List (Only works when ESpeak is disabled)
+                        </big>
+                        <br />
+                        <select name="voice" id="voice"></select>
+                        <br />
+                        <!-- <a href="https://discord.gg/T4FtbuKuqq">Psst.. We have a Discord Server</a> -->
+                        <br />
+                        <br />
+                        <a href="javascript:print();">Print BonziWORLD!</a>
+
+                    </div>
+            </div>
+            <canvas id="bonzi_canvas" width="100" height="100"> </canvas>
+            <div id="main"></div>
+            <table id="chat_bar">
+                <tr>
+                    <td id="chat_send">Send</td>
+                    <td id="chat_message_cont">
+                        <input id="chat_message" type="text" placeholder="Enter a message" />
+                    </td>
+                    <td id="chat_tray">
+                        <div id="btn_tile" class="tray_btn"></div>
+                    </td>
+                </tr>
+            </table>
+
+            <div id="page_login" class="page">
+                <div id="login_apps"></div>
+                <div id="login_tips" style="display: none;">
+                    <img src="./img/tips/swag.png" width=18>Bro Tip: <small><div id="tips_text"></div></small>
+                    <br>
+                    <div id="tips_loading">You will be in the room in 3 seconds. This is to make sure you're reading this.</div>
+                </div>
+                <div id="login_readme" style="display: none;">
+                      <strong>BonziTV IS BACK!!! Use the Room ID textbox to go to the BonziTV room.</strong>
+                        <br>
+                        Click <a href="javascript:freePope()">here</a> for free pope!
+                        <br />
+                        Make sure you read the <a href="readme" target="_blank">README</a> and <a href="rules" target="_blank">RULES</a>  before use.
+                        <br>
+                        <a href="enemies"><font color="maroon">The Enemies of BonziWORLD (AKA The BonziWORLD Blacklist)</font</a>
+                    <br>
+                        <br>
+                        <font size=5>
+                          <a href="https://github.com/Daisreich/BonziWORLD-Community-Edition" class="fab fa-github" style="color:black; text-decoration: none;"></a>
+                          <a href="https://www.youtube.com/@itzcrazyscoutakasm55/featured" class="fab fa-youtube" style="color:red; text-decoration: none;"></a>
+                          <a href="https://discord.gg/nSzG6bGFVq" class="fab fa-discord" style="color:purple; text-decoration: none;"></a>
+                          <a href="https://www.reddit.com/r/BonziWORLD_CE/" class="fab fa-reddit" style="color:orange; text-decoration: none;"></a>
+                          <!-- <a href="#" class="fab fa-discord"  style="color:blue; text-decoration: none;"></a>
+                          <a href="#" class="fab fa-twitter"  style="color:cyan; text-decoration: none;"></a> -->
+                       </font>
+                </div>
+                <div id="login_load">loading <img id="loading_cursor" src="./img/cursors/hourglas.gif"></div>
+                <div id="recaptcha_verify" class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSubmit" data-size="invisible"></div>
+                <div id="login_version">Version 1.12.2 BETA<br>BonziWORLD Version 1.6.0 (modified)<br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
+              <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+                <div id="login_card" style="display: none;">
+                    <input id="login_name" type="text" placeholder="Nickname" />
+                    <input id="login_room" list="login_rooms" type="text" placeholder="Room ID (Optional)" />
+                    <datalist id="login_rooms">
+                        <option value="default"></option>
+                        <option value="bonzi_tv"></option>
+                    </datalist>
+                    <button id="login_go_button"  class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSuccess" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
+                        <div id="login_go"></div>
+                    </button>
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+                    <div id="login_error" style="display: none;"></div>
+                    <br />
+                </div>
+            </div>
+        </div>
+            <div id="page_dm" class="message_cont" style="display: none;">
+                <h1>Message <span id="dm_send_to"></span></h1>
+                <br />
+                <b>Message: </b><input id="dm_input" /><br />
+                <input type="hidden" id="dm_guid" /><br />
+                <button onclick="dm_send()">Send</button>
+            </div>
+        <div id="color_box" class="page" style="display:none">
+    			<div id="color_cont" class="message_cont">
+    				<img src="./img/misc/preview.png" id="colorPreview"><br>
+    				
+    				<h1>Custom Color</h1>
+    				<label for="hueSlider">Hue:</label> <input type="range" min="0" max="360" value="0" id="hueSlider"><br>
+    				<label for="saturationSlider">Saturation:</label> <input type="range" min="0" max="200" value="100" id="saturationSlider"><br>
+    				<button id="colorConfirm">OK</button> <button id="colorCancel">Cancel</button>
+    			</div>
+    		</div>
+        <template id="b_alert" class="page no_selection">
+            <div class="message_cont no_selection">
+                <h1>text here afgjagoafgja</h1>
+                <br />
+                <p>type text here for free</p>
+                <br />
+                <button class="btn">OK</button>
+            </div>
+        </template>
+        <template id="b_broadcast" class="page no_selection">
+            <div class="message_cont no_selection">
+                <h1>text here afgjagoafgja</h1>
+                <br />
+                <p>type text here for free</p>
+                <br />
+                <button class="btn">OK</button>
+            </div>
+        </template>
+        <div id="page_error" class="page" style="display: none;">
+            <div id="error_cont" class="message_cont">
+                <img src="./img/error/logo.png" />
+                <br />
+                <br />
+                <h1>BonziWORLD.exe has stopped working</h1>
+                <p>The server may have been reset or you have been disconnected from the server.</p>
+                <br />
+                <a href="#" onclick="window.location.reload()">Reload?</a>
+            </div>
+        </div>
+        <div id="page_reboot" class="page" style="display: none;">
+            <div id="error_cont" class="message_cont">
+                <img src="./img/error/logo.png" />
+                <br />
+                <br />
+                <h1>BonziWORLD is restarting...</h1>
+                <p>Don't you worry, this is only temporary. If we aren't online after a next couple of seconds, then panic.</p>
+                <br />
+                <a href="#" onclick="window.location.reload()">Reload?</a>
+            </div>
+        </div>
+        <div id="page_warning_login" class="page" style="display: none;">
+            <div id="error_cont" class="message_cont">
+                <img src="./img/error/logo2.png" />
+                <br />
+                <br />
+                <h1>Warning</h1>
+                <br>
+                <br>
+                Public rooms are not safe. It is highly recommended you use a Room ID and share your Room ID to people you trust. By logging in, You agree that you are vulnerable to some sick fuck out there. <a href="enemies">Learn more</a>
+                <br>
+                <br>
+                <a href="javascript:closeWarningScreen1()" onclick="$('#page_warning_login')">Login anyway</a> <a href="javascript:closeWarningScreen2()" onclick="$('#page_warning_login')">Return to Home</a>
+<!--               <a href="javascript:closeWarningScreen3()" onclick="$('#page_warning_login')">test do not click (will be functional soon)</a> -->
+              <br/>
+            </div>
+        </div>
+        <div id="page_warning" class="page" style="display: none;">
+            <div id="warning_cont" class="message_cont">
+                <img src="./img/ban/logo.png" />
+                <br />
+                <br />
+                <h1>Warning</h1>
+                <br />
+                <br />
+                <b>Why did i get warned? </b>
+                <span id="warning_reason"></span>
+                <br />
+                <br />
+                <button onclick="hidewarning()">Hide</button>
+            </div>
+        </div>
+        <div id="page_achieve" class="page" style="display: none;">
+            <div id="achieve_cont" class="message_cont">
+                <img src="./img/ban/logo.png" />
+                <br />
+                <br />
+                <h1>You've Received Admin! You've earn 10 BonziCOINS</h1>
+                <br />
+                <br />
+                <b>Why did i get admin? </b>
+                <span id="achieve_reason"></span>
+                <br />
+                <br />
+                If you did not get admin, reload the page.
+                <br />
+                <br />
+                <button onclick="hideadmin()">Hide</button>
+            </div>
+        </div>
+        <div id="page_ban" class="page" style="display: none;">
+            <div id="ban_cont" class="message_cont">
+                <img src="./img/ban/logo.png" />
+                <br />
+                <br />
+                <h1>You got banned!</h1>
+                <br />
+                <br />
+                <b>Why? </b>
+                <span id="ban_reason"></span>
+                <br />
+                <b>When is it over? </b>
+                <span id="ban_end"></span>
+                <br />
+            </div>
+        </div>
+        <div id="page_kick" class="page" style="display: none;">
+            <div id="kick_cont" class="message_cont">
+                <img src="./img/ban/logo.png" />
+                <br />
+                <br />
+                <h1>You got kicked!</h1>
+                <br />
+                <br />
+                <b>Why? </b>
+                <span id="kick_reason"></span>
+                <br />
+            </div>
+        </div>
+        <div id="page_unsupp" class="page" style="display: none;">
+            <div id="unsupp_cont" class="message_cont">
+                <img src="./img/error/logo.png" />
+                <br />
+                <br />
+                <h1>BonziWORLD cannot run on this platform.</h1>
+                <br />
+                Unfortunately, BonziWORLD cannot run in this browser for the following reasons:
+                <br />
+                <ul id="unsupp_reasons"></ul>
+                You can try to download a BonziWORLD app that works on your device, upgrade your operating system, or update your browser.
+                <div id="login_apps"></div>
+            </div>
+        </div>
+        <div id="titlebar">
+            <div id="minimize"></div>
+            <div id="maximize"></div>
+            <div id="close"></div>
+        </div>
+        <script type='text/javascript' src='//www.midijs.net/lib/midi.js'></script>
+
+        <script src="//www.windows93.net/c/libs/codef/codef_core.js"></script>
+        <script src="//www.windows93.net/c/libs/codef/codef_starfield.js"></script>
+        <script src="//www.windows93.net/c/libs/codef/codef_gradient.js"></script>
+        <script src="//www.windows93.net/c/libs/codef/codef_scrolltext.js"></script>
+        <script src="//www.windows93.net/c/libs/codef/codef_fx.js"></script>
+        <script src="//www.windows93.net/c/libs/codef/codef_3d.js"></script>
+        <script src="//www.windows93.net/c/libs/howler.min.js"></script>
+
+        <script>
+
+            // they lied
+            // when i don't know how to do things, i search it up on google to learn how to do it 
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          
+          const devtest = urlParams.has('devtest')
+          
+          // they lied
+          // when i don't know how to do things, i search it up on google to learn how to do it
+          
+          if (!devtest) {
+            document.onkeydown = function(e) {
+              if(event.keyCode == 123) {
+                 return false;
+              }
+              if(e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) {
+                 return false;
+              }
+              if(e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) {
+                 return false;
+              }
+              if(e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) {
+                 return false;
+              }
+              if(e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) {
+                 return false;
+              }
+            }
+
+            setInterval(function(){
+
+              debugger;
+              console.profile();
+              console.profileEnd();
+              if (console.clear) {
+                console.clear();
+              }
+              
+            },100)
+          }
+            if (window.location.href.match("repl.co")) {
+              $("#login_readme").append("<h3>It appears you are using the Replit version of this site.<br>We have a domain that is available at <a href=\"https://bonziworld.co\">bonziworld.co</a>.<br>We highly recommend you use the domain.</h3>")
+              window.location.href = "https://bonziworld.co";
+            }
+            function freePope() {
+                document.getElementById("login_room").value = "pope";
+                
+                warningScreen();
+            }
+            function onSuccess(token) {
+              socket.emit("sendTokenToServer",{
+                token: token
+              });
+              warningScreen();
+            }
+            function warningScreen() {
+              loadTest();
+              $("#tips_text").text(tips[Math.floor(Math.random() * tips.length)]);
+              if ($("#login_room").val() == "" || $("#login_room").val() == "pope") {
+                $("#page_warning_login").show();
+                $("#login_readme").hide();
+                $("#login_tips").show();
+              } else {
+                $("#login_readme").hide();
+                $("#login_tips").show();
+                setTimeout(function(){
+                  
+                  login();
+                  
+                },3000)
+              }
+            }
+
+            function promptForServerURL() {
+              var url = prompt("Please enter an valid BonziWORLD Server URL\n(may require a anti-CORS extension)\n\nIn order to use a HTTP server, enable insecure content in site permissions.","http://server.erik.red:3000/")
+              if (url) {
+                safeMode = true;
+                socket = io(url);
+              }
+              
+            }
+            function closeWarningScreen1() {
+              $("#tips_text").text(tips[Math.floor(Math.random() * tips.length)]);
+              setTimeout(function(){
+                  
+                login();
+                  
+                if (document.getElementById("login_room").value == "pope") {
+                  
+                  setTimeout(function(){
+                      socket.emit("command",{list:["pope"]})
+                  },200)
+                  
+                }
+                
+              },3000)
+              $("#page_warning_login").fadeOut(230);
+            }
+            function closeWarningScreen2() {
+              $("#page_warning_login").fadeOut(230);
+              $("#login_load").hide();
+              $("#login_card").show();
+            }
+            function toggleCliCmd() {
+                var cmds = document.getElementById('clicmds');
+                if (cmds.style.display == "none") {
+                    cmds.style.display = "block";
+                } else {
+                    cmds.style.display = "none";
+                }
+            }
+            var mycanvas;
+            var my2dstarfield;
+            var my2dstarsparams = [
+                { nb: 30, speedy: 2, speedx: -1, params: 0 },
+                { nb: 30, speedy: 0.8, speedx: 0.8, params: 1 },
+                { nb: 30, speedy: 0.6, speedx: 0.6, params: 2 },
+            ];
+
+            var bubble = new Array();
+            //bubble[0]=new image('data/zip.gif');
+          
+            bubble[0] = new image("/img/ban/logo.png");
+            bubble[1] = new image("/img/stickers/flip.png");
+            bubble[2] = new image("/img/error/logo.png");
+            // not dangerous
+            //bubble[3]=new image('/dangerous/slimey.png');
+
+            var mygrad;
+            var mygradcolor = [
+                { color: "rgb(128,0,128)", offset: 0 },
+                { color: "rgb(255,20,147)", offset: 0.25 },
+                { color: "rgb(128,0,128)", offset: 0.5 },
+                { color: "rgb(255,20,147)", offset: 0.75 },
+                { color: "rgb(128,0,128)", offset: 1 },
+            ];
+
+            var myfont = new image("img/font.png");
+            var mycanvas;
+            var myscrolltext;
+
+            var myscrollparam = [{ myvalue: 0, amp: 125, inc: 0.2, offset: -0.04 }];
+
+            var myimage = new image("/img/desktop/bg_acid.png");
+            var mycanvas;
+            var myoffscreencanvas;
+            var myfx;
+            var myfxparam = [
+                { value: 0, amp: 30, inc: 0.03, offset: -0.05 },
+                { value: 0, amp: 30, inc: 0.01, offset: 0.08 },
+            ];
+
+            var my3d;
+
+            var myobj = new Array();
+            var myobjvert = new Array();
+            myobjvert = [
+                { x: -300, y: 0, z: 300 },
+                { x: 300, y: 0, z: 300 },
+                { x: 300, y: 0, z: -300 },
+                { x: -300, y: 0, z: -300 },
+                { x: 0, y: 400, z: 0 },
+                { x: 0, y: -400, z: 0 },
+            ];
+
+            myobj = [
+                { p1: 1, p2: 4, p3: 0, params: new MeshBasicMaterial({ color: 0x00ffff, opacity: 0.7 }) },
+                { p1: 2, p2: 4, p3: 1, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
+                { p1: 3, p2: 4, p3: 2, params: new MeshBasicMaterial({ color: 0xff00ff, opacity: 0.7 }) },
+                { p1: 0, p2: 4, p3: 3, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
+                { p1: 0, p2: 5, p3: 1, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
+                { p1: 1, p2: 5, p3: 2, params: new MeshBasicMaterial({ color: 0x00ffff, opacity: 0.7 }) },
+                { p1: 2, p2: 5, p3: 3, params: new MeshBasicMaterial({ color: 0xeeeeee, opacity: 0.7 }) },
+                { p1: 3, p2: 5, p3: 0, params: new MeshBasicMaterial({ color: 0xff00ff, opacity: 0.7 }) },
+            ];
+
+            function init() {
+                window.addEventListener("resize", onWindowResize, false);
+
+                mycanvas = new canvas(window.innerWidth, window.innerHeight, "main");
+                my2dstarfield = new starfield2D_img(mycanvas, bubble, my2dstarsparams);
+                mygrad = new grad(mycanvas, mygradcolor);
+
+                myfont.initTile(32, 32, 32);
+                myscrolltext = new scrolltext_horizontal();
+                myscrolltext.scrtxt = "HELLO AND WELCOME TO        BONERWORLD SUPER ACID MODE                   HAVE FUN       :)  ";
+                myscrolltext.init(mycanvas, myfont, 1, myscrollparam);
+
+                myoffscreencanvas = new canvas(208, 170);
+                myimage.draw(myoffscreencanvas, 0, 0);
+                myfx = new FX(myoffscreencanvas, mycanvas, myfxparam);
+
+                my3d = new codef3D(mycanvas, 900, 40, 1, 1600);
+                my3d.faces(myobjvert, myobj, true, false);
+
+                //sound
+
+                //
+
+                /*var invisiblepink = new Audio("//www.windows93.net/c/programs/acidBox93/data/DJ_Invisible_Pink_-_Live_Acid_at_Databit.ogg");
+                invisiblepink.playbackRate = 1.0;
+                invisiblepink.play();
+                invisiblepink.volume = 1;
+                invisiblepink.loop = true;*/
+                MIDIjs.play('./nightoffire.mid');
+                go();
+            }
+
+            function go() {
+                //mycanvas.fill('#000000');
+                mygrad.drawV();
+
+                my3d.group.rotation.x += 0.01;
+                my3d.group.rotation.y += 0.02;
+                my3d.group.rotation.z += 0.04;
+                my3d.draw();
+
+                my2dstarfield.draw();
+
+                myfx.siny(window.innerWidth / 2 - 104, window.innerHeight / 2 - 85);
+
+                myscrolltext.draw(240 - 16);
+
+                requestAnimFrame(go);
+            }
+
+            function onWindowResize() {
+                console.log(mycanvas);
+                //console.log('??');
+                mycanvas.canvas.width = window.innerWidth;
+                mycanvas.canvas.height = window.innerHeight;
+                mycanvas.canvas.style.width = window.innerWidth + "px";
+                mycanvas.canvas.style.height = window.innerHeight + "px";
+
+                //console.log('resize');
+
+                //document.location.reload(true);
+            }
+        </script>
+    </body>
+</html>

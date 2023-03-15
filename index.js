@@ -13,8 +13,8 @@ try {
   if (e.code == "ENOENT") {
     try {
       fs.copySync(
-        'settings.example.json',
-        'settings.json'
+        './json/settings.example.json',
+        './json/settings.json'
       );
       console.log("Created new settings file.");
     } catch (e) {
@@ -29,7 +29,7 @@ try {
 }
 
 // Load settings into memory
-const settings = require("./settings.json");
+const settings = require("./json/settings.json");
 
 // Setup basic express server
 var express = require('express');
@@ -52,28 +52,7 @@ app.use('/robots.txt', function(req, res, next) {
   res.send("User-agent: *\nDisallow: /chat\nSitemap: https://bonziworld.co/sitemap.xml");
 });
 // Init socket.io
-var io = require('socket.io')(server, {
-  cors: {
-    origin: ["https://bonziworld.co:443", "http://bonziworld.co:80", "https://bonziworldrevived.daisreich.repl.co:443"],
-    methods: ["GET", "POST"],
-  },
-  handlePreflightRequest: (req, res) => {
-    const headers = {
-      "Access-Control-Allow-Headers": "Content-Type, Authorization",
-      "Access-Control-Allow-Origin": ["https://bonziworld.co:443", "http://bonziworld.co:80", "https://bonziworldrevived.daisreich.repl.co:443"],
-      "Access-Control-Allow-Credentials": true,
-    };
-    if (headers["Access-Control-Allow-Origin"] != headers["Access-Control-Allow-Origin"][0] || headers["Access-Control-Allow-Origin"][1] || headers["Access-Control-Allow-Origin"][2]) {
-      res.status(403).render();
-      res.writeHead(403, headers);
-      res.end();
-    } else {
-      res.status(200).render();
-      res.writeHead(200, headers);
-      res.end();
-    }
-  },
-});
+var io = require('socket.io')(server);
 var port = process.env.PORT || settings.port;
 exports.io = io;
 

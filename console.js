@@ -28,6 +28,21 @@ let commands = {
       process.exit();
     }
   },
+  "permaban": {
+    "help": "ip",
+    "function": function(args) {
+      if (args.length === 0)
+        return console.log(this.help);
+
+      let ip = args[0];
+
+      Ban.addBan(ip, 9999999999999, "You are permanently banned from accessing this site.");
+      console.log(
+        "permaban: " +
+        ip
+      );
+    }
+  },
   "mute": {
     "help": "ip [length reason]",
     "function": function(args) {

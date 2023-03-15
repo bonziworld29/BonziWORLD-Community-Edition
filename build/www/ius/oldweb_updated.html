@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Internet Time Travel</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	<meta name="mobile-web-app-capable" content="yes" />
+	<meta name="theme-color" content="black">
+	<meta data-react-helmet="true" charset="utf-8">
+	<meta data-react-helmet="true" property="og:title" content="Internet Time Travel Browser">
+	<meta data-react-helmet="true" property="og:description" content="Time travel any website from 2004 by searching it! Other websites may travel into different version of years.">
+</head>
+<style>
+body { text-align: center; color: black; background: white; font-family: "Segoe UI", "MS Sans Serif", "Tahoma", "Arial", sans-serif;font-smooth: never; -webkit-font-smoothing: none; }
+#browsercontrols { background: silver; height: 50px; text-align: left; padding-left: 20px; padding-top: 20px;}
+#webClient { background: white; border: none; text-align: left; float: left;}
+.browserCtrlButtons { border-radius: 10px; border: 1px solid black; box-shadow: 2px 2px 3px grey; background: lightgrey; color: black; transition: 0.25s; user-select: none; cursor: pointer; }
+.browserCtrlButtons:active { border-radius: 10px; border: 1px solid black; box-shadow: 2px 2px 3px grey; background: grey; color: black; user-select: none; cursor: pointer; }
+.browserCtrlButtons:hover { border-radius: 10px; border: 1px solid black; box-shadow: 2px 2px 3px grey; background: white; color: black; user-select: none; cursor: pointer; }
+#divider { background: black; color: black: border: 1px dotted grey; user-select: none; }
+#settings { background: lightgrey; border: none; }
+.settingsButton { border-radius: 5px; user-select: none; cursor: pointer; border: 1px groove black; box-shadow: 2px 2px 0px black; background: grey; color: black; transition: 0.25s; }
+.settingsButton:disabled { border-radius: 5px; user-select: none; cursor: not-allowed; border: 1px groove black; box-shadow: 2px 2px 0px black; background: grey; color: black; transition: 0.25s; }
+#loadingBar {text-align: left; float: left; display: block; user-select: none;}
+#loadingBarProg {width: 50px; height: 30px; filter: hue-rotate(180deg); user-select: none; cursor: not-allowed;}
+#addressBar { max-width: 512px; width: 600px; }
+
+@media only screen and (max-width: 600px) {
+ body { text-align: center; color: black; background: white; font-family: "Tahoma", "Arial", "Eurostile", "Helvetica", "Verdana", "Arial Bold", sans-serif;font-smooth: never; -webkit-font-smoothing: none; }
+#browsercontrols { background: silver; height: 100px; text-align: center; padding-left: 20px; padding-top: 20px;}
+#webClient { background: white; border: none; text-align: center; float: left; display: flex;}
+.browserCtrlButtons { border-radius: 2px; border: 1px solid black; box-shadow: 0px 0px 0px grey; background: silver; color: black; transition: 0.25s; user-select: none; cursor: pointer; }
+.browserCtrlButtons:active { border-radius: 2px; border: 1px solid black; box-shadow: 0px 0px 0px grey; background: silver; color: black; user-select: none; cursor: pointer; }
+.browserCtrlButtons:hover { border-radius: 2px; border: 1px solid black; box-shadow: 0px 0px 0px grey; background: silver; color: black; user-select: none; cursor: pointer; }
+#divider { background: white; color: black: border: 1px dotted grey; user-select: none; }
+#settings { background: black; color: lightgrey; border: none; }
+.settingsButton { border-radius: 5px; user-select: none; cursor: pointer; border: 1px groove black; box-shadow: 2px 2px 0px black; background: grey; color: black; transition: 0.25s; }
+.settingsButton:disabled { border-radius: 5px; user-select: none; cursor: not-allowed; border: 1px groove black; box-shadow: 2px 2px 0px black; background: grey; color: black; transition: 0.25s; }
+#loadingBar {text-align: center; display: inline-block; user-select: none;}
+#loadingBarProg {width: 15px; height: 50px; filter: hue-rotate(50deg); user-select: none; cursor: not-allowed;}
+#addressBar { max-width: 512px; width: 120px; outline: none; }
+}
+</style>
+<body>
+<datalist id="searches">
+<option value="jabba.funyfox.net">
+<option value="about:blank">
+<option value="openmpt.org">
+<option value="google.com">
+<option value="yahoo.com">
+<option value="youtube.com">
+<option value="microsoft.com">
+<option value="aol.com">
+<option value="ask.com">
+<option value="msn.com">
+<option value="bbc.co.uk">
+<option value="cnn.com">
+<option value="mcdonalds.com">
+<option value="samsungfunclub.com">
+<option value="samsung.com">
+<option value="sony.com">
+<option value="lg.com">
+<option value="asus.com">
+<option value="acer.com">
+<option value="motorola.com">
+<option value="samsungmobile.com">
+<option value="samsungelectronics.com">
+<option value="pbs.org">
+<option value="nickjr.com">
+<option value="icarly.com">
+<option value="nick.co.uk">
+<option value="eews.com">
+<option value="nintendo.com">
+<option value="sega.com">
+<option value="apple.com">
+<option value="bonzi.com">
+<option value="minecraft.net">
+<option value="bonziworld.com">
+<option value="goanimate.com">
+<option value="tetrisfriends.com">
+<option value="animusic.com">
+<option value="y8.com">
+<option value="yepi.com">
+<option value="runouw.com">
+<option value="newgrounds.com">
+<option value="deviantart.com">
+<option value="facebook.com">
+<option value="twitter.com">
+<option value="instagram.com">
+<option value="github.com">
+<option value="cloudflare.com">
+<option value="discordapp.com">
+<option value="adobe.com">
+<option value="macromedia.com">
+<option value="pinterest.com">
+<option value="quora.com">
+<option value="web.archive.org">
+<option value="archive.org">
+<option value="snapchat.com">
+<option value="linkedin.com">
+<option value="twitch.tv">
+<option value="skype.com">
+<option value="mail.google.com">
+<option value="wordpress.com">
+<option value="nginx.com">
+<option value="lego.com">
+<option value="ibm.com">
+<option value="python.org">
+<option value="java.com">
+<option value="oracle.com">
+<option value="vmware.com">
+<option value="bmw.com">
+<option value="nissan.com">
+<option value="ford.com">
+<option value="tamo.lt">
+<option value="iki.lt">
+<option value="rimi.lt">
+<option value="maxima.lt">
+<option value="bankas.lt">
+<option value="ktu.lt">
+<option value="lrt.lt">
+<option value="lnk.lt">
+<option value="tv3.lt">
+<option value="viasat.lt">
+<option value="bandicam.com">
+<option value="tv8.lt">
+<option value="tele2.lt">
+<option value="yandex.ru">
+<option value="tv1.lt">
+<option value="tv.lt">
+<option value="mtv.com">
+<option value="dell.com">
+<option value="intel.com">
+<option value="toshiba.com">
+<option value="china.cn">
+<option value="scratch.mit.edu">
+<option value="mit.edu">
+<option value="aim.com">
+<option value="qq.com">
+<option value="icq.com">
+<option value="lenovo.com">
+<option value="fujitsu.com">
+<option value="hp.com">
+<option value="gateway.com">
+<option value="nec.com">
+<option value="xbox.com">
+<option value="playstation.com">
+<option value="fedex.com">
+<option value="subaru.com">
+<option value="amd.com">
+<option value="sgh.ru">
+<option value="godaddy.com">
+<option value="namecheap.com">
+<option value="android.com">
+<option value="play.google.com">
+<option value="megaupload.com">
+<option value="tinypic.com">
+<option value="mediafire.com">
+<option value="wb.com">
+<option value="fox.com">
+<option value="rss.com">
+<option value="reddit.com">
+<option value="coolmathgames.com">
+<option value="theorangebox.com">
+<option value="myspace.com">
+<option value="pizzahut.com">
+<option value="kfc.com">
+<option value="burgerking.com">
+<option value="wikipedia.org">
+<option value="wikia.com">
+<option value="fandom.com">
+<option value="bfdi.tv">
+<option value="blackberry.com">
+<option value="zgpax.com">
+<option value="vtech.com">
+<option value="leapfrog.com">
+<option value="instructables.com">
+<option value="stressthem.to">
+<option value="ipstress.in">
+<option value="gamecube.com">
+<option value="vaio.com">
+<option value="casio.com">
+<option value="smarttechnologies.com">
+<option value="wacom.com">
+<option value="hitachi.com">
+<option value="hamachi.com">
+<option value="nodejs.org">
+<option value="google.com/chrome">
+<option value="epson.com">
+<option value="optoma.com">
+<option value="nokia.com">
+<option value="wifi.com">
+<option value="splius.lt">
+<option value="liuks.lt">
+<option value="compart.com">
+<option value="vyond.com">
+<option value="wrapper.online">
+<option value="mojang.com">
+<option value="att.com">
+<option value="cingular.com">
+<option value="funclub.samsungmobile.com">
+<option value="funclub.ru.samsungmobile.com">
+<option value="philips.com">
+<option value="tplink">
+<option value="adbglobal.com">
+<option value="rog.com">
+<option value="tplinklogin.net">
+<option value="hueber.de">
+<option value="interactivebuddy.org">
+<option value="interactivebuddy.com">
+<option value="ebog.com">
+<option value="youtube.com/editor">
+<option value="youtube.com/oops">
+<option value="youtube.com/upload">
+<option value="youtube.com/search?q=minecraft">
+<option value="youtube.com/user/jawed">
+<option value="interactivebuddy2.org">
+<option value="ebog.com">
+<option value="battlefordreamisland.com">
+<option value="windowsxp.com">
+<option value="office.org">
+<option value="bigbear.com">
+<option value="texasinstruments.com">
+<option value="texas.com">
+<option value="america.com">
+<option value="opera.com">
+<option value="wii.com">
+<option value="meebo.com">
+<option value="pokemon.com">
+<option value="support.nintendo.com">
+<option value="flashhax.com">
+<option value="wiiplayable.com">
+<option value="blender.org">
+<option value="senukai.lt">
+<option value="ivona.com">
+<option value="cepstral.com">
+<option value="voiceforge.com">
+<option value="cavestory.org">
+<option value="hasbro.com">
+<option value="dominos.com">
+<option value="youareanidiot.org">
+</datalist>
+<div>
+<div id="browsercontrols">
+<p id="refreshToSeeDate" style="display: none;"><b style="color:yellow;">Re-enter the URL or press Home to make some changes of the site's date.</b></p>
+<button class="browserCtrlButtons" style="display: none;" title="Reload" id="clientRefresh" onclick="document.getElementById('webClient').src = document.getElementById('webClient').src">↷</button>
+<button class="browserCtrlButtons" style="display: inline-block;" title="Clear URL" id="clientClear" onclick="document.getElementById('addressBar').value = '';document.getElementById('refreshToSeeDate').style.display = 'none';">📬</button>
+<button class="browserCtrlButtons" title="Home page" id="clientHome" onclick="homePage();document.getElementById('loadingBar').style.display = 'block';document.getElementById('refreshToSeeDate').style.display = 'none';">⌂</button>
+<input id="addressBar" placeholder="Search" title="Search" oninput="document.getElementById('refreshToSeeDate').style.display = 'none';" list="searches" type="search">
+<button class="browserCtrlButtons" title="Go" id="clientSearch" onclick="searchNow();document.getElementById('loadingBar').style.display = 'block';document.getElementById('refreshToSeeDate').style.display = 'none';">🔍</button>
+<button class="browserCtrlButtons" style="background: red;display: none;" title="Go (experimental)" id="clientSearchExperiment" onclick="var interS = prompt('Enter the URL to bypass Wayback Machine (and use local website apps).');document.getElementById('webClient').src = interS;document.getElementById('loadingBar').style.display = 'block';">🔍</button>
+<button class="browserCtrlButtons" style="background: cyan;display: none;" title="Go (experimental HTML mode)" id="clientSearchHTML" onclick="var interS = prompt('Paste the HTML code to debug this properly.');document.getElementById('webClient').src = 'data:text/html,' + interS;document.getElementById('loadingBar').style.display = 'block';">🔍</button>
+<button class="browserCtrlButtons" title="Settings" id="clientSettings" onclick="document.getElementById('settings').style.display = 'block'">⚙</button>
+<button class="browserCtrlButtons" title="Fullscreen" onclick="var ee = document.getElementById('webClient');ee.requestFullscreen();">🗖</button>
+<button class="browserCtrlButtons" style="background: yellow;color: gold;display: none;" disabled title="Recently visited" onclick="document.getElementById('recentVisit').style.display = 'block'">⭐</button>
+<div id="loadingBar">
+<progress id="loadingBarProg" title="Loading..." alt="Loading this page..."></progress>
+</div>
+</div>
+<div id="recentVisit" style="display:none;">
+<h2>Recent visited sites</h2>
+<p>Click the recent visited URL to get its address wherever you visited it.</p>
+<button onclick="document.getElementById('recentVisit').style.display = 'none'">Close</button>
+<hr>
+<p style="color: grey;text-shadow: 0px 0px 5px black;" id="errorNoVisits">You don't have any recent visited sites.</p>
+</div>
+<div id="settings" style="display:none;">
+<h2>Settings</h2>
+<hr noshade>
+<br><br>
+<button class="settingsButton" onclick="setResize();document.getElementById('set1').disabled = true" id="set1">Enable browser auto-resize</button>
+<br>
+<button class="settingsButton" onclick="disableTitle();document.getElementById('set2').disabled = true" id="set2">Disable title</button>
+<br>
+<button class="settingsButton" onclick="document.getElementById('webClient').style.borderRadius = '100px';document.getElementById('webClient').style.border = '3px solid black';document.getElementById('webClient').style.filter = 'sepia(100%)';document.getElementById('set5').disabled = true" id="set5">Television mode</button>
+<br>
+<span onclick="var ee = document.getElementById('set4');ee.click()" style="user-select: none;"><input class="settingsButton" type="color" value="#000000" onchange="document.getElementById('webClient').style.background = document.getElementById('set4').value" id="set4"> Change client display background</span>
+<br>
+<button class="settingsButton" onclick="alert('Experimental mode has been enabled.\nThe button appears to this page which you can locally visit the page and access the new websites without Wayback Machine based.');document.getElementById('clientSearchExperiment').style.display = 'inline-block';document.getElementById('set3').disabled = true" id="set3">Experimental Mode</button>
+<br>
+<button class="settingsButton" onclick="document.getElementById('set6').disabled = true;document.getElementById('clientSearchHTML').style.display = 'inline-block';" id="set6">HTML pasting mode</button>
+<br>
+<button class="settingsButton" onclick="document.getElementById('set12').disabled = true;document.getElementById('browsercontrols').style.display = 'flex';" id="set12">Simplified flex browser buttons</button>
+<br>
+<p>Security type:</p>
+<button class="settingsButton" onclick="document.getElementById('set7').disabled = true;document.getElementById('set8').disabled = false;secureMode = 'http:\/\/';alert('HTTP is now activated. HTTPS is now disabled.\n\nYou may encounter console errors that it\'s blocking them to be secure.')" id="set7">HTTP</button>
+<button class="settingsButton" onclick="document.getElementById('set7').disabled = false;document.getElementById('set8').disabled = true;secureMode = 'https:\/\/';alert('HTTPS is now activated. HTTP is now disabled.')" disabled id="set8">HTTPS</button>
+<br><br><br>
+<p>Home address settings:</p>
+<button class="settingsButton" onclick="searchHome = ''">No Search</button>
+<button class="settingsButton" onclick="searchHome = 'http:\/\/google.com'">Google</button>
+<button class="settingsButton" onclick="searchHome = 'http:\/\/yahoo.com'">Yahoo!</button>
+<button class="settingsButton" onclick="searchHome = 'http:\/\/msn.com'">MSN</button>
+<button class="settingsButton" onclick="searchHome = 'http:\/\/aol.com'">AOL</button>
+<button class="settingsButton" onclick="searchHome = 'http:\/\/excite.com'">Excite</button>
+<button class="settingsButton" onclick="searchHome = 'http:\/\/ask.com'">Ask</button>
+<button class="settingsButton" onclick="searchHome = 'http:\/\/qq.com'"><font color="red">(NEW)</font> QQ</button>
+<br>
+<span onclick="var ee = document.getElementById('set9');ee.click()" style="user-select: none;"><input class="settingsButton" type="color" value="#000000" onchange="document.getElementById('divider').style.background = document.getElementById('set9').value" id="set9"> Change divider color</span>
+<br>
+<span onclick="var ee = document.getElementById('set10');ee.click()" style="user-select: none;"><input class="settingsButton" type="color" value="#000000" onchange="document.getElementById('browsercontrols').style.background = document.getElementById('set10').value" id="set10"> Change browser control box color</span>
+<br>
+<span onclick="var ee = document.getElementById('set11');ee.click()" style="user-select: none;"><input class="settingsButton" type="color" value="#000000" onchange="document.body.style.background = document.getElementById('set11').value" id="set11"> Change ITT background color</span>
+<br>
+<p>Website date:</p>
+<select id="websiteDateSelect" onchange="websiteDate = document.getElementById('websiteDateSelect').value;document.getElementById('refreshToSeeDate').style.display = 'block';" style="border: 1px solid black;background: grey;color: lightgrey; outline: none;">
+<option value="1996">1996 (oldest)</option>
+<option value="1997">1997</option>
+<option value="1998">1998 (Windows 98 Style)</option>
+<option value="1999">1999</option>
+<option value="2000">2000</option>
+<option value="2001">2001</option>
+<option value="2002">2002</option>
+<option value="2003">2003</option>
+<option value="2004" selected>2004 (default)</option>
+<option value="2005">2005</option>
+<option value="2006">2006</option>
+<option value="2007">2007</option>
+<option value="2008">2008</option>
+<option value="2009">2009</option>
+<option value="2010">2010</option>
+<option value="2011">2011</option>
+<option value="2012">2012</option>
+<option value="2013">2013</option>
+<option value="2014">2014</option>
+<option value="2015">2015</option>
+<option value="2016">2016</option>
+<option value="2017">2017</option>
+<option value="2018">2018</option>
+<option value="2019">2019</option>
+<option value="2020">2020</option>
+<option value="2021">2021</option>
+<option value="2022">2022 (newest)</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="1991" style="background:black;color:white;">Sonic</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="1">1</option>
+<option value="2">2</option>
+<option value="5">5</option>
+<option value="10">10</option>
+<option value="900">900</option>
+<option value="1550">1550</option>
+<option value="1600">1600</option>
+<option value="1700">1700</option>
+<option value="1830">1830</option>
+<option value="1901">1901</option>
+<option value="1920">1920</option>
+<option value="1950">1950</option>
+<option value="1970">1970</option>
+<option value="1985">1985</option>
+<option value="1990">1990</option>
+<option value="1995">1995</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:black;color:black;">OOOOOOOOOOOOO</option>
+<option value="1994" style="background:black;color:white;">you broke the barrier</option>
+<option value="AAAAA" disabled style="background:grey;color:red;">made by</option>
+<option value="AAAAAA" disabled style="background:grey;color:lime;">onutemaster777</option>
+<option value="AAAAA" disabled style="background:grey;color:blue;">all rights reserved</option>
+<option value="AAAAAA" disabled style="background:grey;color:yellow;">onuteworld.tk ltd.</option>
+<option value="AAAAAA" disabled style="background:grey;color:cyan;">2019-2022</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAS" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAD" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAAE" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="AAAAA" disabled style="background:grey;color:grey;">OOOOOOOOOOOOO</option>
+<option value="2023">2023</option>
+<option value="2024">2024</option>
+<option value="2025">2025</option>
+<option value="2026">2026</option>
+<option value="2027">2027</option>
+<option value="2028">2028</option>
+<option value="2029">2029</option>
+<option value="2030">2030</option>
+<option value="2040">2040</option>
+<option value="2050">2050</option>
+<option value="2060">2060</option>
+<option value="2070">2070</option>
+<option value="2100">2100</option>
+<option value="2120">2120</option>
+<option value="2121">2121</option>
+<option value="2222">2222</option>
+<option value="3000">3000</option>
+<option value="4000">4000</option>
+<option value="5000">5000</option>
+<option value="7000">7000</option>
+<option value="9998">9998</option>
+<option value="9999">9999</option>
+<option value="10000">10000</option>
+<option value="20000">20000</option>
+<option value="30000">30000</option>
+<option value="50000">50000</option>
+<option value="80000">80000</option>
+<option value="100000">100000</option>
+<option value="1000000">1000000</option>
+<option value="2000000">2000000</option>
+<option value="5000000">5000000</option>
+<option value="10000000">10000000</option>
+<option value="10000000000">10000000000</option>
+<option value="10000000000000">10000000000000</option>
+</select>
+<br><br><br>
+<button class="settingsButton" onclick="document.getElementById('settings').style.display = 'none';">Close</button>
+<br>
+<h1>About</h1>
+<p>version v1.2.0 made by onutemaster777</p>
+<hr>
+<p id="mobileEnabled" style="display: none;">This option "Enable browser auto-resize" has been automatically enabled to make the best experience.<br>Because you're on smartphone 📱.</p>
+<h2>What is Internet Time Travel Browser</h2>
+<p>Internet Time Travel Browser (shortly known as "ITT" or "ITTB") is a website that travels back to 2004 pages by using Wayback Machine.</p>
+<p>Internet Time Travel Browser has a minimal features which you have a new browser, but you want old web? It supports old computers to travel across the web via Wi-Fi alliance connection. Other websites that you're trying to connect are different dates, because of Internet Archive didn't index it recursively.</p>
+<p>As you expect, you also just mess it around with this website. This source is free, feel to download the page and put your own page, visitors will enjoy your old web by using Wayback Machine.</p>
+<p>NOTICE: You noticed that's only one file that handles everything to work properly? It's minified source that absolutely works from any device.</p>
+	<hr>
+	<h3>Changelog - v1.2.0</h3>
+	<li>New browser interaction options</li>
+	<li>Recent visited sites is hidden because of super hardcode.</li>
+	<li>HTTP security buttons added</li>
+	<li>New search engine option QQ</li>
+	<li>Clear URL option added</li>
+	<li>HTML pasting button added</li>
+	<li>Travel dates added (you can find from gear options)</li>
+	<li>Smartphone support added.</li>
+	<hr>
+	<p>This was explained from the user: <a href="https://www.youtube.com/watch?v=0OB1g8CUdbA" target="_blank">ITM</a></p>
+	<p>If you want http version, <a href="index.html" download="oldweb.html">click here to download offline</a></p>
+	<br><br>
+</div>
+<hr id="divider">
+<noscript>
+<h1>JavaScript is disabled.</h1>
+<p>Please enable JavaScript in your browser settings to run it properly.</p>
+</noscript>
+<iframe src="https://web.archive.org/web/20041130132508/http://google.com" onbeforeunload="document.getElementById('loadingBar').style.display = 'block'" onloadstart="document.getElementById('loadingBar').style.display = 'block'" onload="document.getElementById('loadingBar').style.display = 'none';document.title = '✔ ' + document.getElementById('addressBar').value + ' - Internet Time Travel';" width="800" height="600" id="webClient">
+HTML iframe feature is not supported.
+</iframe>
+</div>
+<script>
+var secureMode = "http://";
+var searchHome = "google.com";
+var websiteDate = 2004;
+var addressesVisit = [];
+
+var input = document.getElementById("addressBar");
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
+    event.preventDefault();
+    document.getElementById("clientSearch").click();
+  }
+});
+
+// if your router.collabnet.local is blocking that, use experimental mode instead.
+
+function searchNow(){
+if(navigator.onLine === true){
+if(document.getElementById('addressBar').value === ""){var ee = document.getElementById('clientHome');ee.click();document.title = "Internet Time Travel";} else {document.getElementById('webClient').src = 'https:\/\/web.archive.org\/web\/' + websiteDate + '1130132508\/' + secureMode + document.getElementById('addressBar').value;document.title = document.getElementById('addressBar').value + " - Internet Time Travel";}}
+else {document.getElementById('webClient').src = "data:text/html,<!doctype html><head><title></title></head><style>body { text-align:; font-family: Arial, Tahoma, sans-serif; background: white;}</style><html><h1>You\'re offline</h1><br><p>The address " + document.getElementById('addressBar').value + " is not available, because why:</p><br><li>Your router is not configured properly. You haven't configured ISP to get your IP address to work properly, and your modem needs to be set up.</li><li>You need Internet connection to connect for this.</li><li>Your router is restarted.</li><li>Your router is not working. Replug your router for every 10 seconds and then plug back in.</li><br><p>Please connect your Internet to surf. This is a private page. If you like to download and use offline, click on gear icon, and then download the source of the file.</p></html>";}}
+
+/*
+function searchResToVisits(){
+document.getElementById('errorNoVisits').style.display = 'none';addressesVisit.push(document.getElementById('addressBar').value);var p = addressesVisit.pop(); var k = document.getElementById('recentVisit');k.insertAdjacentHTML("beforeend","<button class=\'settingsButton\' onclick=\'document.getElementById(\'addressBar\').value = document.getElementById(\'addressBar\').value;\'>recent - " + document.getElementById('addressBar').value + "</button><br>")
+}
+*/
+
+function homePage(){document.getElementById('webClient').src = "https://web.archive.org/web/" + websiteDate + "1130132508/" + secureMode + searchHome}
+
+function disableTitle(){setInterval(function(){document.title = 'Internet Time Travel'}, 50);}
+
+function setResize(){setInterval(function(){document.getElementById('webClient').width = window.innerWidth / 1.2;document.getElementById('webClient').height = window.innerHeight / 1.2;}, 300)}
+
+function isMobileDevice() {
+    var check = false;
+    (function(a){if(/(android|bb\d+|meego).+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|fennec|hiptop|iemobile|ip(hone|od)|iris|kindle|lge |maemo|midp|mmp|mobile.+firefox|netfront|opera m(ob|in)i|palm( os)?|phone|p(ixi|re)\/|plucker|pocket|psp|series(4|6)0|symbian|treo|up\.(browser|link)|vodafone|wap|windows ce|xda|xiino/i.test(a)||/1207|6310|6590|3gso|4thp|50[1-6]i|770s|802s|a wa|abac|ac(er|oo|s\-)|ai(ko|rn)|al(av|ca|co)|amoi|an(ex|ny|yw)|aptu|ar(ch|go)|as(te|us)|attw|au(di|\-m|r |s )|avan|be(ck|ll|nq)|bi(lb|rd)|bl(ac|az)|br(e|v)w|bumb|bw\-(n|u)|c55\/|capi|ccwa|cdm\-|cell|chtm|cldc|cmd\-|co(mp|nd)|craw|da(it|ll|ng)|dbte|dc\-s|devi|dica|dmob|do(c|p)o|ds(12|\-d)|el(49|ai)|em(l2|ul)|er(ic|k0)|esl8|ez([4-7]0|os|wa|ze)|fetc|fly(\-|_)|g1 u|g560|gene|gf\-5|g\-mo|go(\.w|od)|gr(ad|un)|haie|hcit|hd\-(m|p|t)|hei\-|hi(pt|ta)|hp( i|ip)|hs\-c|ht(c(\-| |_|a|g|p|s|t)|tp)|hu(aw|tc)|i\-(20|go|ma)|i230|iac( |\-|\/)|ibro|idea|ig01|ikom|im1k|inno|ipaq|iris|ja(t|v)a|jbro|jemu|jigs|kddi|keji|kgt( |\/)|klon|kpt |kwc\-|kyo(c|k)|le(no|xi)|lg( g|\/(k|l|u)|50|54|\-[a-w])|libw|lynx|m1\-w|m3ga|m50\/|ma(te|ui|xo)|mc(01|21|ca)|m\-cr|me(rc|ri)|mi(o8|oa|ts)|mmef|mo(01|02|bi|de|do|t(\-| |o|v)|zz)|mt(50|p1|v )|mwbp|mywa|n10[0-2]|n20[2-3]|n30(0|2)|n50(0|2|5)|n7(0(0|1)|10)|ne((c|m)\-|on|tf|wf|wg|wt)|nok(6|i)|nzph|o2im|op(ti|wv)|oran|owg1|p800|pan(a|d|t)|pdxg|pg(13|\-([1-8]|c))|phil|pire|pl(ay|uc)|pn\-2|po(ck|rt|se)|prox|psio|pt\-g|qa\-a|qc(07|12|21|32|60|\-[2-7]|i\-)|qtek|r380|r600|raks|rim9|ro(ve|zo)|s55\/|sa(ge|ma|mm|ms|ny|va)|sc(01|h\-|oo|p\-)|sdk\/|se(c(\-|0|1)|47|mc|nd|ri)|sgh\-|shar|sie(\-|m)|sk\-0|sl(45|id)|sm(al|ar|b3|it|t5)|so(ft|ny)|sp(01|h\-|v\-|v )|sy(01|mb)|t2(18|50)|t6(00|10|18)|ta(gt|lk)|tcl\-|tdg\-|tel(i|m)|tim\-|t\-mo|to(pl|sh)|ts(70|m\-|m3|m5)|tx\-9|up(\.b|g1|si)|utst|v400|v750|veri|vi(rg|te)|vk(40|5[0-3]|\-v)|vm40|voda|vulc|vx(52|53|60|61|70|80|81|83|85|98)|w3c(\-| )|webc|whit|wi(g |nc|nw)|wmlb|wonu|x700|yas\-|your|zeto|zte\-/i.test(a.substr(0,4))) check = true;})(navigator.userAgent||navigator.vendor||window.opera);
+    return check;
+};
+
+var kp = isMobileDevice();
+
+if(kp === true){document.getElementById('mobileEnabled').style.display = "block";document.getElementById('set1').disabled = true;var po = document.getElementById('set1');po.click();} else {undefined;}
+</script>
+</body>
+</html>
