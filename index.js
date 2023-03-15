@@ -7,7 +7,7 @@ const fs = require('fs-extra');
 
 // Load settings
 try {
-  stats = fs.lstatSync('settings.json');
+  stats = fs.lstatSync('./json/settings.json'); 
 } catch (e) {
   // If settings do not yet exist
   if (e.code == "ENOENT") {
