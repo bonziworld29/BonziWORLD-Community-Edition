@@ -77,7 +77,6 @@ server.listen(port, function() {
     "Server listening at port " + port
   );
 });
-app.options('*', cors())
 app.use(express.static(__dirname + '/public', {
   extensions: ['html']
 }));

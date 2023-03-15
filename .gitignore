@@ -8,7 +8,7 @@ src/cordova/config.xml
 
 src/www/tmp/**
 node_modules/**
-# settings.json
+# settings.json 
 bans.json
 mutes.json
 logins.json
