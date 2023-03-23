@@ -226,7 +226,10 @@ var videoIdsCommercials = [
   "https://youtu.be/watch?v=5ls7g9eH7ss",
   "https://youtu.be/watch?v=hb59QZW2SCA",
   "https://youtu.be/watch?v=VJs_VALzi_8",
-  "https://youtu.be/watch?v=GCA5CB5uUyA"
+  "https://youtu.be/watch?v=GCA5CB5uUyA",
+  "https://youtu.be/watch?v=h6cp-6Zthm4",
+  "https://youtu.be/watch?v=DuD_boVOl54",
+  "https://youtu.be/watch?v=Jz6FCFoL3k4",
 ]
 var videoIds4PM2430PM = [
   "https://youtu.be/watch?v=n_sWTHQKr-s",
