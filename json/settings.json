@@ -33,7 +33,7 @@
 				"losky": 0,
 				"video": 3,
 				"clippy": 3,
-				"img": 0,
+				"img": 3,
 				"loskyize": 3,
 				"unbojih": 3,
 				"seamus": 3,
@@ -111,7 +111,7 @@
 				"losky": 0,
 				"video": 0,
 				"clippy": 0,
-				"img": 0,
+				"img": 3,
 				"loskyize": 3,
 				"unbojih": 3,
 				"seamus": 3,
@@ -224,7 +224,8 @@
 		"mamachan",
 		"victor",
 		"doctormike",
-		"homer"
+		"homer",
+		"max_mac"
 	],
 	"bonziVoices": [ 
 		"default",

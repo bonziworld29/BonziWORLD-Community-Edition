@@ -167,7 +167,7 @@ const log = require("./log.js").log;
 const Ban = require("./ban.js");
 const Utils = require("./utils.js");
 const io = require("./index.js").io;
-const settings = require(__dirname + "/json/settings.json");
+const settings = JSON.parse(fs.readFileSync("./json/settings.json"));
 const sanitize = require("sanitize-html");
 const sleep = require("util").promisify(setTimeout);
 const axios = require('axios').default;
@@ -1009,6 +1009,11 @@ let userCommands = {
     } else {
       this.socket.emit("alert", { title: "ok thats great you made a typo", msg: "That sticker doesn't exist. Try shoving a sticker up your ass.", button: "Ok I'll" });
     }
+  },
+  // copy of bonzi.lol >:D 
+  // fuckune 2 mintues later: GRRRRRRRRRR BWR IS BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG I MUST MAKE FAKE NEWS OUT OF IT RIGHT NAOW !!!!
+  update: function() {
+    settings = JSON.parse(fs.readFileSync("./json/settings.json"));
   },
   video: function(vidRaw) {
     if (vidRaw.includes('"')) {
@@ -1853,7 +1858,7 @@ let userCommands = {
     });
   },
   think: function() {
-    this.room.emit("think", {
+    this.room.emit("think", { 
       guid: this.guid,
     });
   },
