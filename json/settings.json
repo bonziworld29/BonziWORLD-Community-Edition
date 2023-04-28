@@ -148,8 +148,8 @@
 				"default": "random"
 			},
 			"speed": {
-				"max": 250,
-				"min": 0,
+				"max": 450,
+				"min": 1,
 				"default": "random"
 			},
 			"defaultName": "BonziBUDDY"
@@ -225,13 +225,17 @@
 		"victor",
 		"doctormike",
 		"homer",
-		"max_mac"
+		"max_mac",
+		"buggiest",
+		"glitch",
+		"ghost"
 	],
 	"bonziVoices": [ 
 		"default",
 		"sam",
 		"mike",
-		"mary"
+		"mary",
+		"broken"
 	],
 	"bonziColors": [ 
 		"bonzi",
@@ -296,7 +300,27 @@
 		"fuckune",
 		"wedonttalkaboutthedrill",
 		"perry",
-		"doof"
+		"doof",
+		"announcer",
+		"blocky",
+		"book",
+		"bubble",
+		"coiny",
+		"david",
+		"dora",
+		"eraser",
+		"flower",
+		"snowball",
+		"spongy",
+		"teardrop",
+		"tennis_ball",
+		"pin",
+		"pen",
+		"pencil",
+		"needle",
+		"golfball",
+		"match",
+		"ice_cube"
 	],
 	"bonziColors2": [ 
 		"bonzi",
