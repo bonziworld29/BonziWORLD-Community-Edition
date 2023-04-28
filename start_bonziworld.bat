@@ -1,6 +1,7 @@
-
-echo Starting BWR Bot....
-start start_bot.bat
-echo Starting BWR...
+@echo off
+echo Starting..
+start ./server/bot/start.bat
+:b
 node index.js
+goto b
 pause

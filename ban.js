@@ -111,7 +111,7 @@ exports.removeLogin = function(ip) {
 };
 
 exports.handleBan = function(socket) {
-  var ip = socket.request.connection.remoteAddress;
+  var ip = socket.handshake.headers["cf-connecting-ip"] || socket.request.connection.remoteAddress;
   if (bans[ip].end <= new Date().getTime()) {
     exports.removeBan(ip);
     return false;
@@ -132,7 +132,7 @@ exports.handleReport = function(name) {
   return true;
 };
 exports.handleMute = function(socket) {
-  var ip = socket.request.connection.remoteAddress;
+  var ip = socket.handshake.headers["cf-connecting-ip"] || socket.request.connection.remoteAddress;
   if (mutes[ip].end <= new Date().getTime()) {
     exports.removeMute(ip);
     return false;
@@ -148,7 +148,7 @@ exports.handleMute = function(socket) {
   return true;
 };
 exports.handleLogin = function(socket) {
-  var ip = socket.request.connection.remoteAddress;
+  var ip = socket.handshake.headers["cf-connecting-ip"] || socket.request.connection.remoteAddress;
 
   log.access.log('info', 'loginadded', {
     ip: ip
@@ -162,7 +162,8 @@ exports.kick = function(ip, reason) {
   reason = reason || "N/A";
   for (var i = 0; i < socketList.length; i++) {
     var socket = sockets[socketList[i]];
-    if (socket.request.connection.remoteAddress == ip) {
+	var ips = socket.handshake.headers["cf-connecting-ip"] || socket.request.connection.remoteAddress
+    if (ips == ip) {
       socket.emit('kick', {
         reason: reason
       });
@@ -176,7 +177,8 @@ exports.warning = function(ip, reason) {
   reason = reason || "N/A";
   for (var i = 0; i < socketList.length; i++) {
     var socket = sockets[socketList[i]];
-    if (socket.request.connection.remoteAddress == ip) {
+	var ips = socket.handshake.headers["cf-connecting-ip"] || socket.request.connection.remoteAddress
+    if (ips == ip) {
       socket.emit('warning', {
         reason: reason + " <button onclick='hidewarning()'>Close</button>"
       });
@@ -194,7 +196,8 @@ exports.mute = function(ip, length, reason) {
   reason = reason || "N/A";
   for (var i = 0; i < socketList.length; i++) {
     var socket = sockets[socketList[i]];
-    if (socket.request.connection.remoteAddress == ip) {
+	var ips = socket.handshake.headers["cf-connecting-ip"] || socket.request.connection.remoteAddress
+    if (ips == ip) {
       exports.handleMute(socket);
     }
   }
@@ -226,7 +229,8 @@ exports.login = function(ip, reason) {
   reason = reason || "N/A";
   for (var i = 0; i < socketList.length; i++) {
     var socket = sockets[socketList[i]];
-    if (socket.request.connection.remoteAddress == ip || socket.handshake.headers['cf-connecting-ip'] == ip) {
+	var ips = socket.handshake.headers["cf-connecting-ip"] || socket.request.connection.remoteAddress
+    if (ips == ip) {
       socket.emit('achieve', {
         reason: reason
       });

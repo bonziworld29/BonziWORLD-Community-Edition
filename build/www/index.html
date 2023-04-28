@@ -80,13 +80,14 @@
         ><!-- section:ogImages -->
       <meta property="twitter:image" content="./favicons/android-chrome-192x192.png">
       <meta property="og:image" content="./favicons/android-chrome-192x192.png"><!-- endsection --><meta property="og:locale" content="en-US"> 
-      <meta data-react-helmet="true" property="og:title" content="BonziWORLD"><meta data-react-helmet="true" property="og:description" content="BonziWORLD is a memey BonziBUDDY chat site with no viruses at all. It is fun to use and it also has rules. Chat, watch videos, record, and many others!">
-      <meta data-react-helmet="true" name="description" content="BonziWORLD is a memey BonziBUDDY chat site with no viruses at all. It is fun to use and it also has rules. Chat, watch videos, record, and many others!">
+      <meta data-react-helmet="true" property="og:title" content="BonziWORLD"><meta data-react-helmet="true" property="og:description" content="Welcome to BonziWORLD! The official revival of BonziWORLD.com! Join with other bonzibuddies to chat, record, watch videos and many other fun stuff.">
+      <meta data-react-helmet="true" name="description" content="Welcome to BonziWORLD! The official revival of BonziWORLD.com! Join with other bonzibuddies to chat, record, watch videos and many other fun stuff."> 
         <script src="./js/lib/easeljs.min.js"></script>
         <script src="./js/lib/preloadjs-0.6.2.min.js"></script>
         <script src="./js/lib/jquery.min.js"></script>
         <script type="text/javascript" id="www-widgetapi-script" src="https://www.youtube.com/s/player/997fe684/www-widgetapi.vflset/www-widgetapi.js" async></script>
         <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.min.js"></script>
+		<script src="https://unpkg.com/twemoji@latest/dist/twemoji.min.js" crossorigin="anonymous"></script>
         <script src="./js/lib/seedrandom.min.js"></script>
         <script src="./js/lib/socket.io-1.4.5.js"></script>
         <script src="./js/lib/speakjs/speakClient.js"></script>
@@ -94,14 +95,20 @@
         <script src="./js/lib/autostartjs"></script>
         <script src="./js/lib/jquery.contextMenu.min.js"></script>
         <script type="module">
-    			import devtools from './index.js';
+    		import devtools from './index.js';
     
-    			setInterval(function(){
-            if (devtools.isOpen) {
-              socket.disconnect();
-            }
-          },100)
-    		</script>
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+    		setInterval(function(){
+				const devtest = urlParams.has('devtest')
+				if (!devtest) {
+					if (devtools.isOpen) {
+					socket.disconnect();
+					} 
+				}
+			 },100)
+			console.log("Yeah, i know, My code is absolute garbage, but here's the reason why it's so shitty.\nI learned it from looking at heyjoeway's minified code. This isn't even the main percentage of JavaScript as a whole.\nIf you have any tips, feel free to email me.");
+    	</script>
         <script src="./cordova.js"></script>
         <script src="./js/platform.js"></script>
         <link rel="stylesheet" type="text/css" href="./css/platform.css" />
@@ -112,7 +119,7 @@
     </head>
     <body oncontextmenu="return false">
         <style id="theme"></style>
-        <audio id="error" src="error.ogg"></audio>
+        <audio id="error" src="/sfx/error.mp3"></audio>
         <audio id="jumpscare" src="hypnobehh.mp3" loop></audio>
         <div id="content">
             <div id="news"></div>
@@ -150,6 +157,8 @@
                     </div>
             </div>
             <canvas id="bonzi_canvas" width="100" height="100"> </canvas>
+			<div id="logs" style="display: none; top: 8px; left: 16px; bottom: 10px width:25%; height: 85%; position: fixed; background-color: rgba(148,0,211,.5); color: #fff; font-weight: bold; border: 8px solid rgba(191, 64, 191, .5); -webkit-background-clip: padding-box; background-clip: padding-box; overflow-x: hidden; overflow-y: auto; -webkit-font-smoothing: none; overflow-wrap: break-word; word-wrap: break-word; max-width: 25%;"><font color="magenta" size="5">Welcome to BonziLOGS</font><br></div>
+			<button onclick="toggleLogs()" style="position: fixed; background-color: rgba(148,0,211,1); color: #fff; font-weight: bold; border: 2px solid rgba(191, 64, 191, 1);"><font size="5">≡</font></button>
             <div id="main"></div>
             <table id="chat_bar">
                 <tr>
@@ -164,30 +173,63 @@
             </table>
 
             <div id="page_login" class="page">
-                <div id="login_apps"></div>
+				<div id="login_apps" class="app_showcase"></div>
                 <div id="login_tips" style="display: none;">
-                    <img src="./img/tips/swag.png" width=18>Bro Tip: <small><div id="tips_text"></div></small>
-                    <br>
-                    <div id="tips_loading">You will be in the room in 3 seconds. This is to make sure you're reading this.</div>
+                    <img src="./img/tips/swag.png" width=18>Pro Tip: <small><div id="tips_text"></div></small>
                 </div>
+				<!-- i'm sick of putting my thoughts in the README bubble -->
+                <div id="login_headline" style="display: block;">
+					<!--
+					not right now
+					Fuckune being a schizo as always, using old ass code and the sudden increase of inactivity and our newest ads to make fake news. Evaljs is not used anymore. 
+					<br>
+					We are stealing their ideas because we have the right to do so.
+					<br>
+					BonziNEWS is the Fox News variant of MaxAlertNEWS from RodrigoJogos.
+					<br>
+					-->
+					Coming soon to Google Play on May 2nd!
+					<br>
+					"Sidenote: BWR is pretending their evaljs function (used for malware injection) is old. This function was caught being used only 2 days ago, SO IT'S NOT OLD." It's called /hypnotize, you fucking idiot.
+					<br>
+					The Enemies of BonziWORLD Link is being moved to the Misc Links page.
+				</div>
                 <div id="login_readme" style="display: none;">
-                        Fune just got <a href="https://cdn.discordapp.com/attachments/1072613977168818237/1092142294230106182/IMG_20230301_221347713.png">0wned</a>.
-                        <br>
-                        Make sure you read the <a href="readme" target="_blank">README</a> and <a href="rules" target="_blank">RULES</a> before use.
-                        <br><a href="enemies">The Enemies of BonziWORLD</a> <a href="https://protest.bonziworld.co/">BonziPROTEST</a>
+                    Make sure you read the <a href="readme" target="_blank">README <small>(Instructions Manual)</small></a> before use.
+					<hr>
+					<a href="misc">Miscellaneous Links</a> <a href="https://discord.gg/PD9Tbr7Efh">Discord Server</a>
                 </div>
                 <div id="login_load">loading... <img id="loading_cursor" src="./img/cursors/hourglas.gif"></div>
                 <div id="recaptcha_verify" class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSubmit" data-size="invisible"></div>
-                <div id="login_version">BWCE Version 1.12.4 (Onute's Version)<br>BonziWORLD Version 1.6.0 (modified)<br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
-              <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+                <div id="login_version">Version 1.13.0<br><small>Made with heyjoeway's BonziWORLD Version 1.6.0</small><br><a href="#" onclick="promptForServerURL()">Connect to a 3rd party server</a></div>
+				<div id="login_social"><a class="fab fa-twitter" href="https://twitter.com/BonziWORLDCE"></a> <a class="fab fa-youtube" href="https://www.youtube.com/@bonziworldce"></a> <a class="fab fa-discord" href="https://discord.gg/PD9Tbr7Efh"></a> </div>
+				<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 
+				<div id="winlogon" style="display: none;">
+					<img id="login_pic" src="//web.archive.org/web/20200101011026im_/http://uranohoshi.in/img/logon/bonzicircle.png" alt="bonzi"></img>
+					<p id="login_defname">BonziWORLD</p>
+					<div id="wincred">
+						<div>
+							<input id="login_name2" type="text" placeholder="Nickname">
+						</div>
+						<div>
+							<input id="login_room2" type="text" placeholder="Room ID (Optional)">
+						</div>
+						<button id="login_go2" class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSuccess">Sign In</button>
+						<p id="use_guide">Make sure to check out the <a id="readme" href="readme.html" target="_blank">README (Instructions)</a> before use.</p>
+					</div>    			
+				</div>
                 <div id="login_card" style="display: none;">
                     <input id="login_name" type="text" placeholder="Nickname" />
-                    <input id="login_room" list="login_rooms" type="text" placeholder="Room ID (safer)" />
+                    <input id="login_room" list="login_rooms" type="text" placeholder="Room ID (optional)" />
                     <datalist id="login_rooms">
                         <option value="default"></option>
-                        <option value="bonzi_tv"></option>
-                        <option value="ai"></option>
+						<option value="bonzi_tv"></option>
+						<option value="bonzi_weather"></option>
+						<option value="news"></option>
+                        <!-- 
+							<option value="ai"></option> 
+						-->
                     </datalist>
                     <button id="login_go_button" class="g-recaptcha" data-sitekey="6Len81UkAAAAANyLdzauK4uOSNvwOBWL9BwBcDU0" data-callback="onSuccess" style="color: transparent; background-color: transparent; border-color: transparent; cursor: default;">
                         <div id="login_go"></div>
@@ -245,7 +287,7 @@
                 <h1>BonziWORLD.exe has encountered an error and needs to close.</h1>
                 <p>The server may have been reset or you have been disconnected from the server. Try reloading the page. If reloading doesn't work and your internet is okay, then panic. We will be back up soon&trade; though.</p>
                 <br />
-              <p>If the server is not working or it's temporarily down, you can also try <a href="http://78.63.40.199:2095">Onute's version</a> until the main server comes back online.</p>
+              <p>If the server is not working or it's temporarily down, you can also try <a href="http://78.63.40.199:2095">Onute's version</a> until the main server comes back online.<br>If that site is offline, you could also try <a href="http://server.erik.red:3000">server.erik.red</a></p>
               <br>
                 <a href="#" onclick="window.location.reload()">Reload?</a>
             </div>
@@ -402,16 +444,27 @@
 
                 document.getElementById("recaptcha_verify").data_size = "";
             }
+			function toggleLogs() {
+				if (document.getElementById("logs").style.display == "none") {
+					$("#logs").show();
+				} else {
+					$("#logs").hide();
+				}
+			}
             function bonziTv() {
                 document.getElementById("login_room").value = "bonzi_tv";
                 
                 document.getElementById("recaptcha_verify").data_size = "";
             }
             function onSuccess(token) {
-              socket.emit("sendTokenToServer",{
-                token: token
-              });
-              warningScreen();
+				socket.emit("sendTokenToServer",{
+					token: token
+				});
+				if (document.getElementById("winlogon").style.display == "none") {
+					warningScreen();
+				} else {
+					warningScreen2();
+				}
             }
             function warningScreen() {
               loadTest();
@@ -427,17 +480,37 @@
                   
                   login();
                   
-                },3000)
-              //}
+                  if (document.getElementById("login_room").value == "pope") {
+                    
+                    setTimeout(function(){
+                        socket.emit("command",{list:["pope"]})
+                    },200)
+                    
+                  }
+                },500)
+				//}
+			}
+            
+            function warningScreen2() {
+				loadTest();
+                  
+				setTimeout(function(){
+					login2();
+				  if (document.getElementById("login_room").value == "pope") {
+						
+					setTimeout(function(){
+						socket.emit("command",{list:["pope"]})
+					},200)
+						
+				  }
+				},500)
             }
-
             function promptForServerURL() {
-              var url = prompt("Please enter an valid BonziWORLD Server URL\n(may require a anti-CORS extension)\n\nIn order to use a HTTP server, enable insecure content in site permissions.","http://server.erik.red:3000")
+              var url = prompt("Please enter an valid BonziWORLD Server URL\n(may require a anti-CORS extension)\n\nIn order to use a HTTP server, enable insecure content in site permissions. (HTTPS only)","http://server.erik.red:3000")
               if (url) {
                 safeMode = true;
                 socket = io(url);
-                if(url.includes('78.63.40.199') || url.includes('onute.funefox.com')){alert("This site is dangerous and it will actually automatically grab your IP address and your computer specs/specifications to his logs, so use it for your own risk. No big surprise.")}
-                else if(url.includes('bonzi.lol')){alert("You are not allowed to connect this server, because we knew that site is super duper omega mega extremely dangerous.");socket.disconnect()}
+                if(url.includes('bonzi.lol')){alert("This server is too unsafe to connect. It may be 'secure', but the admins can grab your IP by using their context menu. This will only occur if you are on their enemy list.");socket.disconnect()}
               }
               
             }
@@ -455,7 +528,7 @@
                   
                 }
                 
-              },3000)
+              },500)
               $("#page_warning_login").fadeOut(230);
             }
             function closeWarningScreen2() {
