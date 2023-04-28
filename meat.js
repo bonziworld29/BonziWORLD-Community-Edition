@@ -167,11 +167,11 @@ const log = require("./log.js").log;
 const Ban = require("./ban.js");
 const Utils = require("./utils.js");
 const io = require("./index.js").io;
-const settings = JSON.parse(fs.readFileSync("./json/settings.json"));
 const sanitize = require("sanitize-html");
 const sleep = require("util").promisify(setTimeout);
 const axios = require('axios').default;
 const snekfetch = require("snekfetch");
+var settings = JSON.parse(fs.readFileSync("./json/settings.json"));
 var onCooldown = false;
 var onloginCooldown = false;
 let roomsPublic = [];
@@ -2199,7 +2199,7 @@ let userCommands = {
       target: sanitize(Utils.argsString(arguments)),
     });
   },
-  update: function() {
+  seeupdates: function() {
     this.socket.emit("alert", { title: "See Updates", msg: "New minor update - /manchild is deprecated because it is old, and the webp file doesnt work anymore. -itzdonutscout", button: "OK" });
   },
   beggar: function() {
