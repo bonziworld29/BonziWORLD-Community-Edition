@@ -2915,7 +2915,7 @@ class User {
           var vid = videoIds4PM2430PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
           this.room.vid = vid;
           //tvhook.send("Now playing: https://www.youtube.com/watch?v=" + vid);
-          await ytdl.getInfo("https://www.youtube.com/watch?v=" + vid).then((info) => {
+          /*await ytdl.getInfo("https://www.youtube.com/watch?v=" + vid).then((info) => {
             console.log("Playing video: " + info.videoDetails.title);
             if (info.videoDetails.title.match(/BFDI/g) || info.videoDetails.title.match(/BFDIA/g)) {
               bonziTvIdent = ["https://www.youtube.com/watch?v=0eGC9tMZ8co"];
@@ -2945,7 +2945,7 @@ class User {
               bonziTvIdent = ["https://www.youtube.com/watch?v=qlYR9mW1DVk"];
               ident = Math.floor(Math.random() * bonziTvIdent.length);
             }
-          });
+          });*/
           this.room.emit("replaceTVWithURL", {
             id: videoIds4PM2430PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", ""),
             identId: bonziTvIdent[ident].replace("https://www.youtube.com/watch?v=", ""),
@@ -2954,7 +2954,7 @@ class User {
           var num = Math.floor(Math.random() * videoIds5PM.length);
           var vid = videoIds5PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
           this.room.vid = vid;
-          await ytdl.getInfo("https://www.youtube.com/watch?v=" + vid).then((info) => {
+          /*await ytdl.getInfo("https://www.youtube.com/watch?v=" + vid).then((info) => {
             console.log("Playing video: " + info.videoDetails.title);
             if (info.videoDetails.title.match(/BFDI/g) || info.videoDetails.title.match(/BFDIA/g)) {
               bonziTvIdent = ["https://www.youtube.com/watch?v=0eGC9tMZ8co"];
@@ -2984,7 +2984,7 @@ class User {
               bonziTvIdent = ["https://www.youtube.com/watch?v=qlYR9mW1DVk"];
               ident = Math.floor(Math.random() * bonziTvIdent.length); 
             }
-          });
+          });*/
           //tvhook.send("Now playing: https://www.youtube.com/watch?v=" + vid);
           this.room.emit("replaceTVWithURL", {
             id: videoIds5PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", ""),
@@ -2994,7 +2994,7 @@ class User {
           var num = Math.floor(Math.random() * videoIds7PM.length);
           var vid = videoIds7PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
           this.room.vid = vid;
-          await ytdl.getInfo("https://www.youtube.com/watch?v=" + vid).then((info) => {
+          /*await ytdl.getInfo("https://www.youtube.com/watch?v=" + vid).then((info) => {
             console.log("Playing video: " + info.videoDetails.title);
             if (info.videoDetails.title.match(/BFDI/g) || info.videoDetails.title.match(/BFDIA/g)) {
               bonziTvIdent = ["https://www.youtube.com/watch?v=0eGC9tMZ8co"];
@@ -3024,7 +3024,7 @@ class User {
               bonziTvIdent = ["https://www.youtube.com/watch?v=qlYR9mW1DVk"];
               ident = Math.floor(Math.random() * bonziTvIdent.length);
             }
-          });
+          });*/
           //tvhook.send("Now playing: https://www.youtube.com/watch?v=" + vid);
           this.room.emit("replaceTVWithURL", {
             id: videoIds7PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", ""),
@@ -3034,7 +3034,7 @@ class User {
           var num = Math.floor(Math.random() * videoIds7PM.length);
           var vid = videoIds7PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
           this.room.vid = vid;
-          await ytdl.getInfo("https://www.youtube.com/watch?v=" + vid).then((info) => {
+          /*await ytdl.getInfo("https://www.youtube.com/watch?v=" + vid).then((info) => {
             console.log("Playing video: " + info.videoDetails.title);
             if (info.videoDetails.title.match(/BFDI/g) || info.videoDetails.title.match(/BFDIA/g)) {
               bonziTvIdent = ["https://www.youtube.com/watch?v=0eGC9tMZ8co"];
@@ -3064,7 +3064,7 @@ class User {
               bonziTvIdent = ["https://www.youtube.com/watch?v=qlYR9mW1DVk"];
               ident = Math.floor(Math.random() * bonziTvIdent.length);
             }
-          });
+          });*/
           //tvhook.send("Now playing: https://www.youtube.com/watch?v=" + vid);
           this.room.emit("replaceTVWithURL", {
             id: videoIds7PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", ""),
@@ -3074,7 +3074,7 @@ class User {
           var num = Math.floor(Math.random() * videoIds25MinutesofMSAgent.length);
           var vid = videoIds25MinutesofMSAgent[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
           this.room.vid = vid;
-          await ytdl.getInfo("https://www.youtube.com/watch?v=" + vid).then((info) => {
+          /*await ytdl.getInfo("https://www.youtube.com/watch?v=" + vid).then((info) => {
             console.log("Playing video: " + info.videoDetails.title);
             if (info.videoDetails.title.match(/BFDI/g) || info.videoDetails.title.match(/BFDIA/g)) {
               bonziTvIdent = ["https://www.youtube.com/watch?v=0eGC9tMZ8co"];
@@ -3104,7 +3104,7 @@ class User {
               bonziTvIdent = ["https://www.youtube.com/watch?v=qlYR9mW1DVk"];
               ident = Math.floor(Math.random() * bonziTvIdent.length);
             }
-          });
+          });*/
           //tvhook.send("Now playing: https://www.youtube.com/watch?v=" + vid);
           this.room.emit("replaceTVWithURL", {
             id: videoIds25MinutesofMSAgent[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", ""),
