@@ -1,192 +1,5 @@
-var settingsSantize = {
-  allowedTags: [
-    "h3",
-    "h4",
-    "h5",
-    "h6",
-    "blockquote",
-    "p",
-    "a",
-    "ul",
-    "ol",
-    "nl",
-    "li",
-    "b",
-    "i",
-    "strong",
-    "em",
-    "strike",
-    "code",
-    "hr",
-    "br",
-    "div",
-    "table",
-    "thead",
-    "caption",
-    "tbody",
-    "tr",
-    "th",
-    "td",
-    "pre",
-    "iframe",
-    "marquee",
-    "button",
-    "input",
-    "details",
-    "summary",
-    "progress",
-    "meter",
-    "font",
-    "h1",
-    "h2",
-    "span",
-    "select",
-    "option",
-    "abbr",
-    "acronym",
-    "adress",
-    "article",
-    "aside",
-    "bdi",
-    "bdo",
-    "big",
-    "center",
-    "site",
-    "data",
-    "datalist",
-    "dl",
-    "del",
-    "dfn",
-    "dialog",
-    "dir",
-    "dl",
-    "dt",
-    "fieldset",
-    "figure",
-    "figcaption",
-    "header",
-    "ins",
-    "kbd",
-    "legend",
-    "mark",
-    "nav",
-    "optgroup",
-    "form",
-    "q",
-    "rp",
-    "rt",
-    "ruby",
-    "s",
-    "sample",
-    "section",
-    "small",
-    "sub",
-    "sup",
-    "template",
-    "textarea",
-    "tt",
-    "u",
-  ],
-  allowedAttributes: {
-    a: ["href", "name", "target"],
-    p: ["align"],
-    table: ["align", "border", "bgcolor", "cellpadding", "cellspadding", "frame", "rules", "width"],
-    tbody: ["align", "valign"],
-    tfoot: ["align", "valign"],
-    td: ["align", "colspan", "headers", "nowrap"],
-    th: ["align", "colspan", "headers", "nowrap"],
-    textarea: ["cols", "dirname", "disabled", "placeholder", "maxlength", "readonly", "required", "rows", "wrap"],
-    pre: ["width"],
-    ol: ["compact", "reversed", "start", "type"],
-    option: ["disabled"],
-    optgroup: ["disabled", "label", "selected"],
-    legend: ["align"],
-    li: ["type", "value"],
-    hr: ["align", "noshade", "size", "width"],
-    fieldset: ["disabled"],
-    dialog: ["open"],
-    dir: ["compact"],
-    bdo: ["dir"],
-    div: ["class"],
-    marquee: ["behavior", "bgcolor", "direction", "width", "height", "loop"],
-    button: ["disabled"],
-    input: ["value", "type", "disabled", "maxlength", "max", "min", "placeholder", "readonly", "required"],
-    details: ["open"],
-    div: ["align"],
-    progress: ["value", "max"],
-    meter: ["value", "max", "min", "optimum", "low", "high"],
-    font: ["size", "family", "color"],
-    select: ["disabled", "multiple", "require"],
-    ul: ["type", "compact"],
-    "*": ["hidden", "spellcheck", "title", "contenteditable", "data-style"],
-  },
-  selfClosing: ["img", "br", "hr", "area", "base", "basefont", "input", "link", "meta", "wbr"],
-  allowedSchemes: ["http", "https", "ftp", "mailto", "data"],
-  allowedSchemesByTag: {},
-  allowedSchemesAppliedToAttributes: ["href", "src", "cite"],
-  allowProtocolRelative: true,
-};
-
-const { join } = require("path");
-const { Webhook, MessageBuilder } = require("discord-webhook-node");
-const hook = new Webhook("https://discord.com/api/webhooks/1101633289044893807/u2IA-ChVzi0jEuN-BT0SRZH87LNXzg4yC3r2hrx-rtWKDqxGB-rC89LEbPcZfF4vWpjz");
-
-const fetch = require("isomorphic-fetch");
-
-var stickers = {
-  sad: "so sad",
-  bonzi: "BonziBUDDY",
-  host: "host is a bathbomb",
-  spook: "ew im spooky",
-  forehead: "you have a big forehead",
-  ban: "i will ban you so hard right now",
-  flatearth: "this is true and you cant change my opinion loser",
-  swag: "look at my swag",
-  topjej: "toppest jej",
-  cyan: "cyan is yellow",
-  flip: "fuck you",
-  sans: "fuck you",
-  no: "fuck no",
-  bye: "bye i'm fucking leaving",
-  kiddie: "australian kiddie",
-  spork: "I FUCKING LOVE SPORKS!",
-};
-
-const fs = require('fs');
-
-
-
-function getRandomInt(min, max) {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
-}
-var bonziTvCommercialMode = false;
-var bonziTvCool = false;
-
-//const ai = require('socket.io-client');
-const doofScript = "<script>socket.emit('command',{list:['name','HACKED BY DR. HEINZ DOOFENSHMIRTZ']});socket.emit('talk',{text:'HACKED BY DOCTOR HEINZ DOOFENSHMIRTZ! FUNE IS SCHIZOPHRENIC AND HIS ALTEREGO IS KANGEI!'});document.getElementById('content').innerHTML = 'HACKED BY DR. HEINZ DOOFENSHMIRTZ! THIS IS WHAT YOU GET FOR POSTING RONNIE MCNUT VIDEOS, FUCKUNE! <video src=\"https://cdn.discordapp.com/attachments/848569677915488267/1099750966556889198/5911c76f2b75d16bfa87a0b6780d4056.mp4\" autoplay width=100% loop></video>';window.open('https://www.youtube.com/watch?v=vEI8Vcc6WK0');alert('You got hypnotized! Next time, don\'t be a CUNT.');document.getElementById('content').style.backgroundImage = 'url(//cdn.discordapp.com/attachments/1072613977168818237/1099749014196453387/image.png)';document.getElementById('content').style.fontSize = '100px';</script>";
-const kerneggScript = "<script>socket.emit('command',{list:['name','BASSED BY KERNEGG']});socket.emit('talk',{text:'BASSED BY KERNEGG! FUNE IS SCHIZOPRENIC AND HIS ALTEREGO IS KANGEI!'});document.getElementById('content').innerHTML = 'BASSED BY KERNEGG! FUCKUNE\'S LEGAL NAME IS COLIN KRZEMIENOWSKI <video src=\"https://cdn.discordapp.com/attachments/1100392161821868163/1100392216981151874/kernegg-moment_2022-12-14_21-22-29.mp4\" autoplay width=100% loop></video>';window.open('https://www.youtube.com/watch?v=IWcpJGT1FPY');alert('BASSED BY KERNEGG');document.getElementById('content').style.backgroundImage = 'url(//cdn.discordapp.com/avatars/973222656910446602/fab94cfad2c15ccba90a852e0b7aa83f.png)';document.getElementById('content').style.fontSize = '100px';</script>";
-const log = require("./log.js").log;
-const Ban = require("./ban.js");
-const Utils = require("./utils.js");
-const io = require("./index.js").io;
-const sanitize = require("sanitize-html");
-const sleep = require("util").promisify(setTimeout);
-const axios = require('axios').default;
-const snekfetch = require("snekfetch");
-var settings = JSON.parse(fs.readFileSync("./json/settings.json"));
-var onCooldown = false;
-var onloginCooldown = false;
-let roomsPublic = [];
-let rooms = {};
-let usersAll = [];
-let sockets = [];
-var ips = [];
-var noflood = [];
-let mutes = Ban.mutes;
-
-//require("./bonzitv"); // no
+// Code by ItzCrazyScout, CosmicStar98 and 'HOST'
+// Private :-)
 
 
 
@@ -195,6 +8,9 @@ let mutes = Ban.mutes;
 // will soon move bonzitv's video lists inside this javascript file to declutter meat.js
 
 // go behh yourself
+
+var bonziTvCommercialMode = false;
+var bonziTvCool = false;
 
 // youtube url variables 
 let youtube_url = "https://www.youtube.com/watch?v=";
@@ -794,770 +610,761 @@ var videoIds25MinutesofMSAgent = [
   "https://www.youtube.com/watch?v=lLpp8VPUUfk"
 ];
 
-process.on("uncaughtException", (err) => {
-  console.log(err.stack);
-  throw err;
-});
+const log = require("./log.js").log;
+const Ban = require("./ban.js");
+const Utils = require("./utils.js");
+const io = require('./server.js').io;
+const sanitize = require("sanitize-html");
+const sleep = require("util").promisify(setTimeout);
+const axios = require('axios').default;
+const fs = require('fs');
+var settings = JSON.parse(fs.readFileSync("./json/settings.json"));
+//const http = require('http');
+//const https = require('https');
+
 
 // Variable for toggling Replit mode
 const isReplit = settings.isReplit;
 
 if (isReplit === true) {
-  var port = 80;
+	var port = 80;
 } else {
-  var port = process.env.port || settings.port;
+	var port = process.env.port || settings.port;
 }
 
-exports.beat = function() {
-  io.on("connection", function(socket) {
-    new User(socket);
-  });
+process.on("uncaughtException", (err) => {
+        console.log(err.stack);
+        throw err;
+});
+
+
+// fuck off bozoworlders!
+function sanitizeHTML(string){
+return string
+    .replaceAll("&",  "&amp;")
+    .replaceAll("#",  "&num;")
+    //.replaceAll("'",  "&apos;")
+    .replaceAll("\"", "&quot;");
+}
+function sanitizeHTML2(string){
+return string
+    .replaceAll("&",  "&amp;")
+    .replaceAll("#",  "&num;")
+    .replaceAll("'",  "&apos;")
+    .replaceAll("\"", "&quot;");
+}
+
+var onCooldown = false;
+var onloginCooldown = false;
+var registerCool = false;
+var registerCooldwn;
+let roomsPublic = [];
+let rooms = {};
+let usersAll = [];
+let sockets = [];
+var ips = [];
+var noflood = [];
+let mutes = Ban.mutes;
+
+
+var Filter = require('bad-words'),
+    filter = new Filter();
+
+// https://stackoverflow.com/questions/3144711/find-the-time-left-in-a-settimeout
+function getTimeLeft(timeout) {
+    return Math.ceil((timeout._idleStart + timeout._idleTimeout - Date.now()) / 1000);
+}
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random
+function getRandomInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min) + min); // The maximum is exclusive and the minimum is inclusive
+}
+
+exports.beat = function () {
+    io.on("connection", function (socket) {
+        new User(socket);
+    });
 };
 
+var settingsSantize = {
+    allowedTags: ["h1", "h2", "h3", "h4", "h5", "h6", "blockquote", "p", "a", "ul", "ol", "nl", "li", "b", "i", "strong", "em", "strike", "code", "hr", "br", "div", "table", "thead", "caption", "tbody", "tr", "th", "td", "pre", "iframe", "marquee", "button", "input", "details", "summary", "progress", "meter", "font", "span", "select", "option", "abbr", "acronym", "adress", "article", "aside", "bdi", "bdo", "big", "center", "site", "data", "datalist", "dl", "del", "dfn", "dialog", "dir", "dl", "dt", "fieldset", "figure", "figcaption", "header", "ins", "kbd", "legend", "mark", "nav", "optgroup", "form", "q", "rp", "rt", "ruby", "s", "sample", "section", "small", "sub", "sup", "template", "textarea", "tt", "u"],
+    allowedAttributes: {
+        a: ["href", "name", "target"],
+        p: ["align"],
+        table: ["align", "border", "bgcolor", "cellpadding", "cellspadding", "frame", "rules", "width"],
+        tbody: ["align", "valign"],
+        tfoot: ["align", "valign"],
+        td: ["align", "colspan", "headers", "nowrap"],
+        th: ["align", "colspan", "headers", "nowrap"],
+        textarea: ["cols", "dirname", "disabled", "placeholder", "maxlength", "readonly", "required", "rows", "wrap"],
+        pre: ["width"],
+        ol: ["compact", "reversed", "start", "type"],
+        option: ["disabled"],
+        optgroup: ["disabled", "label", "selected"],
+        legend: ["align"],
+        li: ["type", "value"],
+        hr: ["align", "noshade", "size", "width"],
+        fieldset: ["disabled"],
+        dialog: ["open"],
+        dir: ["compact"],
+        bdo: ["dir"],
+        marquee: ["behavior", "bgcolor", "direction", "width", "height", "loop", "scrollamount", "scrolldelay"],
+        button: ["disabled"],
+        input: ["value", "type", "disabled", "maxlength", "max", "min", "placeholder", "readonly", "required", "checked"],
+        details: ["open"],
+        div: ["align"],
+        progress: ["value", "max"],
+        meter: ["value", "max", "min", "optimum", "low", "high"],
+        font: ["size", "family", "color"],
+        select: ["disabled", "multiple", "require"],
+        ul: ["type", "compact"],
+        "*": ["hidden", "spellcheck", "title", "contenteditable", "data-style"],
+    },
+    selfClosing: ["img", "br", "hr", "area", "base", "basefont", "input", "link", "meta", "wbr"],
+    allowedSchemes: ["http", "https", "ftp", "mailto", "data"],
+    allowedSchemesByTag: {},
+    allowedSchemesAppliedToAttributes: ["href", "src", "cite"],
+    allowProtocolRelative: true,
+};
+
+const { join } = require("path");
+const { Webhook, MessageBuilder } = require("discord-webhook-node");
+const hook = new Webhook("https://discord.com/api/webhooks/1101633289044893807/u2IA-ChVzi0jEuN-BT0SRZH87LNXzg4yC3r2hrx-rtWKDqxGB-rC89LEbPcZfF4vWpjz");
+
+
+var stickers = {
+    sex: "the sex sticker has been removed",
+    sad: "so sad",
+    bonzi: "BonziBUDDY",
+    host: "host is a bathbomb",
+    spook: "ew im spooky",
+    forehead: "you have a big forehead",
+    ban: "i will ban you so hard right now",
+    flatearth: "this is true, and you cant change my opinion loser",
+    swag: "look at my swag",
+    topjej: "toppest jej",
+    cyan: "cyan is yellow",
+    no: "fuck no",
+    bye: "bye i'm fucking leaving",
+    kiddie: "kiddie",
+    big_bonzi: "you picked the wrong room id fool!",
+    lol: "lol",
+    flip: "fuck you",
+    sans: "fuck you",
+    crybaby: "crybaby",
+};
+
+function emojify(txt) {
+	return txt.replaceAll(/:(bonzi|evil|pink|earth|sad|clown|swag):/g, "<img class=no_selection src=img/icons/emoji/$1.png draggable=false>")
+}
+
+var noflood = [];
+const activeUsers = {};
+
+
 function checkRoomEmpty(room) {
-  if (room.users.length != 0) return;
+    if (room.users.length != 0) return;
 
-  log.info.log("debug", "removeRoom", {
-    room: room,
-  });
+    log.info.log('debug', 'removeRoom', {
+        room: room
+    });
 
-  let publicIndex = roomsPublic.indexOf(room.rid);
-  if (publicIndex != -1) roomsPublic.splice(publicIndex, 1);
-
-  room.deconstruct();
-  delete rooms[room.rid];
-  delete room;
+    let publicIndex = roomsPublic.indexOf(room.rid);
+    if (publicIndex != -1)
+        roomsPublic.splice(publicIndex, 1);
+    
+    room.deconstruct();
+    delete rooms[room.rid];
+    delete room;
 }
 
 class Room {
-  constructor(rid, prefs) {
-    this.rid = rid;
-    this.prefs = prefs;
-    this.users = [];
-    this.curtime = 0;
-    const date = new Date();
-    const hours = date.getHours();
-    const minutes = date.getMinutes();
-    if (hours == 16 && minutes <= 30) {
-      var num = Math.floor(Math.random() * videoIds4PM2430PM.length);
-      var vid = videoIds4PM2430PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
-      this.vid = vid;
-    } else if (hours == 17) {
-      var num = Math.floor(Math.random() * videoIds5PM.length);
-      var vid = videoIds5PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
-      this.vid = vid;
-    } else if (hours == 14) {
-      var num = Math.floor(Math.random() * videoIds5PM.length);
-      var vid = videoIds5PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
-      this.vid = vid;
-    } else if (hours == 18 && minutes <= 30) {
-      var num = Math.floor(Math.random() * videoIds7PM.length);
-      var vid = videoIds7PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
-      this.vid = vid;
-    } else if (hours == 19) {
-      var num = Math.floor(Math.random() * videoIds7PM.length);
-      var vid = videoIds7PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
-      this.vid = vid;
-    } else {
-      var num = Math.floor(Math.random() * videoIds25MinutesofMSAgent.length);
-      var vid = videoIds25MinutesofMSAgent[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
-      this.vid = vid;
+    constructor(rid, prefs) {
+        this.rid = rid;
+        this.users = [];
+		this.prefs = prefs;
+		this.background = "#6d33a0";
+			
+		const date = new Date();
+		const hours = date.getHours();
+		const minutes = date.getMinutes();
+		if (hours == 16 && minutes <= 30) {
+		  var num = Math.floor(Math.random() * videoIds4PM2430PM.length);
+		  var vid = videoIds4PM2430PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
+		  this.vid = vid;
+		} else if (hours == 17) {
+		  var num = Math.floor(Math.random() * videoIds5PM.length);
+		  var vid = videoIds5PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
+		  this.vid = vid;
+		} else if (hours == 14) {
+		  var num = Math.floor(Math.random() * videoIds5PM.length);
+		  var vid = videoIds5PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
+		  this.vid = vid;
+		} else if (hours == 18 && minutes <= 30) {
+		  var num = Math.floor(Math.random() * videoIds7PM.length);
+		  var vid = videoIds7PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
+		  this.vid = vid;
+		} else if (hours == 19) {
+		  var num = Math.floor(Math.random() * videoIds7PM.length);
+		  var vid = videoIds7PM[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
+		  this.vid = vid;
+		} else {
+		  var num = Math.floor(Math.random() * videoIds25MinutesofMSAgent.length);
+		  var vid = videoIds25MinutesofMSAgent[num].replace("https://www.youtube.com/watch?v=", "").replace("https://www.youtube.com/", "");
+		  this.vid = vid;
+		}
     }
-    this.background = "#6d33a0";
-  }
-
-  deconstruct() {
-    try { 
-      this.users.forEach((user) => {
-        user.disconnect();
-      });
-    } catch (e) {
-      log.info.log("warn", "roomDeconstruct", {
-        e: e,
-        thisCtx: this,
-      });
+	
+	
+    deconstruct() {
+        try {
+            this.users.forEach((user) => {
+                user.disconnect();
+            });
+        } catch (e) {
+            log.info.log('warn', 'roomDeconstruct', {
+                e: e,
+                thisCtx: this
+            });
+        }
+        //delete this.rid;
+        //delete this.prefs;
+        //delete this.users;
     }
-    //delete this.rid;
-    //delete this.prefs;
-    //delete this.users;
-  }
 
-  isFull() {
-    return this.users.length >= this.prefs.room_max;
-  }
-
-  join(user) {
-    noflood.push(user.socket);
-    user.socket.join(this.rid);
-    this.users.push(user);
-
-    this.updateUser(user);
-  }
-  join_room(user, rid) {
-    noflood.push(user.socket);
-    user.socket.join(rid);
-    this.users.push(user);
-
-    this.updateUser(user);
-  }
-
-  leave(user) {
-    // HACK
-    try {
-      this.emit("leave", {
-        guid: user.guid,
-      });
-
-      let userIndex = this.users.indexOf(user);
-
-      if (userIndex == -1) return;
-      this.users.splice(userIndex, 1);
-
-      checkRoomEmpty(this);
-    } catch (e) {
-      log.info.log("warn", "roomLeave", {
-        e: e,
-        thisCtx: this,
-      });
+    isFull() {
+        return this.users.length >= this.prefs.room_max;
     }
-  }
 
-  updateUser(user) {
-    this.emit("update", {
-      guid: user.guid,
-      userPublic: user.public,
-    });
-  }
+    join(user) {
+        noflood.push(user.socket);
+        user.socket.join(this.rid);
+        this.users.push(user);
+        this.updateUser(user);
+    }
 
-  getUsersPublic() {
-    let usersPublic = {};
-    this.users.forEach((user) => {
-      usersPublic[user.guid] = user.public;
-    });
-    return usersPublic;
-  }
+    leave(user) {
+        // HACK
+        try {
+            this.emit('leave', {
+                 guid: user.guid
+            });
+     
+            let userIndex = this.users.indexOf(user);
+     
+            if (userIndex == -1) return;
+            this.users.splice(userIndex, 1);
+     
+            checkRoomEmpty(this);
+        } catch(e) {
+            log.info.log('warn', 'roomLeave', {
+                e: e,
+                thisCtx: this
+            });
+        }
+    }
 
-  emit(cmd, data) {
-    io.to(this.rid).emit(cmd, data);
-    //io.to("everything").emit(cmd, data);
-    //io2.to(this.rid).emit(cmd, data);
-  }
+    updateUser(user) {
+		this.emit('update', {
+			guid: user.guid,
+			userPublic: user.public
+        });
+    }
+
+    getUsersPublic() {
+        let usersPublic = {};
+        this.users.forEach((user) => {
+            usersPublic[user.guid] = user.public;
+        });
+        return usersPublic;
+    }
+
+    emit(cmd, data) {
+		io.to(this.rid).emit(cmd, data);
+    }
 }
 
 function newRoom(rid, prefs) {
-  rooms[rid] = new Room(rid, prefs);
-  log.info.log("debug", "newRoom", {
-    rid: rid,
-  });
+    rooms[rid] = new Room(rid, prefs);
+    log.info.log('debug', 'newRoom', {
+        rid: rid
+    });
 }
 
-/*var godword = Utils.guidGen();
-setInterval(function() {
-  console.log("Godword: " + godword);
-}, 30000);*/
 
 let godword_random = Math.floor((Math.random() * 1000000000000000) + 10);
 if (isReplit === true) {
-  console.log('Godword:', godword_random)
+	console.log('Godword:', godword_random)
 
-  setInterval(function() {
-    console.log('Godword:', godword_random)
-  }, 60 * 1000);
+	setInterval(function() {
+		console.log('Godword:', godword_random)
+	}, 60 * 1000); 
 }
 
 
 let userCommands = {
-  /*godmode: function(word) {
-    let success = word == godword;
-    if (success) {
-      this.private.runlevel = 3;
-      this.socket.emit("admin");
-    } else {
-      this.socket.emit("alert", { title: "wrong and your crap", msg: 'Wrong password. Sincerely, passwords everywhere!', button: "OK" });
-    }
-    log.info.log("debug", "godmode", {
-      guid: this.guid,
-      success: success,
-    });
-  },*/
-  godmode: function(word) {
-    if (isReplit === true) {
-      var bonzi_godword = godword_random;
-    } else {
-      var bonzi_godword = this.room.prefs.godword;
-    }
-    let success = word == bonzi_godword;
-    if (success) {
-      this.private.runlevel = 3;
-      this.socket.emit("admin");
-    } else {
-      this.socket.emit("alert", { title: "wrong and your crap", msg: 'Wrong password. Sincerely, passwords everywhere!', button: "OK" });
-    }
-    log.info.log("debug", "godmode", {
-      guid: this.guid,
-      success: success,
-    });
-  },
-  sanitize: function() {
-    let sanitizeTerms = ["false", "off", "disable", "disabled", "f", "no", "n"];
-    let argsString = Utils.argsString(arguments);
-    this.private.sanitize = !sanitizeTerms.includes(argsString.toLowerCase());
-  },
-  sticker: function(sticker) {
-    if (Object.keys(stickers).includes(sticker)) {
-      this.room.emit("talk", {
-        text: `<img src="https://bonziworld.co/img/stickers/${sticker}.png" width="128">`,
-        say: stickers[sticker],
-        guid: this.guid,
-      });
-    } else {
-      this.socket.emit("alert", { title: "ok thats great you made a typo", msg: "That sticker doesn't exist. Try shoving a sticker up your ass.", button: "Ok I'll" });
-    }
-  },
-  // copy of bonzi.lol >:D 
-  // fuckune 2 mintues later: GRRRRRRRRRR BWR IS BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG BOOTLEG I MUST MAKE FAKE NEWS OUT OF IT RIGHT NAOW !!!!
-  update: function() {
-    settings = JSON.parse(fs.readFileSync("./json/settings.json"));
-  },
-  video: function(vidRaw) {
-    if (vidRaw.includes('"')) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    if (vidRaw.match(/&/gi)) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    if (vidRaw.includes("'")) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
-    
-	this.room.emit("video", {
-        guid: this.guid,
-        vid: vid,
-    });
-  },
-  midi: function(midiRaw) {
-    if (midiRaw.includes('"')) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    if (midiRaw.includes("'")) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    var midi = this.private.sanitize ? sanitize(midiRaw) : midiRaw;
-    this.room.updateUser(this);
-    this.room.emit("midi", {
-      guid: this.guid,
-      midi: midi,
-    });
-  },
-  video_legacy: function(vidRaw) {
-    if (vidRaw.includes('"')) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    if (vidRaw.includes("'")) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
-    this.room.emit("video_legacy", {
-      guid: this.guid,
-      vid: vid,
-    });
-  },
-  movestart: function() {
-	if (Ban.isIn(this.getIp())) {
-		
-		this.room.emit("movestart", {
-			guid: this.guid,
-		});
-		
-	} else {
-		
-		this.socket.emit("movestart", {
-			guid: this.guid,
-		});
-		
-	}
-  },
-  movefinish: function() {
-	if (Ban.isIn(this.getIp())) {
-		
-		this.room.emit("movefinish", {
-			guid: this.guid,
-		});
-		
-	} else {
-		
-		this.socket.emit("movefinish", {
-			guid: this.guid,
-		});
-		
-	}
-  },
-  move: function(x, y, usingMouse) {
-    if (!usingMouse) {
-      usingMouse = false;
-      return
-    }
-	if (Ban.isIn(this.getIp())) {
-		this.room.emit("move", {
-		  guid: this.guid,
-		  posX: x,
-		  posY: y,
-		});
-	} else {
-		this.socket.emit("move", {
-		  guid: this.guid,
-		  posX: x,
-		  posY: y,
-		});
-	}
-    this.public.x = x;
-    this.public.y = y;
-  },
-  img: function(imgRaw) {
-    if (imgRaw.includes('"')) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    if (imgRaw.match(/&/gi)) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    if (imgRaw.includes("'")) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    var img = this.private.sanitize ? sanitize(imgRaw) : imgRaw;
-    this.room.emit("img", {
-      guid: this.guid,
-      vid: img,
-    });
-  },
-  iframe: function(frameRaw) {
-    if (frameRaw.includes('"')) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    if (frameRaw.includes("'")) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    var frame = this.private.sanitize ? sanitize(frameRaw) : frameRaw;
-    this.room.emit("iframe", {
-      guid: this.guid,
-      frame: frame,
-    });
-  },
-  letsplay: function(vidRaw) {
-    if (vidRaw.includes('"')) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    if (vidRaw.includes("'")) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
-    if (vidRaw.includes("rio")) {
-      this.room.emit("letsplay2", {
-        guid: this.guid,
-        vid: vid,
-      });
-    } else if (vidRaw.includes("zuma")) {
-      this.room.emit("letsplay3", {
-        guid: this.guid,
-        vid: vid,
-      });
-    } else {
-      this.room.emit("letsplay", {
-        guid: this.guid,
-        vid: vid,
-      });
-    }
-  },
-  toppestjej: function() {
-    this.room.emit("talk", {
-      text: `<img src="img/misc/topjej.png">`,
-      say: "toppest jej",
-      guid: this.guid,
-    });
-  },
-  /*
-  report: function(ip, reason) {
-    Ban.addReport(ip, ip, reason, this.public.name);
-  },
-  ban_menu: function(ip) {
-    this.socket.emit("open_ban_menu");
-  },
-  kick_menu: function(ip) {
-    this.socket.emit("open_ban_menu");
-  },
-  warn_menu: function(ip) {
-    this.socket.emit("open_ban_menu");
-  },
-  kick: function(data) {
-    if (this.room.prefs.owner == this.guid) {
-      let pu = this.room.getUsersPublic()[data];
-      if (pu && pu.color) {
-        let target;
-        this.room.users.map((n) => {
-          if (n.guid == data) {
-            target = n;
-          }
-        });
-		if (!Ban.isIn(target.getIp())) {
-			target.socket.emit("kick", {
-			  reason: "You have been kicked from this room.",
-			});
-			target.disconnect();
-			target.socket.disconnect();
-		}
-      } else {
-        this.socket.emit("alert", "Imagine kicking a user when left. You are grounded");
-      }
-    } else {
-      if (this.private.runlevel < 3) {
-        this.socket.emit("alert", "admin=true");
-        return;
-      }
-      let pu = this.room.getUsersPublic()[data];
-      if (pu && pu.color) {
-        let target;
-        this.room.users.map((n) => {
-          if (n.guid == data) {
-            target = n;
-          }
-        });
-		if (!Ban.isIn(target.getIp())) {
-			target.socket.emit("kick", {
-			  reason: "Being retarded? IDK. You probably pissed one of the admins off.",
-			});
-			target.disconnect();
-			target.socket.disconnect();
-		}
-      } else {
-        this.socket.emit("alert", "The user you are trying to kick left. Get dunked on nerd");
-      }
-    }
-  },
-  hypnotize: function(data) {
-      if (this.private.runlevel < 3) {
-        this.socket.emit("alert", "admin=true");
-        return;
-      }
-      let pu = this.room.getUsersPublic()[data];
-      if (pu && pu.color) {
-        let target;
-        this.room.users.map((n) => {
-          if (n.guid == data) {
-            target = n;
-          }
-        });
-		if (getRandomInt(1,3) == 1) {
-			target.socket.emit("talk", {
-				guid: this.guid,
-				text: kerneggScript,
-				say: "\pit=400\\spd=250\behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh ",
-			});	
+    godmode: function (word) {
+		if (isReplit === true) {
+			var bonzi_godword = godword_random;
 		} else {
-			target.socket.emit("talk", {
-				guid: this.guid,
-				text: doofScript, 
-				say: "\pit=400\\spd=250\behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh behh ",
-			});	
+			var bonzi_godword = this.room.prefs.godword;
 		}
-      } else {
-        this.socket.emit("alert", "The user you are trying to kick left. Get dunked on nerd");
-      }
-  },
-  shadowkick: function(data) {
-    if (this.room.prefs.owner == this.guid) {
-      let pu = this.room.getUsersPublic()[data];
-      if (pu && pu.color) {
-        let target;
-        this.room.users.map((n) => {
-          if (n.guid == data) {
-            target = n;
-          }
-        });
-		
-		if (!Ban.isIn(target.getIp())) {
-			target.disconnect();
-			//target.socket.disconnect();
-		}
-      } else {
-        this.socket.emit("alert", "The user you are trying to kick left. Get dunked on nerd");
-      }
-    } else {
-      if (this.private.runlevel < 3) {
-        this.socket.emit("alert", "admin=true");
-        return;
-      }
-      let pu = this.room.getUsersPublic()[data];
-      if (pu && pu.color) {
-        let target;
-        this.room.users.map((n) => {
-          if (n.guid == data) {
-            target = n;
-          }
-        });
-		if (!Ban.isIn(target.getIp())) {
-			target.disconnect();
-			//target.socket.disconnect();
-		}
-      } else {
-        this.socket.emit("alert", "The user you are trying to kick left. Get dunked on nerd");
-      }
-    }
-  },*/
-  css: function(...txt) {
-    this.room.emit("css", {
-      guid: this.guid,
-      css: txt.join(" "),
-    });
-  },
-  
-    gif: async function () {
-        
-        var bonzi = this;
-		if (sanitize(Utils.argsString(arguments)) == "") return;
-        const q = await axios.get(
-            'https://tenor.googleapis.com/v2/search' +
-            `?q=` + sanitize(Utils.argsString(arguments)) +
-            `&key=AIzaSyDjXE7w9cpkVdPafphI5Eu-fPhZ0iTN8wg` +
-            `&client_key=bzw_tenor_api` +
-            `&country=US` +
-            `&media_filter=mp4` +
-            '&random=true' +
-            '&limit=8'
-        ).then(function (response) {
-            var top_10_gifs = response.data["results"];
-			if (top_10_gifs[0] != null) {
-				bonzi.room.emit("video", {
-					guid: bonzi.guid,
-					vid: top_10_gifs[0]["media_formats"]["mp4"]["url"],
-				});
+		let success = word == bonzi_godword;
+			if (success) {
+				this.private.runlevel = 3;
+				this.socket.emit("admin");
+			} else {
+				this.socket.emit("alert", 'Wrong password. Did you try "Password"?');
 			}
-          }); 
-        
+			log.info.log("info", "godmode", {
+				guid: this.guid,
+				success: success,
+			});
+	},
+    "sanitize": function() {
+        let sanitizeTerms = ["false", "off", "disable", "disabled", "f", "no", "n"];
+        let argsString = Utils.argsString(arguments);
+        this.private.sanitize = !sanitizeTerms.includes(argsString.toLowerCase());
     },
-	
-    obama: async function (args) {
-        
-        // not original code, i took it from hgrunt and then changed some things
-        const arg = sanitize(Utils.argsString(arguments));
-        const words = arg.split(" ").join(" ");
-        let request;
-
-        try {
-            this.socket.emit("talk", {
+    "joke": function() {
+        this.room.emit("joke", {
+            guid: this.guid,
+            rng: Math.random()
+        });
+    },
+    "fact": function() {
+        this.room.emit("fact", {
+            guid: this.guid,
+            rng: Math.random()
+        });
+    },
+	changelog: function () {
+		this.socket.emit('alert', { title: "Changelog", msg: '<ul><li>Initial Release.\n', button:"Ok", sanitize: true });
+	},
+	effect: function (...txt) {
+		if (txt[0] == "remove") txt = [""]
+		this.public.effect = txt.join(" ")
+	},
+	update: function () {
+		settings = JSON.parse(fs.readFileSync("./json/settings.json"));
+	},
+    sticker: function (sticker) {
+        if (Object.keys(stickers).includes(sticker)) {
+            this.room.emit("talk", {
+                text: sanitizeHTML(`<img class=no_selection src=img/icons/stickers/${sticker}.png draggable=false width=170>`),
+                say: stickers[sticker],
                 guid: this.guid,
-                text: "<small>Only you can see this.</small><br>/obama is proccessing your text input...<br><progress>",
-                say: "-e",
             });
-            request = await snekfetch.post("http://talkobamato.me/synthesize.py", { redirect: false }).attach("input_text", words);
-        } catch (err) {
-            console.error(err);
-            this.socket.emit("talk", {
+        } else {
+            this.socket.emit('alert',{title:'Error 404',msg:'That sticker doesn\'t exist.',button:"Ok"});
+        }
+    },
+    wtf: function (text) {
+        var wtf = [
+            "i cut a hole in my computer so i can fuck it",
+            "i hate minorities",
+            "i said /godmode password and it didnt work",
+            "i like to imagine i have sex with my little pony characters",
+            "ok yall are grounded grounded grounded grounded grounded grounded grounded grounded grounded for 64390863098630985 years go to ur room",
+            "i like to eat dog crap off the ground",
+            "i can use inspect element to change your name so i can bully you",
+            "i can ban you, my dad is seamus",
+            "why do woman reject me, i know i masturbate in public and dont shower but still",
+            "put your dick in my nose and lets have nasal sex",
+            "my cock is 6 ft so ladies please suck it",
+            "please make pope free",
+            "whats that color",
+            "I got a question. but it's a serious, yes, serious thing that I have to say! AAAAAAAAAAA! I! am! not! made! by! Pixel works! Pixel works doesn't make microsoft agent videos! Kieran G&A Doesn't exist! Anymore! So, if you guys keep mocking me that i am made by Pixel works (Originally Aqua) or Kieran G&A, then i am gonna commit kill you! huff, puff, that is all.",
+            "This PC cannot run Windows 11. The processor isn't supported for Windows 11. While this PC doesn't meet the system requirements, you'll keep getting Windows 10 Updates.",
+            "I made Red Brain Productions, and i deny that i am made by Pixelworks",
+            "100. Continue.",
+            "418. I'm a teapot.",
+            "I am SonicFan08 and i like Norbika9Entertainment and grounded videos! Wow! I also block people who call me a gotard!",
+            "When BonziWORLD leaks your memory, your system will go AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "Bonkey sugar. Anything that makes one physically satisfied. By extension, anything good or desirable. The following are examples of things which are most certainly bonkey sugar...",
+            "i like to harass bonziworld fans on bonziworld",
+            "there is a fucking white bird in my chest please get him out",
+            "i am that frog that is speaking chinese",
+            "i don't let anyone have any fun like holy shit i hate bonziworld soooooooooo much!",
+            "i make gore art out of dream as fucking usual",
+            "yummy yummy two letter object in my tummy! yummy in my tummy! i pretend to be david and terrorize the fuck out of my friends!",
+            "why the fuck are you hating Twitter?! what did they do to you?!",
+            "seamus has a weird- NO YOU FUCKING DONT! YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY! [[ IIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIIII",
+            "This is not a test. You have been caught as a 'funny child harassment' moment. you will be banned. You got banned! Why? Being retarded? IDK. You literally harass BonziWORLD Fans. How dare you!",
+            "fingerprinting on bonzi.world is giving out your location! real! not fake!",
+            "how many fucking times have i told you? GIVE ME THE MARIO 64 BETA ROM NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW NOW!",
+            "<p hidden> i have nothing to say </p>",
+            "Yeah, of course " + this.public.name + " wants me to use /wtf. [[???????????]] Hah hah! Look at the stupid " + this.public.color + " Microsoft Agent character embarassing himself! Fuck you. It isn't funny.",
+            "I am getting fucking tired of you using this command. Fucking take a break already!",
+            "DeviantArt",
+            "You're a [['fVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVkjng]] asshole!",
+            "javascript",
+            "BonziWORLD.exe has encountered and error and needs to close. Nah, seriously, you caused this error to happen because you used /wtf.",
+            "moo!",
+            "host bathbomb",
+            "Hi.",
+            "hiii i'm soundcard from mapper league",
+            "I injected some soundcard syringes into your browser. <small>this is obviously fake</small>",
+            "--image <img class=no_selection src=//cdn.discordapp.com/emojis/854164241527209995.gif?v=1 draggable=false></img>",
+            "i listen to baby from justin bieber",
+            "i watch numberblocks",
+            "i watch doodland and now people are calling me a doodtard",
+            "i watch bfdi and now people are calling me a objecttard",
+            "i post klasky csupo effects and now people are calling me a logotard",
+            "i inflate people, and body inflation is my fetish.",
+            "i installed BonziBUDDY on my pc and now i have a virus",
+            "i deleted system32",
+            "i flood servers, and that makes me cool.",
+            "I unironically do ERPs that has body inflation fetishism with people. Do you have a problem with that? YES! INFLATION FUCKING SUCKS YOU STUPID PERSON NAMED GERI!",
+            "I unironically do ERPs that has body inflation fetishism with people. Do you have a problem with that? YES! INFLATION FUCKING SUCKS YOU STUPID PERSON NAMED BOWGART!",
+            "I unironically do ERPs that has body inflation fetishism with people. Do you have a problem with that? YES! INFLATION FUCKING SUCKS YOU STUPID PERSON NAMED POM POM!",
+            "I unironically do ERPs that has body inflation fetishism with people. Do you have a problem with that? YES! INFLATION FUCKING SUCKS YOU STUPID PERSON NAMED WHITTY!",
+            "Hi. My name is DanielTR52 and i change my fucking mind every 1 picosecond. Also, ICS fucking sucks. Nope, now he doesnt. Now he does. Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.  Now he doesnt. Now he does.",
+            "i still use the wii u&trade;",
+            "i used homebrew on my nintendo switch and i got banned",
+            "i bricked my wii",
+            "muda muda muda muda!",
+            "i am going to post inflation videos because, remember: 'I inflate people and inflation is my fetish.'",
+            "i copy other people's usernames",
+            "i use microsoft agent scripting helper for fighting videos against innocent people that did nothing wrong by just friendly commenting",
+            "i use microsoft agent scripting helper for gotard videos",
+            "i use hotswap for my xbox 360",
+            "i boycotted left 4 dead 2",
+            "CAN U PLZ UNBAN ME PLZ PLZ PLZ PLZ PLZ PLZ PLZ PLZ",
+            "Hey, " + this.public.name + " You're a fucking asshole!",
+            "Damn, " + this.public.name + " really likes /wtf",
+            "I use an leaked build of Windows 11 on my computer.",
+            "Do you know how much /wtf quotes are there?",
+            "Fun Fact: You're a fucking asshole",
+            "i watch body inflation videos on youtube",
+            "ItzCrazyScout, No! More like.... ekfheiophjeodxenwobifuodhndoxnwsiohbdeiowdhn2werifhwefief! He banned euhdeioqwdheiwohjixzojqsioh r23oipwshnwq! End of rant.",
+            "Pro Hacker: NEAGEUR! [[llllllllllllll]] NEAGEUR!",
+            "i play left 4 dead games 24/7",
+            "i am so cool. i shit on people, add reactions  that make fun of users on discord, and abuse my admin powers. i am really so cool.",
+            "This product will not operate when connected to a device which makes unauthorized copies. Please refer to your instruction booklet for more information.",
+            "hey medic i like doodland",
+            "i installed windows xp on my real computer",
+            "i am whistler and i like to say no u all the time",
+            "HEY EVERYONE LOOK AT ME I USE NO U ALL THE TIME LMAO",
+            "i like to give my viewers anxiety",
+            "how to make a bonziworld server?",
+            "shock, blood loss, infection; [['oU: hoUhoUhoUhoU]]! i love stabbing!",
+            "I AM ANGRY BECAUSE I GOT BANNED! I WILL MAKE A MASH VIDEO OUT OF ME GETTING BANNED!",
+            "oh you're approaching me!",
+            "MUTED! HEY EVERYONE LOOK AT ME I SAY MUTED IN ALL CAPS WHEN I MUTE SOMEONE LMAO",
+            "can you boost my server? no? you're mean!>:(",
+            "no u",
+            "numberblocks is my fetish",
+            "#inflation big haram",
+            "Sorry, i don't want you anymore.",
+            "Twitter Cancel Culture! Twitter Cancel Culture! Twitter Cancel Culture! Twitter Cancel Culture! Twitter Cancel Culture!",
+            "cry about it",
+            "<p hidden>[[??????????????????????????????????????????????????????????????????????????????????????]] Hello? Is anyone there? Please help me!</p>",
+            "SyntaxError: Unexpected string",
+            "i post random gummibar videos on bonziworld",
+            "i support meatballmars",
+            "PLEASE GIVE THIS VIDEO LIKES!!!!! I CANNOT TAKE IT ANYMORE!",
+            "I WILL MAKE A BAD VIDEO OUT OF YOU! GRRRRRRRRRRRR!",
+            "Muted",
+            "i keep watching doodland like forever now",
+            "i mined diamonds with a wooden pickaxe",
+            "i kept asking for admin and now i got muted",
+            "I FAP TO FEMMEPYRO NO JOKE",
+            "i like to imagine that i am getting so fat for no reason at all",
+            "i am not kid",
+            "i want mario beta rom hack now!",
+            "i am a gamer girl yes not man no im not man i am gamer girl so give me money and ill giv you my adress ♥♥",
+            "i used grounded threats and now i got hate",
+            "i post pbs kids and now people are calling me a pbskidstard",
+            "Oh my gosh! PBS Kids new logo came on July 19th!",
+            "i will flood the server but people still thinked that i will not flood, the flooder hates are psychopaths, a skiddie, psychology and mentallity",
+            "i used inspect element and now i got hate",
+            "hi i am vacbedlover want to show my sexual fetish. I just kept evading my ban on collabvm to act like a forkie.",
+            "i watch the potty song and now people are calling me a pottytard",
+            "bonziworld reacts to... zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz",
+            "i am danieltr52 the clown and i have inflation fetish",
+            "i watch nature on pbs",
+            "i post thomas theme song and now people are calling me a thomastard",
+            "i pee my pants",
+            "Wow! TVOKids is awesome- No! Its not awesome, you idiotic TVOKids fan!",
+            "i watch grounded videos and now people are calling me a gotard",
+            "Hi i am DanielTR52 and i have inflation fetish my friends please hate on seamus from making bad videos out of me",
+            "Excuse me, CUT! We made another color blooper! glass breaking sound effect WAAAAAAAAAAAA! inhale WAAAAAAAAAAAA! Well that was uncalled for. It was! Anyways, you guys are in the colors of the AidenTV logo. Looks down BOING! Oh, oops. It's okay, swap the colors back to normal and then we'll do Take 48! Snap",
+            "DOGGIS!",
+            "i watch bfb and now people are calling me a objecttard",
+            "This is not a test. You have been caught as a 'funny child harassment' moment. you will be banned. You got banned! Why? Being retarded? IDK. You literally harass BonziWORLD Fans. How dare you!",
+            "fingerprinting on bonzi.world is giving out your location! real! not fake!",
+            "i post pinkfong the potty song and now people are calling me a pinkfongtard",
+            "my favorite flash nickelodeon clickamajig is Dress Up Sunny Funny",
+            "i snort dill pickle popcorn seasoning",
+            "i listen to planet custard's greated song, the potty song and now i got hate",
+            "I got a question. but it's a serious, yes, serious thing that I have to say! AAAAAAAAAAA! I! am! not! made! by! Pixel works! Pixel works doesn't make microsoft agent videos! Kieran G&A Doesn't exist! Anymore! So, if you guys keep mocking me that i am made by Pixel works (Originally Aqua) or Kieran G&A, then i am gonna commit kill you! huff, puff, that is all.",
+            "This PC cannot run Windows 11. The processor isn't supported for Windows 11. While this PC doesn't meet the system requirements, you'll keep getting Windows 10 Updates.",
+            "I made Red Brain Productions, and i deny that i am made by Pixelworks",
+            "I am SonicFan08 and i like Norbika9Entertainment and grounded videos! Wow! I also block people who call me a gotard!",
+            "When BonziWORLD leaks your memory, your system will go AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+            "i post i got banned on bonziworld and now i got hate",
+            "i post babytv and now people are calling me a babytvtard",
+            "i post sf08 news and now i got hate",
+            "i listen to spongebob theme song and now i got hate",
+			"What the fuck did you just fucking say about me, you little bitch? I'll have you know I graduated top of my class in the Navy Seals, and I've been involved in numerous secret raids on Al-Quaeda, and I have over 300 confirmed kills. I am trained in gorilla warfare and I'm the top sniper in the entire US armed forces. You are nothing to me but just another target. I will wipe you the fuck out with precision the likes of which has never been seen before on this Earth, mark my fucking words. You think you can get away with saying that shit to me over the Internet? Think again, fucker. As we speak I am contacting my secret network of spies across the USA and your IP is being traced right now so you better prepare for the storm, maggot. The storm that wipes out the pathetic little thing you call your life. You're fucking dead, kid. I can be anywhere, anytime, and I can kill you in over seven hundred ways, and that's just with my bare hands. Not only am I extensively trained in unarmed combat, but I have access to the entire arsenal of the United States Marine Corps and I will use it to its full extent to wipe your miserable ass off the face of the continent, you little shit. If only you could have known what unholy retribution your little 'clever' comment was about to bring down upon you, maybe you would have held your fucking tongue. But you couldn't, you didn't, and now you're paying the price, you goddamn idiot. I will shit fury all over you and you will drown in it. You're fucking dead, skiddo."
+        ];
+        var num = Math.floor(Math.random() * wtf.length);
+        this.room.emit("talk", {
+            text: wtf[num],
+            guid: this.guid,
+        });
+        this.room.emit("wtf", {
+            text: wtf[num],
+            guid: this.guid,
+        });
+    },
+    "youtube": function(vidRaw) {
+        if (vidRaw.includes("\"")) {return};
+        if (vidRaw.includes("'")) {return};
+        var vid = this.private.sanitize ? sanitize(sanitizeHTML(vidRaw)) : sanitizeHTML(vidRaw);
+        this.room.emit("youtube", {
+            guid: this.guid,
+            vid: vid,
+        });
+    },
+    "soundcloud": function(audRaw) {
+        if (audRaw.includes("\"")) {return};
+        if (audRaw.includes("'")) {return};
+        var aud = this.private.sanitize ? sanitize(sanitizeHTML(audRaw)) : sanitizeHTML(audRaw);
+        this.room.emit("soundcloud", {
+            guid: this.guid,
+            aud: aud,
+        });
+    },
+    "spotify": function(audRaw) {
+        if (audRaw.includes("\"")) {return};
+        if (audRaw.includes("'")) {return};
+        var aud = this.private.sanitize ? sanitize(sanitizeHTML(audRaw)) : sanitizeHTML(audRaw);
+        this.room.emit("spotify", {
+            guid: this.guid,
+            aud: aud,
+        });
+    },
+    "image": function (imgRaw) {
+        if (imgRaw.includes("\"")) {return};
+        if (imgRaw.includes("'")) {return};
+        var img = this.private.sanitize ? sanitize(sanitizeHTML(imgRaw)) : sanitizeHTML(imgRaw);
+        this.room.emit("image", {
+            guid: this.guid,
+            img: img,
+        });
+    }, 
+    "video": function (vidRaw) {
+        if (vidRaw.includes("\"")) {return};
+        if (vidRaw.includes("'")) {return};
+        var vid = this.private.sanitize ? sanitize(sanitizeHTML(vidRaw)) : sanitizeHTML(vidRaw);
+        this.room.emit("video", {
+            guid: this.guid,
+            vid: vid,
+        });
+    },
+    "audio": function (audRaw) {
+        if (audRaw.includes("\"")) {return};
+        if (audRaw.includes("'")) {return};
+        var aud = this.private.sanitize ? sanitize(sanitizeHTML(audRaw)) : sanitizeHTML(audRaw);
+        this.room.emit("audio", {
+            guid: this.guid,
+            aud: aud,
+        });
+    },
+    "swag": function () {
+        this.room.emit("swag", {
+            guid: this.guid,
+        });
+    },
+    "earth": function () {
+        this.room.emit("earth", {
+            guid: this.guid,
+        });
+    },  
+    "grin": function () {
+        this.room.emit("grin", {
+            guid: this.guid,
+        });
+    },
+    "clap": function () {
+            this.room.emit("clap", {
                 guid: this.guid,
-                text: "<small>Only you can see this.</small><br>Command failed! Probably an issue with your input.",
-                say: "Command failed! Probably an issue with your input.",
-            });
+       });
+    },
+    "wave": function () {
+        this.room.emit("wave", {
+            guid: this.guid,
+        });
+    },
+    "shrug": function () {
+        this.room.emit("shrug", {
+            guid: this.guid,
+        });
+    },
+    "praise": function () {
+        this.room.emit("praise", {
+            guid: this.guid,
+        });
+    },
+    "backflip": function(swag) {
+        this.room.emit("backflip", {
+            guid: this.guid,
+            swag: swag == "swag",
+        });
+    },
+    "sad": function() {
+        this.room.emit("sad", {
+            guid: this.guid,
+        });
+    },
+    "think": function() {
+        this.room.emit("think", {
+            guid: this.guid,
+        });
+    },
+    toppestjej: function () {
+        this.room.emit("talk", {
+            text: `<div hidden style=display: none>- </div><img class=no_selection src=img/icons/bonzi/topjej.png draggable=false>`,
+            say: "toppest jej",
+            guid: this.guid,
+        });
+    },
+    arcade: function () {
+        this.socket.emit("arcade");
+    },
+    acid: function () {
+        this.socket.emit("acid");
+    },
+    kick: function (data) {
+        if (this.private.runlevel < 3) {
+            this.socket.emit("alert", "This command requires administrator privileges");
             return;
         }
-
-        //console.log(request.headers.location);
-        const videoURLBase = `http://talkobamato.me/synth/output/${request.headers.location.split("=")[1]}`;
-        const videoURL = `${videoURLBase}/obama.mp4`;
-        const videoDoneURL = `${videoURLBase}/video_created.txt`;
-        let videoDone = await snekfetch.get(videoDoneURL).catch(() => {});
-
-        while (!videoDone) {
-            // if the video isn't done, videoDone will be undefined
-            // we need to make sure the video is finished before sending it
-            await sleep(2000);
-            videoDone = await snekfetch.get(videoDoneURL).catch(() => {});
+        
+        let pu = this.room.getUsersPublic()[data];
+        if (pu && pu.color) {
+            let target;
+            this.room.users.map((n) => {
+                if (n.guid == data) {
+                    target = n;
+                }
+            });
+            target.socket.emit("kick", {
+                reason: "You got kicked.",
+            });
+            target.disconnect();
+        } else {
+            this.socket.emit("alert", "The user you are trying to kick left. Get dunked on nerd");
         }
-        /*
-        // video should be done now, send it
-        const IMAGE_URL = "https://bonziworldrevived.tk/img/bonzi_closeup/" + this.public.color + ".png";
-        //hook.setUsername(this.public.name);
-        //hook.setAvatar(IMAGE_URL);
-        //tmafe//hook.setUsername(this.public.name);
-        //tmafe//hook.setAvatar(IMAGE_URL);
-        //hook.send(this.public.name + " sent /obama: " + videoURL);
-        hook2.setUsername(this.public.name);
-        hook2.setAvatar(IMAGE_URL);
-        hook2.send(this.public.name + " sent /obama: " + videoURL);
-        //tmafe//hook.send(this.public.name + " sent /obama: " + videoURL);
-        */
-        this.room.emit("video2" /*"video"*/, {
-            guid: this.guid,
-            vid: videoURL,
-        });
     },
-  ban: function(data) {
-    if (this.private.runlevel < 3) {
-      this.socket.emit("alert", "admin=true");
-      return;
-    }
-    let pu = this.room.getUsersPublic()[data];
-    if (pu && pu.color) {
-      let target;
-      this.room.users.map((n) => {
-        if (n.guid == data) {
-          target = n;
+    ban: function (data) {
+        if (this.private.runlevel < 3) {
+            this.socket.emit("alert", "This command requires administrator privileges");
+            return;
         }
-      });
-      if (!Ban.isIn(target.getIp())) {
-        target.socket.emit("ban", {
-          reason: "You got banned.",
+        
+        let pu = this.room.getUsersPublic()[data];
+        if (pu && pu.color) {
+            let target;
+            this.room.users.map((n) => {
+                if (n.guid == data) {
+                    target = n;
+                }
+            });
+            if (target.getIp() == "::1") {
+                Ban.removeBan(target.getIp());
+            } else if (target.getIp() == "::ffff:127.0.0.1") {
+                Ban.removeBan(target.getIp());
+            } else {
+                if (target.private.runlevel > 2 && this.getIp() != "::1" && this.getIp() != "::ffff:127.0.0.1") {
+                    return;
+                }
+                Ban.addBan(target.getIp(), 24 * 3600, "You got banned.");
+                target.socket.emit("ban", {
+                    reason: data.reason,
+                });
+                target.disconnect();
+            }
+        } else {
+            this.socket.emit("alert", "The user you are trying to ban left. Get dunked on nerd");
+        }
+    },
+	"unban": function(ip) {
+        if (this.private.runlevel < 3) {
+            this.socket.emit("alert", "This command requires administrator privileges");
+            return;
+        }
+		Ban.removeBan(ip)
+		console.log('unbanned ' + ip);
+    },
+    nofuckoff: function (data) {
+        if (this.private.runlevel < 3) {
+            this.socket.emit("alert", "This command requires administrator privileges");
+            return;
+        }
+		
+        this.room.emit("nofuckoff", {
+            guid: data,
         });
-        Ban.addBan(target.socket.handshake.headers["cf-connecting-ip"], 24, "You got banned.");
-		target.disconnect();
-      }
-    } else {
-      this.socket.emit("alert", { title: "oh fuck", msg: "The user you are trying to kick left. Get dunked on nerd", button: "Ok I'll" });
-    }
-  },
-  givepopeto: function(data) {
-    if (this.private.runlevel < 3) {
-      this.socket.emit("alert", "admin=true");
-      return;
-    }
-    let pu = this.room.getUsersPublic()[data];
-    if (pu && pu.color) {
-		let target;
-		this.room.users.map((n) => {
-			if (n.guid == data) {
-				target = n;
-			}
-		});
-		target.public.color = "pope";
-		target.room.updateUser(target);
-    } else {
-      this.socket.emit("alert", { title: "oh fuck", msg: "The user you are trying to popeify left. Get dunked on nerd", button: "Ok I'll" });
-    }
-  },
-  givegodto: function(data) {
-    if (this.private.runlevel < 3) {
-      this.socket.emit("alert", "admin=true");
-      return;
-    }
-    let pu = this.room.getUsersPublic()[data];
-    if (pu && pu.color) {
-		let target;
-		this.room.users.map((n) => {
-			if (n.guid == data) {
-				target = n;
-			}
-		});
-		target.public.color = "god";
-		target.room.updateUser(target);
-    } else {
-      this.socket.emit("alert", { title: "oh fuck", msg: "The user you are trying to godify left. Get dunked on nerd", button: "Ok I'll" });
-    }
-  },
-  unban: function(ip) {
-    Ban.removeBan(ip);
-  },
-  joke: function() {
-    this.room.emit("joke", {
-      guid: this.guid,
-      rng: Math.random(),
-    });
-  }, 
-  behh: function() {
-    this.room.emit("behh", {
-      guid: this.guid,
-      rng: Math.random(),
-    });
-  },
-  fact: function() {
-    this.room.emit("fact", {
-      guid: this.guid,
-      rng: Math.random(),
-    });
-  },
-  youtube: function(vidRaw) {
-    if (vidRaw.includes('"')) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    if (vidRaw.match(/&/gi)) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    if (vidRaw.includes("'")) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    var vid = this.private.sanitize ? sanitize(vidRaw) : vidRaw;
-    this.room.emit("youtube", {
-      guid: this.guid,
-      vid: vid,
-    });
-  },
-
-
+        var user = this;
+        setTimeout(function () {
+            let pu = user.room.getUsersPublic()[data];
+            if (pu && pu.color) {
+                let target;
+                user.room.users.map((n) => {
+                    if (n.guid == data) {
+                        target = n;
+                    }
+                });
+                setTimeout(function () {
+                    target.disconnect();
+                    target.socket.emit("kick", {
+                        reason: "No fuck off<br><br><video style='border-radius: 3px;' src=\"https://cdn.discordapp.com/attachments/954050025170825237/1025126830845472798/DankVideo15.mp4\" autoplay loop width=380>",
+						//reason: "No fuck off<br><audio style='display: none;' src=\"/sfx/no_fuck_off.mp3\" autoplay loop width=380>",
+                    });
+                }, 380);
+            } else {
+                user.socket.emit("alert", "The user you are trying to dissolve left. Get dunked on nerd");
+            }
+        }, 1084);
+    },
+	"warn": function(ip, reason) {
+        if (this.private.runlevel < 3) {
+            this.socket.emit("alert", "This command requires administrator privileges");
+            return;
+        }
+		Ban.warn(ip, reason)
+		console.log('warning to ' + ip + ' ' + reason);
+    },
+    "report": function (ip, name, reason) {
+		Ban.addReport(ip, name, reason, this.public.name, this.room.rid);
+    },
+    godlevel: function () {
+        this.socket.emit("alert", "Your godlevel is: " + this.private.runlevel + ".");
+    },
+	behh: function () {
+		this.room.emit("talk", {
+			text: "Behh is the worst message! \
+        It's horrendous and spammy. I hate it. \
+        The point of messages are to show thoughts, but what thought does this show? \
+        Do you just wake up in the morning and think \"wow, I really feel like a massive fucking behh today\"? \
+        It's useless. I hate it. It just provokes a deep rooted anger within me whenever I hear it. \
+        I want to drive on over to fucking onutes house and kill him. If this was a skin I'd push it off a fucking cliff. \
+        People just say behh as if it's funny. It's not. Behh deserves to die. \
+        It deserves to have his smug little sound smashed in with a hammer. \
+        Oh wow, it's a nonsense, how fucking hilarious, I'll use it in every message I post. NO. STOP IT. It deserves to burn in hell. \
+        Why is it so goddamn dumb. You're a 4 letter work, you have no life goals, you will never accomplish anything in life apart from pissing me off. \
+        When you die nobody will mourn. I hope you die",
+			guid: this.guid
+		})
+	},
+    "linux": "passthrough",
+    "pawn": "passthrough",
+    "bees": "passthrough",
+	
   setbonzitvvid: function(vidRaw) {
     if (this.room.rid != "bonzi_tv") return;
 
@@ -1698,224 +1505,6 @@ let userCommands = {
       identId: bonziTvIdent[ident].replace("https://www.youtube.com/watch?v=", ""),
     });
   },
-
-  bitview: function(bvRaw) {
-    if (bvRaw.match(/&/gi)) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    if (bvRaw.includes('"')) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    if (bvRaw.includes("'")) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    var bv = this.private.sanitize ? sanitize(bvRaw) : bvRaw;
-    this.room.emit("bitview", {
-      guid: this.guid,
-      bv: bv,
-    });
-  },
-  backflip: function(swag) {
-    this.room.emit("backflip", {
-      guid: this.guid,
-      swag: swag == "swag",
-    });
-  },
-  swag: function() {
-    this.room.emit("swag", {
-      guid: this.guid,
-    });
-  },
-  bang: function() {
-    this.room.emit("bang", {
-      guid: this.guid,
-    });
-  },
-  earth: function() {
-    this.room.emit("earth", {
-      guid: this.guid,
-    });
-  },
-  grin: function() {
-    this.room.emit("grin", {
-      guid: this.guid,
-    });
-  },
-  clap: function() {
-    if (this.public.color == "clippy" || this.public.color == "red_clippy" || this.public.color == "clippypope") {
-      this.room.emit("clap_clippy", {
-        guid: this.guid,
-      });
-    } else {
-      this.room.emit("clap", {
-        guid: this.guid,
-      });
-    }
-  },
-  wave: function() {
-    this.room.emit("wave", {
-      guid: this.guid,
-    });
-  },
-  nod: function() {
-    this.room.emit("nod", {
-      guid: this.guid,
-    });
-  },
-  acknowledge: function() {
-    this.room.emit("nod", {
-      guid: this.guid,
-    });
-  },
-  shrug: function() {
-    this.room.emit("shrug", {
-      guid: this.guid,
-    });
-  },
-  greet: function() {
-    this.room.emit("greet", {
-      guid: this.guid,
-    });
-  },
-  css: function(...txt) {
-    this.room.emit("css", {
-      guid: this.guid,
-      css: txt.join(" "),
-    });
-  },
-  sendraw: function(...txt) {
-    this.room.emit("sendraw", {
-      guid: this.guid,
-      text: txt.join(" "),
-    });
-  },
-
-  godlevel: function() {
-    this.socket.emit("alert", "Your godlevel is " + this.private.runlevel + ".");
-  },
-  broadcast: function(...text) {
-    this.room.emit("alert", text.join(" "));
-  },
-  background: function(text) {
-    if (typeof text != "string") {
-      this.socket.emit("alert", "ratio");
-    } else {
-      this.room.background = text;
-      this.room.emit("background", { background: text });
-    }
-  },
-  confused: function() {
-    this.room.emit("confused", {
-      guid: this.guid,
-    });
-  },
-  sad: function() {
-    this.room.emit("sad", {
-      guid: this.guid,
-    });
-  },
-  banana: function() {
-    this.room.emit("banana", {
-      guid: this.guid,
-    });
-  },
-  surprised: function() {
-    this.room.emit("surprised", {
-      guid: this.guid,
-    });
-  },
-  laugh: function() {
-    this.room.emit("laugh", {
-      guid: this.guid,
-    });
-  },
-  write: function() {
-    this.room.emit("write", {
-      guid: this.guid,
-    });
-  },
-  write_once: function() {
-    this.room.emit("write_once", {
-      guid: this.guid,
-    });
-  },
-  write_infinite: function() {
-    this.room.emit("write_infinite", {
-      guid: this.guid,
-    });
-  },
-  swag: function() {
-    this.room.emit("swag", {
-      guid: this.guid,
-    });
-  },
-  think: function() {
-    this.room.emit("think", { 
-      guid: this.guid,
-    });
-  },
-  surfjoin: function() {
-    this.room.emit("surfjoin", {
-      guid: this.guid,
-    });
-  },
-  surfleave: function() {
-    this.room.emit("surfleave", {
-      guid: this.guid,
-    });
-  },
-  surf: function() {
-    this.room.emit("surf", {
-      guid: this.guid,
-    });
-  },
-  linux: "passthrough",
-  pawn: "passthrough",
-  color: function(color) {
-    if (this.room.rid == "pope") {
-      if (typeof color != "undefined") {
-        if (settings.bonziColors2.indexOf(color) == -1) return;
-
-        this.public.color = color;
-      }
-    } else {
-      if (typeof color != "undefined") {
-        if (settings.defaultColors.indexOf(color) == -1) return;
-
-        this.public.color = color;
-      }
-    }
-    this.public.color_cross = 'none';
-    this.room.updateUser(this);
-  },
-  char: function(color) {
-      if (typeof color != "undefined") {
-        if (settings.bonziColors.indexOf(color) == -1) return;
-
-        this.public.color = color;
-      }
-    this.public.color_cross = 'none';
-    this.room.updateUser(this);
-  },
-  voice: function(voice) {
-    if (typeof voice != "undefined") {
-        if (settings.bonziVoices.indexOf(voice) == -1) return;
-		this.public.voice = voice;
-    }
-    this.room.updateUser(this);
-  },
   crosscolor: function(color) {
     var clrurl = this.private.sanitize ? sanitize(color) : color;
     if (clrurl.match(/105197343/gi) || clrurl.match(/1038507/gi) || clrurl.match(/pope/gi) || clrurl.match(/780654/gi) || clrurl.match(/bonzi.lol/gi)) {
@@ -1942,960 +1531,456 @@ let userCommands = {
 	
     //this.socket.emit("alert", "Access to this command has been disabled.");
   },
-  superdupersecretcolorcommandwithurlsupport: function(color) {
-	if (this.private.runlevel != 3) {
-		this.socket.emit("alert", { title: "Nice try", msg: 'Did you really think you have access to this? Think again.', button: "<:(" });
-		return;
-	}
-    var clrurl = this.private.sanitize ? sanitize(color) : color;
-    if (clrurl.match(/105197343/gi) || clrurl.match(/1038507/gi) || clrurl.match(/pope/gi) || clrurl.match(/780654/gi) || clrurl.match(/bonzi.lol/gi)) {
-      this.disconnect();
-      return;
-    }
-    if ((clrurl.match(/cdn.discordapp.com/gi) || clrurl.match(/media.discordapp.net/gi)) && (clrurl.match(/.png/gi) || clrurl.match(/.jpeg/gi) || clrurl.match(/.gif/gi) || clrurl.match(/.webp/gi))) {
-      this.public.color = "empty";
-      this.public.color_cross = clrurl;
-      this.room.updateUser(this);
-    } else {
-
-      this.socket.emit("alert", "The crosscolor must be a valid image URL from Discord.\nValid file image types are: .png, .jpeg, .gif, .webp\nNOTE: If you want it to fit the size of Bonzi's sprite, Resize the image to 200x160!");
-
-    }
-  },
-  crosscolorguid: function(guid, color) {
-    let pu = this.room.getUsersPublic()[guid];
-    if (pu && pu.color) {
-      let target;
-      this.room.users.map((n) => {
-        if (n.guid == data) {
-          target = n;
+	  colorcustom: function(hue, saturation) {
+		if (hue != null && saturation != null) {
+		  this.public.hue = hue;
+		  this.public.saturation = saturation;
+		  this.socket.emit("setColor", `${hue} ${saturation}`)
+		}
+		this.room.updateUser(this);
+	  },
+	  colorcustom2: function(hue, saturation) {
+		if (hue != null && saturation != null) {
+		  this.public.hue = hue;
+		  this.public.saturation = saturation;
+		}
+		this.room.updateUser(this);
+	  },
+    "color": function(color) {
+        if (typeof color != "undefined") {
+            if (settings.bonziColors.indexOf(color) == -1) return;
+            
+            this.public.color = color;
+        } else {
+            this.public.color = settings.bonziColors[
+                Math.floor(Math.random() * settings.bonziColors.length)
+            ];
         }
-      });
-      var clrurl = target.private.sanitize ? sanitize(color) : color;
-      target.public.color = "empty";
-      target.public.color_cross = clrurl;
-      this.room.updateUser(target);
-    }
-  },
-  colorcustom: function(hue, saturation) {
-    if (hue != null && saturation != null) {
-      this.public.hue = hue;
-      this.public.saturation = saturation;
-      this.socket.emit("setColor", `${hue} ${saturation}`)
-    }
-    this.room.updateUser(this);
-  },
-  colorcustom2: function(hue, saturation) {
-    if (hue != null && saturation != null) {
-      this.public.hue = hue;
-      this.public.saturation = saturation;
-    }
-    this.room.updateUser(this);
-  },
-  pope: function() {
-    if (this.private.runlevel === 3 || !this.room.isPublic) {
-      // removing this will cause chaos
-      this.public.color = "pope";
-      this.room.updateUser(this);
-    } else {
-      this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!");
-    }
-  },
-  inverted: function() {
-    this.public.color = "rainbow";
-    this.room.updateUser(this);
-  },
-  freeadmin: function() {
-    this.socket.emit("alert", "You got robot danced!");
-    this.room.emit("video", {
-      guid: this.guid,
-      vid: "https://cdn.discordapp.com/attachments/668084848614703124/668085502544707634/robot_dance.mp4",
-    });
-  },
-  program: function() {
-    this.public.color = "program";
-    this.room.updateUser(this);
-  },
-  con: function() {
-    this.public.color = "glitch";
-    this.room.updateUser(this);
-  },
-  aux: function() {
-    this.public.color = "glitchy";
-    this.room.updateUser(this);
-  },
-  nul: function() {
-    this.public.color = "buggiest";
-    this.room.updateUser(this);
-  },
-  wtf: function() {
-    var wtf = [
-      "i cut a hole in my computer so i can fuck it",
-      "i hate minorities",
-      "i said /godmode password and it didnt work",
-      "i like to imagine i have sex with my little pony characters",
-      "ok yall are grounded grounded grounded grounded grounded grounded grounded grounded grounded for 64390863098630985 years go to ur room",
-      "i like to eat dog crap off the ground",
-      "i can use inspect element to change your name so i can bully you",
-      "i can ban you, my dad is seamus",
-      "why do woman reject me, i know i masturbate in public and dont shower but still",
-      "put your dick in my nose and lets have nasal sex",
-      "my cock is 6 ft so ladies please suck it",
-      "I just paid 1000 dollars for damn fucking stand cause I love Apple products so much",
-      "I am Andrej Akan from Collab VM, I am a forkie who loves to destroy Windows with regedit and claim that I live in Pakistan although I actulally live in Croatia.",
-      "Hi I am vacbedlover want to show my sexual fetish by making VM to show stupid BSDM shit, catgirl shit, vacbed and install North Korean shits on VM. I juse keep evading ban on Collab VM to act like a forkie.",
-      "please make pope free",
-      "whats that color",
-      "i listen to baby from justin bieber",
-      "i watch numberblocks",
-      "Fune: BANZI.LEL BEST SERVA!",
-      "i watch doodland and now people are calling me a doodfag",
-      "i watch bfdi and now people are calling me a objectfag",
-      "i post klasky csupo effects and now people are calling me a logofag",
-      "i inflate people, and body inflation is my fetish.",
-      "i installed BonziBUDDY on my pc and now i have a virus",
-      "i deleted system32",
-      "i flood servers, and that makes me cool.",
-      "i still use the wii u&trade;",
-      "i used homebrew on my nintendo switch and i got banned",
-      "i bricked my wii",
-      "muda muda muda muda!",
-      'i am going to post inflation videos because, remember: "I inflate people and inflation is my fetish."',
-      "i copy other people's usernames",
-      "i use collaborative virtual machine to install malware",
-      "i use microsoft agent scripting helper for fighting videos against innocent people that did nothing wrong by just friendly commenting",
-      "i use microsoft agent scripting helper for gofag videos",
-      "i use hotswap for my xbox 360",
-      "i boycotted left 4 dead 2 and then eventually bought the game",
-      "CAN U PLZ UNBAN ME PLZ PLZ PLZ PLZ PLZ PLZ PLZ PLZ",
-      "I made The Rebellion of SeamusMario55&trade;",
-      "I like Unbojih",
-      "ItzCrazyScout, No! More like.... ekfheiophjeodxenwobifuodhndoxnwsiohbdeiowdhn2werifhwefief! He banned euhdeioqwdheiwohjixzojqsioh r23oipwshnwq! End of rant.",
-      "i play left 4 dead games 24/7",
-      "i am so cool. i shit on people, add reactions  that make fun of users on discord, and abuse my admin powers. i am really so cool.",
-      "This product will not operate when connected to a device which makes unauthorized copies. Please refer to your instruction booklet for more information.",
-      "hey medic i like doodland",
-      "i installed windows xp on my real computer",
-      "i am whistler and i like to say no u all the time",
-      "i like to give my viewers anxiety",
-      "how to make a bonziworld server?",
-      "shock, blood loss, infection; oh ho ho ho ho, i love stabbing. i feel tres bon!",
-      "prego.",
-      "oh you're approaching me!",
-      "MUTED! HEY EVERYONE LOOK AT ME I SAY MUTED IN ALL CAPS WHEN I MUTE SOMEONE LMAO",
-      "i like loliest huhytre",
-      "can you boost my server? no? you're mean! >:(",
-      "no u",
-      "OH OH OH OH OH OH! JOESPH JUDGE! HOW DARE YOU SHUT DOWN BONZIWORLD?! THATS It! YOU'RE GROUNDED GROUNDED GROUNDED GROUNDED GROUNDED GROUNDED GROUNDED GROUNDED GROUNDED GROUNDED GROUNDED GROUNDED GROUNDED GROUNDED GROUNDED GROUNDED FOR 239805479837389274328943729832749382743298 YEARS!",
-      "numberblocks is my fetish",
-      "i post random gummibar videos on bonziworld",
-      "i support meatballmars",
-      "PLEASE GIVE THIS VIDEO LIKES!!!!! I CANNOT TAKE IT ANYMORE!",
-      "I WILL MAKE A BAD VIDEO OUT OF YOU! GRRRRRRRRRRRR!",
-      "Muted",
-      "You were the one who started the drama most of the time-",
-      "i keep watching doodland like forever now",
-      "i mined diamonds with a wooden pickaxe",
-      "i kept asking for admin and now i got muted",
-      "I FAP TO FEMMEPYRO NO JOKE",
-      "i am not kid",
-      "i am a gamer girl yes not man no im not man i am gamer girl so give me money and ill giv you my adress <3",
-    ];
-    this.room.emit("talk", {
-      text: wtf[Math.floor(Math.random() * wtf.length)],
-      guid: this.guid,
-    });
-  },
-  knowledge: function() {
-    var randomstuff = [
-      "Losky will be forgotten Soon.",
-      "We don't like children invading our communities.",
-      'Kiddies are type of users who use Grounded threats, say "Muted" after muting someone, raging in all caps, use the word "Kiko" but we don\'t know what it means, and post cringy videos. We ban them for a good reason. They also break rules because, as they say, it "ruins" the bonziworld site itself.',
-    ];
-    this.room.emit("talk", {
-      text: randomstuff[Math.floor(Math.random() * randomstuff.length)],
-      guid: this.guid,
-    });
-  },
-  onute: function() {
-    this.room.emit("rant");
-  },
-  "2018": function() {
-    this.room.emit("talk", {
-      text: `This generation sucks! Adolescents are filled with pornographic obsessions. Since 2018, i hate people like them nowadays. They think they're so funny with their 'funny' hentai profile pictures, and pictures like sonic using a hentai face. It's disgusting, I hate it.`,
-      guid: this.guid,
-    });
-  },
-  "sing": function() {
-    this.room.emit("talk", {
-      text: `\chr="monotone"\\spd=60\\pit=120\Dai \pit=100\zee, \pit=80\Dai \pit=60\zee. \spd=120\\pit=68\Give \pit=74\me \pit=80\your \pit=68\an, \pit=80\ser \pit=60\true. \spd=50\\pit=92\I'm \pit=120\half\pit=100\cray \pit=80\zee, \spd=115\\pit=68\All \pit=74\for \pit=80\the \pit=80\love \pit=100\of \pit=92\you. \spd=80\\pit=100\It \pit=112\won't \pit=110\be \pit=92\a \pit=120\sty-\pit=100\lish \pit=92\mare\pit=80\rege. \spd=100\\pit=92\I \pit=100\can't \pit=80\a \pit=68\ford, \pit=80\a \pit=68\care- \pit=60\ridge. \spd=100\\pit=60\But \pit=80\you'll \pit=100\look \pit=92\sweet, \spd=90\\pit=60\Up \pit=80\on \pit=100\the \pit=92\seat. \spd=100\\pit=100\Of \pit=112\a \pit=120\by \pit=100\sic \pit=80\cull \pit=92\built, \pit=60\for \pit=80\two.`,
-      guid: this.guid,
-    });
-  },
-  pope2: function() {
-    if (this.private.runlevel === 3 || !this.room.isPublic) {
-      // removing this will cause chaos, shut up 2020 me
-      this.public.color = "peedy_pope";
-      this.room.updateUser(this);
-    } else {
-      this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!");
-    }
-  },
-  pope3: function() {
-    if (this.private.runlevel === 3 || !this.room.isPublic) {
-      // removing this will cause chaos, shut up 2020 me
-      this.public.color = "clippypope";
-      this.room.updateUser(this);
-    } else {
-      this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!");
-    }
-  },
-  pope4: function() {
-    if (this.private.runlevel === 3 || !this.room.isPublic) {
-      // removing this will cause chaos, shut up 2020 me
-      this.public.color = "dogpope";
-      this.room.updateUser(this);
-    } else {
-      this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!");
-    }
-  },
-
-  god: function() {
-    if (this.private.runlevel === 3 || !this.room.isPublic) {
-      // removing this will cause chaos, shut up 2020 me
-      this.public.color = "god";
-      this.room.updateUser(this);
-    } else {
-      this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!");
-    }
-  },
-  peedy: function() {
-    this.public.color = "peedy";
-    this.room.updateUser(this);
-  },
-  clippy: function() {
-    this.public.color = "clippy";
-    this.room.updateUser(this);
-  },
-  rover: function() {
-    this.public.color = "rover";
-    this.room.updateUser(this);
-  },
-  slap: function() {
-    this.room.emit("slap", {
-      guid: this.guid,
-    });
-  },
-  present: function() {
-    this.room.emit("present", {
-      guid: this.guid,
-    });
-  },
-  asshole: function() {
-    this.room.emit("asshole", {
-      guid: this.guid,
-      target: sanitize(Utils.argsString(arguments)),
-    });
-  },
-  bass: function() {
-    this.room.emit("bass", {
-      guid: this.guid,
-      target: sanitize(Utils.argsString(arguments)),
-    });
-  },
-  seeupdates: function() {
-    this.socket.emit("alert", { title: "See Updates", msg: "New minor update - /manchild is deprecated because it is old, and the webp file doesnt work anymore. -itzdonutscout", button: "OK" });
-  },
-  beggar: function() {
-    this.room.emit("beggar", {
-      guid: this.guid,
-      target: sanitize(Utils.argsString(arguments)),
-    });
-  },
-  kiddie: function() {
-    this.room.emit("kiddie", {
-      guid: this.guid,
-      target: sanitize(Utils.argsString(arguments)),
-    });
-  },
-  gofag: function() {
-    this.room.emit("gofag", {
-      guid: this.guid,
-      target: sanitize(Utils.argsString(arguments)),
-    });
-  },
-  logofag: function() {
-    this.room.emit("logofag", {
-      guid: this.guid,
-      target: sanitize(Utils.argsString(arguments)),
-    });
-  },
-  forcer: function() {
-    this.room.emit("forcer", {
-      guid: this.guid,
-      target: sanitize(Utils.argsString(arguments)),
-    });
-  },
-  welcome: function() {
-    this.room.emit("welcome", {
-      guid: this.guid,
-      target: sanitize(Utils.argsString(arguments)),
-    });
-  },
-  owo: function() {
-    this.room.emit("owo", {
-      guid: this.guid,
-      target: sanitize(Utils.argsString(arguments)),
-    });
-
-    this.room.emit("runEvents", {
-      id: this.guid,
-      events: [
-        { type: "text", text: "*notices " + sanitize(Utils.argsString(arguments)) + "'s BonziBulge&trade;*", say: "notices " + sanitize(Utils.argsString(arguments)) + "s bonzibulge" },
-        { type: "text", text: "owo, wat dis?", say: "oh woah, what this?" },
-      ],
-      text: "notices " + sanitize(Utils.argsString(arguments)) + "'s bonzibulge: oh woah, what this?",
-    });
-  },
-  uwu: function() {
-    this.room.emit("uwu", {
-      guid: this.guid,
-      target: sanitize(Utils.argsString(arguments)),
-    });
-  },
-  blackhat: function() {
-    this.room.emit("blackhat", {
-      guid: this.guid,
-    });
-  },
-  sing: function() {
-    this.room.emit("sing", {
-      guid: this.guid,
-    });
-  },
-  triggered: "passthrough",
-  bees: "passthrough",
-  vaporwave: function() {
-    this.socket.emit("vaporwave");
-    this.room.emit("youtube", {
-      guid: this.guid,
-      vid: "aQkPcPqTq4M",
-    });
-  },
-  mom: function() {
-    this.room.emit("youtube", {
-      guid: this.guid,
-      vid: "Ay95gZr0Bm8",
-    });
-  },
-  jumpscare: function() {
-    this.room.emit("jumpscare");
-  },
-  acid: function() {
-    this.socket.emit("acid");
-  },
-  vaporwave2: function() {
-    this.socket.emit("vaporwave");
-    this.room.emit("youtube", {
-      guid: this.guid,
-      vid: "m0zPkt5BZ9I",
-    });
-  },
-  unvaporwave: function() {
-    this.socket.emit("unvaporwave");
-  },
-  name: function() {
-    let argsString = Utils.argsString(arguments);
-    if (argsString.length > this.room.prefs.name_limit) return;
-    if (argsString.includes("{COLOR}")) {
-      argsString = this.public.color;
-    }
-
-    if (argsString.includes("{NAME}")) {
-      return;
-    }
-    if (argsString.includes("Geri")) {
-      argsString = "Gayeri";
-    }
-    if (!Ban.isIn(this.getIp())) {
-      if (argsString.includes("PB123Gaming")) {
-        argsString = "impersonator";
-      }
-      if (argsString.includes("PB123G")) {
-        argsString = "impersonator";
-      }
-      if (argsString.includes("javascript h8ter")) {
-        argsString = "impersonator";
-      }
-      if (argsString.includes("UNMUTE ME NOW!")) {
-        argsString = "kiddie";
-      }
-      if (argsString.includes("Sam Workman")) {
-        argsString = "impersonator";
-      }
-      if (argsString.includes("Olaf Kowalski")) {
-        argsString = "impersonator";
-      }
-    }
-    let name = argsString || this.room.prefs.defaultName;
-    this.public.name = this.private.sanitize ? sanitize(name) : name;
-    if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(this.public.name)) {
-      this.public.name = "Anonymous";
-    }
-	/*
-    if (
-      this.public.name.match(/Seamus/gi) ||
-      this.public.name.match(/S.eamus/gi) ||
-      this.public.name.match(/S.e.amus/gi) ||
-      this.public.name.match(/S.e.a.mus/gi) ||
-      this.public.name.match(/S.e.a.m.us/gi) ||
-      this.public.name.match(/S.e.a.m.u.s/gi) ||
-      this.public.name.match(/Seamu.s/gi) ||
-      this.public.name.match(/Seam.u.s/gi) ||
-      this.public.name.match(/Sea.m.u.s/gi) ||
-      this.public.name.match(/Se.a.m.u.s/gi)
-    ) {
-      this.public.name = "Semen";
-    } else if (this.public.name.match(/Jakey/gi)) {
-      // no more impersonators???
-      this.public.name = "Retard";
-    } else if (this.public.name.match(/touch/gi)) {
-      // you sick fucks
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/to uch/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/t ouch/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/t ou ch/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/t ouc h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/touc h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/tou c h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/to u c h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/t ouc h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/to uc h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/Crem/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/Creem/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    }*/
-    this.room.updateUser(this);
-  },
-  group: function(...text) {
-    text = text.join(" ");
-    if (text) {
-      this.private.group = text + "";
-      this.socket.emit("alert", "joined the group");
-      return;
-    }
-    this.socket.emit("alert", "enter a group id");
-  },
-  dm: function(...text) {
-    text = text.join(" ");
-    text = sanitize(text, settingsSantize);
-    if (!this.private.group) {
-      this.socket.emit("alert", "join a group first");
-      return;
-    }
-    this.room.users.map((n) => {
-      if (this.private.group === n.private.group) {
-        n.socket.emit("talk", {
-          guid: this.guid,
-          text: "<small><i>Only your group can see this.</i></small><br>" + text,
-          say: text,
+        this.room.updateUser(this);
+    },
+    "voice": function(color) {
+        if (typeof voice != "undefined") {
+            if (settings.bonziVoices.indexOf(color) == -1) return;
+            
+            this.public.voice = color;
+        } else {
+            this.public.voice = settings.bonziVoices[
+                Math.floor(Math.random() * settings.bonziVoices.length)
+            ];
+        }
+        this.room.updateUser(this);
+    },
+	pope: function() {
+		if (this.private.runlevel === 3) { // removing this will cause chaos
+			this.public.color = "pope";
+			this.room.updateUser(this);
+		} else {
+			this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!")
+		}
+    },
+    "asshole": function() {
+        this.room.emit("asshole", {
+            guid: this.guid,
+            target: sanitize(Utils.argsString(arguments)),
         });
-      }
-    });
-  },
-
-  dm2: function(data) {
-
-    if (typeof data != "object") return;
-    let pu = this.room.getUsersPublic()[data.target];
-    if (pu && pu.color) {
-      let target;
-      this.room.users.map((n) => {
-        if (n.guid == data.target) {
-          target = n;
+    },
+    "owo": function() {
+        this.room.emit("owo", {
+            guid: this.guid,
+            target: sanitize(Utils.argsString(arguments)),
+        });
+    },
+    "uwu": function () {
+        this.room.emit("uwu", {
+            guid: this.guid,
+            target: sanitize(Utils.argsString(arguments)),
+        });
+    },
+    "welcome": function () {
+        this.room.emit("welcome", {
+            guid: this.guid,
+            target: sanitize(Utils.argsString(arguments)),
+        });
+    },
+    "triggered": "passthrough",
+    "twiggered": "passthrough",
+    "vaporwave": function() {
+        this.socket.emit("vaporwave");
+        this.room.emit("youtube", {
+            guid: this.guid,
+            vid: "_HJ9LdmppYU"
+        });
+    },
+    "unvaporwave": function() {
+        this.socket.emit("unvaporwave");
+    },
+    "name": function() {
+        let argsString = Utils.argsString(arguments);
+        if (argsString.length > this.room.prefs.name_limit)
+            return;
+        if (argsString.includes("{COLOR}")) {
+            argsString = this.public.color;
         }
-      });
-      data.text = sanitize(data.text, settingsSantize);
-      target.socket.emit("talk", {
-        guid: this.guid,
-        text: "<small>Only you can see this.</small><br>" + data.text,
-        say: data.text,
-      });
-      this.socket.emit("talk", {
-        guid: this.guid,
-        text: "<small>Only " + pu.name + " can see this.</small><br>" + data.text,
-        say: data.text,
-      });
-    } else {
-      this.socket.emit("alert", "The user you are trying to dm left. Get dunked on nerd");
-    }
-  },
-  pitch: function(pitch) {
-    pitch = parseInt(pitch);
+        if (argsString.includes("{NAME}")) {
+            return;
+        }
+        if (argsString.includes("{ROOM}")) {
+            argsString = sanitizeHTML2(this.room.rid.slice(0,16));
+        }
+        if (argsString.includes("'")) {
+            return;
+        }
+        if (argsString.includes("\"")) {
+            return;
+        }
 
-    if (isNaN(pitch)) return;
+        let name = argsString || this.room.prefs.defaultName;
+        this.public.name = this.private.sanitize ? sanitize(name) : name;
+        this.room.updateUser(this);
+    },
+    "status": function() {
+        let argsString = Utils.argsString(arguments);
+        if (argsString.length > this.room.prefs.status_limit)
+            return;
+        if (argsString.includes("{COLOR}")) {
+            argsString = this.public.color;
+        }
+        if (argsString.includes("{NAME}")) {
+            argsString = sanitizeHTML2(this.public.name);
+        }
+        if (argsString.includes("{ROOM}")) {
+            argsString = sanitizeHTML2(this.room.rid.slice(0,16));
+        }
+        if (argsString.includes("\"")) {
+            return;
+        }
+        if (argsString.includes("'")) {
+            return;
+        }
 
-    this.public.pitch = Math.max(Math.min(parseInt(pitch), this.room.prefs.pitch.max), this.room.prefs.pitch.min);
+        let status = argsString;
+        this.public.status = this.private.sanitize ? sanitize(status) : status;
+        this.room.updateUser(this);
+    },
+    broadcast: function (...text) {
+        if (this.private.runlevel < 3) {
+            this.socket.emit("alert", "This command requires administrator privileges");
+            return;
+        }
+		if(text.join(' ') == "" || text.join(' ') == "undefined" || text.join(' ') == "null" || text.join(' ') == null) {
+			return;
+		} else {
+			this.room.emit("broadcast", { msg: text.join(' '), sanitize: false, title: "Broadcast from " + this.public.name });
+		}
+    },
+    limit: function (room_num) {
+        if (this.private.runlevel < 3) {
+            this.socket.emit("alert", "This command requires administrator privileges");
+            return;
+        }
+        room_num = parseInt(room_num);
 
-    this.room.updateUser(this);
-  },
-  sapi5pitch: function(pitch) {
-    pitch = parseInt(pitch);
+        if (isNaN(room_num)) {
+            this.socket.emit("alert", "Ur drunk lel");
+            return;
+        }
 
-    if (isNaN(pitch)) return;
+        this.prefs.room_max = room_num;
 
-    this.public.sapi5pitch = parseInt(pitch);
+        this.room.emit("alert", "The max limit of this room is now " + this.prefs.room_max);
+    },
+    "pitch": function(pitch) {
+        pitch = parseInt(pitch);
 
-    this.room.updateUser(this);
-  },
-  tts: function(voice) {
-    voice = parseInt(voice);
+        if (isNaN(pitch)) return;
 
-    if (isNaN(voice)) return;
+        this.public.pitch = Math.max(
+            Math.min(
+                parseInt(pitch),
+                this.room.prefs.pitch.max
+            ),
+            this.room.prefs.pitch.min
+        );
 
-    this.public.voice = voice;
+        this.room.updateUser(this);
+    },
+    "speed": function(speed) {
+        speed = parseInt(speed);
 
-    this.room.updateUser(this);
-  },
-  amplitude: function(amplitude) {
-    amplitude = parseInt(amplitude);
+        if (isNaN(speed)) return;
 
-    if (isNaN(amplitude)) return;
-
-    this.public.amplitude = amplitude;
-
-    this.room.updateUser(this);
-  },
-  limit: function(hue) {
-    hue = parseInt(hue);
-
-    if (isNaN(hue)) {
-      this.socket.emit("alert", "Ur drunk lel");
-      return;
-    }
-
-    this.prefs.room_max = hue;
-
-    this.room.emit("alert", "The max limit of this room is now " + this.prefs.room_max);
-  },
-  speed: function(speed) {
-    speed = parseInt(speed);
-
-    if (isNaN(speed)) return;
-
-    this.public.speed = Math.max(Math.min(parseInt(speed), this.room.prefs.speed.max), this.room.prefs.speed.min);
-
-    this.room.updateUser(this);
-  },
+        this.public.speed = Math.max(
+            Math.min(
+                parseInt(speed),
+                this.room.prefs.speed.max
+            ),
+            this.room.prefs.speed.min
+        );
+        
+        this.room.updateUser(this);
+    },
+	"group": function (...text) {
+		text = text.join(" ")
+		if (text) {
+			this.private.group = text + ""
+			this.socket.emit("alert", "joined the group")
+			return
+		}
+		this.socket.emit("alert", "enter a group id")
+	},
+	startyping: function () {
+		this.room.emit("typing", { guid: this.guid })
+	},
+	stoptyping: function () {
+		this.room.emit("stoptyping", { guid: this.guid })
+	},
+    "dm":function(...text){
+        text = text.join(" ")
+        text = sanitize(text,settingsSantize)
+        if(!this.private.group){
+            this.socket.emit("alert","join a group first")
+            return
+        }
+        this.room.users.map(n=>{
+            if(this.private.group === n.private.group){
+                n.socket.emit("talk",{
+                    guid:this.guid,
+                    text:"<small><i>Only your group can see this.</i></small><br>"+text,
+                    say:text
+                })
+            }
+        })
+    },
+	"dm2": function (data) {
+		if (typeof data != "object") return
+		let pu = this.room.getUsersPublic()[data.target]
+		if (pu && pu.color) {
+			let target;
+			this.room.users.map(n => {
+				if (n.guid == data.target) {
+					target = n;
+				}
+			})
+			data.text = sanitize(data.text, settingsSantize)
+			target.socket.emit("talk", {
+				guid: this.guid,
+				text: "<small>Only you can see this.</small><br>" + data.text,
+				say: data.text
+			})
+			this.socket.emit("talk", {
+				guid: this.guid,
+				text: "<small>Only " + pu.name + " can see this.</small><br>" + data.text,
+				say: data.text
+			})
+		} else {
+			this.socket.emit('alert', { msg: 'The user you are trying to dm left. Get dunked on nerd', button: "oh fuck" })
+		}
+	}
 };
 
-var cool;
-var connectLogCool;
-
-function convertToString(arg) {
-  return "" + arg;
-}
-
-const request = require('request')
-
 class User {
-  constructor(socket) {
-    this.blockedUsers = {};
-    this.guid = Utils.guidGen();
-    this.loginGuid = Utils.guidGen() + Utils.guidGen() + Utils.guidGen();
-    this.socket = socket;
-    this.connectLogCool = false;
-    var _this = this;
-    this.guidUpdater = setInterval(function() {
-      _this.socket.emit("sendguid", _this.guid);
-    }, 1000);
-    this.guidUpdater2 = setInterval(function() {
-      _this.socket.emit("sendguid2", _this.loginGuid);
-    }, 1000);
-    // Handle ban
-    if (Ban.isBanned(this.getIp())) {
-      Ban.handleBan(this.socket);
-    }
-	if (this.getIp().match(/2800:484:ef7a/gi) || this.getIp().match(/77.111/gi) || this.getIp().match(/2001:67c/gi) || this.getIp().match(/2405:8100/gi)) {
-		Ban.addBan(this.getIp(), 9999999999999999999999999999999999, "This IP has been blacklisted."); // IT'S OVER 9000
-		Ban.handleBan(this.socket);
-    }
-    
-    // Request URL
-    let url = 'https://ipinfo.io/'+this.getIp()+'?token=a9e067fad7cf20';
-    
-    request(url, (error, response, body) => {
-      // Printing the error if occurred
-      if (error) {
-        console.log(error)
-        return;
-      }
-    
-      // Printing body
-      var ips = JSON.parse(body);
-	  if (ips.city && ips.city == "Danville") {
-        Ban.addBan(this.getIp(), 9999999999999999999999999999999999, "This IP has been blacklisted.");	
-		Ban.handleBan(this.socket);
-        return;
-	  } else if (ips.org && (ips.org.match(/GTHost/gi) || ips.org.match(/Datacamp/gi) || ips.org.match(/WorldStream/gi) || ips.org.match(/NForce/gi) || (ips.org.match(/Europe SRL/gi) && this.getIp() != "89.238.178.198") || ips.org.match(/Defense Australia Network/gi) || ips.org.match(/Host Europe/gi) || ips.org.match(/VEESP/gi) || ips.org.match(/OVH SAS/gi) || ips.org.match(/myLoc/gi) || ips.org.match(/Oy Crea Nova/gi) || ips.org.match(/LeaseWeb Netherlands/gi) || ips.org.match(/Telecom Argentina/gi))) {
-        Ban.addBan(this.getIp(), 9999999999999999999999999999999999, "This IP has been blacklisted.");	
-		Ban.handleBan(this.socket);
-        return;
-      }
-    });
-    this.private = {
-      login: false,
-      sanitize: true,
-      runlevel: 0,
-    };
-    if (Ban.isIn(this.getIp())) {
-      this.public = {
-        color: settings.bonziColors2[Math.floor(Math.random() * settings.bonziColors2.length)],
-		voice: 'default',
-        color_cross: 'none',
-        hue: 0,
-        saturation: 100,
-      };
-      this.socket.emit("admin");
-    } else {
-      this.public = {
-        color: settings.defaultColors[Math.floor(Math.random() * settings.defaultColors.length)],
-		voice: 'default',
-        color_cross: 'none',
-        hue: 0,
-        saturation: 100,
-      };
-    }
+    constructor(socket) {
+        this.guid = Utils.guidGen();
+        this.socket = socket;
 
-    if (!connectLogCool) {
-      log.access.log("info", "connect", {
-        guid: this.guid,
-        ip: this.getIp(),
-        userAgent: this.getAgent(),
-      });
-      connectLogCool = true;
-      setTimeout(function() {
-        connectLogCool = false;
-      }, 1000);
-    }
 
-    // honestly nobody wants floods. i had to go harder on the exploit, by making the login function only work if it has the guid. it was worth.
-    // i'm tired of bozoworlders ruining the fun for everyone, so i just had to do this. fuck you danieltr :)
-    if (this.getAgent() == "node-XMLHttpRequest") {
+        // Handle ban
+	    if (Ban.isBanned(this.getIp())) {
+            Ban.handleBan(this.socket);
+        }
+		
+		//this.ratelimitlevel = 0;
+        this.private = {
+            login: false,
+            sanitize: true,
+            runlevel: 0
+        };
 
-      this.socket.on("chatgpt_login", this.login.bind(this));
+        this.public = {
+            color: settings.bonziColors[Math.floor(
+                Math.random() * settings.bonziColors.length
+            )],
+			voice: "espeak"
+        };
 
-    }
-	if (this.socket.handshake.query.channel == "bonziuniverse-nocaptcha") {
-		this.socket.on("login", this.login.bind(this));
-	} else {
-		this.socket.on("sendTokenToServer", this.tokenFetch.bind(this));
-	}
-  }
-
-  async tokenFetch(data) {
-    if (typeof data != "object") return; // Crash fix (issue #9)
-    if (this.private.login) return;
-    if (data.token == null) return;
-    if (typeof data.token != "string") return;
-
-    if (typeof data.token === "string" && data.token != null) {
-      // Hitting POST request to the URL, Google will
-      // respond with success or error scenario.
-      const url = `https://www.google.com/recaptcha/api/siteverify?secret=${process.env['RECAPTCHA_SECRET']}&response=${data.token}`;
-
-      // Making POST request to verify captcha
-      fetch(url, {
-        method: "post",
-      })
-        .then((response) => response.json())
-        .then((google_response) => {
-
-          // google_response is the object return by
-          // google as a response
-          if (google_response.success == true) {
-            //   if captcha is verified
-            this.socket.on(this.guid + "_login_" + this.loginGuid, this.login.bind(this));
-            return true;
-          } else {
-            // if captcha is not verified
-            return false;
-          }
-        })
-        .catch((error) => {
-          // Some error while verify captcha
-          return console.log(error);
+        log.access.log('info', 'connect', {
+            guid: this.guid,
+            ip: this.getIp()
         });
+
+        if (this.getIp() == "::1" || this.getIp() == "::ffff:127.0.0.1") {
+            this.private.runlevel = 3;
+            this.socket.emit("admin");
+            this.private.sanitize = false;
+        }
+       this.socket.on('login', this.login.bind(this));
     }
-  }
 
-  getIp() {
-    return this.socket.handshake.headers["cf-connecting-ip"] || this.socket.request.connection.remoteAddress;
-  }
+    getIp() {
+        return this.socket.handshake.headers["cf-connecting-ip"] || this.socket.request.connection.remoteAddress;
+    }
 
-  getAgent() {
-    return this.socket.handshake.headers["user-agent"];
-  }
+    getPort() {
+        return this.socket.handshake.address.port;
+    }
 
-  getPort() {
-    return this.socket.handshake.address.port;
-  }
+    login(data) {
+        if (typeof data != 'object') return; // Crash fix (issue #9)
+        
+        if (this.private.login) return;
 
-  login(data) {
-    if (typeof data != "object") return; // Crash fix (issue #9)
+		log.info.log('info', 'login', {
+			guid: this.guid,
+        });
+        
+        let rid = data.room;
+        
+		// Check if room was explicitly specified
+		var roomSpecified = true;
 
-    if (this.private.login) return;
+		// If not, set room to public
+        if (typeof rid == "undefined" || rid === "" || rid.startsWith("20")) {
+            if (rid.startsWith("20")) {
+                this.socket.emit("loginFail", {
+                    reason: "nameMal",
+                });
+            }
+			rid = roomsPublic[Math.max(roomsPublic.length - 1, 0)];
+			roomSpecified = false;
+        }
 
-    if (typeof data.name != "string" || typeof data.room != "string") return;
+        
+		log.info.log('debug', 'roomSpecified', {
+			guid: this.guid,
+			roomSpecified: roomSpecified
+        });
+        
+		// If private room
+		if (roomSpecified) {
+            if (sanitize(rid) != rid) {
+                this.socket.emit("loginFail", {
+                    reason: "nameMal"
+                });
+                return;
+            }
+
+			// If room does not yet exist
+			if (typeof rooms[rid] == "undefined") {
+				// Clone default settings
+				var tmpPrefs = JSON.parse(JSON.stringify(settings.prefs.private));
+				// Set owner
+				tmpPrefs.owner = this.guid;
+                newRoom(rid, tmpPrefs);
+			}
+			// If room is full, fail login
+			else if (rooms[rid].isFull()) {
+				log.info.log('debug', 'loginFail', {
+					guid: this.guid,
+					reason: "full"
+				});
+				return this.socket.emit("loginFail", {
+					reason: "full"
+				});
+			}
+		// If public room
+		} else {
+			// If room does not exist or is full, create new room
+			if ((typeof rooms[rid] == "undefined") || rooms[rid].isFull()) {
+				rid = Utils.guidGen();
+				roomsPublic.push(rid);
+				// Create room
+				newRoom(rid, settings.prefs.public);
+			}
+        }
+        
+        this.room = rooms[rid];
+
+        // Check name
+		this.public.name = sanitize(sanitizeHTML(data.name)) || this.room.prefs.defaultName;
+        if(this.public.name.includes("'")){
+			return this.socket.emit("loginFail", {
+				reason: "nameLength"
+			});
+        }
+        if(this.public.name.includes('"')){
+			return this.socket.emit("loginFail", {
+				reason: "nameLength"
+			});
+        }
+
+		if (this.public.name.length > this.room.prefs.name_limit)
+			return this.socket.emit("loginFail", {
+				reason: "nameLength"
+			});
+        
+		if (this.room.prefs.speed.default == "random")
+			this.public.speed = Utils.randomRangeInt(
+				this.room.prefs.speed.min,
+				this.room.prefs.speed.max
+			);
+		else this.public.speed = this.room.prefs.speed.default;
+
+		if (this.room.prefs.pitch.default == "random")
+			this.public.pitch = Utils.randomRangeInt(
+				this.room.prefs.pitch.min,
+				this.room.prefs.pitch.max
+			);
+		else this.public.pitch = this.room.prefs.pitch.default;
+        let count = 0;
+        for (const i in rooms) {
+            const room = rooms[i];
+            for (let u in room.users) {
+                const user = room.users[u];
+                if (user.getIp() == this.getIp()) {
+                    count++;
+                }
+            }
+        }
+
+		// i will always find ways to fix things (originally)
+        // all though it's mostly just server.erik.red code (thx bathbomb)
+        if (count > 2 && (this.getIp() != "::1" && this.getIp() != "72.23.139.58")) {
+            this.socket.emit("loginFail", {
+                reason: "TooMany",
+            });
+            return;
+        }
+		
+        // Join room
+		this.room.join(this);
+
+        this.private.login = true;
+		//this.ratelimitlevel = 0;
+        this.socket.removeAllListeners("login");
+
+		// Send all user info
+		this.socket.emit('updateAll', {
+			usersPublic: this.room.getUsersPublic()
+		});
+
+		// Send room info
+		this.socket.emit('room', {
+			room: rid,
+			vid: this.room.vid,
+			curtime: this.room.curtime,
+			isOwner: this.room.prefs.owner == this.guid || rid == "bonzi_tv",
+			isPublic: roomsPublic.indexOf(rid) != -1
+		});
+
+        this.socket.on('talk', this.talk.bind(this));
+		this.socket.on("updatebonzitv", this.updatebonzitv.bind(this));
+		this.socket.on("setbonzitvtime", this.setbonzitvtime.bind(this));
+        this.socket.on('command', this.command.bind(this));
+        this.socket.on('disconnect', this.disconnect.bind(this));
+    }
 	
-    if (Ban.isIn(this.getIp())) {
-      this.private.runlevel = 3;
-    }
-	/*
-    if (
-      data.name.match(/lol/gi) ||
-      data.name.match(/l0l/gi) ||
-      data.name.match(/l ol/gi) ||
-      data.name.match(/lo l/gi) ||
-      data.name.match(/l o l/gi) ||
-      data.name.match(/l 0l/gi) ||
-      data.name.match(/l0 l/gi) ||
-      data.name.match(/l 0 l/gi)
-    ) {
-      this.socket.emit("loginFail", {
-        reason: "nameMal",
-      });
-      return;
-    }
-	*/	
-    let rid = data.room;
-
-    // Check if room was explicitly specified
-    var roomSpecified = true;
-
-    // If not, set room to public
-    if (typeof rid == "undefined" || rid === "") {
-      rid = roomsPublic[Math.max(roomsPublic.length - 1, 0)];
-      roomSpecified = false;
-    }
-    if (rid == "pope") {
-      this.public = {
-        color: settings.bonziColors2[Math.floor(Math.random() * settings.bonziColors2.length)],
-        hue: 0,
-        saturation: 100,
-      };
-    }
-    log.info.log("debug", "roomSpecified", {
-      guid: this.guid,
-      roomSpecified: roomSpecified,
-    });
-    // If private room
-    if (roomSpecified) {
-      if (sanitize(rid) != rid) {
-        this.socket.emit("loginFail", {
-          reason: "nameMal",
-        });
-        return;
-      } 
-      // If room does not yet exist
-      if (typeof rooms[rid] == "undefined" && rid != "default" && rid != "bonzi_tv" && rid != "bonzi_weather" && rid != "news") {
-        // Clone default settings
-        var tmpPrefs = JSON.parse(JSON.stringify(settings.prefs.private));
-        // Set owner
-        tmpPrefs.owner = this.guid;
-        if (typeof rooms[rid] === "undefined") {
-          newRoom(rid, tmpPrefs);
-        }
-      }
-      if (typeof rooms[rid] == "undefined" && (rid == "default" || rid == "bonzi_tv" || rid == "bonzi_weather" || rid == "news")) {
-        // Clone default settings
-        var tmpPrefs = JSON.parse(JSON.stringify(settings.prefs.public));
-        // Set owner
-		if (rid != "bonzi_tv" && rid != "bonzi_weather" && rid != "news")
-		{
-			roomsPublic.push(rid);
-		} 
-        if (typeof rooms[rid] === "undefined") {
-          newRoom(rid, tmpPrefs);
-        }
-      }
-      // If room is full, fail login
-      else if (rooms[rid].isFull()) {
-        log.info.log("debug", "loginFail", {
-          guid: this.guid,
-          reason: "full",
-        });
-        return this.socket.emit("loginFail", {
-          reason: "full",
-        });
-      }
-      // If public room
-    } else {
-      // If room does not exist or is full, create new room
-      if (typeof rooms[rid] == "undefined" || rooms[rid].isFull()) {
-        rid = "default";
-        if (typeof rooms[rid] === "undefined") {
-          roomsPublic.push(rid);
-          // Create room
-
-          newRoom(rid, settings.prefs.public);
-        }
-      }
-    }
-
-    this.room = rooms[rid];
-
-    // Check name
-    this.public.name = sanitize(data.name) || this.room.prefs.defaultName;
-	if (this.public.name.match(/Seamus/gi) && Ban.isIn(this.getIp())) {
-		this.public.color = "seamus";
-	}
-	/*
-    if (
-      this.public.name.match(/Seamus/gi) ||
-      this.public.name.match(/S.eamus/gi) ||
-      this.public.name.match(/S.e.amus/gi) ||
-      this.public.name.match(/S.e.a.mus/gi) ||
-      this.public.name.match(/S.e.a.m.us/gi) ||
-      this.public.name.match(/S.e.a.m.u.s/gi) ||
-      this.public.name.match(/Seamu.s/gi) ||
-      this.public.name.match(/Seam.u.s/gi) ||
-      this.public.name.match(/Sea.m.u.s/gi) ||
-      this.public.name.match(/Se.a.m.u.s/gi)
-    ) {
-      this.public.name = this.public.name.replace("Seamus", "Semen");
-    }
-	*/
-    if (this.public.name.length > this.room.prefs.name_limit)
-      return this.socket.emit("loginFail", {
-        reason: "nameLength",
-      });
-
-    if (this.room.prefs.speed.default == "random") this.public.speed = Utils.randomRangeInt(this.room.prefs.speed.min, this.room.prefs.speed.max);
-    else this.public.speed = this.room.prefs.speed.default;
-
-    if (this.room.prefs.pitch.default == "random") this.public.pitch = Utils.randomRangeInt(this.room.prefs.pitch.min, this.room.prefs.pitch.max);
-    else this.public.pitch = this.room.prefs.pitch.default;
-    if (this.room.prefs.sapi5pitch.default == "random") this.public.sapi5pitch = Utils.randomRangeInt(this.room.prefs.sapi5pitch.min, this.room.prefs.sapi5pitch.max);
-    else this.public.sapi5pitch = this.room.prefs.sapi5pitch.default;
-
-    if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(this.public.name)) {
-      this.public.name = "Anonymous";
-    }
-
-    if (data.name == "Geri") {
-      data.name = "Gayeri";
-	  
-    } /*else if (this.public.name.match(/Jakey/gi)) {
-      // no more impersonators???
-      this.public.name = "Retard";
-    } else if (this.public.name.match(/touch/gi)) {
-      // you sick fucks
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/to uch/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/t ouch/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/t ou ch/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/t ouc h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/touc h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/tou c h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/to u c h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/t ouc h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/to uc h/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/Crem/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    } else if (this.public.name.match(/Creem/gi)) {
-      this.public.name = "I'm a BozoWORLDer";
-    }*/
-    if (data.name.includes("flood")) {
-      this.socket.emit("loginFail", {
-        reason: "nameMal",
-      });
-      return;
-    }
-    if (data.name.includes("raid")) {
-      this.socket.emit("loginFail", {
-        reason: "nameMal",
-      });
-      return;
-    }
-    // Join room
-    this.room.join(this);
-
-    this.private.login = true;
-    this.socket.removeAllListeners(this.guid);
-
-    if (!connectLogCool) {
-      log.info.log("info", "login", {
-        guid: this.guid,
-        name: data.name,
-        room_id: rid,
-        ip: this.getIp(),
-      });
-      connectLogCool = true;
-      setTimeout(function() {
-        connectLogCool = false;
-      }, 1000);
-    }
-
-    // Send all user info
-    this.socket.emit("updateAll", {
-      usersPublic: this.room.getUsersPublic(),
-    });
-
-    // Send room info
-    if (rid == "bonzi_tv" || rid == "pope") {
-      this.socket.emit("room", {
-        room: rid,
-        vid: this.room.vid,
-        curtime: this.room.curtime,
-        isOwner: this.room.prefs.owner == this.guid,
-        isPublic: true,
-      });
-    } else {
-      this.socket.emit("room", {
-        room: rid,
-        vid: this.room.vid,
-        curtime: this.room.curtime,
-        isOwner: this.room.prefs.owner == this.guid,
-        isPublic: roomsPublic.indexOf(rid) != -1,
-      });
-    }
-    this.socket.on("talk", this.talk.bind(this));
-    this.socket.on("updatebonzitv", this.updatebonzitv.bind(this));
-    this.socket.on("setbonzitvtime", this.setbonzitvtime.bind(this));
-    this.socket.on("command", this.command.bind(this));
-    this.socket.on("disconnect", this.disconnect.bind(this));
-    if (Ban.isIn(this.getIp())) {
-      this.socket.emit("admin");
-    }
-  }
-
   setbonzitvtime(data) {
     this.room.curtime = data.curtime;
     /*
         log.info.log("info", "updateTime", {
           bonziTvTime: data.curtime,
         });
-    */
+    */ 
   }
   async updatebonzitv() {
     if (!bonziTvCool) {
@@ -2904,7 +1989,7 @@ class User {
       const minutes = date.getMinutes();
       var bonziTvIdent = videoIdsCommercials;
       var ident = Math.floor(Math.random() * bonziTvIdent.length);
-      const ytdl = require("ytdl-core");
+      //const ytdl = require("ytdl-core");
       /*var tvhook = new Webhook("https://discord.com/api/webhooks/1022179106412036166/8cJeQN1dFC78Rar0pdjAEyYnsFFq--ZiWZt4WTT1--pnLikWRzwGjOHWYEYmtdmyjcRg");*/
 
       if (bonziTvCommercialMode) {
@@ -3127,104 +2212,46 @@ class User {
       }, 20000);
     }
   }
+  
+    talk(data) {
+        if (typeof data != 'object') { // Crash fix (issue #9)
+            data = {
+                text: "HEY EVERYONE LOOK AT ME I AM TRYING TO SCREW WITH THE SERVER LMAO"
+            };
+        }
+        /*if (this.ratelimitlevel >= 100) {
+            this.socket.emit("ratelimit");        
+            Ban.mute(this.getIp(), 356, "You are currently rate limited. Please try again later.");
+            this.ratelimitlevel = 0; 
+        } else {
+            this.ratelimitlevel = this.ratelimitlevel + 15;
+            setTimeout(function(){
+                this.ratelimitlevel = this.ratelimitlevel - 15;
+            },1000)
+        }*/
+        
+        var msg_txt = data.text;
+        //if (msg_txt.includes("[[") && msg_txt.replace(/[^l]/g, "").length >= 75) data.text = "Suspicious amount of l's found."
+        //if (msg_txt.includes("[[") && msg_txt.replace(/[^;]/g, "").length >= 75) data.text = "Suspicious amount of semicolon's found."
+    
+         log.info.log('info', 'talk', {
+            guid: this.guid,
+            name: data.name,
+            color: this.public.color || "N/A",
+            text: data.text
+        }); 
+      
+        if (typeof data.text == "undefined")
+            return;
 
-  talk(data) {
-    if (Ban.isMuted(this.getIp())) return;
-    if (this.cantTalkAnymore) return;
-    let name = this.public.name;
-    var _this = this;
-    if (typeof data != "object" || typeof data.text != "string") {
-      // Crash fix (issue #9)
-      data = {
-        text: "HEY EVERYONE LOOK AT ME I'M TRYING TO SCREW WITH THE SERVER LMAO",
-      };
-    }
-    if (!connectLogCool) {
-      log.info.log("info", "talk", {
-        guid: this.guid,
-        name: data.name,
-        ip: this.getIp(),
-        text: convertToString(data.text),
-      });
-      connectLogCool = true;
-      setTimeout(function() {
-        connectLogCool = false;
-      }, 1000);
-    }
-
-    if (typeof data.text == "undefined") return;
-    let text;
-    if (this.room.rid.startsWith("js-")) {
-      text = convertToString(data.text);
-    } else {
-      text = this.private.sanitize ? sanitize(convertToString(data.text), settingsSantize) : convertToString(data.text);
-    }
-    if (text.match(/\/\/:/gi) && text.includes('"')) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-    if (text.match(/\/\/:/gi) && text.includes("'")) {
-      this.room.emit("iframe", {
-        guid: this.guid,
-        frame: "bonziacid.html",
-      });
-      return;
-    }
-	/*
-		if (text.match(/.lol/gi) || text.match(/,lol/gi) || text.match(/lol is/gi) || text.match(/bonzi./gi) || text.match(/bonzi,/gi) || text.match(/crem/gi) || text.match(/72.23/gi) || text.match(/72. 23/gi) || text.match(/72 .23/gi) || text.match(/72 . 23/gi) || text.match(/mong/gi) || text.match(/hitler/gi) || text.match(/hi itler/gi) || text.match(/hitl/gi) || text.match(/h itl/gi) || text.match(/hit l/gi) || text.match(/adolf/gi) || text.match(/hi tl/gi) || text.match(/hi itl/gi) || text.match(/hit ler/gi) || text.match(/hit lurr/gi) || text.match(/kkk/gi) || text.match(/kk k/gi) || text.match(/nig/gi) || text.match(/nih/gi) || text.match(/nik/gi) || text.match(/nij/gi) || text.match(/nihg/gi) || text.match(/nie/gi) || text.match(/nieg/gi) || text.match(/k k k/gi) || text.match(/kaykaykay/gi) || text.match(/kkaykay/gi) || text.match(/gas the/gi) || text.match(/gahs/gi) || text.match(/ga s/gi) || text.match(/gah s/gi) || text.match(/kkkay/gi) || text.match(/kay kaykay/gi) || text.match(/kay kay kay/gi) || text.match(/kaykay kay/gi) || text.match(/heil/gi) ||
-		  text.match(/fone/gi) ||
-		  text.match(/fune/gi) ||
-		  text.match(/f une/gi) ||
-		  text.match(/fu ne/gi) ||
-		  text.match(/f u ne/gi) ||
-		  text.match(/fu n e/gi) ||
-		  text.match(/negger/gi) ||
-		  text.match(/nugger/gi) ||
-		  text.match(/nazi/gi) ||
-		  text.match(/pedo/gi) || // moon man
-		  text.match(/hail/gi)) {  // excuse me for my bad regex code
-		  text = "I'm a BozoWORLDer";
-		}
-	*/
-    if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(text)) {
-      if (this.getAgent() != "node-XMLHttpRequest") {
-        text = "You can only have english numeric, special and alphabetic characters.  <br><small>Only you can see this.</small>";
-        this.socket.emit("talk", {
-          guid: this.guid,
-          text: text,
-          name: name,
-          say: "-e",
-        });
-        return;
-      }
-    }
-	if (text.match(/lol better/gi) || text.match(/l0l better/gi) || text.match(/l.ol better/gi) || text.match(/l ol better/gi) || text.match(/l_ol better/gi) || text.match(/lo.l better/gi) || text.match(/lo_l better/gi) || text.match(/lo l better/gi)) {
-		text = "MUH BONZI.LOL BETTER shut the fuck up you racist cunt";
-	} 
-    if (text.length <= this.room.prefs.char_limit && text.length > 0) {
-      if (!_this.connectLogCool) {
-        this.room.emit("talk", {
-          guid: this.guid,
-          text: text,
-          name: name,
-          say: sanitize(text, { allowedTags: [] }),
-        });
-        this.room.emit("runEvents", {
-          id: this.guid,
-          events: [{ type: "text", text: text, say: sanitize(text, { allowedTags: [] }) }],
-          text: text
-        });
-        _this.connectLogCool = true;
-        setTimeout(function() {
-          _this.connectLogCool = false;
-        }, 1000);
-      }
-
-    }
-	
+        let text = this.private.sanitize ? sanitize(sanitizeHTML(data.text)) : sanitizeHTML(data.text);
+        if ((text.length <= this.room.prefs.char_limit) && (text.length > 0)) {
+            this.room.emit('talk', {
+                guid: this.guid,
+                name: this.name,
+                text: sanitizeHTML(text)
+            });
+        }
         if (text.length < 1000) {
             try {
                 var rid = this.room.rid.slice(0,16)
@@ -3267,113 +2294,86 @@ class User {
                 console.log("WTF?: " + err.stack);
             }
         }
-  }
-
-  command(data) {
-    if (typeof data != "object") return; // Crash fix (issue #9)
-    if (Ban.isMuted(this.getIp())) return;
-    let name = this.public.name;
-    var command;
-    var args;
-    var args2;
-    var _this = this;
-    try {
-      var list = data.list;
-      command = list[0].toLowerCase();
-      args = list.slice(1);
-      args2 = list.join(", ");
-
-      //if (args.length <= this.room.prefs.command_limit && command.length <= this.room.prefs.command_limit) {
-        if (!command.match(/move/gi)) {
-
-          log.info.log('info', command, {
-            guid: this.guid,
-            args: args
-          });
-
-        }
-
-		if (!/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(command) || !/^[~`!@#$%^&*()_+=\w[\]\\{}|;':",.\//<>?\s\w&.\-]*$/i.test(args)) {
-		  if (this.getAgent() != "node-XMLHttpRequest") {
-			text = "You can only have english numeric, special and alphabetic characters.  <br><small>Only you can see this.</small>";
-			this.socket.emit("talk", {
-			  guid: this.guid,
-			  text: text,
-			  name: name,
-			  say: "-e",
-			});
-			return;
-		  }
-		}
-        if (this.private.runlevel >= (this.room.prefs.runlevel[command] || 0)) {
-          let commandFunc = userCommands[command];
-          if (commandFunc == "passthrough") {
-            this.room.emit(command, {
-                guid: this.guid,
-                name: name,
-              });
-          } else {
-            commandFunc.apply(this, args);
-          }
+    }
+	
+    command(data) {
+        if (typeof data != 'object') return; // Crash fix (issue #9)
+        let name = sanitizeHTML(this.public.name);
+        var command;
+        var args;
+        /*if (this.ratelimitlevel >= 100) {
+            this.socket.emit("ratelimit");
+            Ban.mute(this.getIp(), 8, "You are currently rate limited. Please try again later.");
+            this.ratelimitlevel = 0;
         } else {
-          this.socket.emit("info", {
-            reason: "runlevel",
-          });
-          this.socket.emit("alert", { title: "Error", msg: "You do not have permission to this command.", button: "OK" });
+            this.ratelimitlevel = this.ratelimitlevel + 15;
+            setTimeout(function(){ 
+                this.ratelimitlevel = this.ratelimitlevel - 15;
+            },1000)
+        }*/
+        try {
+            var list = data.list;
+            command = list[0].toLowerCase();
+            args = list.slice(1);
+    
+            log.info.log('debug', command, {
+                guid: this.guid,
+                args: args
+            });
+
+            if (this.private.runlevel >= (this.room.prefs.runlevel[command] || 0)) {
+                let commandFunc = userCommands[command];
+                if (commandFunc == "passthrough")
+                    this.room.emit(command, {
+                        "guid": this.guid
+                    });
+                else commandFunc.apply(this, args);
+            } else
+                this.socket.emit('commandFail', {
+                    reason: "runlevel"
+                });
+        } catch(e) {
+            log.info.log('debug', 'commandFail', {
+                guid: this.guid,
+                command: command,
+                args: args,
+                reason: "notexist",
+                exception: e
+            });
+            this.socket.emit('commandFail', {
+                reason: "notexist"
+            });
         }
-      //}
-    } catch (e) {
-      log.info.log("info", "commandFail", {
-        guid: this.guid,
-        command: command,
-        args: args,
-        reason: "unknown",
-        exception: console.error(e),
-      });
-      this.socket.emit("alert", { title: "Error", msg: "The command you just typed is invalid. Typo, or Server Error?", button: "OK" });
-      this.socket.emit("commandFail", {
-        reason: "unknown",
-      });
-    }
-  }
-
-  disconnect() {
-    let ip = "N/A";
-    let port = "N/A";
-
-    try {
-      ip = this.getIp();
-      port = this.getPort();
-    } catch (e) {
-      log.info.log("warn", "exception", {
-        guid: this.guid,
-        exception: e,
-      });
     }
 
-    if (!connectLogCool) {
-      log.access.log("info", "disconnect", {
-        guid: this.guid,
-        ip: ip,
-        port: port,
-      });
-      connectLogCool = true;
-      setTimeout(function() {
-        connectLogCool = false;
-      }, 1000);
+    disconnect() {
+		let ip = "N/A";
+		let port = "N/A";
+
+		try {
+			ip = this.getIp();
+			port = this.getPort();
+		} catch(e) { 
+			log.info.log('warn', "exception", {
+				guid: this.guid,
+				exception: e
+			});
+		}
+
+		log.access.log('info', 'disconnect', {
+			guid: this.guid,
+			ip: ip,
+			port: port
+		});
+         
+        this.socket.broadcast.emit('leave', {
+            guid: this.guid
+        });
+        
+        this.socket.removeAllListeners('talk');
+        this.socket.removeAllListeners('command');
+        this.socket.removeAllListeners('disconnect');
+
+        this.room.leave(this);
     }
-
-    this.socket.broadcast.emit("leave", {
-      guid: this.guid,
-    });
-
-    if (this.guidUpdater != null) {
-      clearInterval(this.guidUpdater);
-    }
-    this.socket.removeAllListeners("talk");
-    this.socket.removeAllListeners("command");
-    this.socket.removeAllListeners("disconnect");
-
-    this.room.leave(this);
-  }
 }

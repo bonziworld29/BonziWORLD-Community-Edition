@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json.schemastore.org/web-manifest-combined.json",
+  "name": "BonziWORLD - Enhanced",
+  "short_name": "BWE",
+  "description": "The global leader in the *BEST* gorilla-based chat clients!",
+  "icon": [{
+    "src": "./icon/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png"
+    }, {
+      "src": "./icon/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png"
+    }, {
+      "src": "./icon/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png"
+    }, {
+      "src": "./icon/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    }, {
+      "src": "./icon/icon-256x256.png",
+      "sizes": "256x256",
+      "type": "image/png"
+    }, {
+      "src": "./icon/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+  }],
+  "display": "fullscreen",
+  "display_override": ["window-controls-overlay"],
+  "start_url": "/index.html",
+  "background_color": "#8b5adc",
+  "theme_color": "#8b5adc"
+}

@@ -23,7 +23,7 @@ exports.init = function() {
         
         loggers[key] =  Winston.createLogger({
             transports: transports
-        });    
+        });
     }
 }
 

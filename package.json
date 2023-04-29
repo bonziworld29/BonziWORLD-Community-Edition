@@ -1,47 +1,43 @@
 {
-  "name": "bonziworld_server",
-  "version": "2.0.2",
-  "description": "Server for the BonziWORLD chat client.",
-  "main": "index.js",
-  "author": "Joseph Judge",
+  "name": "bonziworld_e_server",
+  "version": "1.0.0",
+  "description": "Server for the BonziWORLD Enhanced chat client.",
+  "author": "Cosmic",
   "private": true,
   "license": "MIT",
-  "type": "commonjs",
+  "keywords": ["bonziworld"],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CosmicStar98/BonziWORLD-Enhanced.git"
+  },
+  "bugs": {
+    "url": "https://github.com/CosmicStar98/BonziWORLD-Enhanced/issues"
+  },
+  "main": "server.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "node server.js"
+  },
+  "engines": {
+    "node": ">=19"
   },
   "dependencies": {
-    "acorn": ">=5.7.4",
-    "axios": "^1.3.6",
+    "axios": "^0.27.2",
+    "bad-words": "^3.0.4",
     "body-parser": "^1.20.1",
-    "braces": ">=2.3.1",
-    "chatgpt": "^4.7.2",
-    "clean-css": ">=4.1.11",
-    "cors": "^2.8.5",
+    "cookie-parser": "^1.4.6",
     "discord-webhook-node": "^1.1.8",
-    "express": "^4.17.1",
-    "express-recaptcha": "^5.1.0",
-    "express-sitemap-xml": "^3.0.1",
-    "fs": "0.0.1-security",
+    "express": "^4.16.4",
     "fs-extra": "^7.0.1",
-    "http": "0.0.0",
-    "isomorphic-fetch": "^3.0.0",
-    "jquery": "^3.6.3",
-    "js-yaml": ">=3.13.1",
-    "lodash": ">=4.17.12",
-    "lodash.template": ">=4.5.0",
-    "marked": ">=0.3.18",
-    "merge": "^1.2.1",
-    "minimist": ">=1.2.2",
-    "request": "^2.88.2",
-    "sanitize-html": "^2.10.0",
-    "snekfetch": "^4.0.4",
+    "got": "^12.5.0",
+    "http": "^0.0.1-security",
+    "javascript-obfuscator": "^4.0.2",
+    "mediaserver": "^0.1.1",
+    "merge": "^2.1.1",
+    "nodemon": "^2.0.20",
+    "reload": "^3.2.0",
+    "sanitize-html": "^2.3.2",
     "socket.io": "^2.2.0",
-    "socket.io-client": "^2.4.0",
-    "tunnel-agent": ">=0.6.0",
-    "underscore.string": ">=3.3.5",
-    "winston": "^3.1.0",
-    "ws": "^8.12.1",
-    "ytdl-core": "^4.11.4"
+    "url": "^0.11.0",
+    "winston": "^3.1.0"
   }
 }

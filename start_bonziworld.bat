@@ -1,7 +1,6 @@
 @echo off
 echo Starting..
-start ./server/bot/start.bat
 :b
-node index.js
+node server.js
 goto b
 pause

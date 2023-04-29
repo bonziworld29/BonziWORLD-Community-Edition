@@ -1,0 +1,471 @@
+#bonziworld,
+.hidden {
+    display: none;
+}
+.strong,
+.th {
+    font-weight: 700;
+}
+.context-menu-item.context-menu-visible > .context-menu-list,
+.th:after {
+    display: block;
+}
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+}
+body,
+body * {
+    font-family: Tahoma, sans-serif;
+}
+input[type="text"] {
+    background-color: #fff;
+    border: 1px inset #aaa;
+    color: #000;
+}
+#content,
+.xp_bubble {
+    background: #ffffe1;
+    color: #000;
+    -webkit-border-radius: 9px;
+    -moz-border-radius: 9px;
+    border-radius: 9px;
+    border: 1px solid #000;
+}
+@font-face {
+    font-family: Tahoma;
+    src: url("../font/Tahoma/Tahoma.eot#iefix") format("embedded-opentype"), url("../font/Tahoma/Tahoma.woff") format("woff"), url("../font/Tahoma/Tahoma.ttf") format("truetype"), url("../font/Tahoma/Tahoma.svg#Tahoma") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+html {
+    overflow-y: auto;
+}
+body {
+    background-color: #6d33a0;
+    background-image: url("../../img/desktop/bonzi.png");
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+#content {
+    background-color: rgba(255, 255, 225, 0.8);
+}
+#titlebar {
+    background-color: rgba(109, 51, 160, 0.85);
+}
+video::-webkit-media-controls-timeline {
+    background-color: #90f;
+    padding-bottom: 0;
+    margin-bottom: 20px;
+}
+video::-webkit-media-controls-volume-slider {
+    background-color: #bf00e6;
+    padding-top: 0;
+    margin-top: 20px;
+    padding-bottom: 0;
+}
+video::-webkit-media-controls-current-time-display {
+    color: #dd80ff;
+}
+video::-webkit-media-controls-time-remaining-display {
+    color: #cb5cff;
+}
+audio::-webkit-media-controls-current-time-display {
+    color: #c875e6;
+}
+audio::-webkit-media-controls-time-remaining-display {
+    color: #bf56f0;
+}
+.hidden {
+    visibility: hidden;
+    appearance: none;
+}
+.no_selection {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+.cursor-auto {
+    cursor: auto;
+}
+.cursor-default {
+    cursor: default;
+}
+.cursor-none {
+    cursor: none;
+}
+.cursor-context-menu {
+    cursor: context-menu;
+}
+.cursor-help {
+    cursor: help;
+}
+.cursor-pointer {
+    cursor: pointer;
+}
+.cursor-progress {
+    cursor: progress;
+}
+.cursor-wait {
+    cursor: wait;
+}
+.cursor-cell {
+    cursor: cell;
+}
+.cursor-crosshair {
+    cursor: crosshair;
+}
+.cursor-text {
+    cursor: text;
+}
+.cursor-vertical-text {
+    cursor: vertical-text;
+}
+.cursor-alias {
+    cursor: alias;
+}
+.cursor-copy {
+    cursor: copy;
+}
+.cursor-move {
+    cursor: move;
+}
+.cursor-no-drop {
+    cursor: no-drop;
+}
+.cursor-not-allowed {
+    cursor: not-allowed;
+}
+.cursor-all-scroll {
+    cursor: all-scroll;
+}
+.cursor-col-resize {
+    cursor: col-resize;
+}
+.cursor-row-resize {
+    cursor: row-resize;
+}
+.cursor-n-resize {
+    cursor: n-resize;
+}
+.cursor-e-resize {
+    cursor: e-resize;
+}
+.cursor-s-resize {
+    cursor: s-resize;
+}
+.cursor-w-resize {
+    cursor: w-resize;
+}
+.cursor-ns-resize {
+    cursor: ns-resize;
+}
+.cursor-ew-resize {
+    cursor: ew-resize;
+}
+.cursor-ne-resize {
+    cursor: ne-resize;
+}
+.cursor-nw-resize {
+    cursor: nw-resize;
+}
+.cursor-se-resize {
+    cursor: se-resize;
+}
+.cursor-sw-resize {
+    cursor: sw-resize;
+}
+.cursor-nesw-resize {
+    cursor: nesw-resize;
+}
+.cursor-nwse-resize {
+    cursor: nwse-resize;
+}
+::-webkit-scrollbar:horizontal {
+    height: 17px;
+}
+::-webkit-scrollbar-track {
+    background-image: url("data:image/svg+xml; @charset=utf-8,<svg width='2' height='2' fill='none' xmlns='http://www.w3.org/2000/svg'>    <path fill-rule='evenodd' clip-rule='evenodd' d='M10h0v1h1v1h1v1h1v0z' fill='silver' />    <path fill-rule='evenodd' clip-rule='evenodd' d='M20h1v1h0v1h1v1h1v0z' fill='#fff' /></svg>");
+}
+::-webkit-scrollbar-thumb {
+    box-shadow: inset -1px -1px #0a0a0a, inset 1px 1px #fff, inset -2px -2px grey, inset 2px 2px #dfdfdf;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-color: #c8d6fb;
+    background-size: 7px;
+    border: 1px solid #fff;
+    border-radius: 2px;
+    box-shadow: inset -3px 0 #bad1fc, inset 1px 1px #b7caf5;
+}
+::-webkit-scrollbar-button:horizontal:end:increment,
+::-webkit-scrollbar-button:horizontal:start:decrement,
+::-webkit-scrollbar-button:vertical:end:increment,
+::-webkit-scrollbar-button:vertical:start:decrement {
+    display: block;
+}
+::-webkit-scrollbar {
+    width: 17px;
+}
+::-webkit-scrollbar-corner {
+    background: #dfdfdf;
+}
+::-webkit-scrollbar-track:vertical {
+    background-image: url("data:image/svg+xml; charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0-0.5171' shape-rendering='crispEdges'>    <path stroke='#eeede5' d='M00h1m150h1' />    <path stroke='#f3f1ec' d='M10h1' />    <path stroke='#f4f1ec' d='M20h1' />    <path stroke='#f4f3ee' d='M30h1' />    <path stroke='#f5f4ef' d='M40h1' />    <path stroke='#f6f5f0' d='M50h1' />    <path stroke='#f7f7f3' d='M60h1' />    <path stroke='#f9f8f4' d='M70h1' />    <path stroke='#f9f9f7' d='M80h1' />    <path stroke='#fbfbf8' d='M90h1' />    <path stroke='#fbfbf9' d='M100h2' />    <path stroke='#fdfdfa' d='M120h1' />    <path stroke='#fefefb' d='M130h3' /></svg>");
+}
+::-webkit-scrollbar-track:horizontal {
+    background-image: url("data:image/svg+xml; charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0-0.5117' shape-rendering='crispEdges'>    <path stroke='#eeede5' d='M00h1m016h1' />    <path stroke='#f3f1ec' d='M01h1' />    <path stroke='#f4f1ec' d='M02h1' />    <path stroke='#f4f3ee' d='M03h1' />    <path stroke='#f5f4ef' d='M04h1' />    <path stroke='#f6f5f0' d='M05h1' />    <path stroke='#f7f7f3' d='M06h1' />    <path stroke='#f9f8f4' d='M07h1' />    <path stroke='#f9f9f7' d='M08h1' />    <path stroke='#fbfbf8' d='M09h1' />    <path stroke='#fbfbf9' d='M010h1m-11h1' />    <path stroke='#fdfdfa' d='M012h1' />    <path stroke='#fefefb' d='M013h1m-11h1m-11h1' /></svg>");
+}
+::-webkit-scrollbar-thumb:vertical {
+    background-image: url("data:image/svg+xml; charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0-0.578' shape-rendering='crispEdges'>    <path stroke='#eef4fe' d='M00h6m02h6m04h6m06h6' />    <path stroke='#bad1fc' d='M60h1m62h1m64h1' />    <path stroke='#c8d6fb' d='M01h1m03h1m05h1m07h1' />    <path stroke='#8cb0f8' d='M11h6m13h6m15h6m17h6' />    <path stroke='#bad3fc' d='M66h1' /></svg>");
+}
+::-webkit-scrollbar-thumb:horizontal {
+    background-size: 8px;
+    background-image: url("data:image/svg+xml; charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0-0.587' shape-rendering='crispEdges'>    <path stroke='#eef4fe' d='M00h1m10h1m10h1m10h1m01h1m10h1m10h1m10h1m02h1m10h1m10h1m10h1m03h1m10h1m10h1m10h1m04h1m10h1m10h1m10h1m05h1m10h1m10h1m10h1' />    <path stroke='#c8d6fb' d='M10h1m10h1m10h1m10h1' />    <path stroke='#8cb0f8' d='M11h1m10h1m10h1m10h1m12h1m10h1m10h1m10h1m13h1m10h1m10h1m10h1m14h1m10h1m10h1m10h1m15h1m10h1m10h1m10h1m16h1m10h1m10h1m10h1' />    <path stroke='#bad1fc' d='M06h1m10h1' />    <path stroke='#bad3fc' d='M46h1m10h1' /></svg>");
+}
+::-webkit-scrollbar-button:vertical:start {
+    height: 17px;
+    background-image: url("data:image/svg+xml; charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0-0.51717' shape-rendering='crispEdges'>    <path stroke='#eeede5' d='M00h1m150h1m01h1m02h1m03h1m04h1m05h1m06h1m07h1m08h1m09h1m-11h1m-11h1m-11h1m-11h1m-11h1m-11h1m150h1m016h1m150h1' />    <path stroke='#fdfdfa' d='M10h1' />    <path stroke='#fff' d='M20h14m11h1m130h1m12h1m130h1m13h1m130h1m14h1m130h1m15h1m130h1m16h1m130h1m17h1m130h1m18h1m130h1m19h1m130h1m110h1m130h1m111h1m130h1m112h1m130h1m113h1m130h1m114h1m130h1m215h13' />    <path stroke='#e6eefc' d='M21h1' />    <path stroke='#d0dffc' d='M31h1m22h1' />    <path stroke='#cad8f9' d='M41h1m23h1' />    <path stroke='#c4d2f7' d='M51h1' />    <path stroke='#c0d0f7' d='M61h1' />    <path stroke='#bdcef7' d='M71h1m26h1' />    <path stroke='#bbcdf5' d='M81h1' />    <path stroke='#b8cbf6' d='M91h1m27h1' />    <path stroke='#b7caf5' d='M101h1m28h1' />    <path stroke='#b5c8f7' d='M111h1' />    <path stroke='#b3c7f5' d='M121h1' />    <path stroke='#afc5f4' d='M131h1' />    <path stroke='#dce6f9' d='M141h1' />    <path stroke='#dfe2e1' d='M161h1' />    <path stroke='#e1eafe' d='M32h1' />    <path stroke='#dae6fe' d='M42h1m33h1' />    <path stroke='#d4e1fc' d='M52h1m34h1' />    <path stroke='#d1e0fd' d='M62h1m44h1' />    <path stroke='#d0ddfc' d='M72h1m35h1' />    <path stroke='#cedbfd' d='M82h1m63h1' />    <path stroke='#cad9fd' d='M92h1m73h1m55h1' />    <path stroke='#c8d8fb' d='M102h1' />    <path stroke='#c5d6fc' d='M112h1m-88h1m10h1' />    <path stroke='#c2d3fc' d='M122h1m-21h1m-97h1m01h1' />    <path stroke='#bccefa' d='M132h1m-12h1m-99h2' />    <path stroke='#b9c9f3' d='M142h1m514h3' />    <path stroke='#cfd7dd' d='M162h1' />    <path stroke='#d8e3fc' d='M43h1' />    <path stroke='#d1defd' d='M53h1' />    <path stroke='#c9d8fc' d='M83h1m64h2m56h2m37h1' />    <path stroke='#c5d5fc' d='M93h1m39h1m30h1' />    <path stroke='#c5d3fc' d='M103h1' />    <path stroke='#bed0fc' d='M123h1m94h1m-77h1m01h1' />    <path stroke='#bccdfa' d='M133h1' />    <path stroke='#baccf4' d='M143h1' />    <path stroke='#bdcbda' d='M163h1' />    <path stroke='#c4d4f7' d='M24h1' />    <path stroke='#cddbfc' d='M54h1m36h1' />    <path stroke='#c8d5fb' d='M84h1' />    <path stroke='#bbcefd' d='M104h3m95h1' />    <path stroke='#bcccf3' d='M144h1m-11h1m-11h1' />    <path stroke='#b1c2d5' d='M164h1' />    <path stroke='#bed0f8' d='M25h1' />    <path stroke='#ceddfd' d='M45h1' />    <path stroke='#c8d6fb' d='M65h2m38h2' />    <path stroke='#4d6185' d='M85h1m76h3m67h5m58h3m10h3m49h3m30h3m-81h1m50h1' />    <path stroke='#bacdfc' d='M105h1m10h2m312h1' />    <path stroke='#b9cdfb' d='M115h1m-21h1m10h2m-11h1' />    <path stroke='#a8bbd4' d='M165h1' />    <path stroke='#cddafc' d='M46h1' />    <path stroke='#b7cdfc' d='M116h1m01h1' />    <path stroke='#a4b8d3' d='M166h1' />    <path stroke='#cad8fd' d='M47h2' />    <path stroke='#b6cefb' d='M117h1m01h1' />    <path stroke='#bacbf4' d='M147h1' />    <path stroke='#a0b5d3' d='M167h1m-11h1m-15h1' />    <path stroke='#c1d3fb' d='M88h1' />    <path stroke='#b6cdfb' d='M138h1m-55h1' />    <path stroke='#b9cbf3' d='M148h1' />    <path stroke='#b4c8f6' d='M29h1' />    <path stroke='#c2d5fc' d='M89h1m-11h1m-31h2' />    <path stroke='#bdd3fb' d='M99h1m-23h1' />    <path stroke='#b5cdfa' d='M139h1' />    <path stroke='#b5c9f3' d='M149h1' />    <path stroke='#9fb5d2' d='M169h1m-11h1m-11h1m-11h1' />    <path stroke='#b1c7f6' d='M210h1' />    <path stroke='#c3d5fd' d='M710h1' />    <path stroke='#bad4fc' d='M910h1m-11h1' />    <path stroke='#b2cffb' d='M1010h1m10h1m-22h1' />    <path stroke='#b1cbfa' d='M1310h1' />    <path stroke='#b3c8f5' d='M1410h1m-64h2' />    <path stroke='#adc3f6' d='M211h1' />    <path stroke='#c3d3fd' d='M511h1' />    <path stroke='#c1d5fb' d='M811h1' />    <path stroke='#b7d3fc' d='M1011h1m-21h1' />    <path stroke='#b3d1fc' d='M1111h1' />    <path stroke='#afcefb' d='M1211h1' />    <path stroke='#aecafa' d='M1311h1' />    <path stroke='#b1c8f3' d='M1411h1' />    <path stroke='#acc2f5' d='M212h1' />    <path stroke='#c1d2fb' d='M512h1' />    <path stroke='#bed1fc' d='M612h2' />    <path stroke='#b6d1fb' d='M1012h1' />    <path stroke='#afccfb' d='M1212h1' />    <path stroke='#adc9f9' d='M1312h1m-21h1' />    <path stroke='#b1c5f3' d='M1412h1' />    <path stroke='#aac0f3' d='M213h1' />    <path stroke='#b7cbf9' d='M313h1' />    <path stroke='#b9cefb' d='M413h1' />    <path stroke='#bbcef9' d='M713h1' />    <path stroke='#b9cffb' d='M813h1' />    <path stroke='#b2cdfb' d='M1013h1' />    <path stroke='#b0cbf9' d='M1113h1' />    <path stroke='#aec8f7' d='M1313h1' />    <path stroke='#b0c5f2' d='M1413h1' />    <path stroke='#dbe3f8' d='M214h1' />    <path stroke='#b7c6f1' d='M314h1' />    <path stroke='#b8c9f2' d='M414h1m30h1' />    <path stroke='#b2c8f4' d='M1114h1' />    <path stroke='#b1c6f3' d='M1214h1' />    <path stroke='#b0c4f2' d='M1314h1' />    <path stroke='#d9e3f6' d='M1414h1' />    <path stroke='#aec0d6' d='M1614h1' />    <path stroke='#c3d4e7' d='M115h1' />    <path stroke='#aec4e5' d='M1515h1' />    <path stroke='#edf1f3' d='M116h1' />    <path stroke='#aac0e1' d='M216h1' />    <path stroke='#94b1d9' d='M316h1' />    <path stroke='#88a7d8' d='M416h1' />    <path stroke='#83a4d3' d='M516h1' />    <path stroke='#7da0d4' d='M616h1m30h3' />    <path stroke='#7e9fd2' d='M716h1' />    <path stroke='#7c9fd3' d='M816h2' />    <path stroke='#82a4d6' d='M1316h1' />    <path stroke='#94b0dd' d='M1416h1' />    <path stroke='#ecf2f7' d='M1516h1' /></svg>");
+}
+::-webkit-scrollbar-button:vertical:end {
+    height: 17px;
+    background-image: url("data:image/svg+xml; charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0-0.51717' shape-rendering='crispEdges'>    <path stroke='#eeede5' d='M00h1m150h1m01h1m02h1m03h1m04h1m05h1m06h1m07h1m08h1m09h1m-11h1m-11h1m-11h1m-11h1m-11h1m-11h1m150h1m016h1m150h1' />    <path stroke='#fdfdfa' d='M10h1' />    <path stroke='#fff' d='M20h14m11h1m130h1m12h1m130h1m13h1m130h1m14h1m130h1m15h1m130h1m16h1m130h1m17h1m130h1m18h1m130h1m19h1m130h1m110h1m130h1m111h1m130h1m112h1m130h1m113h1m130h1m114h1m130h1m215h13' />    <path stroke='#e6eefc' d='M21h1' />    <path stroke='#d0dffc' d='M31h1m22h1' />    <path stroke='#cad8f9' d='M41h1m23h1' />    <path stroke='#c4d2f7' d='M51h1' />    <path stroke='#c0d0f7' d='M61h1' />    <path stroke='#bdcef7' d='M71h1m26h1' />    <path stroke='#bbcdf5' d='M81h1' />    <path stroke='#b8cbf6' d='M91h1m27h1' />    <path stroke='#b7caf5' d='M101h1m28h1' />    <path stroke='#b5c8f7' d='M111h1' />    <path stroke='#b3c7f5' d='M121h1' />    <path stroke='#afc5f4' d='M131h1' />    <path stroke='#dce6f9' d='M141h1' />    <path stroke='#dfe2e1' d='M161h1' />    <path stroke='#e1eafe' d='M32h1' />    <path stroke='#dae6fe' d='M42h1m33h1' />    <path stroke='#d4e1fc' d='M52h1m34h1' />    <path stroke='#d1e0fd' d='M62h1m44h1' />    <path stroke='#d0ddfc' d='M72h1m35h1' />    <path stroke='#cedbfd' d='M82h1m63h1' />    <path stroke='#cad9fd' d='M92h1m73h1m55h1' />    <path stroke='#c8d8fb' d='M102h1' />    <path stroke='#c5d6fc' d='M112h1m-88h3' />    <path stroke='#c2d3fc' d='M122h1m-21h1m-97h1m01h1' />    <path stroke='#bccefa' d='M132h1m-12h1m-99h2' />    <path stroke='#b9c9f3' d='M142h1m514h3' />    <path stroke='#cfd7dd' d='M162h1' />    <path stroke='#d8e3fc' d='M43h1' />    <path stroke='#d1defd' d='M53h1' />    <path stroke='#c9d8fc' d='M83h1m64h2m66h2m37h1' />    <path stroke='#c5d5fc' d='M93h1m39h3' />    <path stroke='#c5d3fc' d='M103h1' />    <path stroke='#bed0fc' d='M123h1m94h1m-77h1m01h1' />    <path stroke='#bccdfa' d='M133h1' />    <path stroke='#baccf4' d='M143h1' />    <path stroke='#bdcbda' d='M163h1' />    <path stroke='#c4d4f7' d='M24h1' />    <path stroke='#cddbfc' d='M54h1m36h1' />    <path stroke='#c8d5fb' d='M84h1' />    <path stroke='#bbcefd' d='M104h3m95h1m86h1' />    <path stroke='#bcccf3' d='M144h1m-11h1m-11h1' />    <path stroke='#b1c2d5' d='M164h1' />    <path stroke='#bed0f8' d='M25h1' />    <path stroke='#ceddfd' d='M45h1' />    <path stroke='#c8d6fb' d='M65h3m38h2' />    <path stroke='#bacdfc' d='M105h1m10h2m312h1' />    <path stroke='#b9cdfb' d='M115h1m96h2m10h2m-11h1' />    <path stroke='#a8bbd4' d='M165h1' />    <path stroke='#cddafc' d='M46h1' />    <path stroke='#4d6185' d='M56h1m50h1m47h3m30h3m58h3m10h3m69h5m-41h3m-21h1' />    <path stroke='#a4b8d3' d='M166h1' />    <path stroke='#c1d3fb' d='M77h2m88h1' />    <path stroke='#b6cefb' d='M97h1m21h1m-21h2' />    <path stroke='#bacbf4' d='M147h1' />    <path stroke='#a0b5d3' d='M167h1m-11h1m-15h1' />    <path stroke='#b6cdfb' d='M138h1m-55h1' />    <path stroke='#b9cbf3' d='M148h1' />    <path stroke='#b4c8f6' d='M29h1' />    <path stroke='#b5cdfa' d='M139h1' />    <path stroke='#b5c9f3' d='M149h1' />    <path stroke='#9fb5d2' d='M169h1m-11h1m-11h1m-11h1' />    <path stroke='#b1c7f6' d='M210h1' />    <path stroke='#b2cffb' d='M1010h3m-22h1' />    <path stroke='#b1cbfa' d='M1310h1' />    <path stroke='#b3c8f5' d='M1410h1m-64h2' />    <path stroke='#adc3f6' d='M211h1' />    <path stroke='#c3d3fd' d='M511h1' />    <path stroke='#c2d5fc' d='M611h2' />    <path stroke='#bad4fc' d='M911h1' />    <path stroke='#b7d3fc' d='M1011h1m-21h1' />    <path stroke='#b3d1fc' d='M1111h1' />    <path stroke='#afcefb' d='M1211h1' />    <path stroke='#aecafa' d='M1311h1' />    <path stroke='#b1c8f3' d='M1411h1' />    <path stroke='#acc2f5' d='M212h1' />    <path stroke='#c1d2fb' d='M512h1' />    <path stroke='#bed1fc' d='M612h2' />    <path stroke='#bdd3fb' d='M812h1' />    <path stroke='#b6d1fb' d='M1012h1' />    <path stroke='#afccfb' d='M1212h1' />    <path stroke='#adc9f9' d='M1312h1m-21h1' />    <path stroke='#b1c5f3' d='M1412h1' />    <path stroke='#aac0f3' d='M213h1' />    <path stroke='#b7cbf9' d='M313h1' />    <path stroke='#b9cefb' d='M413h1' />    <path stroke='#bbcef9' d='M713h1' />    <path stroke='#b9cffb' d='M813h1' />    <path stroke='#b2cdfb' d='M1013h1' />    <path stroke='#b0cbf9' d='M1113h1' />    <path stroke='#aec8f7' d='M1313h1' />    <path stroke='#b0c5f2' d='M1413h1' />    <path stroke='#dbe3f8' d='M214h1' />    <path stroke='#b7c6f1' d='M314h1' />    <path stroke='#b8c9f2' d='M414h1m30h1' />    <path stroke='#b2c8f4' d='M1114h1' />    <path stroke='#b1c6f3' d='M1214h1' />    <path stroke='#b0c4f2' d='M1314h1' />    <path stroke='#d9e3f6' d='M1414h1' />    <path stroke='#aec0d6' d='M1614h1' />    <path stroke='#c3d4e7' d='M115h1' />    <path stroke='#aec4e5' d='M1515h1' />    <path stroke='#edf1f3' d='M116h1' />    <path stroke='#aac0e1' d='M216h1' />    <path stroke='#94b1d9' d='M316h1' />    <path stroke='#88a7d8' d='M416h1' />    <path stroke='#83a4d3' d='M516h1' />    <path stroke='#7da0d4' d='M616h1m30h3' />    <path stroke='#7e9fd2' d='M716h1' />    <path stroke='#7c9fd3' d='M816h2' />    <path stroke='#82a4d6' d='M1316h1' />    <path stroke='#94b0dd' d='M1416h1' />    <path stroke='#ecf2f7' d='M1516h1' /></svg>");
+}
+::-webkit-scrollbar-button:horizontal:start {
+    width: 17px;
+    background-image: url("data:image/svg+xml; charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0-0.51717' shape-rendering='crispEdges'>    <path stroke='#eeede5' d='M00h17m-11h1m-114h1m-11h1' />    <path stroke='#fdfdfa' d='M01h1' />    <path stroke='#fff' d='M11h15m02h1m140h1m03h1m140h1m04h1m140h1m05h1m140h1m06h1m140h1m07h1m140h1m08h1m140h1m09h1m140h1m010h1m140h1m011h1m140h1m012h1m140h1m013h1m140h1m014h1m140h1m115h14' />    <path stroke='#e6eefc' d='M12h1' />    <path stroke='#d0dffc' d='M22h1m13h1' />    <path stroke='#cad8f9' d='M32h1m14h1' />    <path stroke='#c4d2f7' d='M42h1' />    <path stroke='#c0d0f7' d='M52h1' />    <path stroke='#bdcef7' d='M62h1m17h1' />    <path stroke='#bbcdf5' d='M72h2' />    <path stroke='#b8cbf6' d='M92h1m18h1' />    <path stroke='#b7caf5' d='M102h1m19h1' />    <path stroke='#b5c8f7' d='M112h1' />    <path stroke='#b3c7f5' d='M122h1' />    <path stroke='#afc5f4' d='M132h1' />    <path stroke='#dce6f9' d='M142h1' />    <path stroke='#dfe2e1' d='M162h1' />    <path stroke='#e1eafe' d='M23h1' />    <path stroke='#dae6fe' d='M33h1m24h1' />    <path stroke='#d4e1fc' d='M43h1m25h1' />    <path stroke='#d1e0fd' d='M53h1m35h1' />    <path stroke='#d0ddfc' d='M63h1m26h1' />    <path stroke='#cedbfd' d='M73h1m54h1' />    <path stroke='#cddbfc' d='M83h1m45h1m27h1' />    <path stroke='#cad9fd' d='M93h1m64h1m46h1' />    <path stroke='#c8d8fb' d='M103h1' />    <path stroke='#c5d6fc' d='M113h1m-97h3' />    <path stroke='#c2d3fc' d='M123h1m-21h1m210h1m01h1' />    <path stroke='#bccefa' d='M133h1m-12h1m413h2' />    <path stroke='#b9c9f3' d='M143h1m414h3' />    <path stroke='#cfd7dd' d='M163h1' />    <path stroke='#d8e3fc' d='M34h1' />    <path stroke='#d1defd' d='M44h1' />    <path stroke='#c9d8fc' d='M74h1m55h2m47h1m28h1' />    <path stroke='#4d6185' d='M84h1m75h3m66h3m57h3m48h3m59h3m-21h3m-21h3m-21h1' />    <path stroke='#c5d5fc' d='M94h1' />    <path stroke='#c5d3fc' d='M104h1' />    <path stroke='#bed0fc' d='M124h1m211h1m01h1' />    <path stroke='#bccdfa' d='M134h1' />    <path stroke='#baccf4' d='M144h1' />    <path stroke='#bdcbda' d='M164h1' />    <path stroke='#c4d4f7' d='M15h1' />    <path stroke='#bbcefd' d='M105h3m96h1' />    <path stroke='#bcccf3' d='M145h1m-11h1m-11h1' />    <path stroke='#b1c2d5' d='M165h1' />    <path stroke='#bed0f8' d='M16h1' />    <path stroke='#ceddfd' d='M36h1' />    <path stroke='#c8d6fb' d='M56h1m29h3' />    <path stroke='#bacdfc' d='M106h1m10h2m212h1' />    <path stroke='#b9cdfb' d='M116h1m87h3m10h2m-11h1' />    <path stroke='#a8bbd4' d='M166h1' />    <path stroke='#cddafc' d='M37h1' />    <path stroke='#b7cdfc' d='M117h1m01h1' />    <path stroke='#a4b8d3' d='M167h1' />    <path stroke='#cad8fd' d='M38h1' />    <path stroke='#c1d3fb' d='M78h2' />    <path stroke='#b6cefb' d='M98h3m99h4' />    <path stroke='#bacbf4' d='M148h1' />    <path stroke='#a0b5d3' d='M168h1m-11h1m-14h1' />    <path stroke='#bdd3fb' d='M89h1m-23h1' />    <path stroke='#b6cdfb' d='M139h1m-54h1' />    <path stroke='#b9cbf3' d='M149h1' />    <path stroke='#b1c7f6' d='M110h1' />    <path stroke='#bad4fc' d='M910h1' />    <path stroke='#b2cffb' d='M1010h3m-22h1' />    <path stroke='#b1cbfa' d='M1310h1' />    <path stroke='#b3c8f5' d='M1410h1m-64h2' />    <path stroke='#9fb5d2' d='M1610h1m-11h1m-11h1' />    <path stroke='#adc3f6' d='M111h1' />    <path stroke='#c3d3fd' d='M411h1' />    <path stroke='#c2d5fc' d='M511h2' />    <path stroke='#b7d3fc' d='M1011h1m-21h1' />    <path stroke='#b3d1fc' d='M1111h1' />    <path stroke='#afcefb' d='M1211h1' />    <path stroke='#aecafa' d='M1311h1' />    <path stroke='#b1c8f3' d='M1411h1' />    <path stroke='#acc2f5' d='M112h1' />    <path stroke='#c1d2fb' d='M412h1' />    <path stroke='#bed1fc' d='M512h2' />    <path stroke='#b6d1fb' d='M1012h1' />    <path stroke='#afccfb' d='M1212h1' />    <path stroke='#adc9f9' d='M1312h1m-21h1' />    <path stroke='#b1c5f3' d='M1412h1' />    <path stroke='#aac0f3' d='M113h1' />    <path stroke='#b7cbf9' d='M213h1' />    <path stroke='#b9cefb' d='M313h1' />    <path stroke='#bbcef9' d='M613h1' />    <path stroke='#b9cffb' d='M713h1' />    <path stroke='#b8cffa' d='M813h1' />    <path stroke='#b2cdfb' d='M1013h1' />    <path stroke='#b0cbf9' d='M1113h1' />    <path stroke='#aec8f7' d='M1313h1' />    <path stroke='#b0c5f2' d='M1413h1' />    <path stroke='#dbe3f8' d='M114h1' />    <path stroke='#b7c6f1' d='M214h1' />    <path stroke='#b8c9f2' d='M314h1m30h2' />    <path stroke='#b2c8f4' d='M1114h1' />    <path stroke='#b1c6f3' d='M1214h1' />    <path stroke='#b0c4f2' d='M1314h1' />    <path stroke='#d9e3f6' d='M1414h1' />    <path stroke='#aec0d6' d='M1614h1' />    <path stroke='#c3d4e7' d='M015h1' />    <path stroke='#aec4e5' d='M1515h1' />    <path stroke='#edf1f3' d='M016h1' />    <path stroke='#aac0e1' d='M116h1' />    <path stroke='#94b1d9' d='M216h1' />    <path stroke='#88a7d8' d='M316h1' />    <path stroke='#83a4d3' d='M416h1' />    <path stroke='#7da0d4' d='M516h1m40h3' />    <path stroke='#7e9fd2' d='M616h1' />    <path stroke='#7c9fd3' d='M716h3' />    <path stroke='#82a4d6' d='M1316h1' />    <path stroke='#94b0dd' d='M1416h1' />    <path stroke='#ecf2f7' d='M1516h1' /></svg>");
+}
+::-webkit-scrollbar-button:horizontal:end {
+    width: 17px;
+    background-image: url("data:image/svg+xml; charset=utf-8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0-0.51717' shape-rendering='crispEdges'>    <path stroke='#eeede5' d='M00h17m-11h1m-114h1m-11h1' />    <path stroke='#fdfdfa' d='M01h1' />    <path stroke='#fff' d='M11h15m02h1m140h1m03h1m140h1m04h1m140h1m05h1m140h1m06h1m140h1m07h1m140h1m08h1m140h1m09h1m140h1m010h1m140h1m011h1m140h1m012h1m140h1m013h1m140h1m014h1m140h1m115h14' />    <path stroke='#e6eefc' d='M12h1' />    <path stroke='#d0dffc' d='M22h1m13h1' />    <path stroke='#cad8f9' d='M32h1m14h1' />    <path stroke='#c4d2f7' d='M42h1' />    <path stroke='#c0d0f7' d='M52h1' />    <path stroke='#bdcef7' d='M62h1m17h1' />    <path stroke='#bbcdf5' d='M72h2' />    <path stroke='#b8cbf6' d='M92h1m18h1' />    <path stroke='#b7caf5' d='M102h1' />    <path stroke='#b5c8f7' d='M112h1' />    <path stroke='#b3c7f5' d='M122h1' />    <path stroke='#afc5f4' d='M132h1' />    <path stroke='#dce6f9' d='M142h1' />    <path stroke='#dfe2e1' d='M162h1' />    <path stroke='#e1eafe' d='M23h1' />    <path stroke='#dae6fe' d='M33h1m24h1' />    <path stroke='#d4e1fc' d='M43h1m25h1' />    <path stroke='#d1e0fd' d='M53h1m35h1' />    <path stroke='#d0ddfc' d='M63h1m26h1' />    <path stroke='#cedbfd' d='M73h1m54h1' />    <path stroke='#cddbfc' d='M83h1m45h1m27h1' />    <path stroke='#cad9fd' d='M93h1m64h1m46h1' />    <path stroke='#c8d8fb' d='M103h1' />    <path stroke='#c5d6fc' d='M113h1m-97h3' />    <path stroke='#c2d3fc' d='M123h1m-21h1m210h1m01h1' />    <path stroke='#bccefa' d='M133h1m-12h1m413h2' />    <path stroke='#b9c9f3' d='M143h1m414h3' />    <path stroke='#cfd7dd' d='M163h1' />    <path stroke='#d8e3fc' d='M34h1' />    <path stroke='#d1defd' d='M44h1' />    <path stroke='#4d6185' d='M74h1m65h3m76h3m87h3m98h3m89h3m-41h3m-41h3m-21h1' />    <path stroke='#c8d6fb' d='M84h1m56h2' />    <path stroke='#c5d5fc' d='M94h1m29h5' />    <path stroke='#c5d3fc' d='M104h1' />    <path stroke='#bed0fc' d='M124h1m95h1m-86h1m01h1' />    <path stroke='#bccdfa' d='M134h1' />    <path stroke='#baccf4' d='M144h1' />    <path stroke='#bdcbda' d='M164h1' />    <path stroke='#c4d4f7' d='M15h1' />    <path stroke='#c9d8fc' d='M55h1m47h3m28h1' />    <path stroke='#bbcefd' d='M105h3m77h1' />    <path stroke='#bcccf3' d='M145h1m-11h1m-11h1' />    <path stroke='#b1c2d5' d='M165h1' />    <path stroke='#bed0f8' d='M16h1' />    <path stroke='#ceddfd' d='M36h1' />    <path stroke='#bacdfc' d='M106h1m10h2m212h1' />    <path stroke='#b9cdfb' d='M116h1m01h2m-11h1' />    <path stroke='#a8bbd4' d='M166h1' />    <path stroke='#cddafc' d='M37h1' />    <path stroke='#b7cdfc' d='M117h1m01h1' />    <path stroke='#a4b8d3' d='M167h1' />    <path stroke='#cad8fd' d='M38h3' />    <path stroke='#c1d3fb' d='M68h3' />    <path stroke='#bacbf4' d='M148h1' />    <path stroke='#a0b5d3' d='M168h1m-15h1' />    <path stroke='#b4c8f6' d='M19h1' />    <path stroke='#c2d5fc' d='M79h1m-32h1' />    <path stroke='#b6cefb' d='M119h2' />    <path stroke='#b5cdfa' d='M139h1' />    <path stroke='#b5c9f3' d='M149h1' />    <path stroke='#9fb5d2' d='M169h1m-11h1m-11h1m-11h1' />    <path stroke='#b1c7f6' d='M110h1' />    <path stroke='#c3d5fd' d='M610h1' />    <path stroke='#b2cffb' d='M1010h3m-22h1' />    <path stroke='#b1cbfa' d='M1310h1' />    <path stroke='#b3c8f5' d='M1410h1m-64h2' />    <path stroke='#adc3f6' d='M111h1' />    <path stroke='#c3d3fd' d='M411h1' />    <path stroke='#bad4fc' d='M911h1' />    <path stroke='#b7d3fc' d='M1011h1m-21h1' />    <path stroke='#b3d1fc' d='M1111h1' />    <path stroke='#afcefb' d='M1211h1' />    <path stroke='#aecafa' d='M1311h1' />    <path stroke='#b1c8f3' d='M1411h1' />    <path stroke='#acc2f5' d='M112h1' />    <path stroke='#c1d2fb' d='M412h1' />    <path stroke='#bed1fc' d='M512h2' />    <path stroke='#bbd3fd' d='M812h1' />    <path stroke='#b6d1fb' d='M1012h1' />    <path stroke='#afccfb' d='M1212h1' />    <path stroke='#adc9f9' d='M1312h1m-21h1' />    <path stroke='#b1c5f3' d='M1412h1' />    <path stroke='#aac0f3' d='M113h1' />    <path stroke='#b7cbf9' d='M213h1' />    <path stroke='#b9cefb' d='M313h1' />    <path stroke='#bbcef9' d='M613h1' />    <path stroke='#b9cffb' d='M713h1' />    <path stroke='#b8cffa' d='M813h1' />    <path stroke='#b6cdfb' d='M913h1' />    <path stroke='#b2cdfb' d='M1013h1' />    <path stroke='#b0cbf9' d='M1113h1' />    <path stroke='#aec8f7' d='M1313h1' />    <path stroke='#b0c5f2' d='M1413h1' />    <path stroke='#dbe3f8' d='M114h1' />    <path stroke='#b7c6f1' d='M214h1' />    <path stroke='#b8c9f2' d='M314h1m30h2' />    <path stroke='#b2c8f4' d='M1114h1' />    <path stroke='#b1c6f3' d='M1214h1' />    <path stroke='#b0c4f2' d='M1314h1' />    <path stroke='#d9e3f6' d='M1414h1' />    <path stroke='#aec0d6' d='M1614h1' />    <path stroke='#c3d4e7' d='M015h1' />    <path stroke='#aec4e5' d='M1515h1' />    <path stroke='#edf1f3' d='M016h1' />    <path stroke='#aac0e1' d='M116h1' />    <path stroke='#94b1d9' d='M216h1' />    <path stroke='#88a7d8' d='M316h1' />    <path stroke='#83a4d3' d='M416h1' />    <path stroke='#7da0d4' d='M516h1m40h3' />    <path stroke='#7e9fd2' d='M616h1' />    <path stroke='#7c9fd3' d='M716h3' />    <path stroke='#82a4d6' d='M1316h1' />    <path stroke='#94b0dd' d='M1416h1' />    <path stroke='#ecf2f7' d='M1516h1' /></svg>");
+}
+.btn {
+    padding: 3.2px 10px;
+    font-family: "Pixelated MS Sans Serif", Arial;
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    box-sizing: border-box;
+    border: 1px solid #5c0075;
+    background: linear-gradient(180deg, #fff, #ecebe5 86%, #d8d0c4);
+    box-shadow: none;
+    border-radius: 3px;
+}
+.td,
+.th {
+    padding: 10px 15px;
+    position: relative;
+}
+.btn:not(:disabled).active,
+.btn:not(:disabled):active {
+    box-shadow: none;
+    background: linear-gradient(180deg, #cdcac3, #e3e3db 8%, #e5e5de 94%, #f2f2f1);
+}
+.btn:not(:disabled):hover {
+    box-shadow: inset -1px 1px #f5d1ff, inset 1px 2px #de86fd, inset -2px 2px #bd60fb, inset 2px -2px #9e19e6;
+}
+.btn.focused,
+.btn:focus {
+    box-shadow: inset -1px 1px #edccff, inset 1px 2px #e999ea, inset -2px 2px #efbcf5, inset 1px -1px #da8be5, inset 2px -2px #e38be5;
+}
+.btn::-moz-focus-inner {
+    border: 0;
+}
+::-moz-selection {
+    background: #b72be38c;
+}
+::selection {
+    background: #b72be38c;
+}
+.table-list,
+.tbody:hover tr:hover td {
+    color: #444;
+    text-shadow: 0 1px 0 #fff;
+}
+.context-menu-icon.context-menu-hover:before,
+.context-menu-icon.context-menu-icon--fa.context-menu-hover:before,
+.th {
+    color: #fff;
+}
+.em {
+    font-style: italic;
+}
+.aero-table {
+    font-family: Tahoma, sans-serif;
+    height: auto;
+    width: 96%;
+    background: #f5f5f5;
+    border-collapse: separate;
+    box-shadow: inset 0 1px 0 #fff;
+    font-size: 14px;
+    line-height: 19px;
+    margin: auto auto 20px;
+    text-align: left;
+}
+.th {
+    background: linear-gradient(#777, #444);
+    border-left: 1px solid #555;
+    border-right: 1px solid #777;
+    border-top: 1px solid #555;
+    border-bottom: 1px solid #333;
+    box-shadow: inset 0 1px 0 #999;
+    text-shadow: 0 1px 0 #000;
+}
+.th:after {
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.08));
+    content: "";
+    height: 25%;
+    left: 0;
+    margin: 1px 0 0;
+    position: absolute;
+    top: 25%;
+    width: 100%;
+}
+.th:first-child {
+    border-left: 1px solid #777;
+    box-shadow: inset 1px 1px 0 #999;
+}
+.th:last-child {
+    box-shadow: inset -1px 1px 0 #999;
+}
+.td {
+    border-right: 1px solid #fff;
+    border-left: 1px solid #e8e8e8;
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #e8e8e8;
+    transition: 0.3s;
+}
+.td:first-child {
+    box-shadow: inset 1px 0 0 #fff;
+}
+.td:last-child {
+    border-right: 1px solid #e8e8e8;
+    box-shadow: inset -1px 0 0 #fff;
+}
+.tr {
+    background: url(https://web.archive.org/web/20150228115731if_/http://jackrugile.com/images/misc/noise-diagonal.png);
+}
+.tr:nth-child(odd) td {
+    background: url(https://web.archive.org/web/20150228115731if_/http://jackrugile.com/images/misc/noise-diagonal.png) #f1f1f1;
+}
+.tr:last-of-type td {
+    box-shadow: inset 0 -1px 0 #fff;
+}
+.tr:last-of-type td:first-child {
+    box-shadow: inset 1px -1px 0 #fff;
+}
+.tr:last-of-type td:last-child {
+    box-shadow: inset -1px -1px 0 #fff;
+}
+.tbody:hover td {
+    color: transparent;
+    text-shadow: 0 0 3px #aaa;
+}
+.context-menu-icon.context-menu-disabled::before {
+    color: #8c8c8c;
+}
+.context-menu-icon.context-menu-icon--fa {
+    display: list-item;
+}
+.context-menu-icon.context-menu-icon--fa.context-menu-disabled::before {
+    color: #8c8c8c;
+}
+.context-menu-icon.context-menu-icon--fa span {
+    font-family: sans-serif;
+}
+.context-menu-list {
+    background: #fff;
+    border: 1px solid #aca899;
+    border-radius: 0;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+    font-family: inherit;
+    font-size: 11px;
+    display: inline-block;
+    list-style-type: none;
+    margin: 0;
+    max-width: none;
+    min-width: none;
+    padding: 2px;
+    position: absolute;
+}
+.context-menu-item {
+    background-color: #fff;
+    color: #000;
+    padding: 5px 22px;
+    position: relative;
+    user-select: none;
+}
+.context-menu-separator {
+    border-bottom: 1px solid #aca899;
+    margin: 1px 2.5px;
+    padding: 0;
+}
+.context-menu-item > label > input,
+.context-menu-item > label > textarea {
+    user-select: text;
+}
+.context-menu-item.context-menu-hover {
+    background-color: #8931c4;
+    color: #fff;
+    cursor: pointer;
+}
+.context-menu-item.context-menu-disabled {
+    background-color: #fff;
+    color: #8c8c8c;
+    cursor: default;
+}
+.context-menu-input.context-menu-hover {
+    background-color: #eee;
+    cursor: default;
+}
+.context-menu-submenu:after {
+    content: "";
+    border-style: solid;
+    border-width: 0.25em 0 0.25em 0.25em;
+    border-color: transparent transparent transparent #000;
+    height: 0;
+    position: absolute;
+    right: 0.5em;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    z-index: 1;
+}
+.context-menu-item.context-menu-input {
+    padding: 0.3em 0.6em;
+}
+.context-menu-input > label > * {
+    vertical-align: top;
+}
+.context-menu-input > label > input[type="checkbox"],
+.context-menu-input > label > input[type="radio"] {
+    margin-right: 0.4em;
+    position: relative;
+    top: 0.12em;
+}
+.context-menu-input > label {
+    margin: 0;
+}
+.context-menu-input > label,
+.context-menu-input > label > input[type="text"],
+.context-menu-input > label > select,
+.context-menu-input > label > textarea {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+}
+.context-menu-input > label > textarea {
+    height: 7em;
+}
+.context-menu-item > .context-menu-list {
+    display: none;
+    right: -0.3em;
+    top: 0.3em;
+}
+.context-menu-accesskey {
+    text-decoration: underline;
+}

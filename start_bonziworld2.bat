@@ -1,1 +1,0 @@
-cmd /c node index.js

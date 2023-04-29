@@ -1,5 +1,22 @@
 // GUID generator (okay not actually GUID compliant but whatever)
 // http://stackoverflow.com/a/105074
+
+function sanitizeHTML(string){
+return string
+    .replaceAll("&",  "&amp;")
+    .replaceAll("#",  "&num;")
+    //.replaceAll("'",  "&apos;")
+    .replaceAll("\"", "&quot;");
+}
+function sanitizeHTML2(string){
+return string
+    .replaceAll("&",  "&amp;")
+    .replaceAll("#",  "&num;")
+    .replaceAll("'",  "&apos;")
+    .replaceAll("\"", "&quot;");
+}
+
+
 exports.guidGen = function() {
 	function s4() {
 		return Math.floor((1 + Math.random()) * 0x10000)
@@ -20,5 +37,5 @@ exports.randomRangeInt = function(min, max) {
 };
 
 exports.argsString = function(args, char = " ") {
-    return Array.prototype.join.call(args, char);
+    return sanitizeHTML2(Array.prototype.join.call(args, char));
 };
