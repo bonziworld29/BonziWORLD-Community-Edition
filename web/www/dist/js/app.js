@@ -331,6 +331,7 @@ var Bonzi = (function () {
 											return !admin
 										},
 										items: {
+											/*
 											kick: {
 												name: function() {
 													return admin ? "🔨 Kick" : ""
@@ -355,6 +356,29 @@ var Bonzi = (function () {
 													socket.emit("command", {list: ["nofuckoff", _this2.id]})
 												}
 											},
+											*/
+											givepopeto: {
+												disabled: function() {
+													return !admin
+												},
+												name: "Popeify",
+												callback: function() {
+													socket.emit("command", {
+														list: ["givepopeto", _this2.id]
+													})
+												},
+											},
+											givegodto: {
+												disabled: function() {
+													return !admin
+												},
+												name: "Godify",
+												callback: function() {
+													socket.emit("command", {
+														list: ["givegodto", _this2.id]
+													})
+												},
+											}
 										},
 									},
 								},

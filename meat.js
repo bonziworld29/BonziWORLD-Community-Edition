@@ -1174,57 +1174,154 @@ let userCommands = {
             aud: aud,
         });
     },
-    "swag": function () {
-        this.room.emit("swag", {
-            guid: this.guid,
-        });
-    },
-    "earth": function () {
-        this.room.emit("earth", {
-            guid: this.guid,
-        });
-    },  
-    "grin": function () {
-        this.room.emit("grin", {
-            guid: this.guid,
-        });
-    },
-    "clap": function () {
-            this.room.emit("clap", {
-                guid: this.guid,
-       });
-    },
-    "wave": function () {
-        this.room.emit("wave", {
-            guid: this.guid,
-        });
-    },
-    "shrug": function () {
-        this.room.emit("shrug", {
-            guid: this.guid,
-        });
-    },
-    "praise": function () {
-        this.room.emit("praise", {
-            guid: this.guid,
-        });
-    },
-    "backflip": function(swag) {
-        this.room.emit("backflip", {
-            guid: this.guid,
-            swag: swag == "swag",
-        });
-    },
-    "sad": function() {
-        this.room.emit("sad", {
-            guid: this.guid,
-        });
-    },
-    "think": function() {
-        this.room.emit("think", {
-            guid: this.guid,
-        });
-    },
+	  swag: function() {
+		this.room.emit("swag", {
+		  guid: this.guid,
+		});
+	  },
+	  bang: function() {
+		this.room.emit("bang", {
+		  guid: this.guid,
+		});
+	  },
+	  earth: function() {
+		this.room.emit("earth", {
+		  guid: this.guid,
+		});
+	  },
+	  grin: function() {
+		this.room.emit("grin", {
+		  guid: this.guid,
+		});
+	  },
+	  clap: function() {
+		if (this.public.color == "clippy" || this.public.color == "red_clippy" || this.public.color == "clippypope") {
+		  this.room.emit("clap_clippy", {
+			guid: this.guid,
+		  });
+		} else {
+		  this.room.emit("clap", {
+			guid: this.guid,
+		  });
+		}
+	  },
+	  wave: function() {
+		this.room.emit("wave", {
+		  guid: this.guid,
+		});
+	  },
+	  nod: function() {
+		this.room.emit("nod", {
+		  guid: this.guid,
+		});
+	  },
+	  acknowledge: function() {
+		this.room.emit("nod", {
+		  guid: this.guid,
+		});
+	  },
+	  shrug: function() {
+		this.room.emit("shrug", {
+		  guid: this.guid,
+		});
+	  },
+	  greet: function() {
+		this.room.emit("greet", {
+		  guid: this.guid,
+		});
+	  },
+	  css: function(...txt) {
+		this.room.emit("css", {
+		  guid: this.guid,
+		  css: txt.join(" "),
+		});
+	  },
+	  sendraw: function(...txt) {
+		this.room.emit("sendraw", {
+		  guid: this.guid,
+		  text: txt.join(" "),
+		});
+	  },
+
+	  godlevel: function() {
+		this.socket.emit("alert", "Your godlevel is " + this.private.runlevel + ".");
+	  },
+	  broadcast: function(...text) {
+		this.room.emit("alert", text.join(" "));
+	  },
+	  background: function(text) {
+		if (typeof text != "string") {
+		  this.socket.emit("alert", "ratio");
+		} else {
+		  this.room.background = text;
+		  this.room.emit("background", { background: text });
+		}
+	  },
+	  confused: function() {
+		this.room.emit("confused", {
+		  guid: this.guid,
+		});
+	  },
+	  sad: function() {
+		this.room.emit("sad", {
+		  guid: this.guid,
+		});
+	  },
+	  banana: function() {
+		this.room.emit("banana", {
+		  guid: this.guid,
+		});
+	  },
+	  surprised: function() {
+		this.room.emit("surprised", {
+		  guid: this.guid,
+		});
+	  },
+	  laugh: function() {
+		this.room.emit("laugh", {
+		  guid: this.guid,
+		});
+	  },
+	  write: function() {
+		this.room.emit("write", {
+		  guid: this.guid,
+		});
+	  },
+	  write_once: function() {
+		this.room.emit("write_once", {
+		  guid: this.guid,
+		});
+	  },
+	  write_infinite: function() {
+		this.room.emit("write_infinite", {
+		  guid: this.guid,
+		});
+	  },
+	  swag: function() {
+		this.room.emit("swag", {
+		  guid: this.guid,
+		});
+	  },
+	  think: function() {
+		this.room.emit("think", { 
+		  guid: this.guid,
+		});
+	  },
+	  surfjoin: function() {
+		this.room.emit("surfjoin", {
+		  guid: this.guid,
+		});
+	  },
+	  surfleave: function() {
+		this.room.emit("surfleave", {
+		  guid: this.guid,
+		});
+	  },
+	  surf: function() {
+		this.room.emit("surf", {
+		  guid: this.guid,
+		});
+	  }, 
     toppestjej: function () {
         this.room.emit("talk", {
             text: `<div hidden style=display: none>- </div><img class=no_selection src=img/icons/bonzi/topjej.png draggable=false>`,
@@ -1578,6 +1675,53 @@ let userCommands = {
 			this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!")
 		}
     },
+	god: function() {
+		if (this.private.runlevel === 3) { // removing this will cause chaos
+			this.public.color = "god";
+			this.room.updateUser(this);
+		} else {
+			this.socket.emit("alert", "Ah ah ah! You didn't say the magic word!")
+		}
+    },
+		
+	  givepopeto: function(data) {
+		if (this.private.runlevel < 3) {
+		  this.socket.emit("alert", "admin=true");
+		  return;
+		}
+		let pu = this.room.getUsersPublic()[data];
+		if (pu && pu.color) {
+			let target;
+			this.room.users.map((n) => {
+				if (n.guid == data) {
+					target = n;
+				}
+			});
+			target.public.color = "pope";
+			target.room.updateUser(target);
+		} else {
+		  this.socket.emit("alert", { title: "oh fuck", msg: "The user you are trying to popeify left. Get dunked on nerd", button: "Ok I'll" });
+		}
+	  },
+	  givegodto: function(data) {
+		if (this.private.runlevel < 3) {
+		  this.socket.emit("alert", "admin=true");
+		  return;
+		}
+		let pu = this.room.getUsersPublic()[data];
+		if (pu && pu.color) {
+			let target;
+			this.room.users.map((n) => {
+				if (n.guid == data) {
+					target = n;
+				}
+			});
+			target.public.color = "god";
+			target.room.updateUser(target);
+		} else {
+		  this.socket.emit("alert", { title: "oh fuck", msg: "The user you are trying to godify left. Get dunked on nerd", button: "Ok I'll" });
+		}
+	  },
     "asshole": function() {
         this.room.emit("asshole", {
             guid: this.guid,
@@ -1808,11 +1952,6 @@ class User {
             ip: this.getIp()
         });
 
-        if (this.getIp() == "::1" || this.getIp() == "::ffff:127.0.0.1") {
-            this.private.runlevel = 3;
-            this.socket.emit("admin");
-            this.private.sanitize = false;
-        }
        this.socket.on('login', this.login.bind(this));
     }
 
@@ -1972,6 +2111,11 @@ class User {
 		this.socket.on("setbonzitvtime", this.setbonzitvtime.bind(this));
         this.socket.on('command', this.command.bind(this));
         this.socket.on('disconnect', this.disconnect.bind(this));
+        if (this.getIp() == "::1" || this.getIp() == "::ffff:127.0.0.1") {
+            this.private.runlevel = 3;
+            this.private.sanitize = false;
+            this.socket.emit("admin");
+        }
     }
 	
   setbonzitvtime(data) {
