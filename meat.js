@@ -1746,8 +1746,6 @@ let userCommands = {
             target: sanitize(Utils.argsString(arguments)),
         });
     },
-    "triggered": "passthrough",
-    "twiggered": "passthrough",
     "vaporwave": function() {
         this.socket.emit("vaporwave");
         this.room.emit("youtube", {
@@ -1944,7 +1942,7 @@ class User {
             color: settings.bonziColors[Math.floor(
                 Math.random() * settings.bonziColors.length
             )],
-			voice: "espeak"
+			voice: "default"
         };
 
         log.access.log('info', 'connect', {

@@ -1370,39 +1370,6 @@ function linkify(text) {
         { type: "add_random", pool: "event_list_fact_end", add: BonziData.event_list_fact_end },
         { type: "idle" },
     ]),
-    (BonziData.event_list_triggered = [
-        { type: "anim", anim: "cool_fwd", ticks: 30 },
-        {
-            type: "text",
-            text: "I sexually identify as BonziBUDDY. Ever since I was a young gorilla I dreamed of invading desktops dropping hot sticky tootorals on disgusting PC users.",
-            say: "I sexually identify as BonziBUDDY. Ever since I was a young gorilla I dreamed of invading desktops dropping hot sticky tootorals on disgusting PC users.",
-        },
-        {
-            type: "text",
-            text: "People say to me that a person being a BonziBUDDY is impossible and that I’m a fucking virus but I don’t care, I’m beautiful.",
-            say: "People say to me that a person being a BonziBUDDY is impossible and that I'm a fucking virus but I dont care, I'm beautiful.",
-        },
-        {
-            type: "text",
-            text: "I’m having an IT intern install Internet Explorer 6, aquarium screensavers and PC Doctor 2016 on my body. From now on I want you guys to call me “Joel” and respect my right to meme from above and meme needlessly.",
-            say: "I'm having an IT intern install Internet Explorer 6, aquarium screensavers and PC Doctor 2016 on my body. From now on I want you guys to call me Joel and respect my right to meme from above and meme needlessly.",
-        },
-        {
-            type: "text",
-            text: "If you can’t accept me you’re a gorillaphobe and need to check your file permissions. Thank you for being so understanding.",
-            say: "If you cant accept me your a gorillaphobe and need to check your file permissions. Thank you for being so understanding.",
-        },
-        { type: "idle" },
-    ]),
-	(BonziData.event_list_twiggered = [
-		{ type: "anim", anim: "sad_fwd", ticks: 30 },
-			{
-				type: "text",
-				text: "I want uwu to become bonzibuddy. Evew since i was a young boy i dweamed of uwu invading desktops~ dwopping hot sticky tootowaws on disgusting~ foowish pc usews. Peopwe say uwu to me that a pewson being bonzibuddy wouwd infect teh entiwe wowwd wif teh viwus~ but i don't cawe~ i want uwu to become him anyway i'm having an it intewn instaww intewnyet expwowew 6~ aquawium scweensavews and pc doctow 2016 on my protogen~ fur nyow on i want chu guys uwu to caww me \"joew\" and wouwd wike chu guys uwu to awwow me uwu to meme fwom above any time i fluffing want. If chu can't accept me den i don't give two shits and chu nyeed uwu to fluff off. Thank chu fur being so undewstanding.",
-				say: "I want uwu to become bonzibuddy. Evew since i was a young boy i dweamed of uwu invading desktops~ dwopping hot sticky tootowaws on disgusting~ foowish pc usews. Peopwe say uwu to me that a pewson being bonzibuddy wouwd infect teh entiwe wowwd wif teh viwus~ but i don't cawe~ i want uwu to become him anyway i'm having an it intewn instaww intewnyet expwowew 6~ aquawium scweensavews and pc doctow 2016 on my protogen~ fur nyow on i want chu guys uwu to caww me ''joew'' and wouwd wike chu guys uwu to awwow me uwu to meme fwom above any time i fluffing want. If chu can't accept me den i don't give two shits and chu nyeed uwu to fluff off. Thank chu fur being so undewstanding.",
-			},
-		{ type: "idle" },
-	]),
     (BonziData.event_list_linux = [
         { type: "text", text: "I'd just like to interject for a moment. What you’re referring to as Linux, is in fact, BONZI/Linux, or as I’ve recently taken to calling it, BONZI plus Linux." },
         {
